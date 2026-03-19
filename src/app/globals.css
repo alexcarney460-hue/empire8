@@ -381,15 +381,15 @@ a { transition: color 150ms ease, opacity 150ms ease; }
 
 /* ── Tablet overrides (641-767px gap fix) ── */
 @media (min-width: 641px) and (max-width: 767px) {
-  :root { --nav-height: 120px; }
-  .e8-logo { height: 200px !important; margin-bottom: -100px !important; }
+  :root { --nav-height: 100px; }
+  .e8-logo { height: 85px !important; margin-bottom: 0px !important; margin-top: 0px !important; }
 }
 
 /* ── Mobile overrides ── */
 @media (max-width: 640px) {
   :root { --nav-height: 90px; }
 
-  .e8-logo { height: 140px !important; margin-bottom: -70px !important; }
+  .e8-logo { height: 75px !important; margin-bottom: 0px !important; margin-top: 0px !important; }
 
   .e8-btn-group {
     flex-direction: column;
