@@ -1,0 +1,21 @@
+{
+  "provider": "claude-code",
+  "apiKey": "",
+  "pipeline": {
+    "provider": "claude-code",
+    "providerKey": "claude-code",
+    "apiKey": "",
+    "layer1": true,
+    "layer2": {
+      "enabled": true,
+      "model": "claude-sonnet-4-6",
+      "baseUrl": ""
+    },
+    "layer3": {
+      "enabled": true,
+      "model": "claude-sonnet-4-6",
+      "baseUrl": "",
+      "computerUse": true
+    }
+  }
+}

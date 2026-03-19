@@ -1,0 +1,2 @@
+file 'C:/Users/Claud/.openclaw/workspace/ValueSuppliers.co/tmp/reels/reel-gloveup.mp4'
+file 'C:/Users/Claud/.openclaw/workspace/ValueSuppliers.co/tmp/reels/tog-gloveup-endcard.mp4'

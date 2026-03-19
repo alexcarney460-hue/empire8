@@ -1,0 +1,187 @@
+================================================================================
+AMAZON PRODUCT LISTING — VALUE SUPPLIERS NITRILE GLOVES (BLUE)
+Ready for Amazon Seller Central — Copy/Paste Each Section
+================================================================================
+
+
+================================================================================
+1. PRODUCT TITLE (200 characters max)
+================================================================================
+
+Value Suppliers Blue Nitrile Exam Gloves, Case of 1000 (10 Boxes), 5 Mil, Powder Free, Latex Free, Textured Fingertips, ASTM Certified, Disposable
+
+Character count: 148
+
+
+================================================================================
+2. BULLET POINTS (5 bullets, each under 200 characters)
+================================================================================
+
+BULLET 1 — Quantity & Value:
+CASE OF 1000 GLOVES (10 Boxes of 100) — Bulk case packaging ideal for high-volume facilities including dental offices, cannabis grows, auto shops, tattoo studios, and food processing plants.
+
+BULLET 2 — Thickness & Protection:
+5 MIL THICK NITRILE — Durable 5 mil construction provides superior puncture resistance and chemical protection compared to standard 3-4 mil gloves, without sacrificing dexterity or comfort.
+
+BULLET 3 — Certification & Quality:
+ASTM D6319 & D3578 CERTIFIED — Meets both industrial and exam-grade standards with an AQL rating of 1.5-2.5 for reliable, consistent quality you can trust in regulated environments.
+
+BULLET 4 — Comfort & Fit:
+TEXTURED FINGERTIPS FOR SECURE GRIP — Ambidextrous design fits either hand. Beaded cuff prevents rolldown. Powder-free and latex-free formulation reduces skin irritation during extended wear.
+
+BULLET 5 — Sizes & Availability:
+AVAILABLE IN 5 SIZES (S, M, L, XL, XXL) — Select the size that fits your team. Also available in black. Perfect for janitorial services, laboratories, cultivation facilities, and general industrial use.
+
+
+================================================================================
+3. PRODUCT DESCRIPTION (HTML formatted, under 2000 characters)
+================================================================================
+
+<h3>Professional-Grade Nitrile Gloves Built for Demanding Work Environments</h3>
+<p>Value Suppliers 5 Mil Blue Nitrile Gloves deliver the durability and protection that professionals demand. Whether you operate a cannabis cultivation facility, dental practice, food processing plant, auto repair shop, or tattoo parlor, these gloves are engineered to perform.</p>
+<p><b>Why Professionals Choose Value Suppliers:</b></p>
+<ul>
+<li><b>5 Mil Thickness:</b> Stronger than standard disposable gloves. Resists punctures, tears, and a wide range of chemicals including solvents, oils, and cleaning agents.</li>
+<li><b>Dual ASTM Certification:</b> Certified to ASTM D6319 (industrial) and ASTM D3578 (exam-grade), so one glove covers both your safety compliance and medical-grade needs.</li>
+<li><b>Textured Fingertips:</b> Micro-textured surface provides a confident grip on wet or dry tools, equipment, and instruments.</li>
+<li><b>All-Day Comfort:</b> Powder-free, latex-free formulation is gentle on skin. Ambidextrous fit means less waste and faster gloving.</li>
+<li><b>Bulk Case Value:</b> 1,000 gloves per case (10 boxes of 100) reduces reorder frequency and lowers your per-glove cost.</li>
+</ul>
+<p><b>Trusted by businesses across California and nationwide.</b> Value Suppliers is based in Clovis, CA and specializes in high-quality disposable gloves for commercial and industrial use. Backed by responsive customer service and fast Amazon fulfillment.</p>
+<p>Available in sizes Small through XXL. Also available in black.</p>
+
+Character count: ~1,340
+
+
+================================================================================
+4. BACKEND SEARCH TERMS (250 characters max, comma-separated)
+================================================================================
+
+disposable hand protection,examination glove,mechanic glove,food safe glove,cleaning glove,ppe supplies,bulk medical gloves,salon gloves,grow room,dispensary supplies,janitorial supplies,lab glove,vinyl alternative
+
+Character count: 213
+
+NOTES ON BACKEND TERMS:
+- These words do NOT appear in the title or bullets (no duplication).
+- No brand names, no ASINs, no competitor names (violates Amazon TOS).
+- Covers alternate phrasings and use-case terms shoppers actually search.
+- "vinyl alternative" captures shoppers comparing materials.
+- "grow room" and "dispensary supplies" target cannabis vertical.
+
+
+================================================================================
+5. A+ CONTENT OUTLINE (Enhanced Brand Content — 3 Modules)
+================================================================================
+
+MODULE 1: "Built Thicker. Built Better." (Hero Banner + Comparison)
+----------------------------------------------------------------------
+- Full-width hero image: Close-up of gloved hand gripping a tool, blue nitrile
+  glove in sharp focus against an industrial background.
+- Comparison chart (infographic style):
+  | Feature              | Value Suppliers 5 Mil | Generic 3 Mil |
+  |----------------------|-----------------------|---------------|
+  | Thickness            | 5 mil                 | 3 mil         |
+  | Puncture Resistance  | High                  | Low-Medium     |
+  | ASTM Exam Certified  | Yes                   | Varies        |
+  | Textured Fingertips  | Yes                   | Varies        |
+  | Chemical Resistance  | Superior              | Basic         |
+- Headline: "40% thicker than standard disposable gloves — feel the difference."
+- Body: Short paragraph on why thickness matters for protection and durability.
+
+MODULE 2: "One Glove. Every Industry." (Use Case Grid)
+----------------------------------------------------------------------
+- 6-panel image grid showing the glove in different professional settings:
+  1. Cannabis cultivation (trimming, handling plants)
+  2. Food processing / commercial kitchen
+  3. Auto mechanic shop
+  4. Tattoo artist at work
+  5. Dental / medical exam room
+  6. Janitorial / cleaning crew
+- Each panel: Lifestyle photo + short 1-line caption.
+- Headline: "Trusted across industries that demand more from their gloves."
+- Body: Emphasize dual ASTM certification covering both industrial and
+  exam-grade requirements in a single SKU.
+
+MODULE 3: "Quality You Can Count On" (Trust & Specs)
+----------------------------------------------------------------------
+- Left side: Product photo showing the case, individual box, and single glove.
+- Right side: Technical specifications in clean, scannable format:
+  - Material: Nitrile (100% latex-free)
+  - Thickness: 5 mil
+  - Color: Blue (also available in black)
+  - Sizes: S, M, L, XL, XXL
+  - Quantity: 1,000/case (10 x 100)
+  - Certifications: ASTM D6319, ASTM D3578
+  - AQL: 1.5-2.5
+  - Features: Powder-free, ambidextrous, textured fingertips, beaded cuff
+- Headline: "ASTM Certified. AQL Rated. Zero Compromises."
+- Body: Brief paragraph about Value Suppliers' commitment to quality,
+  Clovis CA headquarters, and responsive customer support.
+- Optional trust badges: ASTM Certified, Latex-Free, Made for Professionals.
+
+MODULE 4 (Optional): "The Right Size Matters" (Size Guide)
+----------------------------------------------------------------------
+- Hand measurement diagram showing how to measure palm width.
+- Size chart:
+  | Size | Palm Width (inches) |
+  |------|---------------------|
+  | S    | 2.75 - 3.0          |
+  | M    | 3.0 - 3.5           |
+  | L    | 3.5 - 4.0           |
+  | XL   | 4.0 - 4.5           |
+  | XXL  | 4.5 - 5.0           |
+- Tip: "Not sure? Order a size up. Nitrile stretches to conform to your hand."
+- This module reduces returns from incorrect sizing.
+
+
+================================================================================
+ADDITIONAL SELLER CENTRAL FIELDS
+================================================================================
+
+BRAND:                  Value Suppliers
+MANUFACTURER:           Value Suppliers
+ITEM WEIGHT:            ~12.5 lbs per case
+PACKAGE DIMENSIONS:     Approx. 18 x 12 x 10 inches
+MATERIAL:               Nitrile
+COLOR:                  Blue
+ITEM FORM:              Glove
+CLOSURE TYPE:           Beaded Cuff
+PATTERN:                Solid
+SPECIAL FEATURE:        Powder Free, Latex Free, Textured, Ambidextrous
+USE FOR:                Medical, Industrial, Food Service, Janitorial, Automotive
+TARGET AUDIENCE:        Medical Professional, Industrial Worker, Food Handler
+UNIT COUNT:             1000
+NUMBER OF ITEMS:        10
+ASIN VARIATION:         Parent listing with child ASINs per size (S/M/L/XL/XXL)
+PRICE:                  $89.95
+
+VARIATION STRATEGY:
+- Create a PARENT ASIN (non-buyable) with size as the variation theme.
+- 5 CHILD ASINs: one per size, all priced at $89.95.
+- If launching black color later, add color as a second variation dimension
+  under the same parent to consolidate reviews.
+
+
+================================================================================
+KEYWORD STRATEGY NOTES
+================================================================================
+
+PRIMARY KEYWORDS (in title):
+  nitrile, exam gloves, case of 1000, 5 mil, powder free, latex free,
+  textured fingertips, ASTM certified, disposable
+
+SECONDARY KEYWORDS (in bullets):
+  puncture resistance, chemical protection, cannabis, dental, auto shop,
+  tattoo, food processing, janitorial, laboratory, cultivation, ambidextrous,
+  beaded cuff, bulk
+
+BACKEND / LONG-TAIL (hidden):
+  disposable hand protection, examination glove, mechanic glove, food safe,
+  cleaning glove, ppe supplies, salon gloves, grow room, dispensary supplies,
+  vinyl alternative, lab glove
+
+AVOIDED (Amazon TOS violations):
+  - No competitor brand names (AMMEX, MedPride, Emerald, etc.)
+  - No subjective claims ("best," "cheapest," "#1")
+  - No temporary pricing language ("sale," "discount")
+  - No ASINs or catalog numbers of other products

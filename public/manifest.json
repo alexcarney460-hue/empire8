@@ -1,0 +1,27 @@
+{
+  "name": "ValueSuppliers.co — Professional Gloves & Cannabis Trimming Supplies",
+  "short_name": "ValueSuppliers",
+  "description": "Professional-grade disposable gloves and cannabis trimming equipment. Case pricing for retail, wholesale, and distribution.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1B3A2D",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

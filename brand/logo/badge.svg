@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Hexagon -->
+  <polygon points="32,2 56,16 56,48 32,62 8,48 8,16" fill="#1B3A2D"/>
+  <polygon points="32,2 56,16 56,48 32,62 8,48 8,16" fill="none" stroke="#C8922A" stroke-width="2"/>
+  <!-- VS monogram -->
+  <text x="32" y="42" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="28" fill="#C8922A" text-anchor="middle" letter-spacing="-1">VS</text>
+</svg>

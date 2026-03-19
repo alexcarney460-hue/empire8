@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" font-family="Arial, sans-serif">
+  <rect width="720" height="320" fill="#F5F4F0"/>
+  <text x="24" y="32" font-size="16" font-weight="700" fill="#1C1C1C" letter-spacing="1">VALUESUPPLIERS.CO — COLOR PALETTE</text>
+
+  <!-- Row 1: Primary -->
+  <text x="24" y="60" font-size="10" font-weight="600" fill="#9A9590" letter-spacing="2">PRIMARY</text>
+
+  <!-- Forest -->
+  <rect x="24" y="70" width="120" height="80" rx="8" fill="#1B3A2D"/>
+  <text x="84" y="120" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Forest</text>
+  <text x="84" y="136" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.7">#1B3A2D</text>
+
+  <!-- Amber -->
+  <rect x="156" y="70" width="120" height="80" rx="8" fill="#C8922A"/>
+  <text x="216" y="120" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Amber</text>
+  <text x="216" y="136" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.8">#C8922A</text>
+
+  <!-- Charcoal -->
+  <rect x="288" y="70" width="120" height="80" rx="8" fill="#1C1C1C"/>
+  <text x="348" y="120" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Charcoal</text>
+  <text x="348" y="136" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.7">#1C1C1C</text>
+
+  <!-- Off-White -->
+  <rect x="420" y="70" width="120" height="80" rx="8" fill="#F5F4F0" stroke="#E2E0DB" stroke-width="1"/>
+  <text x="480" y="120" font-size="11" fill="#1C1C1C" text-anchor="middle" font-weight="600">Off-White</text>
+  <text x="480" y="136" font-size="10" fill="#9A9590" text-anchor="middle">#F5F4F0</text>
+
+  <!-- White -->
+  <rect x="552" y="70" width="120" height="80" rx="8" fill="#FFFFFF" stroke="#E2E0DB" stroke-width="1"/>
+  <text x="612" y="120" font-size="11" fill="#1C1C1C" text-anchor="middle" font-weight="600">White</text>
+  <text x="612" y="136" font-size="10" fill="#9A9590" text-anchor="middle">#FFFFFF</text>
+
+  <!-- Row 2: Secondary -->
+  <text x="24" y="185" font-size="10" font-weight="600" fill="#9A9590" letter-spacing="2">SECONDARY + TIERS</text>
+
+  <!-- Muted Green -->
+  <rect x="24" y="195" width="120" height="80" rx="8" fill="#4A7C59"/>
+  <text x="84" y="243" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Muted Green</text>
+  <text x="84" y="259" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.7">#4A7C59</text>
+
+  <!-- Sage Light -->
+  <rect x="156" y="195" width="120" height="80" rx="8" fill="#E8EDE9" stroke="#E2E0DB" stroke-width="1"/>
+  <text x="216" y="243" font-size="11" fill="#1C1C1C" text-anchor="middle" font-weight="600">Sage Light</text>
+  <text x="216" y="259" font-size="10" fill="#9A9590" text-anchor="middle">#E8EDE9</text>
+
+  <!-- Warm Gray -->
+  <rect x="288" y="195" width="120" height="80" rx="8" fill="#9A9590"/>
+  <text x="348" y="243" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Warm Gray</text>
+  <text x="348" y="259" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.8">#9A9590</text>
+
+  <!-- Amber Hover -->
+  <rect x="420" y="195" width="120" height="80" rx="8" fill="#A67320"/>
+  <text x="480" y="243" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Amber Dark</text>
+  <text x="480" y="259" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.8">#A67320</text>
+
+  <!-- Alert Red -->
+  <rect x="552" y="195" width="120" height="80" rx="8" fill="#C0392B"/>
+  <text x="612" y="243" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Alert Red</text>
+  <text x="612" y="259" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.8">#C0392B</text>
+
+  <!-- Tier labels -->
+  <text x="84" y="298" font-size="9" fill="#4A7C59" text-anchor="middle" font-weight="700" letter-spacing="1">WHOLESALE</text>
+  <text x="348" y="298" font-size="9" fill="#9A9590" text-anchor="middle" font-weight="700" letter-spacing="1">RETAIL</text>
+  <text x="480" y="298" font-size="9" fill="#A67320" text-anchor="middle" font-weight="700" letter-spacing="1">DISTRIBUTION</text>
+</svg>

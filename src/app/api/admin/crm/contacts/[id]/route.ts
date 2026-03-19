@@ -1,0 +1,79 @@
+import { NextResponse } from 'next/server';
+import { requireAdmin } from '@/lib/admin/requireAdmin';
+import { getSupabaseServer } from '@/lib/supabase-server';
+
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
+
+  const supabase = getSupabaseServer();
+  if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
+
+  const { id } = await params;
+
+  const { data: contact, error } = await supabase
+    .from('contacts')
+    .select('*, companies(id, name, domain)')
+    .eq('id', id)
+    .single();
+
+  if (error || !contact) return NextResponse.json({ ok: false, error: 'Not found' }, { status: 404 });
+
+  const [activitiesRes, commsRes, ordersRes] = await Promise.all([
+    supabase.from('activities').select('*').eq('contact_id', id).order('created_at', { ascending: false }),
+    supabase.from('communications').select('*').eq('contact_id', id).order('created_at', { ascending: false }),
+    supabase.from('orders').select('*').eq('contact_id', id).order('created_at', { ascending: false }),
+  ]);
+
+  const company = contact.companies || null;
+  const { companies: _, ...contactFields } = contact;
+
+  return NextResponse.json({
+    ok: true,
+    data: {
+      ...contactFields,
+      company,
+      activities: activitiesRes.data || [],
+      communications: commsRes.data || [],
+      orders: ordersRes.data || [],
+    },
+  });
+}
+
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
+
+  const supabase = getSupabaseServer();
+  if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
+
+  const { id } = await params;
+  const body = await req.json();
+  const allowedFields = ['firstname', 'lastname', 'email', 'phone', 'city', 'state', 'role', 'source', 'lead_status', 'lifecycle_stage', 'company_id', 'owner', 'notes', 'last_contacted_at'];
+  const update: Record<string, unknown> = {};
+  for (const key of allowedFields) {
+    if (body[key] !== undefined) update[key] = body[key];
+  }
+  update.updated_at = new Date().toISOString();
+
+  const { data, error } = await supabase.from('contacts').update(update).eq('id', id).select().single();
+
+  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+
+  return NextResponse.json({ ok: true, data });
+}
+
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
+
+  const supabase = getSupabaseServer();
+  if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
+
+  const { id } = await params;
+  const { error } = await supabase.from('contacts').delete().eq('id', id);
+
+  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+
+  return NextResponse.json({ ok: true });
+}
