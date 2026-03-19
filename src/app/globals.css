@@ -24,7 +24,7 @@
   --color-text-muted:     #9A9590;
   --color-accent:         #C8A23C;
   --color-accent-hover:   #A6841E;
-  --nav-height:           140px;
+  --nav-height:           220px;
 
   /* Premium shadows */
   --shadow-xs:  0 1px 2px rgba(0,0,0,0.04);
@@ -381,15 +381,15 @@ a { transition: color 150ms ease, opacity 150ms ease; }
 
 /* ── Tablet overrides (641-767px gap fix) ── */
 @media (min-width: 641px) and (max-width: 767px) {
-  :root { --nav-height: 100px; }
-  .e8-logo { height: 72px !important; }
+  :root { --nav-height: 140px; }
+  .e8-logo { height: 120px !important; }
 }
 
 /* ── Mobile overrides ── */
 @media (max-width: 640px) {
-  :root { --nav-height: 80px; }
+  :root { --nav-height: 110px; }
 
-  .e8-logo { height: 64px !important; }
+  .e8-logo { height: 90px !important; }
 
   .e8-btn-group {
     flex-direction: column;

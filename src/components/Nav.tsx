@@ -39,11 +39,11 @@ export default function Nav() {
           right: 0,
           zIndex: 100,
           height: 'var(--nav-height)',
-          backgroundColor: scrolled ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.96)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid rgba(226,224,219,0.5)',
-          boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
+          backgroundColor: scrolled ? 'rgba(15,5,32,0.92)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(24px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(200,162,60,0.15)' : 'none',
+          boxShadow: scrolled ? '0 4px 24px rgba(0,0,0,0.3)' : 'none',
           transition: 'background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease',
           display: 'flex',
           alignItems: 'center',
@@ -65,10 +65,10 @@ export default function Nav() {
             <Image
               src="/logo.jpg"
               alt="Empire 8 Sales Direct — Licensed Cannabis Distribution"
-              width={320}
-              height={120}
+              width={640}
+              height={240}
               className="e8-logo"
-              style={{ objectFit: 'contain', height: 160, width: 'auto' }}
+              style={{ objectFit: 'contain', height: 320, width: 'auto' }}
               priority
             />
           </Link>
@@ -81,7 +81,7 @@ export default function Nav() {
                 href={link.href}
                 className="label-caps e8-nav-link"
                 style={{
-                  color: 'var(--color-charcoal)',
+                  color: scrolled ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.9)',
                   textDecoration: 'none',
                   fontSize: '0.68rem',
                   letterSpacing: '0.16em',
@@ -101,8 +101,8 @@ export default function Nav() {
               className="desktop-nav"
               style={{
                 marginLeft: 8,
-                backgroundColor: 'var(--color-royal)',
-                color: '#fff',
+                backgroundColor: 'var(--color-gold)',
+                color: '#1A0633',
                 padding: '8px 18px',
                 borderRadius: 8,
                 fontFamily: "'Barlow', Arial, sans-serif",
@@ -135,7 +135,7 @@ export default function Nav() {
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                color: 'var(--color-charcoal)',
+                color: '#fff',
                 display: 'none',
                 alignItems: 'center',
                 justifyContent: 'center',
