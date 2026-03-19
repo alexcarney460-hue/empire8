@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { BadgeCheck, Truck, DollarSign, User, FileText, Phone, ArrowRight } from 'lucide-react';
 import AnimateIn from '@/components/AnimateIn';
@@ -69,6 +70,33 @@ export default function DispensarySignUpPage() {
               <div style={{ color: 'var(--color-warm-gray)', fontSize: '0.8rem' }}>120+ cases · Save $20/case · NET 30 available</div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Zone Map */}
+      <section style={{ backgroundColor: '#0F0520', padding: '64px 24px', borderBottom: '1px solid rgba(200,162,60,0.15)' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <AnimateIn style={{ textAlign: 'center', marginBottom: 32 }}>
+            <span className="label-caps" style={{ color: '#C8A23C' }}>Coverage Area</span>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: '#fff' }}>
+              Statewide Delivery Zones
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.95rem', maxWidth: 560, margin: '12px auto 0', lineHeight: 1.7 }}>
+              Empire 8 delivers across all 7 zones covering every county in New York State.
+            </p>
+          </AnimateIn>
+          <AnimateIn delay={100}>
+            <div style={{ borderRadius: 16, overflow: 'hidden', border: '2px solid rgba(200,162,60,0.25)', boxShadow: '0 8px 40px rgba(0,0,0,0.4)' }}>
+              <Image
+                src="/zone-map.jpg"
+                alt="Empire 8 Sales Direct — Regional Sales and Distribution Map covering all 7 zones across New York State"
+                width={1600}
+                height={1000}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+                priority
+              />
+            </div>
+          </AnimateIn>
         </div>
       </section>
 
