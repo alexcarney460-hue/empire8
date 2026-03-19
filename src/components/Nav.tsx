@@ -65,10 +65,10 @@ export default function Nav() {
             <Image
               src="/logo.png"
               alt="Empire 8 Sales Direct — Licensed Cannabis Distribution"
-              width={640}
-              height={240}
+              width={1280}
+              height={480}
               className="e8-logo"
-              style={{ objectFit: 'contain', height: 130, width: 'auto' }}
+              style={{ objectFit: 'contain', height: 260, width: 'auto', marginTop: 4, marginBottom: -130 }}
               priority
             />
           </Link>
