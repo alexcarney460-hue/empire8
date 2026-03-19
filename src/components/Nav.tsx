@@ -38,7 +38,8 @@ export default function Nav() {
           left: 0,
           right: 0,
           zIndex: 100,
-          height: 'var(--nav-height)',
+          height: 'auto',
+          padding: '8px 24px',
           backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.98)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -47,7 +48,6 @@ export default function Nav() {
           transition: 'background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease',
           display: 'flex',
           alignItems: 'center',
-          padding: '0 24px',
         }}
       >
         <div
@@ -65,10 +65,10 @@ export default function Nav() {
             <Image
               src="/logo.png"
               alt="Empire 8 Sales Direct — Licensed Cannabis Distribution"
-              width={1280}
-              height={480}
+              width={640}
+              height={240}
               className="e8-logo"
-              style={{ objectFit: 'contain', height: 400, width: 'auto' }}
+              style={{ objectFit: 'contain', height: 130, width: 'auto' }}
               priority
             />
           </Link>
