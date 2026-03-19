@@ -53,13 +53,13 @@ export default function HeroCarousel() {
         </div>
       ))}
 
-      {/* Dark overlay for text readability */}
+      {/* Subtle vignette — keeps images vivid */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, rgba(45,10,78,0.82) 0%, rgba(26,6,51,0.88) 50%, rgba(15,5,32,0.95) 100%)",
+            "linear-gradient(180deg, rgba(15,5,32,0.15) 0%, transparent 30%, transparent 70%, rgba(15,5,32,0.3) 100%)",
           pointerEvents: "none",
         }}
       />

@@ -66,19 +66,40 @@ export default function HomePage() {
   return (
     <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520' }}>
 
-      {/* -- HERO -- */}
+      {/* -- BANNER CAROUSEL -- */}
       <section
         style={{
-          padding: '96px 24px 112px',
           position: 'relative',
           overflow: 'hidden',
-          minHeight: '85vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          height: '70vh',
+          minHeight: 420,
+          maxHeight: 700,
         }}
       >
         <HeroCarousel />
+      </section>
+
+      {/* -- HERO TEXT -- */}
+      <section
+        style={{
+          background: 'linear-gradient(168deg, #2D0A4E 0%, #4A0E78 35%, #2D0A4E 70%, #1A0633 100%)',
+          padding: '80px 24px 96px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            width: 600,
+            height: 600,
+            top: '-30%',
+            right: '-10%',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(200,162,60,0.08) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
 
         <div
           style={{
@@ -100,7 +121,7 @@ export default function HomePage() {
             }}
           >
             <span style={{ width: 28, height: 1.5, backgroundColor: '#C8A23C', display: 'inline-block', borderRadius: 99 }} />
-            Licensed B2B Cannabis Distribution
+            Licensed B2B Cannabis Wholesale
             <span style={{ width: 28, height: 1.5, backgroundColor: '#C8A23C', display: 'inline-block', borderRadius: 99 }} />
           </span>
 
@@ -114,9 +135,9 @@ export default function HomePage() {
               color: '#FFFFFF',
             }}
           >
-            New York's Premier
+            New York&apos;s Premier
             <br />
-            Cannabis Distribution Partner
+            Cannabis Supply Partner
           </h1>
 
           <p
@@ -129,8 +150,8 @@ export default function HomePage() {
               lineHeight: 1.8,
             }}
           >
-            Licensed B2B distribution connecting top cannabis brands with
-            New York's finest dispensaries. Reliable. Compliant. Statewide.
+            Licensed B2B wholesale connecting top cannabis brands with
+            New York&apos;s finest dispensaries. Reliable. Compliant. Statewide.
           </p>
 
           <div className="e8-fade-up-3" style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
