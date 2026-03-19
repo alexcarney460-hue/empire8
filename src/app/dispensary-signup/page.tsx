@@ -1,45 +1,58 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BadgeCheck, Truck, DollarSign, User, FileText, Phone, ArrowRight } from 'lucide-react';
+import { BadgeCheck, Truck, DollarSign, User, FileText, Phone, Package, ShieldCheck, ArrowRight } from 'lucide-react';
 import AnimateIn from '@/components/AnimateIn';
 import DistributionForm from '@/components/forms/DistributionForm';
 
 export const metadata: Metadata = {
-  title: 'Dispensary Sign Up — $60/Case + NET 30',
+  title: 'Dispensary Sign Up | Empire 8 Sales Direct',
   description:
-    'Sign up your dispensary. $60/case pricing on 120+ case orders with NET 30 terms, dedicated rep, and priority inventory. Save $20/case off retail.',
-  keywords: ['dispensary sign up', 'dispensary wholesale pricing', 'wholesale gloves dispensary', 'dispensary supplies', 'net 30 gloves', 'cannabis supplies wholesale'],
+    'Licensed NY dispensaries — sign up with Empire 8 Sales Direct for premium cannabis product supply, competitive wholesale pricing, and statewide delivery.',
+  keywords: ['dispensary sign up', 'cannabis wholesale NY', 'dispensary supplier new york', 'cannabis distribution', 'OCM licensed distributor'],
   openGraph: {
-    title: 'Dispensary Sign Up — $60/Case + NET 30',
-    description: 'Dispensary wholesale pricing at $60/case on 120+ case orders. NET 30 billing, dedicated rep, and priority inventory allocation.',
+    title: 'Dispensary Sign Up | Empire 8 Sales Direct',
+    description: 'Licensed NY dispensaries — sign up with Empire 8 Sales Direct for premium cannabis product supply, competitive wholesale pricing, and statewide delivery.',
     url: 'https://empire8salesdirect.com/dispensary-signup',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Dispensary Sign Up | Empire 8 Sales Direct',
-    description: '$60/case glove pricing for dispensaries. NET 30 terms, priority allocation, and dedicated account rep.',
+    description: 'Licensed NY dispensaries — sign up with Empire 8 Sales Direct for premium cannabis product supply, competitive wholesale pricing, and statewide delivery.',
   },
   alternates: { canonical: 'https://empire8salesdirect.com/dispensary-signup' },
 };
 
-const BENEFITS = [
-  { icon: DollarSign, title: '$60/case Pricing', desc: 'Dispensary accounts save $20/case off retail — $60/case ($6/box) on every SKU, every order.' },
-  { icon: Truck, title: 'Priority Allocation', desc: 'Dispensary partners are fulfilled first. You get inventory priority before retail channels.' },
-  { icon: FileText, title: 'NET 30 Terms', desc: 'Qualify for NET 30 billing after account approval. Invoice-based ordering for established operations.' },
-  { icon: User, title: 'Dedicated Rep', desc: 'Direct line to your account manager for custom orders, volume quotes, and restock scheduling.' },
-  { icon: BadgeCheck, title: 'Custom Pricing Tiers', desc: 'At 100+ case/month volume, we build a custom pricing agreement tailored to your operation.' },
-  { icon: Phone, title: 'After-Hours Support', desc: 'Dispensary accounts get priority support contact for urgent restock situations.' },
+const OFFERINGS = [
+  {
+    icon: Package,
+    title: 'Curated Product Portfolio',
+    desc: 'Vapes, flower, pre-rolls, edibles, concentrates, tinctures, and more from premium NY-licensed brands.',
+  },
+  {
+    icon: DollarSign,
+    title: 'Competitive Wholesale Pricing',
+    desc: 'Volume-based pricing with NET 30 terms available for qualified dispensaries.',
+  },
+  {
+    icon: Truck,
+    title: 'Statewide Delivery',
+    desc: 'Temperature-controlled delivery across all 7 New York zones. Same-week fulfillment.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Compliance & Tracking',
+    desc: 'Full manifesting, chain of custody documentation, and real-time order tracking. 100% OCM compliant.',
+  },
 ];
 
-const COMPARISON = [
-  { label: 'Case Price',               retail: '$80/case',  wholesale: '$70/case',      dispensary: '$60/case' },
-  { label: 'Savings per Case',         retail: '—',         wholesale: 'Save $10/case', dispensary: 'Save $20/case' },
-  { label: 'Minimum Order',            retail: '1 case',    wholesale: '30 cases',      dispensary: '120 cases' },
-  { label: 'NET Terms',                retail: 'No',        wholesale: 'No',            dispensary: 'NET 30' },
-  { label: 'Dedicated Account Rep',    retail: 'No',        wholesale: 'No',            dispensary: 'Yes' },
-  { label: 'Inventory Priority',       retail: 'No',        wholesale: 'No',            dispensary: 'Yes' },
-  { label: 'Custom Pricing Available', retail: 'No',        wholesale: 'No',            dispensary: 'Yes (200+ cases)' },
+const WHY_EMPIRE8 = [
+  { icon: BadgeCheck, title: 'Licensed & Compliant', desc: 'NYS OCM licensed. Every shipment fully manifested and tracked seed-to-shelf.' },
+  { icon: Package, title: 'Premium Brands', desc: 'Curated portfolio of top-tier NY cannabis brands across all major product categories.' },
+  { icon: User, title: 'Dedicated Account Manager', desc: 'Your own rep for ordering, inventory planning, and marketing support.' },
+  { icon: FileText, title: 'Flexible Terms', desc: 'NET 30 billing available for approved accounts. Volume-based pricing.' },
+  { icon: ShieldCheck, title: 'Full Product Range', desc: 'Vapes, cartridges, flower, infused pre-rolls, edibles, beverages, tinctures, concentrates.' },
+  { icon: Phone, title: 'Fast Fulfillment', desc: 'Same-week delivery with temperature-controlled vehicles across all 62 counties.' },
 ];
 
 
@@ -58,18 +71,11 @@ export default function DispensarySignUpPage() {
             <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
           </span>
           <h1 className="font-display" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.0, color: 'var(--color-charcoal)', marginBottom: 20 }}>
-            Built for Commercial Volume.
+            Partner with New York&apos;s Premier Cannabis Supplier
           </h1>
-          <p style={{ color: 'var(--color-warm-gray)', fontSize: '1.05rem', maxWidth: 540, margin: '0 auto 36px', lineHeight: 1.8 }}>
-            Licensed dispensaries and commercial operations — sign up for wholesale access and get $60/case pricing (save $20/case) on every order.
+          <p style={{ color: 'var(--color-warm-gray)', fontSize: '1.05rem', maxWidth: 580, margin: '0 auto', lineHeight: 1.8 }}>
+            Empire 8 Sales Direct supplies licensed dispensaries across all 62 New York counties with premium cannabis products. Apply below to become a partner.
           </p>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, backgroundColor: 'rgba(200,146,42,0.08)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: 16, padding: '18px 32px' }}>
-            <span className="font-display" style={{ fontSize: '2.25rem', color: 'var(--color-gold)', lineHeight: 1 }}>$60</span>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ color: 'var(--color-charcoal)', fontWeight: 700, fontSize: '0.9rem' }}>Per Case — Dispensary Tier</div>
-              <div style={{ color: 'var(--color-warm-gray)', fontSize: '0.8rem' }}>120+ cases · Save $20/case · NET 30 available</div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -100,67 +106,53 @@ export default function DispensarySignUpPage() {
         </div>
       </section>
 
-      {/* Tier Comparison Table */}
+      {/* What We Offer */}
       <section style={{ backgroundColor: '#FAFAFA', padding: '80px 24px', borderBottom: '1px solid var(--color-border)' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <AnimateIn style={{ textAlign: 'center', marginBottom: 48 }}>
-            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Pricing Tiers</span>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <AnimateIn style={{ textAlign: 'center', marginBottom: 52 }}>
+            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Our Services</span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
-              How the Tiers Compare
+              What We Offer
             </h2>
           </AnimateIn>
-          <AnimateIn>
-            <div style={{ backgroundColor: '#fff', borderRadius: 20, border: '1px solid var(--color-border)', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
-                      <th style={{ padding: '16px 24px', textAlign: 'left' }}></th>
-                      {['Retail', 'Wholesale', 'Dispensary'].map((tier, i) => (
-                        <th
-                          key={tier}
-                          style={{
-                            padding: '16px 24px',
-                            textAlign: 'center',
-                            borderLeft: '1px solid var(--color-border)',
-                            backgroundColor: i === 2 ? 'rgba(200,146,42,0.05)' : 'transparent',
-                          }}
-                        >
-                          <span className="label-caps" style={{ color: i === 2 ? 'var(--color-gold)' : i === 1 ? 'var(--color-purple-muted)' : 'var(--color-warm-gray)', fontSize: '0.72rem' }}>
-                            {tier}
-                          </span>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {COMPARISON.map((row, ri) => (
-                      <tr key={row.label} style={{ borderBottom: ri < COMPARISON.length - 1 ? '1px solid var(--color-border)' : 'none', backgroundColor: ri % 2 === 0 ? '#FAFAFA' : '#fff' }}>
-                        <td style={{ padding: '14px 24px', fontSize: '0.88rem', color: 'var(--color-charcoal)', fontWeight: 500 }}>{row.label}</td>
-                        <td style={{ padding: '14px 24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-warm-gray)', borderLeft: '1px solid var(--color-border)' }}>{row.retail}</td>
-                        <td style={{ padding: '14px 24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-purple-muted)', fontWeight: 500, borderLeft: '1px solid var(--color-border)' }}>{row.wholesale}</td>
-                        <td style={{ padding: '14px 24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-gold)', fontWeight: 600, backgroundColor: 'rgba(200,146,42,0.05)', borderLeft: '1px solid rgba(200,146,42,0.15)' }}>{row.dispensary}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </AnimateIn>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20 }}>
+            {OFFERINGS.map(({ icon: Icon, title, desc }, i) => (
+              <AnimateIn key={title} delay={i * 75}>
+                <div
+                  className="tilt-card"
+                  style={{
+                    backgroundColor: '#fff',
+                    borderRadius: 20,
+                    padding: '28px 24px',
+                    border: '1px solid var(--color-border)',
+                    borderTop: '3px solid var(--color-gold)',
+                    height: '100%',
+                    boxShadow: 'var(--shadow-xs)',
+                  }}
+                >
+                  <div style={{ width: 48, height: 48, backgroundColor: 'var(--color-purple-light)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
+                    <Icon size={22} color="var(--color-gold)" />
+                  </div>
+                  <h3 className="font-heading" style={{ fontSize: '1rem', marginBottom: 8, color: 'var(--color-charcoal)' }}>{title}</h3>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-warm-gray)', lineHeight: 1.7 }}>{desc}</p>
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Benefits */}
+      {/* Why Dispensaries Choose Empire 8 */}
       <section style={{ backgroundColor: '#fff', padding: '80px 24px', borderBottom: '1px solid var(--color-border)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 52 }}>
-            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>What You Get</span>
+            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Why Empire 8</span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
-              Dispensary Partner Benefits
+              Why Dispensaries Choose Empire 8
             </h2>
           </AnimateIn>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-            {BENEFITS.map(({ icon: Icon, title, desc }, i) => (
+            {WHY_EMPIRE8.map(({ icon: Icon, title, desc }, i) => (
               <AnimateIn key={title} delay={i * 75}>
                 <div
                   className="tilt-card"
@@ -192,10 +184,10 @@ export default function DispensarySignUpPage() {
           <AnimateIn style={{ textAlign: 'center', marginBottom: 44 }}>
             <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Apply Now</span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
-              Dispensary Sign Up
+              Apply to Become a Dispensary Partner
             </h2>
-            <p style={{ color: 'var(--color-warm-gray)', marginTop: 12 }}>
-              Applications reviewed within 1 business day. You&apos;ll receive account credentials and NET 30 terms upon approval.
+            <p style={{ color: 'var(--color-warm-gray)', marginTop: 12, maxWidth: 520, margin: '12px auto 0', lineHeight: 1.7 }}>
+              Submit your information below. A New York Cannabis License is required. Applications are reviewed within 2 business days.
             </p>
           </AnimateIn>
 
@@ -242,6 +234,15 @@ export default function DispensarySignUpPage() {
             Contact Us <ArrowRight size={14} />
           </Link>
         </AnimateIn>
+      </section>
+
+      {/* Compliance Disclaimer */}
+      <section style={{ backgroundColor: '#0F0520', padding: '32px 24px', borderTop: '1px solid rgba(200,162,60,0.15)' }}>
+        <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', lineHeight: 1.8, margin: 0 }}>
+            For use only by adults 21 years of age and older. Empire 8 Sales Direct does not make health or medical claims about cannabis products. NYS OCM Licensed Distributor.
+          </p>
+        </div>
       </section>
 
     </div>

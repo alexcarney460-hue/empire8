@@ -27,9 +27,14 @@ export default function HeroCarousel() {
   return (
     <div
       style={{
-        position: "absolute",
-        inset: 0,
+        position: "relative",
+        width: "100%",
+        height: "100%",
         overflow: "hidden",
+        backgroundColor: "#0F0520",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       {SLIDES.map((slide, i) => (
@@ -38,6 +43,9 @@ export default function HeroCarousel() {
           style={{
             position: "absolute",
             inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             opacity: i === active ? 1 : 0,
             transition: "opacity 1.2s ease-in-out",
           }}
@@ -45,21 +53,26 @@ export default function HeroCarousel() {
           <Image
             src={slide.src}
             alt={slide.alt}
-            fill
-            style={{ objectFit: "cover" }}
+            width={1200}
+            height={675}
+            style={{
+              width: "100%",
+              height: "auto",
+              maxHeight: "100%",
+              objectFit: "contain",
+            }}
             priority={i === 0}
-            sizes="100vw"
           />
         </div>
       ))}
 
-      {/* Subtle vignette — keeps images vivid */}
+      {/* Subtle vignette */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, rgba(15,5,32,0.15) 0%, transparent 30%, transparent 70%, rgba(15,5,32,0.3) 100%)",
+            "linear-gradient(180deg, rgba(15,5,32,0.08) 0%, transparent 30%, transparent 70%, rgba(15,5,32,0.15) 100%)",
           pointerEvents: "none",
         }}
       />
