@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Truck, Shield, Handshake, HeadphonesIcon, ArrowRight, MapPin, BadgeCheck, Building2, LocateFixed } from 'lucide-react';
 import AnimateIn from '@/components/AnimateIn';
+import HeroCarousel from '@/components/HeroCarousel';
 import FAQSection from './(home)/FAQSection';
 import CTASection from './(home)/CTASection';
 
@@ -68,37 +69,16 @@ export default function HomePage() {
       {/* -- HERO -- */}
       <section
         style={{
-          background: 'linear-gradient(168deg, #2D0A4E 0%, #4A0E78 35%, #2D0A4E 70%, #1A0633 100%)',
           padding: '96px 24px 112px',
           position: 'relative',
           overflow: 'hidden',
+          minHeight: '85vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        {/* Subtle gold accent glow */}
-        <div
-          style={{
-            position: 'absolute',
-            width: 700,
-            height: 700,
-            top: '-30%',
-            right: '-10%',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(200,162,60,0.08) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            width: 500,
-            height: 500,
-            bottom: '-20%',
-            left: '-5%',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(107,47,160,0.15) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
+        <HeroCarousel />
 
         <div
           style={{

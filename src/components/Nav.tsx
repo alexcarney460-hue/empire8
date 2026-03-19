@@ -66,10 +66,10 @@ export default function Nav() {
             <Image
               src="/logo.jpg"
               alt="Empire 8 Sales Direct — Licensed Cannabis Distribution"
-              width={160}
-              height={60}
+              width={320}
+              height={120}
               className="e8-logo"
-              style={{ objectFit: 'contain', height: 120, width: 'auto' }}
+              style={{ objectFit: 'contain', height: 160, width: 'auto' }}
               priority
             />
           </Link>
@@ -172,9 +172,9 @@ export default function Nav() {
             <Image
               src="/logo.jpg"
               alt="Empire 8 Sales Direct"
-              width={140}
-              height={52}
-              style={{ objectFit: 'contain', height: 80, width: 'auto' }}
+              width={280}
+              height={104}
+              style={{ objectFit: 'contain', height: 120, width: 'auto' }}
             />
             <button
               onClick={() => setOpen(false)}
