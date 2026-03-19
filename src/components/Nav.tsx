@@ -68,7 +68,7 @@ export default function Nav() {
               width={1280}
               height={480}
               className="e8-logo"
-              style={{ objectFit: 'contain', height: 260, width: 'auto', marginTop: 4, marginBottom: -130 }}
+              style={{ objectFit: 'contain', height: 260, width: 'auto', marginTop: -80, marginBottom: -80 }}
               priority
             />
           </Link>
