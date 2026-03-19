@@ -389,7 +389,7 @@ a { transition: color 150ms ease, opacity 150ms ease; }
 @media (max-width: 640px) {
   :root { --nav-height: 90px; }
 
-  .e8-logo { height: 225px !important; margin-bottom: -100px !important; margin-top: -50px !important; position: relative; z-index: 10; }
+  .e8-logo { height: 225px !important; margin-bottom: -80px !important; margin-top: -80px !important; position: relative; z-index: 10; }
 
   .e8-btn-group {
     flex-direction: column;
