@@ -152,7 +152,7 @@ export default function CompliancePage() {
             9 NYCRR Parts 128 and 129, as administered by the New York State Office of Cannabis Management (OCM).
           </p>
           <p style={textStyle}>
-            Empire 8 Sales Direct is a B2B cannabis distribution company. We do not sell directly to consumers.
+            Empire 8 Sales Direct is a B2B cannabis wholesale supplier. We do not sell directly to consumers.
           </p>
         </div>
 

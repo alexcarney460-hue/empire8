@@ -44,7 +44,7 @@ export default function CTASection() {
         </p>
         <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link
-            href="/distribution"
+            href="/dispensary-signup"
             style={{
               backgroundColor: '#C8A23C',
               color: '#1A0633',
@@ -62,7 +62,7 @@ export default function CTASection() {
               boxShadow: '0 4px 24px rgba(200,162,60,0.35)',
             }}
           >
-            Apply for Distribution <ArrowRight size={14} />
+            Dispensary Sign Up <ArrowRight size={14} />
           </Link>
           <Link
             href="/contact"

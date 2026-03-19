@@ -237,7 +237,7 @@ export default function CatalogPage() {
               Apply for Wholesale
             </Link>
             <Link
-              href="/distribution"
+              href="/dispensary-signup"
               className="e8-btn-ghost"
               style={{
                 backgroundColor: 'transparent',
@@ -254,7 +254,7 @@ export default function CatalogPage() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Distribution Program
+              Dispensary Sign Up
             </Link>
           </div>
         </div>

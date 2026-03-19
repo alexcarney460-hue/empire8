@@ -5,44 +5,44 @@ import AnimateIn from '@/components/AnimateIn';
 import DistributionForm from '@/components/forms/DistributionForm';
 
 export const metadata: Metadata = {
-  title: 'Glove Distributor Program — $60/Case + NET 30',
+  title: 'Dispensary Sign Up — $60/Case + NET 30',
   description:
-    'Become a glove distributor. $60/case pricing on 120+ case orders with NET 30 terms, dedicated rep, and priority inventory. Save $20/case off retail.',
-  keywords: ['glove distributor', 'distribution pricing gloves', 'wholesale glove distributor', 'disposable gloves distributor', 'net 30 gloves', 'cannabis supplies distributor'],
+    'Sign up your dispensary. $60/case pricing on 120+ case orders with NET 30 terms, dedicated rep, and priority inventory. Save $20/case off retail.',
+  keywords: ['dispensary sign up', 'dispensary wholesale pricing', 'wholesale gloves dispensary', 'dispensary supplies', 'net 30 gloves', 'cannabis supplies wholesale'],
   openGraph: {
-    title: 'Glove Distributor Program — $60/Case + NET 30',
-    description: 'Distribution pricing at $60/case on 120+ case orders. NET 30 billing, dedicated rep, and priority inventory allocation.',
-    url: 'https://empire8salesdirect.com/distribution',
+    title: 'Dispensary Sign Up — $60/Case + NET 30',
+    description: 'Dispensary wholesale pricing at $60/case on 120+ case orders. NET 30 billing, dedicated rep, and priority inventory allocation.',
+    url: 'https://empire8salesdirect.com/dispensary-signup',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Glove Distribution Program | Empire 8 Sales Direct',
-    description: '$60/case glove pricing for distributors. NET 30 terms, priority allocation, and dedicated account rep.',
+    title: 'Dispensary Sign Up | Empire 8 Sales Direct',
+    description: '$60/case glove pricing for dispensaries. NET 30 terms, priority allocation, and dedicated account rep.',
   },
-  alternates: { canonical: 'https://empire8salesdirect.com/distribution' },
+  alternates: { canonical: 'https://empire8salesdirect.com/dispensary-signup' },
 };
 
 const BENEFITS = [
-  { icon: DollarSign, title: '$60/case Pricing', desc: 'Distribution accounts save $20/case off retail — $60/case ($6/box) on every SKU, every order.' },
-  { icon: Truck, title: 'Priority Allocation', desc: 'Distribution partners are fulfilled first. You get inventory priority before wholesale and retail channels.' },
+  { icon: DollarSign, title: '$60/case Pricing', desc: 'Dispensary accounts save $20/case off retail — $60/case ($6/box) on every SKU, every order.' },
+  { icon: Truck, title: 'Priority Allocation', desc: 'Dispensary partners are fulfilled first. You get inventory priority before retail channels.' },
   { icon: FileText, title: 'NET 30 Terms', desc: 'Qualify for NET 30 billing after account approval. Invoice-based ordering for established operations.' },
   { icon: User, title: 'Dedicated Rep', desc: 'Direct line to your account manager for custom orders, volume quotes, and restock scheduling.' },
   { icon: BadgeCheck, title: 'Custom Pricing Tiers', desc: 'At 100+ case/month volume, we build a custom pricing agreement tailored to your operation.' },
-  { icon: Phone, title: 'After-Hours Support', desc: 'Distribution accounts get priority support contact for urgent restock situations.' },
+  { icon: Phone, title: 'After-Hours Support', desc: 'Dispensary accounts get priority support contact for urgent restock situations.' },
 ];
 
 const COMPARISON = [
-  { label: 'Case Price',               retail: '$80/case',  wholesale: '$70/case',      distribution: '$60/case' },
-  { label: 'Savings per Case',         retail: '—',         wholesale: 'Save $10/case', distribution: 'Save $20/case' },
-  { label: 'Minimum Order',            retail: '1 case',    wholesale: '30 cases',      distribution: '120 cases' },
-  { label: 'NET Terms',                retail: 'No',        wholesale: 'No',            distribution: 'NET 30' },
-  { label: 'Dedicated Account Rep',    retail: 'No',        wholesale: 'No',            distribution: 'Yes' },
-  { label: 'Inventory Priority',       retail: 'No',        wholesale: 'No',            distribution: 'Yes' },
-  { label: 'Custom Pricing Available', retail: 'No',        wholesale: 'No',            distribution: 'Yes (200+ cases)' },
+  { label: 'Case Price',               retail: '$80/case',  wholesale: '$70/case',      dispensary: '$60/case' },
+  { label: 'Savings per Case',         retail: '—',         wholesale: 'Save $10/case', dispensary: 'Save $20/case' },
+  { label: 'Minimum Order',            retail: '1 case',    wholesale: '30 cases',      dispensary: '120 cases' },
+  { label: 'NET Terms',                retail: 'No',        wholesale: 'No',            dispensary: 'NET 30' },
+  { label: 'Dedicated Account Rep',    retail: 'No',        wholesale: 'No',            dispensary: 'Yes' },
+  { label: 'Inventory Priority',       retail: 'No',        wholesale: 'No',            dispensary: 'Yes' },
+  { label: 'Custom Pricing Available', retail: 'No',        wholesale: 'No',            dispensary: 'Yes (200+ cases)' },
 ];
 
 
-export default function DistributionPage() {
+export default function DispensarySignUpPage() {
   return (
     <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#fff', minHeight: '100vh' }}>
 
@@ -53,19 +53,19 @@ export default function DistributionPage() {
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <span className="label-caps" style={{ color: 'var(--color-gold)', display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
             <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
-            Distribution Program
+            Dispensary Sign Up
             <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
           </span>
           <h1 className="font-display" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.0, color: 'var(--color-charcoal)', marginBottom: 20 }}>
             Built for Commercial Volume.
           </h1>
           <p style={{ color: 'var(--color-warm-gray)', fontSize: '1.05rem', maxWidth: 540, margin: '0 auto 36px', lineHeight: 1.8 }}>
-            Licensed grows, commercial operations, and resellers — apply for distribution access and get $60/case pricing (save $20/case) on every order.
+            Licensed dispensaries and commercial operations — sign up for wholesale access and get $60/case pricing (save $20/case) on every order.
           </p>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, backgroundColor: 'rgba(200,146,42,0.08)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: 16, padding: '18px 32px' }}>
             <span className="font-display" style={{ fontSize: '2.25rem', color: 'var(--color-gold)', lineHeight: 1 }}>$60</span>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ color: 'var(--color-charcoal)', fontWeight: 700, fontSize: '0.9rem' }}>Per Case — Distribution Tier</div>
+              <div style={{ color: 'var(--color-charcoal)', fontWeight: 700, fontSize: '0.9rem' }}>Per Case — Dispensary Tier</div>
               <div style={{ color: 'var(--color-warm-gray)', fontSize: '0.8rem' }}>120+ cases · Save $20/case · NET 30 available</div>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function DistributionPage() {
                   <thead>
                     <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
                       <th style={{ padding: '16px 24px', textAlign: 'left' }}></th>
-                      {['Retail', 'Wholesale', 'Distribution'].map((tier, i) => (
+                      {['Retail', 'Wholesale', 'Dispensary'].map((tier, i) => (
                         <th
                           key={tier}
                           style={{
@@ -111,7 +111,7 @@ export default function DistributionPage() {
                         <td style={{ padding: '14px 24px', fontSize: '0.88rem', color: 'var(--color-charcoal)', fontWeight: 500 }}>{row.label}</td>
                         <td style={{ padding: '14px 24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-warm-gray)', borderLeft: '1px solid var(--color-border)' }}>{row.retail}</td>
                         <td style={{ padding: '14px 24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-purple-muted)', fontWeight: 500, borderLeft: '1px solid var(--color-border)' }}>{row.wholesale}</td>
-                        <td style={{ padding: '14px 24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-gold)', fontWeight: 600, backgroundColor: 'rgba(200,146,42,0.05)', borderLeft: '1px solid rgba(200,146,42,0.15)' }}>{row.distribution}</td>
+                        <td style={{ padding: '14px 24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-gold)', fontWeight: 600, backgroundColor: 'rgba(200,146,42,0.05)', borderLeft: '1px solid rgba(200,146,42,0.15)' }}>{row.dispensary}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -128,7 +128,7 @@ export default function DistributionPage() {
           <AnimateIn style={{ textAlign: 'center', marginBottom: 52 }}>
             <span className="label-caps" style={{ color: 'var(--color-gold)' }}>What You Get</span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
-              Distribution Partner Benefits
+              Dispensary Partner Benefits
             </h2>
           </AnimateIn>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
@@ -164,7 +164,7 @@ export default function DistributionPage() {
           <AnimateIn style={{ textAlign: 'center', marginBottom: 44 }}>
             <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Apply Now</span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
-              Distribution Application
+              Dispensary Sign Up
             </h2>
             <p style={{ color: 'var(--color-warm-gray)', marginTop: 12 }}>
               Applications reviewed within 1 business day. You&apos;ll receive account credentials and NET 30 terms upon approval.
@@ -190,7 +190,7 @@ export default function DistributionPage() {
             Questions Before You Apply?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: 36, lineHeight: 1.75 }}>
-            Reach out and we&apos;ll walk you through the distribution program and what to expect.
+            Reach out and we&apos;ll walk you through the dispensary program and what to expect.
           </p>
           <Link
             href="/contact"

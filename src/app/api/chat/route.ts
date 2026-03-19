@@ -20,7 +20,7 @@ PRODUCTS:
 PRICING TIERS:
 - Retail: $80/case ($8/box), 1–29 cases, buy online at /catalog
 - Wholesale: $70/case ($7/box), save $10/case off retail, minimum 30 cases, apply at /wholesale
-- Distribution: $60/case ($6/box), save $20/case off retail, minimum 120 cases, NET 30 available, apply at /distribution
+- Dispensary: $60/case ($6/box), save $20/case off retail, minimum 120 cases, NET 30 available, sign up at /dispensary-signup
 
 AFFILIATE PROGRAM:
 - Commission tiers: Starter 10% ($0–$10k), Growth 12% ($10k–$25k), Pro 15% ($25k–$75k), Elite 18% ($75k–$150k), Apex 20% ($150k+)

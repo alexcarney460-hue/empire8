@@ -4,8 +4,7 @@ import Image from 'next/image';
 const FOOTER_LINKS = {
   Company: [
     { label: 'About Us', href: '/about' },
-    { label: 'Services', href: '/services' },
-    { label: 'Distribution', href: '/distribution' },
+    { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
     { label: 'Contact', href: '/contact' },
   ],
   Legal: [

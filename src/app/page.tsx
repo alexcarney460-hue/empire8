@@ -35,8 +35,8 @@ export const metadata: Metadata = {
 const SERVICE_CARDS = [
   {
     icon: Truck,
-    title: 'Statewide Distribution',
-    description: 'Full coverage across all 62 New York counties. Temperature-controlled fleet. Same-week delivery to licensed retailers.',
+    title: 'Statewide Delivery',
+    description: 'Full coverage across all 62 New York counties. Temperature-controlled fleet. Same-week delivery to licensed dispensaries.',
   },
   {
     icon: Shield,
@@ -58,7 +58,7 @@ const SERVICE_CARDS = [
 const TRUST_STATS = [
   { icon: MapPin, value: '62 Counties', label: 'Served' },
   { icon: BadgeCheck, value: '100%', label: 'OCM Compliant' },
-  { icon: Building2, value: 'Licensed', label: 'Distributor' },
+  { icon: Building2, value: 'Licensed', label: 'Supplier' },
   { icon: LocateFixed, value: 'NY-Based', label: 'Operations' },
 ];
 
@@ -135,7 +135,7 @@ export default function HomePage() {
 
           <div className="e8-fade-up-3" style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link
-              href="/distribution"
+              href="/dispensary-signup"
               style={{
                 backgroundColor: '#C8A23C',
                 color: '#1A0633',
@@ -154,7 +154,7 @@ export default function HomePage() {
                 transition: 'transform 150ms ease, box-shadow 150ms ease',
               }}
             >
-              Become a Partner <ArrowRight size={14} />
+              Dispensary Sign Up <ArrowRight size={14} />
             </Link>
             <Link
               href="/about"
@@ -245,10 +245,10 @@ export default function HomePage() {
               className="font-display"
               style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 12, color: '#FFFFFF' }}
             >
-              Full-Service Cannabis Distribution
+              Full-Service Cannabis Supply
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: 16, maxWidth: 560, margin: '16px auto 0', fontSize: '1rem', lineHeight: 1.7 }}>
-              From warehouse to dispensary shelf, we handle every step of the supply chain with precision and full regulatory compliance.
+              From warehouse to dispensary shelf, we handle every step of the wholesale supply chain with precision and full regulatory compliance.
             </p>
           </AnimateIn>
 
@@ -332,7 +332,7 @@ export default function HomePage() {
               Built for the New York Market
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1.05rem', lineHeight: 1.8, maxWidth: 640, margin: '0 auto 48px' }}>
-              Empire 8 Sales Direct was founded to solve distribution in New York's regulated cannabis market.
+              Empire 8 Sales Direct was founded to solve supply in New York's regulated cannabis market.
               We know the routes, the regulations, and the retailers. Our entire operation is built around
               getting compliant product from brands to shelves, fast.
             </p>

@@ -64,11 +64,11 @@ export const metadata: Metadata = {
     },
   },
   title: {
-    default: 'Empire 8 Sales Direct — Licensed Cannabis Distribution in New York',
+    default: 'Empire 8 Sales Direct — Licensed Cannabis Wholesale Supplier in New York',
     template: '%s | Empire 8 Sales Direct',
   },
   description:
-    'Empire 8 Sales Direct is a NYS OCM licensed cannabis distributor serving dispensaries, processors, and cultivators across New York. Reliable supply chain, competitive pricing, and full regulatory compliance.',
+    'Empire 8 Sales Direct is a NYS OCM licensed cannabis wholesale supplier serving dispensaries across New York. Reliable supply chain, competitive pricing, and full regulatory compliance.',
   keywords: [
     'cannabis distribution new york',
     'NYS cannabis distributor',
@@ -102,17 +102,17 @@ export const metadata: Metadata = {
     siteName: 'Empire 8 Sales Direct',
     type: 'website',
     locale: 'en_US',
-    title: 'Empire 8 Sales Direct — Licensed Cannabis Distribution in New York',
+    title: 'Empire 8 Sales Direct — Licensed Cannabis Wholesale Supplier in New York',
     description:
-      'NYS OCM licensed cannabis distributor. Serving dispensaries, processors, and cultivators across New York with reliable distribution and full compliance.',
+      'NYS OCM licensed cannabis wholesale supplier. Serving dispensaries across New York with reliable supply and full compliance.',
     url: BASE,
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Empire 8 Sales Direct — Licensed Cannabis Distribution in New York' }],
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Empire 8 Sales Direct — Licensed Cannabis Wholesale Supplier in New York' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Empire 8 Sales Direct — Cannabis Distribution NY',
+    title: 'Empire 8 Sales Direct — Cannabis Wholesale Supply NY',
     description:
-      'Licensed cannabis distributor serving New York. Reliable supply chain for dispensaries, processors, and cultivators statewide.',
+      'Licensed cannabis wholesale supplier serving New York dispensaries. Reliable supply chain statewide.',
     creator: '@empire8direct',
     images: ['/og-image.jpg'],
   },
@@ -134,7 +134,7 @@ const orgSchema = {
   logo: `${BASE}/logo.jpg`,
   image: `${BASE}/og-image.jpg`,
   description:
-    'NYS OCM licensed cannabis distributor serving dispensaries, processors, and cultivators across New York with reliable supply chain management and full regulatory compliance.',
+    'NYS OCM licensed cannabis wholesale supplier serving dispensaries across New York with reliable supply chain management and full regulatory compliance.',
   /* TODO: Replace with real phone number */
   telephone: '+1-212-000-0000',
   email: 'info@empire8salesdirect.com',
@@ -180,7 +180,7 @@ const orgSchema = {
   /* TODO: Add social profile URLs as they are created */
   sameAs: [],
   knowsAbout: [
-    'cannabis distribution',
+    'cannabis wholesale supply',
     'cannabis supply chain',
     'NYS cannabis licensing',
     'dispensary supply',
@@ -193,7 +193,7 @@ const websiteSchema = {
   '@type': 'WebSite',
   name: 'Empire 8 Sales Direct',
   url: BASE,
-  description: 'NYS OCM licensed cannabis distributor serving New York.',
+  description: 'NYS OCM licensed cannabis wholesale supplier serving New York dispensaries.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -391,7 +391,7 @@ export default function AffiliatePage() {
               Wholesale Pricing <ArrowRight size={14} />
             </Link>
             <Link
-              href="/distribution"
+              href="/dispensary-signup"
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 backgroundColor: 'transparent', color: '#fff',
@@ -402,7 +402,7 @@ export default function AffiliatePage() {
                 textDecoration: 'none',
               }}
             >
-              Distribution Program
+              Dispensary Sign Up
             </Link>
           </div>
         </AnimateIn>

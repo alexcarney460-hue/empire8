@@ -126,13 +126,13 @@ export default function WholesalePage() {
         <AnimateIn style={{ maxWidth: 560, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <span className="label-caps" style={{ color: 'rgba(200,146,42,0.85)', display: 'block', marginBottom: 16 }}>Need More?</span>
           <h2 className="font-display" style={{ color: '#fff', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginBottom: 16, lineHeight: 1.05 }}>
-            Looking for Distribution Pricing?
+            Looking for Dispensary Pricing?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: 36, lineHeight: 1.75 }}>
-            Distribution accounts get $60/case pricing (120+ cases) with NET 30 terms and a dedicated rep.
+            Dispensary accounts get $60/case pricing (120+ cases) with NET 30 terms and a dedicated rep.
           </p>
           <Link
-            href="/distribution"
+            href="/dispensary-signup"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -150,7 +150,7 @@ export default function WholesalePage() {
               boxShadow: 'var(--shadow-gold)',
             }}
           >
-            View Distribution Program <ArrowRight size={14} />
+            Dispensary Sign Up <ArrowRight size={14} />
           </Link>
         </AnimateIn>
       </section>

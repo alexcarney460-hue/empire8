@@ -320,7 +320,7 @@ export default function AccountPage() {
                       Apply for Wholesale
                     </Link>
                     <Link
-                      href="/distribution"
+                      href="/dispensary-signup"
                       style={{
                         fontSize: '0.75rem',
                         fontWeight: 600,
@@ -331,7 +331,7 @@ export default function AccountPage() {
                         padding: '6px 14px',
                       }}
                     >
-                      Apply for Distribution
+                      Dispensary Sign Up
                     </Link>
                   </div>
                 </>
@@ -437,7 +437,7 @@ export default function AccountPage() {
                   { label: 'My Subscriptions', href: '#subscriptions' },
                   { label: 'Browse Catalog', href: '/catalog' },
                   { label: 'Wholesale Program', href: '/wholesale' },
-                  { label: 'Distribution Program', href: '/distribution' },
+                  { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
                   { label: 'Contact Support', href: '/contact' },
                 ].map(({ label, href }) => (
                   <Link

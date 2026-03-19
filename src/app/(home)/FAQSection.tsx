@@ -13,11 +13,11 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How do I become a retail partner?',
-    a: 'Licensed dispensaries and retailers can apply through our distribution page. We assign a dedicated account manager to every partner, provide inventory planning support, and offer competitive wholesale pricing with flexible delivery scheduling.',
+    a: 'Licensed dispensaries and retailers can apply through our dispensary sign up page. We assign a dedicated account manager to every partner, provide inventory planning support, and offer competitive wholesale pricing with flexible delivery scheduling.',
   },
   {
-    q: 'How can my brand get distribution through Empire 8?',
-    a: 'We work with premium cannabis brands that meet our quality and compliance standards. Submit your brand information through our distribution application. Our team evaluates product quality, packaging compliance, and market fit to build a curated portfolio for New York dispensaries.',
+    q: 'How can my brand get wholesale supply through Empire 8?',
+    a: 'We work with premium cannabis brands that meet our quality and compliance standards. Submit your brand information through our dispensary sign up form. Our team evaluates product quality, packaging compliance, and market fit to build a curated portfolio for New York dispensaries.',
   },
   {
     q: 'What support do you provide to dispensaries?',

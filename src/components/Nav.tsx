@@ -7,8 +7,7 @@ import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Distribution', href: '/distribution' },
+  { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
   { label: 'Compliance', href: '/compliance' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -226,8 +225,7 @@ export default function Nav() {
           {/* Quick pills */}
           <div style={{ display: 'flex', gap: 10, paddingTop: 28 }}>
             {[
-              { label: 'Services', href: '/services' },
-              { label: 'Distribution', href: '/distribution' },
+              { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
               { label: 'Contact', href: '/contact' },
             ].map(({ label, href }) => (
               <Link

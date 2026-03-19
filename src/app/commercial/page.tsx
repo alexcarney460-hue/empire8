@@ -61,8 +61,8 @@ const TIER_CARDS = [
     accentBg: '#FDF6E8',
     headline: 'Enterprise Programs',
     description: '$50/case ($5/box) on 120+ case orders. Save $20/case with NET terms, dedicated rep, and bulk freight pricing.',
-    cta: 'Apply for Distribution',
-    href: '/distribution',
+    cta: 'Dispensary Sign Up',
+    href: '/dispensary-signup',
   },
 ];
 

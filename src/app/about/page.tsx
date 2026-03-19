@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Package, Truck, BadgeCheck, Users } from 'lucide-react';
+import { ArrowRight, Truck, Shield, Handshake, Users, MapPin, BadgeCheck, Clock, Building2 } from 'lucide-react';
 import AnimateIn from '@/components/AnimateIn';
 
 export const metadata: Metadata = {
-  title: 'About Empire 8 Sales Direct — Gloves & Cannabis Supplies',
+  title: 'About Empire 8 Sales Direct — Licensed Cannabis Wholesale in NY',
   description:
-    'Empire 8 Sales Direct supplies professional-grade disposable gloves and cannabis trimming equipment to operations across the United States. Learn about our commitment to quality, fast restock, and industry-grade products.',
+    'Empire 8 Sales Direct is a NYS OCM licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties. Learn about our mission, team, and commitment to compliance.',
   openGraph: {
     title: 'About Empire 8 Sales Direct',
-    description: 'Professional-grade gloves and cannabis trimming supplies. Built for the operations that need reliability.',
+    description: 'Licensed cannabis wholesale supplier serving dispensaries across New York State.',
     url: 'https://empire8salesdirect.com/about',
   },
   alternates: { canonical: 'https://empire8salesdirect.com/about' },
@@ -17,31 +17,31 @@ export const metadata: Metadata = {
 
 const VALUES = [
   {
-    icon: Package,
-    title: 'Professional Grade, Every Time',
-    desc: "We source products built for commercial operations — not hobby kits. If it doesn't hold up under real workload conditions, it doesn't make our catalog.",
+    icon: Shield,
+    title: 'Compliance First',
+    desc: 'Every product we move is fully tracked, manifested, and compliant with NYS OCM regulations. We handle the paperwork so you can focus on your customers.',
   },
   {
-    icon: BadgeCheck,
-    title: 'Value Without Compromise',
-    desc: "Professional grade shouldn't mean unaffordable. We negotiate volume pricing so you don't have to — and pass those savings straight through.",
+    icon: Handshake,
+    title: 'Dispensary-Focused',
+    desc: 'We exist to serve dispensaries. Our entire operation is built around making it easy for licensed retailers to access premium cannabis products at competitive margins.',
   },
   {
     icon: Truck,
-    title: 'Reliable Restock',
-    desc: 'Running out of gloves mid-harvest is not an option. We keep deep inventory and fulfill fast so your operation never stops for supplies.',
+    title: 'Reliable Delivery',
+    desc: 'Temperature-controlled fleet with same-week delivery across New York State. Your shelves stay stocked, your customers stay happy.',
   },
   {
     icon: Users,
-    title: 'Built for Every Scale',
-    desc: "Whether you're a home grower ordering your first case or a licensed commercial operation running through 10,000 pairs a month — you get the same quality and service.",
+    title: 'Dedicated Support',
+    desc: 'Every dispensary partner gets a dedicated account manager. From inventory planning to marketing support, we help your business grow.',
   },
 ];
 
 const STATS = [
-  { stat: '3', label: 'Customer Tiers' },
-  { stat: '100+', label: 'SKUs Available' },
-  { stat: '48hr', label: 'Average Fulfillment' },
+  { stat: '62', label: 'Counties Served' },
+  { stat: '100%', label: 'OCM Compliant' },
+  { stat: 'Same Week', label: 'Delivery' },
   { stat: 'NET 30', label: 'Terms Available' },
 ];
 
@@ -51,20 +51,21 @@ export default function AboutPage() {
 
       {/* Hero */}
       <section style={{ backgroundColor: '#fff', padding: '72px 24px 80px', position: 'relative', overflow: 'hidden', borderBottom: '1px solid var(--color-border)' }}>
-        <div style={{ position: 'absolute', top: '-20%', right: '5%', width: 500, height: 500, borderRadius: '50%', background: 'rgba(200,146,42,0.07)', filter: 'blur(80px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: '-10%', left: '3%', width: 300, height: 300, borderRadius: '50%', background: 'rgba(27,58,45,0.05)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '-20%', right: '5%', width: 500, height: 500, borderRadius: '50%', background: 'rgba(200,162,60,0.07)', filter: 'blur(80px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-10%', left: '3%', width: 300, height: 300, borderRadius: '50%', background: 'rgba(74,14,120,0.05)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <span className="label-caps" style={{ color: 'var(--color-gold)', display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
             <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
-            Our Story
+            About Empire 8
             <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
           </span>
           <h1 className="font-display" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.0, color: 'var(--color-charcoal)', marginBottom: 24 }}>
-            The Supply Chain for Serious Growers.
+            Powering New York&apos;s Cannabis Retail.
           </h1>
           <p style={{ color: 'var(--color-warm-gray)', fontSize: '1.05rem', maxWidth: 560, margin: '0 auto', lineHeight: 1.8 }}>
-            Empire 8 Sales Direct started with a simple observation: the grow industry was underserved on supplies.
-            Quality gloves and trimming equipment existed — but not at prices that made sense for operations of every size.
+            Empire 8 Sales Direct is a licensed cannabis wholesale supplier based in New York.
+            We connect premium cannabis brands with dispensaries across all 62 counties &mdash;
+            delivering quality products, full compliance, and reliable service.
           </p>
         </div>
       </section>
@@ -75,19 +76,22 @@ export default function AboutPage() {
           <AnimateIn>
             <span className="label-caps" style={{ color: 'var(--color-gold)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
               <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
-              What We Do
+              Our Mission
             </span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 14, marginBottom: 20, color: 'var(--color-charcoal)', lineHeight: 1.05 }}>
-              One Supplier.<br />Every Scale.
+              Built for Dispensaries.<br />Backed by Compliance.
             </h2>
             <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.85, marginBottom: 16, fontSize: '0.95rem' }}>
-              We supply disposable gloves and cannabis trimming equipment to retail customers, hydro stores, dispensaries, licensed grows, and commercial distributors across the country.
+              New York&apos;s cannabis market is growing fast &mdash; and dispensaries need a wholesale partner they can trust.
+              Empire 8 was founded to fill that gap: a fully licensed, OCM-compliant supplier with statewide reach
+              and a curated portfolio of premium brands.
             </p>
             <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.85, marginBottom: 36, fontSize: '0.95rem' }}>
-              Our pricing is tiered by volume — the more you buy, the better your rate. And we make it easy to move up tiers as your operation grows.
+              We handle the logistics, compliance, and brand relationships so dispensaries can focus on what matters
+              most &mdash; serving their communities and growing their business.
             </p>
             <Link
-              href="/catalog"
+              href="/dispensary-signup"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -105,7 +109,7 @@ export default function AboutPage() {
                 boxShadow: 'var(--shadow-gold)',
               }}
             >
-              See All Products <ArrowRight size={14} />
+              Dispensary Sign Up <ArrowRight size={14} />
             </Link>
           </AnimateIn>
 
@@ -137,9 +141,9 @@ export default function AboutPage() {
       <section style={{ backgroundColor: '#fff', padding: '80px 24px', borderBottom: '1px solid var(--color-border)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 52 }}>
-            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>What We Stand For</span>
+            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>How We Operate</span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
-              How We Operate
+              What Sets Empire 8 Apart
             </h2>
           </AnimateIn>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20 }}>
@@ -168,22 +172,64 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Coverage Map Section */}
+      <section style={{ backgroundColor: '#FAFAFA', padding: '80px 24px', borderBottom: '1px solid var(--color-border)' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+          <AnimateIn>
+            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Coverage Area</span>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, marginBottom: 20, color: 'var(--color-charcoal)' }}>
+              All 62 New York Counties
+            </h2>
+            <p style={{ color: 'var(--color-warm-gray)', fontSize: '1rem', lineHeight: 1.8, maxWidth: 600, margin: '0 auto 40px' }}>
+              From Manhattan to Buffalo, Long Island to the Adirondacks &mdash;
+              Empire 8 delivers to every licensed dispensary in New York State.
+              Same-week delivery with temperature-controlled vehicles.
+            </p>
+          </AnimateIn>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
+            {[
+              { icon: MapPin, title: 'NYC Metro', desc: 'Manhattan, Brooklyn, Queens, Bronx, Staten Island' },
+              { icon: Building2, title: 'Long Island', desc: 'Nassau and Suffolk counties' },
+              { icon: MapPin, title: 'Hudson Valley', desc: 'Westchester, Rockland, Orange, Dutchess' },
+              { icon: Clock, title: 'Upstate NY', desc: 'Albany, Syracuse, Rochester, Buffalo' },
+              { icon: BadgeCheck, title: 'Capital Region', desc: 'Albany, Schenectady, Troy, Saratoga' },
+              { icon: MapPin, title: 'Western NY', desc: 'Buffalo, Niagara Falls, Erie County' },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <AnimateIn key={title} delay={i * 60}>
+                <div style={{
+                  backgroundColor: '#fff',
+                  borderRadius: 16,
+                  padding: '24px 20px',
+                  border: '1px solid var(--color-border)',
+                  textAlign: 'left',
+                }}>
+                  <Icon size={20} color="var(--color-royal)" style={{ marginBottom: 12 }} />
+                  <div className="font-heading" style={{ fontSize: '0.95rem', color: 'var(--color-charcoal)', marginBottom: 6 }}>{title}</div>
+                  <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.82rem', lineHeight: 1.6 }}>{desc}</p>
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section
         className="e8-dot-grid"
         style={{ backgroundColor: 'var(--color-royal)', padding: '96px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}
       >
-        <div style={{ position: 'absolute', top: '-30%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 300, borderRadius: '50%', background: 'rgba(200,146,42,0.09)', filter: 'blur(80px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '-30%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 300, borderRadius: '50%', background: 'rgba(200,162,60,0.09)', filter: 'blur(80px)', pointerEvents: 'none' }} />
         <AnimateIn style={{ maxWidth: 560, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <h2 className="font-display" style={{ color: '#fff', fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', marginBottom: 16 }}>
-            Ready to Get Supplied?
+            Ready to Partner with Empire 8?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: 40, fontSize: '1.05rem', lineHeight: 1.75 }}>
-            Browse the catalog or apply for wholesale and distribution pricing.
+            Whether you&apos;re a licensed dispensary looking for reliable supply or a cannabis brand seeking
+            statewide reach, we&apos;re ready to work with you.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link
-              href="/catalog"
+              href="/dispensary-signup"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -201,10 +247,10 @@ export default function AboutPage() {
                 boxShadow: 'var(--shadow-gold)',
               }}
             >
-              Shop the Catalog <ArrowRight size={14} />
+              Dispensary Sign Up <ArrowRight size={14} />
             </Link>
             <Link
-              href="/wholesale"
+              href="/contact"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -222,7 +268,7 @@ export default function AboutPage() {
                 textDecoration: 'none',
               }}
             >
-              Wholesale Pricing
+              Contact Us
             </Link>
           </div>
         </AnimateIn>

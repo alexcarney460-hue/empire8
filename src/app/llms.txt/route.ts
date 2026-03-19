@@ -66,7 +66,7 @@ For wholesale (30+ cases) or distribution (120+ cases) orders:
 ## Key Pages
 - Catalog: https://empire8salesdirect.com/catalog
 - Wholesale Program: https://empire8salesdirect.com/wholesale
-- Distribution Program: https://empire8salesdirect.com/distribution
+- Dispensary Sign Up: https://empire8salesdirect.com/dispensary-signup
 - Commercial Accounts: https://empire8salesdirect.com/commercial
 - Affiliate Program: https://empire8salesdirect.com/affiliate
 - About Us: https://empire8salesdirect.com/about

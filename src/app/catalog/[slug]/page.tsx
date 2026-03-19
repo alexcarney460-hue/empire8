@@ -130,7 +130,7 @@ export default async function ProductPage({
         price: distroTierPrice.toFixed(2),
         priceCurrency: 'USD',
         availability: availabilityUrl,
-        url: 'https://empire8salesdirect.com/distribution',
+        url: 'https://empire8salesdirect.com/dispensary-signup',
         priceValidUntil: '2026-12-31',
         seller,
         eligibleCustomerType: 'https://schema.org/Business',
@@ -381,7 +381,7 @@ export default async function ProductPage({
                       {' '}{product.unit}
                     </span>
                   </div>
-                  <Link href="/distribution" style={{ fontSize: '0.72rem', color: 'var(--color-gold)', textDecoration: 'none', fontWeight: 600 }}>
+                  <Link href="/dispensary-signup" style={{ fontSize: '0.72rem', color: 'var(--color-gold)', textDecoration: 'none', fontWeight: 600 }}>
                     Apply →
                   </Link>
                 </div>
@@ -596,7 +596,7 @@ export default async function ProductPage({
               Get Wholesale Access
             </Link>
             <Link
-              href="/distribution"
+              href="/dispensary-signup"
               style={{
                 backgroundColor: 'transparent',
                 color: '#fff',
@@ -611,7 +611,7 @@ export default async function ProductPage({
                 textDecoration: 'none',
               }}
             >
-              Distribution Program
+              Dispensary Sign Up
             </Link>
           </div>
         </div>
