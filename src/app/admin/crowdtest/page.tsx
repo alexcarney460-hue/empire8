@@ -21,7 +21,7 @@ export default function CrowdTestPage() {
             CrowdTest
           </h1>
           <p style={{ fontSize: '0.85rem', color: TEXT_SECONDARY }}>
-            Run synthetic audience testing with AI-generated personas. Manage API keys and review test results.
+            Run synthetic audience testing with AI-generated personas. Configure your LLM key, run tests, and review results.
           </p>
         </div>
 
