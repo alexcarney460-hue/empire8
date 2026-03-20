@@ -74,9 +74,16 @@ export default function LoginPage() {
       const isAdmin = ADMIN_EMAILS.includes(authData.user.email?.toLowerCase() ?? '');
 
       if (isAdmin) {
-        // Set admin cookie via API so middleware recognizes us
-        await fetch('/api/auth/admin-session', { method: 'POST' });
-        // Hard redirect so the browser sends the new cookie on the next request
+        // Set admin cookie via API — pass the access token explicitly since
+        // Supabase JS stores sessions in localStorage, not cookies
+        const session = authData.session;
+        await fetch('/api/auth/admin-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session?.access_token ?? ''}`,
+          },
+        });
         window.location.href = '/admin';
         return;
       }

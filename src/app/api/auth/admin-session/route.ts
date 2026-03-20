@@ -22,27 +22,33 @@ export async function POST(req: NextRequest) {
 
   const supabase = createClient(url, key, { auth: { persistSession: false } });
 
-  // Find the Supabase auth cookie
-  const authCookie = req.cookies.getAll().find((c) => c.name.match(/^sb-.*-auth-token/));
-  if (!authCookie) {
-    return NextResponse.json({ ok: false, error: 'No session' }, { status: 401 });
-  }
-
+  // Get access token from Authorization header (primary) or cookie (fallback)
   let accessToken: string | null = null;
-  try {
-    const raw = decodeURIComponent(authCookie.value);
-    if (raw.startsWith('[')) {
-      accessToken = JSON.parse(raw)[0];
-    } else {
-      const parsed = JSON.parse(raw);
-      accessToken = parsed.access_token ?? parsed[0] ?? null;
-    }
-  } catch {
-    accessToken = authCookie.value;
+
+  const authHeader = req.headers.get('authorization') || '';
+  if (authHeader.startsWith('Bearer ')) {
+    accessToken = authHeader.slice(7).trim();
   }
 
   if (!accessToken) {
-    return NextResponse.json({ ok: false, error: 'Invalid session' }, { status: 401 });
+    const authCookie = req.cookies.getAll().find((c) => c.name.match(/^sb-.*-auth-token/));
+    if (authCookie) {
+      try {
+        const raw = decodeURIComponent(authCookie.value);
+        if (raw.startsWith('[')) {
+          accessToken = JSON.parse(raw)[0];
+        } else {
+          const parsed = JSON.parse(raw);
+          accessToken = parsed.access_token ?? parsed[0] ?? null;
+        }
+      } catch {
+        accessToken = authCookie.value;
+      }
+    }
+  }
+
+  if (!accessToken) {
+    return NextResponse.json({ ok: false, error: 'No session' }, { status: 401 });
   }
 
   const { data: userData, error: userError } = await supabase.auth.getUser(accessToken);
