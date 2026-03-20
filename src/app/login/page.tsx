@@ -54,21 +54,44 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+      // Sign in client-side so Supabase sets the auth cookie in the browser
+      const { getSupabase } = await import('@/lib/supabase');
+      const supabase = getSupabase();
+
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || 'Login failed.');
+      if (authError || !authData.user) {
+        setError('Invalid email or password.');
         setLoading(false);
         return;
       }
 
-      if (!data.approved) {
+      // Check if user has a dispensary account and if it's approved
+      const { data: dispensary } = await supabase
+        .from('dispensary_accounts')
+        .select('id, is_approved')
+        .eq('user_id', authData.user.id)
+        .maybeSingle();
+
+      // Check if admin
+      const { ADMIN_EMAILS } = await import('@/lib/admin/constants');
+      const isAdmin = ADMIN_EMAILS.includes(authData.user.email?.toLowerCase() ?? '');
+
+      if (isAdmin) {
+        router.push('/admin');
+        return;
+      }
+
+      if (!dispensary) {
+        setError('No dispensary account found. Please sign up first.');
+        setLoading(false);
+        return;
+      }
+
+      if (!dispensary.is_approved) {
         setError('Your dispensary account is pending approval. You will receive an email once approved.');
         setLoading(false);
         return;
