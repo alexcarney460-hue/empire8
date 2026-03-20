@@ -7,6 +7,8 @@ import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import PageTracker from '@/components/PageTracker';
 import AgeGate from '@/components/AgeGate';
+import { DispensaryCartProvider } from '@/context/DispensaryCartContext';
+import DispensaryCartDrawer from '@/components/DispensaryCartDrawer';
 
 /*
  * ── Analytics IDs ──────────────────────────────────────────────────────
@@ -247,13 +249,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Script>
         )}
 
-        <AgeGate>
-          <Nav />
-          <main>{children}</main>
-          <Footer />
-          <ChatWidget />
-          <PageTracker />
-        </AgeGate>
+        <DispensaryCartProvider>
+          <AgeGate>
+            <Nav />
+            <main>{children}</main>
+            <Footer />
+            <ChatWidget />
+            <PageTracker />
+            <DispensaryCartDrawer />
+          </AgeGate>
+        </DispensaryCartProvider>
       </body>
     </html>
   );

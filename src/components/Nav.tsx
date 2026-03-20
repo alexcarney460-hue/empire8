@@ -3,10 +3,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingBag } from 'lucide-react';
+import { getSupabase } from '@/lib/supabase';
+import { useDispensaryCart } from '@/context/DispensaryCartContext';
 
 const NAV_LINKS = [
   { label: 'About', href: '/about' },
+  { label: 'Brands', href: '/brands' },
   { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
   { label: 'Compliance', href: '/compliance' },
   { label: 'Contact', href: '/contact' },
@@ -15,11 +18,26 @@ const NAV_LINKS = [
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { getCartItemCount, openCart } = useDispensaryCart();
+  const cartCount = getCartItemCount();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 8);
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  // Check for Supabase session
+  useEffect(() => {
+    const supabase = getSupabase();
+    supabase.auth.getSession().then(({ data }) => {
+      setIsLoggedIn(!!data.session);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsLoggedIn(!!session);
+    });
+    return () => { subscription.unsubscribe(); };
   }, []);
 
   useEffect(() => {
@@ -95,6 +113,59 @@ export default function Nav() {
 
           {/* Right actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            {/* Dispensary Cart Button — only visible when logged in */}
+            {isLoggedIn && (
+              <button
+                onClick={openCart}
+                aria-label={`Open cart${cartCount > 0 ? `, ${cartCount} items` : ''}`}
+                className="desktop-nav"
+                style={{
+                  position: 'relative',
+                  width: 36,
+                  height: 36,
+                  borderRadius: 8,
+                  border: 'none',
+                  backgroundColor: 'transparent',
+                  color: 'var(--color-charcoal)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'background-color 150ms ease',
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'var(--color-purple-light)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
+                }}
+              >
+                <ShoppingBag size={20} />
+                {cartCount > 0 && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: 2,
+                      right: 2,
+                      width: 18,
+                      height: 18,
+                      borderRadius: '50%',
+                      backgroundColor: 'var(--color-gold)',
+                      color: '#fff',
+                      fontSize: '0.6rem',
+                      fontWeight: 800,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      lineHeight: 1,
+                    }}
+                  >
+                    {cartCount > 99 ? '99+' : cartCount}
+                  </span>
+                )}
+              </button>
+            )}
+
             {/* Get in Touch CTA */}
             <Link
               href="/contact"
