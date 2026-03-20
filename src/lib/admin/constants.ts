@@ -2,6 +2,7 @@
 export const ADMIN_EMAILS: readonly string[] = [
   'gardenablaze@gmail.com',
   'bee@empire8salesdirect.com',
+  'mikesutherlandconsulting@gmail.com',
 ];
 
 /** Product categories for the brand catalog. */
