@@ -218,6 +218,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Fire-and-forget: run the actual LLM simulation in the background
+    import('@/lib/crowdtest/runner').then(({ runCrowdTest }) => {
+      runCrowdTest(data.id).catch((e) =>
+        console.error('[crowdtest] Background run failed:', e instanceof Error ? e.message : e)
+      );
+    });
+
     return NextResponse.json({ ok: true, data }, { status: 201 });
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'unknown';
