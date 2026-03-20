@@ -120,12 +120,25 @@ export const inputStyle: React.CSSProperties = {
 };
 
 export const selectStyle: React.CSSProperties = {
-  ...inputStyle,
+  width: '100%',
+  padding: '10px 14px',
+  paddingRight: 32,
+  borderRadius: 10,
+  border: `1px solid ${BORDER}`,
+  background: '#1A0E2E',
+  color: TEXT_PRIMARY,
+  fontSize: '0.85rem',
+  outline: 'none',
   appearance: 'none' as const,
   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239B8AAE' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'right 12px center',
-  paddingRight: 32,
+};
+
+/** Use on <option> elements inside dark-themed selects */
+export const optionStyle: React.CSSProperties = {
+  background: '#1A0E2E',
+  color: '#fff',
 };
 
 export const btnPrimary: React.CSSProperties = {
