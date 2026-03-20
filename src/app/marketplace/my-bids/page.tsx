@@ -71,6 +71,8 @@ function getBidStatusBadge(status: string) {
 
 export default function MyBidsPage() {
   const [entries, setEntries] = useState<readonly BidEntry[]>([]);
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -155,7 +157,8 @@ export default function MyBidsPage() {
   /* ── Main render ──────────────────────────────────────────────────── */
 
   return (
-    <div>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: COLORS.bg, minHeight: '100vh', padding: 'var(--nav-height) 24px 48px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
       {/* Header */}
       <div style={{ marginBottom: 32 }}>
         <h1
@@ -322,6 +325,7 @@ export default function MyBidsPage() {
           })}
         </div>
       )}
+      </div>
     </div>
   );
 }

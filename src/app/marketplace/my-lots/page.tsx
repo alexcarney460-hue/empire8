@@ -66,6 +66,9 @@ export default function MyLotsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // Scroll to top on mount
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -147,7 +150,8 @@ export default function MyLotsPage() {
   /* ── Main render ──────────────────────────────────────────────────── */
 
   return (
-    <div>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: COLORS.bg, minHeight: '100vh', padding: 'var(--nav-height) 24px 48px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
       {/* Header */}
       <div
         style={{
@@ -346,6 +350,7 @@ export default function MyLotsPage() {
           </div>
         </>
       )}
+      </div>
     </div>
   );
 }
