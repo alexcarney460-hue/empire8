@@ -101,6 +101,7 @@ interface FormState {
   buy_now_price: string;
   duration_hours: number;
   lab_results_url: string;
+  image_url: string;
 }
 
 const INITIAL_STATE: FormState = {
@@ -118,6 +119,7 @@ const INITIAL_STATE: FormState = {
   buy_now_price: '',
   duration_hours: 168,
   lab_results_url: '',
+  image_url: '',
 };
 
 /* ------------------------------------------------------------------ */
@@ -262,6 +264,7 @@ export default function CreateLotPage() {
       buy_now_price_cents: form.buy_now_price ? dollarsToCents(form.buy_now_price) : null,
       ends_at: endsAt,
       lab_results_url: form.lab_results_url.trim() || null,
+      images: form.image_url.trim() ? [form.image_url.trim()] : [],
     };
 
     try {
@@ -279,7 +282,8 @@ export default function CreateLotPage() {
         return;
       }
 
-      router.push(`/marketplace/${data.id}`);
+      const lotId = data.data?.id || data.id;
+      router.push(`/marketplace/${lotId}`);
     } catch {
       setError('Network error. Please try again.');
       setLoading(false);
@@ -582,6 +586,26 @@ export default function CreateLotPage() {
                     style={inputStyle}
                   />
                 </div>
+              </div>
+
+              {/* Product Image URL */}
+              <div style={fieldGap}>
+                <label className="label-caps" htmlFor="image_url" style={labelStyle}>
+                  Product Image URL
+                </label>
+                <input
+                  id="image_url"
+                  type="url"
+                  placeholder="https://example.com/product-photo.jpg"
+                  value={form.image_url}
+                  onChange={(e) => updateField('image_url', e.target.value)}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  style={inputStyle}
+                />
+                <p style={{ fontSize: '0.72rem', color: COLORS.textFaint, marginTop: 6 }}>
+                  Paste a direct link to your product photo. Supported: JPG, PNG, WebP.
+                </p>
               </div>
 
               {/* Lab Results URL */}

@@ -344,6 +344,7 @@ export async function POST(req: NextRequest) {
       cbd_percentage: cbdPercentage,
       grow_method: growMethod,
       lab_results_url: labResultsUrl,
+      images: Array.isArray(body.images) ? body.images.filter((u: unknown) => typeof u === 'string') : [],
       platform_fee_pct: 5.0,
       status: 'active',
       bid_count: 0,
