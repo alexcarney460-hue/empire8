@@ -29,7 +29,7 @@ export default function BrandsPage() {
         const res = await fetch('/api/brands');
         const json = await res.json();
 
-        if (!res.ok || !json.success) {
+        if (!res.ok || !json.ok) {
           throw new Error(json.error ?? 'Failed to load brands');
         }
 

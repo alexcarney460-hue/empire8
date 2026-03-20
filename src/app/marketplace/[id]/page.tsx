@@ -20,7 +20,7 @@ import {
 type Bid = {
   id: string;
   bidder_number: number;
-  amount: number;
+  amount_cents: number;
   created_at: string;
 };
 
@@ -31,20 +31,19 @@ type LotDetail = {
   description: string | null;
   quantity: number;
   unit: string;
-  strain: string | null;
+  strain_name: string | null;
   grow_method: string | null;
-  thc_pct: number | null;
-  cbd_pct: number | null;
-  starting_price: number;
-  current_bid: number | null;
-  buy_now_price: number | null;
-  reserve_price: number | null;
+  thc_percentage: number | null;
+  cbd_percentage: number | null;
+  starting_price_cents: number;
+  current_bid_cents: number | null;
+  buy_now_price_cents: number | null;
   reserve_met: boolean;
   bid_count: number;
   ends_at: string;
   status: 'active' | 'ended' | 'sold';
   lab_results_url: string | null;
-  images: string[];
+  images?: string[];
   bids: Bid[];
 };
 
@@ -64,13 +63,13 @@ function formatTimeRemaining(endsAt: string): string {
   return `${minutes}m ${seconds}s`;
 }
 
-function formatCurrency(amount: number): string {
+function formatCurrency(cents: number): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(amount);
+  }).format(cents / 100);
 }
 
 function formatTimestamp(iso: string): string {
@@ -270,7 +269,7 @@ export default function LotDetailPage() {
         const res = await fetch(`/api/marketplace/lots/${id}`);
         const json = await res.json();
 
-        if (!res.ok || !json.success) {
+        if (!res.ok || !json.ok) {
           throw new Error(json.error ?? 'Lot not found');
         }
 
@@ -301,25 +300,26 @@ export default function LotDetailPage() {
     return () => clearInterval(interval);
   }, [lot?.ends_at]);
 
-  const displayPrice = lot ? (lot.current_bid ?? lot.starting_price) : 0;
-  const minimumBid = lot ? (lot.current_bid ? lot.current_bid + 1 : lot.starting_price) : 0;
+  const displayPriceCents = lot ? (lot.current_bid_cents ?? lot.starting_price_cents) : 0;
+  const minimumBidCents = lot ? (lot.current_bid_cents ? lot.current_bid_cents + 100 : lot.starting_price_cents) : 0;
   const urgent = lot ? isUrgent(lot.ends_at) : false;
   const isActive = lot?.status === 'active';
 
   const handlePlaceBid = useCallback(() => {
     // Placeholder -- bid submission would POST to /api/marketplace/bids
-    const amount = parseFloat(bidAmount);
-    if (isNaN(amount) || amount < minimumBid) {
-      alert(`Minimum bid is ${formatCurrency(minimumBid)}`);
+    const amountDollars = parseFloat(bidAmount);
+    const amountCents = Math.round(amountDollars * 100);
+    if (isNaN(amountDollars) || amountCents < minimumBidCents) {
+      alert(`Minimum bid is ${formatCurrency(minimumBidCents)}`);
       return;
     }
-    alert(`Bid of ${formatCurrency(amount)} submitted. (Integration pending)`);
-  }, [bidAmount, minimumBid]);
+    alert(`Bid of ${formatCurrency(amountCents)} submitted. (Integration pending)`);
+  }, [bidAmount, minimumBidCents]);
 
   const handleBuyNow = useCallback(() => {
-    if (!lot?.buy_now_price) return;
-    alert(`Buy Now for ${formatCurrency(lot.buy_now_price)} selected. (Integration pending)`);
-  }, [lot?.buy_now_price]);
+    if (!lot?.buy_now_price_cents) return;
+    alert(`Buy Now for ${formatCurrency(lot.buy_now_price_cents)} selected. (Integration pending)`);
+  }, [lot?.buy_now_price_cents]);
 
   if (loading) {
     return (
@@ -434,7 +434,7 @@ export default function LotDetailPage() {
           {/* Left column: images + details */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
 
-            <ImageGallery images={lot.images} />
+            <ImageGallery images={lot.images ?? []} />
 
             {/* Description */}
             {lot.description && (
@@ -474,10 +474,10 @@ export default function LotDetailPage() {
               }}
             >
               <DetailItem label="Quantity" value={`${lot.quantity} ${lot.unit}`} />
-              {lot.strain && <DetailItem label="Strain" value={lot.strain} />}
+              {lot.strain_name && <DetailItem label="Strain" value={lot.strain_name} />}
               {lot.grow_method && <DetailItem label="Grow Method" value={lot.grow_method} />}
-              {lot.thc_pct != null && <DetailItem label="THC" value={`${lot.thc_pct}%`} />}
-              {lot.cbd_pct != null && <DetailItem label="CBD" value={`${lot.cbd_pct}%`} />}
+              {lot.thc_percentage != null && <DetailItem label="THC" value={`${lot.thc_percentage}%`} />}
+              {lot.cbd_percentage != null && <DetailItem label="CBD" value={`${lot.cbd_percentage}%`} />}
             </div>
 
             {/* Lab results */}
@@ -579,7 +579,7 @@ export default function LotDetailPage() {
                             fontSize: '0.92rem',
                           }}
                         >
-                          {formatCurrency(bid.amount)}
+                          {formatCurrency(bid.amount_cents)}
                         </span>
                         <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.75rem' }}>
                           {formatTimestamp(bid.created_at)}
@@ -615,7 +615,7 @@ export default function LotDetailPage() {
                     marginBottom: 6,
                   }}
                 >
-                  {lot.current_bid ? 'Current Bid' : 'Starting Price'}
+                  {lot.current_bid_cents ? 'Current Bid' : 'Starting Price'}
                 </span>
                 <span
                   style={{
@@ -626,7 +626,7 @@ export default function LotDetailPage() {
                     lineHeight: 1,
                   }}
                 >
-                  {formatCurrency(displayPrice)}
+                  {formatCurrency(displayPriceCents)}
                 </span>
               </div>
 
@@ -661,8 +661,8 @@ export default function LotDetailPage() {
                 </div>
               </div>
 
-              {/* Reserve indicator */}
-              {lot.reserve_price != null && (
+              {/* Reserve indicator - only displayed when there is meaningful reserve info */}
+              {lot.bid_count > 0 && (
                 <div
                   style={{
                     textAlign: 'center',
@@ -713,11 +713,11 @@ export default function LotDetailPage() {
                       <input
                         id="bid-amount"
                         type="number"
-                        min={minimumBid}
+                        min={minimumBidCents / 100}
                         step="1"
                         value={bidAmount}
                         onChange={(e) => setBidAmount(e.target.value)}
-                        placeholder={minimumBid.toString()}
+                        placeholder={(minimumBidCents / 100).toString()}
                         style={{
                           width: '100%',
                           padding: '14px 16px 14px 28px',
@@ -736,7 +736,7 @@ export default function LotDetailPage() {
                       />
                     </div>
                     <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem', marginTop: 4, display: 'block' }}>
-                      Min: {formatCurrency(minimumBid)}
+                      Min: {formatCurrency(minimumBidCents)}
                     </span>
                   </div>
 
@@ -825,7 +825,7 @@ export default function LotDetailPage() {
                       <input
                         id="max-bid"
                         type="number"
-                        min={minimumBid}
+                        min={minimumBidCents / 100}
                         step="1"
                         value={maxBid}
                         onChange={(e) => setMaxBid(e.target.value)}
@@ -853,7 +853,7 @@ export default function LotDetailPage() {
                   )}
 
                   {/* Buy Now */}
-                  {lot.buy_now_price != null && (
+                  {lot.buy_now_price_cents != null && (
                     <button
                       onClick={handleBuyNow}
                       style={{
@@ -885,7 +885,7 @@ export default function LotDetailPage() {
                         e.currentTarget.style.borderColor = 'rgba(200,162,60,0.3)';
                       }}
                     >
-                      <Zap size={14} /> Buy Now {formatCurrency(lot.buy_now_price)}
+                      <Zap size={14} /> Buy Now {formatCurrency(lot.buy_now_price_cents!)}
                     </button>
                   )}
                 </>

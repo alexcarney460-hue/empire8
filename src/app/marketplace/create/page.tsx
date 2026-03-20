@@ -29,19 +29,24 @@ const COLORS = {
 } as const;
 
 const CATEGORIES = [
-  'Flower',
-  'Concentrates',
-  'Edibles',
-  'Pre-Rolls',
-  'Extracts',
-  'Tinctures',
-  'Beverages',
-  'Other',
+  { value: 'flower', label: 'Flower' },
+  { value: 'concentrate', label: 'Concentrates' },
+  { value: 'edible', label: 'Edibles' },
+  { value: 'pre-roll', label: 'Pre-Rolls' },
+  { value: 'vape', label: 'Vape' },
+  { value: 'topical', label: 'Topical' },
+  { value: 'tincture', label: 'Tinctures' },
+  { value: 'other', label: 'Other' },
 ] as const;
 
 const UNITS = ['lbs', 'oz', 'units', 'cases', 'pallets'] as const;
 
-const GROW_METHODS = ['Indoor', 'Outdoor', 'Greenhouse', 'Mixed Light'] as const;
+const GROW_METHODS = [
+  { value: 'indoor', label: 'Indoor' },
+  { value: 'outdoor', label: 'Outdoor' },
+  { value: 'greenhouse', label: 'Greenhouse' },
+  { value: 'mixed-light', label: 'Mixed Light' },
+] as const;
 
 const DURATIONS: readonly { label: string; hours: number }[] = [
   { label: '24 hours', hours: 24 },
@@ -89,8 +94,8 @@ interface FormState {
   unit: string;
   strain_name: string;
   grow_method: string;
-  thc_pct: string;
-  cbd_pct: string;
+  thc_percentage: string;
+  cbd_percentage: string;
   starting_price: string;
   reserve_price: string;
   buy_now_price: string;
@@ -106,8 +111,8 @@ const INITIAL_STATE: FormState = {
   unit: 'lbs',
   strain_name: '',
   grow_method: '',
-  thc_pct: '',
-  cbd_pct: '',
+  thc_percentage: '',
+  cbd_percentage: '',
   starting_price: '',
   reserve_price: '',
   buy_now_price: '',
@@ -206,16 +211,19 @@ export default function CreateLotPage() {
       if (buyCents <= startCents) return 'Buy now price must be higher than starting price.';
     }
 
-    if (form.thc_pct && (Number(form.thc_pct) < 0 || Number(form.thc_pct) > 100)) {
+    if (form.thc_percentage && (Number(form.thc_percentage) < 0 || Number(form.thc_percentage) > 100)) {
       return 'THC % must be between 0 and 100.';
     }
-    if (form.cbd_pct && (Number(form.cbd_pct) < 0 || Number(form.cbd_pct) > 100)) {
+    if (form.cbd_percentage && (Number(form.cbd_percentage) < 0 || Number(form.cbd_percentage) > 100)) {
       return 'CBD % must be between 0 and 100.';
     }
 
     if (form.lab_results_url) {
       try {
-        new URL(form.lab_results_url);
+        const parsed = new URL(form.lab_results_url);
+        if (parsed.protocol !== 'https:') {
+          return 'Lab results URL must use HTTPS.';
+        }
       } catch {
         return 'Lab results URL is not a valid URL.';
       }
@@ -247,8 +255,8 @@ export default function CreateLotPage() {
       unit: form.unit,
       strain_name: form.strain_name.trim() || null,
       grow_method: form.grow_method || null,
-      thc_pct: form.thc_pct ? Number(form.thc_pct) : null,
-      cbd_pct: form.cbd_pct ? Number(form.cbd_pct) : null,
+      thc_percentage: form.thc_percentage ? Number(form.thc_percentage) : null,
+      cbd_percentage: form.cbd_percentage ? Number(form.cbd_percentage) : null,
       starting_price_cents: dollarsToCents(form.starting_price),
       reserve_price_cents: form.reserve_price ? dollarsToCents(form.reserve_price) : null,
       buy_now_price_cents: form.buy_now_price ? dollarsToCents(form.buy_now_price) : null,
@@ -422,8 +430,8 @@ export default function CreateLotPage() {
                 >
                   <option value="">Select category</option>
                   {CATEGORIES.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
+                    <option key={c.value} value={c.value}>
+                      {c.label}
                     </option>
                   ))}
                 </select>
@@ -529,8 +537,8 @@ export default function CreateLotPage() {
                 >
                   <option value="">Select grow method</option>
                   {GROW_METHODS.map((m) => (
-                    <option key={m} value={m}>
-                      {m}
+                    <option key={m.value} value={m.value}>
+                      {m.label}
                     </option>
                   ))}
                 </select>
@@ -539,36 +547,36 @@ export default function CreateLotPage() {
               {/* THC % + CBD % */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, ...fieldGap }}>
                 <div>
-                  <label className="label-caps" htmlFor="thc_pct" style={labelStyle}>
+                  <label className="label-caps" htmlFor="thc_percentage" style={labelStyle}>
                     THC %
                   </label>
                   <input
-                    id="thc_pct"
+                    id="thc_percentage"
                     type="number"
                     min={0}
                     max={100}
                     step={0.1}
                     placeholder="0.0"
-                    value={form.thc_pct}
-                    onChange={(e) => updateField('thc_pct', e.target.value)}
+                    value={form.thc_percentage}
+                    onChange={(e) => updateField('thc_percentage', e.target.value)}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     style={inputStyle}
                   />
                 </div>
                 <div>
-                  <label className="label-caps" htmlFor="cbd_pct" style={labelStyle}>
+                  <label className="label-caps" htmlFor="cbd_percentage" style={labelStyle}>
                     CBD %
                   </label>
                   <input
-                    id="cbd_pct"
+                    id="cbd_percentage"
                     type="number"
                     min={0}
                     max={100}
                     step={0.1}
                     placeholder="0.0"
-                    value={form.cbd_pct}
-                    onChange={(e) => updateField('cbd_pct', e.target.value)}
+                    value={form.cbd_percentage}
+                    onChange={(e) => updateField('cbd_percentage', e.target.value)}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     style={inputStyle}

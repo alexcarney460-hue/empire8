@@ -32,6 +32,30 @@ const REQUIRED_COLUMNS = [
   'min_order_qty',
 ] as const;
 
+/**
+ * RFC 4180-compliant CSV line parser.
+ * Handles quoted fields containing commas, newlines, and escaped quotes.
+ */
+function parseCSVLine(line: string): string[] {
+  const result: string[] = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (inQuotes) {
+      if (ch === '"' && line[i + 1] === '"') { current += '"'; i++; }
+      else if (ch === '"') { inQuotes = false; }
+      else { current += ch; }
+    } else {
+      if (ch === '"') { inQuotes = true; }
+      else if (ch === ',') { result.push(current.trim()); current = ''; }
+      else { current += ch; }
+    }
+  }
+  result.push(current.trim());
+  return result;
+}
+
 function parseCsv(raw: string): { headers: string[]; rows: Record<string, string>[] } {
   const lines = raw
     .replace(/\r\n/g, '\n')
@@ -43,11 +67,11 @@ function parseCsv(raw: string): { headers: string[]; rows: Record<string, string
     return { headers: [], rows: [] };
   }
 
-  const headers = lines[0].split(',').map((h) => h.trim().toLowerCase());
+  const headers = parseCSVLine(lines[0]).map((h) => h.toLowerCase());
   const rows: Record<string, string>[] = [];
 
   for (let i = 1; i < lines.length; i++) {
-    const values = lines[i].split(',').map((v) => v.trim());
+    const values = parseCSVLine(lines[i]);
     const row: Record<string, string> = {};
     for (let j = 0; j < headers.length; j++) {
       row[headers[j]] = values[j] ?? '';

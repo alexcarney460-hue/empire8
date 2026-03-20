@@ -2,23 +2,9 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Link from 'next/link';
-import { Search, Loader2, Clock, Gavel, ArrowRight } from 'lucide-react';
-
-/* ── Types ── */
-
-type Lot = {
-  id: string;
-  title: string;
-  category: string;
-  quantity: number;
-  unit: string;
-  starting_price: number;
-  current_bid: number | null;
-  bid_count: number;
-  ends_at: string;
-  thc_pct: number | null;
-  status: 'active' | 'ended' | 'sold';
-};
+import { Search, Loader2, Gavel } from 'lucide-react';
+import LotCard from '@/components/marketplace/LotCard';
+import type { Lot } from '@/components/marketplace/LotCard';
 
 type SortOption = 'ending_soon' | 'newest' | 'price_asc' | 'most_bids';
 
@@ -31,35 +17,6 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: 'most_bids', label: 'Most Bids' },
 ];
 
-/* ── Helpers ── */
-
-function formatTimeRemaining(endsAt: string): string {
-  const diff = new Date(endsAt).getTime() - Date.now();
-  if (diff <= 0) return 'Ended';
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-  if (days > 0) return `${days}d ${hours}h`;
-  if (hours > 0) return `${hours}h ${minutes}m`;
-  return `${minutes}m`;
-}
-
-function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
-
-function isUrgent(endsAt: string): boolean {
-  const diff = new Date(endsAt).getTime() - Date.now();
-  return diff > 0 && diff < 1000 * 60 * 60 * 4; // under 4 hours
-}
-
 /* ── Sort logic ── */
 
 function sortLots(lots: readonly Lot[], sort: SortOption): Lot[] {
@@ -70,7 +27,7 @@ function sortLots(lots: readonly Lot[], sort: SortOption): Lot[] {
     case 'newest':
       return copy.sort((a, b) => new Date(b.ends_at).getTime() - new Date(a.ends_at).getTime());
     case 'price_asc':
-      return copy.sort((a, b) => (a.current_bid ?? a.starting_price) - (b.current_bid ?? b.starting_price));
+      return copy.sort((a, b) => (a.current_bid_cents ?? a.starting_price_cents) - (b.current_bid_cents ?? b.starting_price_cents));
     case 'most_bids':
       return copy.sort((a, b) => b.bid_count - a.bid_count);
     default:
@@ -96,7 +53,7 @@ export default function MarketplacePage() {
         const res = await fetch('/api/marketplace/lots');
         const json = await res.json();
 
-        if (!res.ok || !json.success) {
+        if (!res.ok || !json.ok) {
           throw new Error(json.error ?? 'Failed to load lots');
         }
 
@@ -422,202 +379,3 @@ export default function MarketplacePage() {
   );
 }
 
-/* ── Lot Card ── */
-
-function LotCard({ lot }: { lot: Lot }) {
-  const displayPrice = lot.current_bid ?? lot.starting_price;
-  const priceLabel = lot.current_bid ? 'Current Bid' : 'Starting Price';
-  const timeLeft = formatTimeRemaining(lot.ends_at);
-  const urgent = isUrgent(lot.ends_at);
-
-  return (
-    <Link
-      href={`/marketplace/${lot.id}`}
-      style={{ textDecoration: 'none', display: 'block', height: '100%' }}
-    >
-      <div
-        style={{
-          backgroundColor: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(200,162,60,0.12)',
-          borderRadius: 16,
-          overflow: 'hidden',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          transition: 'border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(200,162,60,0.35)';
-          e.currentTarget.style.transform = 'translateY(-3px)';
-          e.currentTarget.style.boxShadow = '0 12px 40px rgba(74,14,120,0.15)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(200,162,60,0.12)';
-          e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = 'none';
-        }}
-      >
-        {/* Top area with category badge */}
-        <div
-          style={{
-            height: 140,
-            background: 'linear-gradient(135deg, rgba(26,10,46,0.8) 0%, rgba(45,10,78,0.6) 100%)',
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Gavel size={36} style={{ color: 'rgba(200,162,60,0.15)' }} />
-          {/* Category badge */}
-          <span
-            style={{
-              position: 'absolute',
-              top: 12,
-              right: 12,
-              padding: '4px 12px',
-              borderRadius: 9999,
-              backgroundColor: 'rgba(200,162,60,0.15)',
-              border: '1px solid rgba(200,162,60,0.25)',
-              color: '#C8A23C',
-              fontFamily: "'Barlow', Arial, sans-serif",
-              fontWeight: 700,
-              fontSize: '0.65rem',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-            }}
-          >
-            {lot.category}
-          </span>
-        </div>
-
-        {/* Info */}
-        <div style={{ padding: '18px 20px 22px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <h3
-            style={{
-              fontFamily: "'Barlow', Arial, sans-serif",
-              fontWeight: 700,
-              fontSize: '1.05rem',
-              color: '#fff',
-              marginBottom: 8,
-              lineHeight: 1.25,
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-            }}
-          >
-            {lot.title}
-          </h3>
-
-          {/* Quantity + THC */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-            <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.82rem' }}>
-              {lot.quantity} {lot.unit}
-            </span>
-            {lot.thc_pct != null && (
-              <span
-                style={{
-                  padding: '2px 8px',
-                  borderRadius: 6,
-                  backgroundColor: 'rgba(200,162,60,0.1)',
-                  color: '#C8A23C',
-                  fontSize: '0.72rem',
-                  fontWeight: 700,
-                }}
-              >
-                {lot.thc_pct}% THC
-              </span>
-            )}
-          </div>
-
-          {/* Price */}
-          <div style={{ marginBottom: 10 }}>
-            <span className="label-caps" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.58rem', display: 'block', marginBottom: 2 }}>
-              {priceLabel}
-            </span>
-            <span
-              style={{
-                fontFamily: "'Barlow Condensed', Arial, sans-serif",
-                fontWeight: 800,
-                fontSize: '1.5rem',
-                color: '#C8A23C',
-              }}
-            >
-              {formatCurrency(displayPrice)}
-            </span>
-          </div>
-
-          {/* Meta row */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginTop: 'auto',
-              paddingTop: 14,
-              borderTop: '1px solid rgba(200,162,60,0.08)',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Gavel size={12} style={{ color: 'rgba(255,255,255,0.35)' }} />
-              <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.78rem' }}>
-                {lot.bid_count} {lot.bid_count === 1 ? 'bid' : 'bids'}
-              </span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Clock size={12} style={{ color: urgent ? '#C0392B' : 'rgba(255,255,255,0.35)' }} />
-              <span
-                style={{
-                  color: urgent ? '#C0392B' : 'rgba(255,255,255,0.45)',
-                  fontSize: '0.78rem',
-                  fontWeight: urgent ? 700 : 400,
-                }}
-              >
-                {timeLeft}
-              </span>
-            </div>
-          </div>
-
-          {/* Place Bid button */}
-          <button
-            style={{
-              marginTop: 16,
-              width: '100%',
-              padding: '12px 0',
-              borderRadius: 10,
-              border: 'none',
-              backgroundColor: '#C8A23C',
-              color: '#1A0633',
-              fontFamily: "'Barlow', Arial, sans-serif",
-              fontWeight: 700,
-              fontSize: '0.82rem',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              transition: 'background-color 150ms ease, transform 150ms ease',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#A6841E';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#C8A23C';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
-            onClick={(e) => {
-              e.preventDefault();
-              // Navigation handled by parent Link
-            }}
-          >
-            Place Bid <ArrowRight size={14} />
-          </button>
-        </div>
-      </div>
-    </Link>
-  );
-}

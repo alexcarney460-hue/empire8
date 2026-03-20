@@ -60,7 +60,8 @@ export async function GET() {
     .from('weedbay_bids')
     .select('lot_id, amount_cents')
     .eq('bidder_id', dispensary.id)
-    .order('amount_cents', { ascending: false });
+    .order('amount_cents', { ascending: false })
+    .limit(50);
 
   if (bidsError) {
     console.error('[marketplace/my-bids] Bids query error:', bidsError.message);
@@ -91,7 +92,8 @@ export async function GET() {
       'id, title, category, current_bid_cents, starting_price_cents, bid_count, status, ends_at, winner_id',
     )
     .in('id', lotIds)
-    .order('ends_at', { ascending: true });
+    .order('created_at', { ascending: false })
+    .limit(50);
 
   if (lotsError) {
     console.error('[marketplace/my-bids] Lots query error:', lotsError.message);

@@ -50,14 +50,14 @@ function buildOutreachEmail(lead: LeadData, template: string): { subject: string
 
   const templates: Record<string, { subject: string; text: string }> = {
     intro: {
-      subject: `gloves for ${company}?`,
+      subject: `wholesale products for ${company}?`,
       text: `Hey ${firstName},
 
 Saw you guys are licensed in ${loc}.
 
-We supply 5 mil nitrile gloves at $60-80/case (1,000 gloves per case) — most grows and labs in ${lead.state} are restocking with us monthly.
+We're a cannabis wholesale marketplace connecting dispensaries with top brands — flower, concentrates, edibles, pre-rolls, and more. Most dispensaries in ${lead.state} are ordering through us weekly.
 
-Would it make sense to send you a sample case?
+Would it make sense to set up a wholesale account so you can browse our catalog?
 
 — Alex
 Empire 8 Sales Direct
@@ -65,10 +65,10 @@ info@empire8salesdirect.com
 empire8salesdirect.com`,
     },
     followup_1: {
-      subject: `re: gloves for ${company}?`,
-      text: `Quick follow up — we ship same week and do NET 30 for operations ordering 30+ cases.
+      subject: `re: wholesale for ${company}?`,
+      text: `Quick follow up — we ship same week and do NET 30 for dispensaries with approved accounts.
 
-Most trim crews go through 10-20 cases/month. Happy to put together a quote if you want to compare against your current supplier.
+Most shops restock weekly through our marketplace. Happy to put together a quote if you want to compare against your current distributor.
 
 — Alex
 Empire 8 Sales Direct`,
@@ -77,19 +77,19 @@ Empire 8 Sales Direct`,
       subject: `last one from me`,
       text: `${firstName} — not trying to clog your inbox.
 
-If gloves aren't a priority right now, no worries. But if your crew burns through nitrile, we're probably cheaper than whoever you're buying from.
+If you're set on suppliers right now, no worries. But if you're looking for better wholesale pricing on cannabis products, we're probably worth a look.
 
-empire8salesdirect.com/wholesale if you ever want to check pricing.
+empire8salesdirect.com/wholesale if you ever want to browse the catalog.
 
 — Alex`,
     },
     lab: {
-      subject: `lab gloves for ${company}?`,
+      subject: `lab supplies for ${company}?`,
       text: `Hey ${firstName},
 
 Noticed ${company} is a licensed testing lab in ${loc}.
 
-We supply exam-grade 5 mil nitrile gloves — ASTM certified, powder-free, available in XS through XXL. Case pricing starts at $80/case (1,000 gloves), with wholesale at $70 for 30+ cases.
+We supply cannabis industry products wholesale — including PPE, testing supplies, and lab essentials. Competitive wholesale pricing with NET 30 terms available.
 
 Most labs we work with restock monthly. Want me to send pricing for your volume?
 
@@ -98,12 +98,12 @@ Empire 8 Sales Direct
 info@empire8salesdirect.com`,
     },
     distributor: {
-      subject: `glove supply for ${company}`,
+      subject: `wholesale partnership with ${company}`,
       text: `Hey ${firstName},
 
 ${company} showed up on our radar as a licensed distributor in ${lead.state}.
 
-If you're moving product that needs PPE — we do distribution pricing at $60/case (120+ cases) with NET 30 terms. 5 mil nitrile, case of 1,000.
+We're a cannabis wholesale marketplace with distribution-tier pricing for partners moving volume. NET 30 terms available for approved accounts.
 
 Worth a conversation?
 

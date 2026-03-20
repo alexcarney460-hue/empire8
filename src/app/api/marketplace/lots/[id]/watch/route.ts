@@ -9,11 +9,21 @@ export const dynamic = 'force-dynamic';
 // POST /api/marketplace/lots/[id]/watch -- Add lot to watchlist
 // ---------------------------------------------------------------------------
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id: lotId } = await params;
+
+  // UUID format validation
+  if (!lotId || !UUID_RE.test(lotId)) {
+    return NextResponse.json(
+      { ok: false, error: 'Invalid lot ID' },
+      { status: 400 },
+    );
+  }
 
   const dispensary = await getAuthenticatedDispensary();
   if (!dispensary) {
@@ -105,6 +115,14 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id: lotId } = await params;
+
+  // UUID format validation
+  if (!lotId || !UUID_RE.test(lotId)) {
+    return NextResponse.json(
+      { ok: false, error: 'Invalid lot ID' },
+      { status: 400 },
+    );
+  }
 
   const dispensary = await getAuthenticatedDispensary();
   if (!dispensary) {

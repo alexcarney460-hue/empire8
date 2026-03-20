@@ -31,7 +31,8 @@ export async function GET() {
       'id, title, category, current_bid_cents, bid_count, status, ends_at, starting_price_cents, created_at',
     )
     .eq('seller_id', dispensary.id)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(50);
 
   if (error) {
     console.error('[marketplace/my-lots] Database error:', error.message);

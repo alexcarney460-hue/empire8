@@ -175,7 +175,7 @@ export default function MyLotsPage() {
           </p>
         </div>
         <Link
-          href="/marketplace/post"
+          href="/marketplace/create"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -212,7 +212,7 @@ export default function MyLotsPage() {
             You have not posted any lots yet.
           </p>
           <Link
-            href="/marketplace/post"
+            href="/marketplace/create"
             style={{
               fontSize: '0.78rem',
               fontWeight: 600,

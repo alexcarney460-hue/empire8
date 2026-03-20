@@ -9,10 +9,8 @@ export const dynamic = 'force-dynamic';
  * Check if an LLM API key is configured. Returns masked version only.
  */
 export async function GET(req: NextRequest) {
-  const admin = await requireAdmin(req);
-  if (!admin) {
-    return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const supabase = getSupabaseServer();
   if (!supabase) {
@@ -42,10 +40,8 @@ export async function GET(req: NextRequest) {
  * Save or update the Anthropic API key.
  */
 export async function PUT(req: NextRequest) {
-  const admin = await requireAdmin(req);
-  if (!admin) {
-    return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const body = await req.json().catch(() => null);
   if (!body || typeof body.api_key !== 'string' || !body.api_key.trim()) {
@@ -95,10 +91,8 @@ export async function PUT(req: NextRequest) {
  * Remove the Anthropic API key.
  */
 export async function DELETE(req: NextRequest) {
-  const admin = await requireAdmin(req);
-  if (!admin) {
-    return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const supabase = getSupabaseServer();
   if (!supabase) {

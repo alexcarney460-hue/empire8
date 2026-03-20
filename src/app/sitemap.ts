@@ -16,6 +16,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/contact`,             lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/commercial`,          lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/track`,               lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/brands`,              lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE}/marketplace`,         lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE}/compliance`,          lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/login`,              lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${BASE}/signup`,             lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${BASE}/privacy`,            lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${BASE}/terms`,              lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
     { url: `${BASE}/llms.txt`,            lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
   ];
 

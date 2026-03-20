@@ -132,8 +132,8 @@ export default function AddToCartPanel({ id, name, price, img, unit, product }: 
           {/* Unit info */}
           <div style={{ fontSize: '0.72rem', color: 'var(--color-warm-gray)', marginTop: 6, textAlign: 'center' }}>
             {purchaseUnit === 'box'
-              ? `1 box = ${100} gloves`
-              : `1 case = ${product.caseBoxCount ?? 10} boxes (${product.caseGloveCount ?? 1000} gloves)`
+              ? `1 box = ${100} units`
+              : `1 case = ${product.caseBoxCount ?? 10} boxes (${product.caseGloveCount ?? 1000} units)`
             }
           </div>
 

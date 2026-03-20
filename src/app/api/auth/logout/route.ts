@@ -20,7 +20,7 @@ export async function POST() {
       );
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(
       { error: 'An unexpected error occurred.' },

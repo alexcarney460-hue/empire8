@@ -91,7 +91,7 @@ export function ApiKeysSection() {
       <h2 style={sectionTitleStyle}>LLM API Key</h2>
       <p style={{ fontSize: '0.82rem', color: TEXT_SECONDARY, marginBottom: 20 }}>
         CrowdTest and ThinkTank require an Anthropic (Claude) API key to generate personas and run simulations.
-        Your key is stored encrypted and never exposed to the client.
+        Your key is stored securely in the database and only accessed server-side. It is never exposed to the client.
       </p>
 
       {loading ? (

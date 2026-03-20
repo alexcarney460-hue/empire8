@@ -100,8 +100,11 @@ export async function GET(req: NextRequest) {
   }
 
   if (search) {
-    // Use ilike for simple text search across title and strain
-    query = query.or(`title.ilike.%${search}%,strain_name.ilike.%${search}%`);
+    // Sanitize search input -- only allow alphanumeric, spaces, hyphens, underscores, and hash
+    const sanitized = search.replace(/[^a-zA-Z0-9\s\-_#]/g, '');
+    if (sanitized.length > 0) {
+      query = query.or(`title.ilike.%${sanitized}%,strain_name.ilike.%${sanitized}%`);
+    }
   }
 
   // Sorting

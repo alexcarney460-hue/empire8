@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { getSupabaseServer } from '@/lib/supabase-server';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
 
 const VALID_STIMULUS_TYPES = ['text', 'url', 'product', 'brand'] as const;
 type StimulusType = typeof VALID_STIMULUS_TYPES[number];
@@ -96,6 +97,14 @@ export async function POST(req: NextRequest) {
   const denied = await requireAdmin(req);
   if (denied) return denied;
 
+  const ip = getClientIp(req);
+  if (!rateLimit(`crowdtest-create:${ip}`, 5, 60_000)) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many requests. Please wait before creating another test.' },
+      { status: 429 },
+    );
+  }
+
   const supabase = getSupabaseServer();
   if (!supabase) {
     return NextResponse.json(
@@ -149,6 +158,13 @@ export async function POST(req: NextRequest) {
     if (!rawContent) {
       return NextResponse.json(
         { ok: false, error: 'stimulus_content is required' },
+        { status: 400 },
+      );
+    }
+
+    if (rawContent.length > 10000) {
+      return NextResponse.json(
+        { ok: false, error: 'stimulus_content must be 10,000 characters or fewer' },
         { status: 400 },
       );
     }

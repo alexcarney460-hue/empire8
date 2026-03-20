@@ -84,7 +84,7 @@ export default function SearchModal({ onClose }: Props) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search gloves, scissors, accessories..."
+            placeholder="Search brands, products, marketplace..."
             aria-label="Search products"
             style={{
               flex: 1,

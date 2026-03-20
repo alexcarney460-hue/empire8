@@ -27,7 +27,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   const [activitiesRes, commsRes, ordersRes] = await Promise.all([
     supabase.from('activities').select('*').eq('contact_id', id).order('created_at', { ascending: false }),
     supabase.from('communications').select('*').eq('contact_id', id).order('created_at', { ascending: false }),
-    supabase.from('orders').select('*').eq('contact_id', id).order('created_at', { ascending: false }),
+    supabase.from('sales_orders').select('*').eq('contact_id', id).order('created_at', { ascending: false }),
   ]);
 
   const company = contact.companies || null;

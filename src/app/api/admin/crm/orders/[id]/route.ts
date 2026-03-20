@@ -17,8 +17,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   }
 
   const { data, error } = await supabase
-    .from('orders')
-    .select('*, order_items(*)')
+    .from('sales_orders')
+    .select('*, sales_order_items(*)')
     .eq('id', id)
     .single();
 
@@ -47,7 +47,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
   }
   update.updated_at = new Date().toISOString();
 
-  const { data, error } = await supabase.from('orders').update(update).eq('id', id).select().single();
+  const { data, error } = await supabase.from('sales_orders').update(update).eq('id', id).select().single();
   if (error) {
     console.error('[Admin] orders/:id error:', error.message);
     return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });

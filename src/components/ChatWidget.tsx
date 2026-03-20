@@ -190,7 +190,7 @@ export default function ChatWidget() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && send()}
-              placeholder="Ask about gloves, pricing, wholesale..."
+              placeholder="Ask about products, brands, pricing, wholesale..."
               aria-label="Type your message"
               disabled={isLoading}
               style={{

@@ -11,7 +11,7 @@ export async function GET(_req: Request, ctx: RouteContext) {
 
   if (!slug || typeof slug !== 'string') {
     return NextResponse.json(
-      { success: false, data: null, error: 'Missing brand slug' },
+      { ok: false, error: 'Missing brand slug' },
       { status: 400 },
     );
   }
@@ -44,9 +44,8 @@ export async function GET(_req: Request, ctx: RouteContext) {
         }
 
         return NextResponse.json({
-          success: true,
+          ok: true,
           data: { brand, products: products ?? [] },
-          error: null,
         });
       }
 
@@ -64,7 +63,7 @@ export async function GET(_req: Request, ctx: RouteContext) {
 
   if (!staticBrand) {
     return NextResponse.json(
-      { success: false, data: null, error: 'Brand not found' },
+      { ok: false, error: 'Brand not found' },
       { status: 404 },
     );
   }
@@ -92,8 +91,7 @@ export async function GET(_req: Request, ctx: RouteContext) {
   }));
 
   return NextResponse.json({
-    success: true,
+    ok: true,
     data: { brand, products },
-    error: null,
   });
 }

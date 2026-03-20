@@ -19,8 +19,8 @@ export async function GET(req: Request) {
   const offset = (page - 1) * limit;
 
   let query = supabase
-    .from('orders')
-    .select('*, order_items(*)', { count: 'exact' });
+    .from('sales_orders')
+    .select('*, sales_order_items(*)', { count: 'exact' });
 
   if (contactId) query = query.eq('contact_id', contactId);
   if (companyId) query = query.eq('company_id', companyId);

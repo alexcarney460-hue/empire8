@@ -17,7 +17,7 @@ export async function GET() {
         .order('name', { ascending: true });
 
       if (!error && brands && brands.length > 0) {
-        return NextResponse.json({ success: true, data: brands, error: null });
+        return NextResponse.json({ ok: true, data: brands });
       }
 
       if (error) {
@@ -40,5 +40,5 @@ export async function GET() {
     }),
   );
 
-  return NextResponse.json({ success: true, data: staticBrands, error: null });
+  return NextResponse.json({ ok: true, data: staticBrands });
 }

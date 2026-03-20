@@ -394,7 +394,7 @@ export default function CartDrawer() {
                             }}
                           >
                             {item.purchaseUnit === 'case' ? <Package size={9} /> : <Box size={9} />}
-                            {item.purchaseUnit === 'case' ? 'Case (10 boxes)' : 'Box (100 gloves)'}
+                            {item.purchaseUnit === 'case' ? 'Case (10 boxes)' : 'Box (100 units)'}
                           </span>
                         )}
                       </div>

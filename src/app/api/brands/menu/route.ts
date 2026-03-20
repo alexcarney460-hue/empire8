@@ -2,6 +2,35 @@ import { NextResponse } from 'next/server';
 import { getSupabaseServer } from '@/lib/supabase-server';
 
 /* ------------------------------------------------------------------ */
+/*  Rate limiting (in-memory, per-IP, 10 requests per minute)          */
+/* ------------------------------------------------------------------ */
+
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 10;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  entry.count++;
+  return entry.count > RATE_LIMIT_MAX;
+}
+
+function getClientIp(req: Request): string {
+  const forwarded = req.headers.get('x-forwarded-for');
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  return req.headers.get('x-real-ip') ?? 'unknown';
+}
+
+/* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
@@ -74,6 +103,15 @@ function validateProduct(
 /* ------------------------------------------------------------------ */
 
 export async function POST(req: Request) {
+  // --- Rate limiting ---
+  const clientIp = getClientIp(req);
+  if (isRateLimited(clientIp)) {
+    return NextResponse.json(
+      { ok: false, error: 'Rate limit exceeded. Maximum 10 requests per minute.' },
+      { status: 429 },
+    );
+  }
+
   const supabase = getSupabaseServer();
   if (!supabase) {
     return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
@@ -89,14 +127,22 @@ export async function POST(req: Request) {
     );
   }
 
-  const apiKey = body.api_key;
+  // --- Extract API key: prefer Authorization header, fall back to body ---
+  const authHeader = req.headers.get('authorization');
+  let apiKey: unknown;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    apiKey = authHeader.slice(7).trim();
+  } else {
+    apiKey = body.api_key;
+  }
+
   const brandSlug = body.brand_slug;
   const products = body.products;
 
   // --- Validate required fields ---
   if (!apiKey || typeof apiKey !== 'string') {
     return NextResponse.json(
-      { ok: false, error: 'api_key is required' },
+      { ok: false, error: 'api_key is required (pass via Authorization: Bearer <key> header or body.api_key)' },
       { status: 400 },
     );
   }
@@ -111,6 +157,13 @@ export async function POST(req: Request) {
   if (!Array.isArray(products) || products.length === 0) {
     return NextResponse.json(
       { ok: false, error: 'products array is required and must not be empty' },
+      { status: 400 },
+    );
+  }
+
+  if (products.length > 5000) {
+    return NextResponse.json(
+      { ok: false, error: 'Maximum 5000 products per upload' },
       { status: 400 },
     );
   }

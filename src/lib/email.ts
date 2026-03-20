@@ -103,7 +103,7 @@ function emailLayout(title: string, preheader: string, body: string): string {
                 Empire 8 Sales Direct
               </h1>
               <p style="margin:4px 0 0;color:rgba(255,255,255,0.8);font-size:13px;">
-                Wholesale Gloves &amp; Supplies
+                Cannabis Wholesale
               </p>
             </td>
           </tr>

@@ -15,6 +15,15 @@ export async function POST(
 ) {
   const { id: lotId } = await params;
 
+  // UUID format validation
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (!lotId || !UUID_RE.test(lotId)) {
+    return NextResponse.json(
+      { ok: false, error: 'Invalid lot ID' },
+      { status: 400 },
+    );
+  }
+
   // ---- Auth ---------------------------------------------------------------
   const dispensary = await getAuthenticatedDispensary();
   if (!dispensary) {
@@ -83,7 +92,7 @@ export async function POST(
   const { data: lot, error: lotError } = await supabase
     .from('weedbay_lots')
     .select(
-      'id, seller_id, status, current_bid_cents, bid_count, buy_now_price_cents, ends_at, reserve_price_cents',
+      'id, seller_id, status, current_bid_cents, bid_count, buy_now_price_cents, starting_price_cents, ends_at, reserve_price_cents',
     )
     .eq('id', lotId)
     .maybeSingle();
@@ -127,13 +136,15 @@ export async function POST(
     );
   }
 
-  // Bid must exceed current bid (or starting price if no bids yet)
-  const minimumBid = lot.current_bid_cents ?? 0;
-  if (amountCents <= minimumBid) {
+  // First bid must be >= starting_price, subsequent bids must be > current_bid
+  const minimumBid = lot.current_bid_cents > 0 ? lot.current_bid_cents : (lot.starting_price_cents || 0);
+  if (lot.current_bid_cents > 0 ? amountCents <= minimumBid : amountCents < minimumBid) {
     return NextResponse.json(
       {
         ok: false,
-        error: `Bid must exceed the current bid of ${minimumBid} cents.`,
+        error: lot.current_bid_cents > 0
+          ? `Bid must exceed the current bid of ${minimumBid} cents.`
+          : `Bid must be at least the starting price of ${minimumBid} cents.`,
         current_bid_cents: minimumBid,
       },
       { status: 400 },
@@ -171,8 +182,8 @@ export async function POST(
   const newBidCount = (lot.bid_count ?? 0) + 1;
 
   if (isBuyNow) {
-    // Instant win via Buy Now
-    const { error: updateError } = await supabase
+    // Instant win via Buy Now -- status guard ensures lot is still active
+    const { data: buyNowResult, error: updateError } = await supabase
       .from('weedbay_lots')
       .update({
         status: 'sold',
@@ -181,11 +192,23 @@ export async function POST(
         winner_id: dispensary.id,
         winner_bid_cents: amountCents,
       })
-      .eq('id', lotId);
+      .eq('id', lotId)
+      .eq('status', 'active')
+      .select('id');
 
     if (updateError) {
       console.error('[marketplace/bid] Buy-now update error:', updateError.message);
-      // Bid was already inserted -- log but respond with partial success
+      return NextResponse.json(
+        { ok: false, error: 'Failed to complete buy-now.' },
+        { status: 500 },
+      );
+    }
+
+    if (!buyNowResult || buyNowResult.length === 0) {
+      return NextResponse.json(
+        { ok: false, error: 'This lot is no longer available for purchase.' },
+        { status: 409 },
+      );
     }
 
     return NextResponse.json({
@@ -200,8 +223,8 @@ export async function POST(
     });
   }
 
-  // Standard bid -- just update current_bid_cents and bid_count
-  const { error: updateError } = await supabase
+  // Standard bid -- optimistic concurrency check on current_bid_cents
+  let updateQuery = supabase
     .from('weedbay_lots')
     .update({
       current_bid_cents: amountCents,
@@ -209,8 +232,24 @@ export async function POST(
     })
     .eq('id', lotId);
 
+  // Supabase .eq() does not match null -- use .is() for first-bid scenario
+  if (lot.current_bid_cents == null) {
+    updateQuery = updateQuery.is('current_bid_cents', null);
+  } else {
+    updateQuery = updateQuery.eq('current_bid_cents', lot.current_bid_cents);
+  }
+
+  const { data: updateResult, error: updateError } = await updateQuery.select('id');
+
   if (updateError) {
     console.error('[marketplace/bid] Lot update error:', updateError.message);
+  }
+
+  if (!updateResult || updateResult.length === 0) {
+    return NextResponse.json(
+      { ok: false, error: 'Another bid was placed. Please retry.' },
+      { status: 409 },
+    );
   }
 
   // ---- Check if this bid outbid someone -----------------------------------

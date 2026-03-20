@@ -3,6 +3,7 @@ import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { getSupabaseServer } from '@/lib/supabase-server';
 import { generateExperts } from '@/lib/thinktank/experts';
 import { buildEmpire8Context } from '@/lib/crowdtest/context';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
 
 const MIN_EXPERTS = 3;
 const MAX_EXPERTS = 10;
@@ -91,6 +92,14 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const denied = await requireAdmin(req);
   if (denied) return denied;
+
+  const ip = getClientIp(req);
+  if (!rateLimit(`debate-create:${ip}`, 5, 60_000)) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many requests. Please wait before creating another debate.' },
+      { status: 429 },
+    );
+  }
 
   const supabase = getSupabaseServer();
   if (!supabase) {

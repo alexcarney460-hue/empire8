@@ -47,6 +47,10 @@ export const MODELS = {
  * Call the Anthropic API with the stored key.
  * Returns the response text or throws on error.
  */
+const MAX_RETRIES = 3;
+const RETRY_BASE_MS = 1000;
+const REQUEST_TIMEOUT_MS = 30_000;
+
 export async function callClaude(params: {
   model?: string;
   system?: string;
@@ -59,37 +63,77 @@ export async function callClaude(params: {
   }
 
   const model = params.model || MODELS.crowdtest;
-
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      model,
-      max_tokens: params.maxTokens || 4096,
-      system: params.system,
-      messages: [{ role: 'user', content: params.prompt }],
-    }),
+  const requestBody = JSON.stringify({
+    model,
+    max_tokens: params.maxTokens || 4096,
+    system: params.system,
+    messages: [{ role: 'user', content: params.prompt }],
   });
 
-  if (!response.ok) {
-    const err = await response.json().catch(() => ({}));
-    const msg = (err as Record<string, unknown>).error
-      ? JSON.stringify((err as Record<string, unknown>).error)
-      : `API error ${response.status}`;
-    throw new Error(`Anthropic API error: ${msg}`);
+  let lastError: Error | null = null;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    if (attempt > 0) {
+      const delayMs = RETRY_BASE_MS * Math.pow(2, attempt - 1);
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+        },
+        body: requestBody,
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        const msg = (err as Record<string, unknown>).error
+          ? JSON.stringify((err as Record<string, unknown>).error)
+          : `API error ${response.status}`;
+
+        // Retry on 429 (rate limited) and 529 (overloaded)
+        if ((response.status === 429 || response.status === 529) && attempt < MAX_RETRIES) {
+          lastError = new Error(`Anthropic API error: ${msg}`);
+          continue;
+        }
+
+        throw new Error(`Anthropic API error: ${msg}`);
+      }
+
+      const data = await response.json();
+      const content = data.content;
+      if (Array.isArray(content) && content.length > 0 && content[0].type === 'text') {
+        return content[0].text;
+      }
+
+      throw new Error('Unexpected API response format');
+    } catch (err) {
+      clearTimeout(timeoutId);
+
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        lastError = new Error('Anthropic API request timed out after 30 seconds');
+        if (attempt < MAX_RETRIES) continue;
+        throw lastError;
+      }
+
+      // If it's a retryable error we already set, continue
+      if (lastError && attempt < MAX_RETRIES) continue;
+
+      throw err;
+    }
   }
 
-  const data = await response.json();
-  const content = data.content;
-  if (Array.isArray(content) && content.length > 0 && content[0].type === 'text') {
-    return content[0].text;
-  }
-
-  throw new Error('Unexpected API response format');
+  throw lastError ?? new Error('Anthropic API call failed after retries');
 }
 
 /**

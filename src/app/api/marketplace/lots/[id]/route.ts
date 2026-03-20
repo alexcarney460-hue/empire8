@@ -15,8 +15,9 @@ export async function GET(
 ) {
   const { id } = await params;
 
-  // Basic ID format check
-  if (!id || id.length < 10) {
+  // UUID format validation
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (!id || !UUID_RE.test(id)) {
     return NextResponse.json(
       { ok: false, error: 'Invalid lot ID' },
       { status: 400 },
@@ -84,14 +85,15 @@ export async function GET(
     lot.reserve_price_cents == null ||
     (lot.current_bid_cents != null && lot.current_bid_cents >= lot.reserve_price_cents);
 
+  // Strip sensitive fields that would break anonymity
+  const { seller_id, winner_id, reserve_price_cents, ...publicLot } = lot;
+
   return NextResponse.json({
     ok: true,
     data: {
-      ...lot,
+      ...publicLot,
       time_remaining_seconds: secondsRemaining(lot.ends_at),
       reserve_met: reserveMet,
-      // Hide exact reserve price -- only expose whether it is met
-      reserve_price_cents: lot.reserve_price_cents != null ? '[hidden]' : null,
       bids,
     },
   });

@@ -42,7 +42,7 @@ export default function BrandDetailPage({
         const res = await fetch(`/api/brands/${slug}`);
         const json = await res.json();
 
-        if (!res.ok || !json.success) {
+        if (!res.ok || !json.ok) {
           throw new Error(json.error ?? 'Brand not found');
         }
 
