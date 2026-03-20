@@ -13,8 +13,11 @@ import {
   Menu,
   X,
   LogOut,
+  Bell,
 } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
+import NotificationToggle from '@/components/NotificationToggle';
+import NotificationBell from '@/components/NotificationBell';
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -32,6 +35,7 @@ const NAV_ITEMS: readonly NavItem[] = [
   { label: 'Menu Upload', href: '/brand-dashboard/menu-upload', icon: Upload },
   { label: 'My Lots', href: '/brand-dashboard/lots', icon: Gavel },
   { label: 'Orders', href: '/brand-dashboard/orders', icon: ShoppingCart },
+  { label: 'Notifications', href: '/brand-dashboard/notifications', icon: Bell },
   { label: 'Account Settings', href: '/brand-dashboard/settings', icon: Settings },
 ] as const;
 
@@ -56,6 +60,7 @@ export default function BrandDashboardLayout({ children }: { children: ReactNode
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [companyName, setCompanyName] = useState<string>('');
   const [isMobile, setIsMobile] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   // Detect mobile viewport
   useEffect(() => {
@@ -104,6 +109,26 @@ export default function BrandDashboardLayout({ children }: { children: ReactNode
       }
     }
     loadBrandInfo();
+  }, []);
+
+  // Fetch unread notification count
+  useEffect(() => {
+    async function loadUnreadCount() {
+      try {
+        const res = await fetch('/api/user-notifications?filter=unread');
+        if (res.ok) {
+          const json = await res.json();
+          if (json.ok) {
+            setUnreadCount(json.data?.unread_count ?? 0);
+          }
+        }
+      } catch {
+        // Non-critical
+      }
+    }
+    loadUnreadCount();
+    const interval = setInterval(loadUnreadCount, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   // Lock body scroll when mobile sidebar is open
@@ -235,6 +260,7 @@ export default function BrandDashboardLayout({ children }: { children: ReactNode
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
+            const showBadge = item.href === '/brand-dashboard/notifications' && unreadCount > 0;
             return (
               <Link
                 key={item.href}
@@ -255,19 +281,40 @@ export default function BrandDashboardLayout({ children }: { children: ReactNode
                 }}
               >
                 <Icon size={18} strokeWidth={active ? 2.2 : 1.8} />
-                {item.label}
+                <span style={{ flex: 1 }}>{item.label}</span>
+                {showBadge && (
+                  <span
+                    style={{
+                      minWidth: 18,
+                      height: 18,
+                      borderRadius: 9,
+                      backgroundColor: COLORS.gold,
+                      color: '#1A0633',
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '0 5px',
+                      lineHeight: 1,
+                    }}
+                  >
+                    {unreadCount > 99 ? '99+' : unreadCount}
+                  </span>
+                )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Sign out */}
+        {/* Push notifications + Sign out */}
         <div
           style={{
             padding: '12px 10px 20px',
             borderTop: `1px solid ${COLORS.sidebarBorder}`,
           }}
         >
+          <NotificationToggle />
           <button
             onClick={handleLogout}
             style={{
@@ -333,10 +380,12 @@ export default function BrandDashboardLayout({ children }: { children: ReactNode
               fontWeight: 600,
               color: COLORS.textPrimary,
               margin: 0,
+              flex: 1,
             }}
           >
             {companyName || 'Brand Dashboard'}
           </p>
+          <NotificationBell />
         </header>
 
         {/* Page content */}

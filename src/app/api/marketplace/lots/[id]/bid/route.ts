@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAuthenticatedDispensary } from '@/lib/dispensary-auth';
 import { getSupabaseServer } from '@/lib/supabase-server';
 import { rateLimit } from '@/lib/rate-limit';
+import { createNotifications, formatCents } from '@/lib/notifications';
 
 export const dynamic = 'force-dynamic';
 
@@ -92,7 +93,7 @@ export async function POST(
   const { data: lot, error: lotError } = await supabase
     .from('weedbay_lots')
     .select(
-      'id, seller_id, status, current_bid_cents, bid_count, buy_now_price_cents, starting_price_cents, ends_at, reserve_price_cents',
+      'id, seller_id, title, status, current_bid_cents, bid_count, buy_now_price_cents, starting_price_cents, ends_at, reserve_price_cents',
     )
     .eq('id', lotId)
     .maybeSingle();
@@ -211,6 +212,27 @@ export async function POST(
       );
     }
 
+    // Notify winner and seller about the buy-now sale
+    const buyNowNotifs = [
+      {
+        user_id: dispensary.id,
+        title: `You won the auction for ${lot.title}!`,
+        body: `Final price: ${formatCents(amountCents)}`,
+        url: `/marketplace/lots/${lotId}`,
+        type: 'lot_won',
+      },
+      {
+        user_id: lot.seller_id,
+        title: `Your lot ${lot.title} has sold`,
+        body: `Sold for ${formatCents(amountCents)} via Buy Now`,
+        url: `/marketplace/my-lots`,
+        type: 'lot_sold',
+      },
+    ];
+    createNotifications(buyNowNotifs).catch((err) => {
+      console.error('[marketplace/bid] Buy-now notification error:', err);
+    });
+
     return NextResponse.json({
       ok: true,
       data: {
@@ -252,9 +274,42 @@ export async function POST(
     );
   }
 
-  // ---- Check if this bid outbid someone -----------------------------------
-  // (The previous highest bidder is implicitly outbid. We report that fact so
-  //  the frontend can show "You are the highest bidder" or similar.)
+  // ---- Notify seller and outbid users ------------------------------------
+
+  const bidNotifs: Array<{ user_id: string; title: string; body?: string; url?: string; type?: string }> = [
+    {
+      user_id: lot.seller_id,
+      title: `New bid of ${formatCents(amountCents)} on your lot: ${lot.title}`,
+      body: `Bid count: ${newBidCount}`,
+      url: `/marketplace/my-lots`,
+      type: 'new_bid',
+    },
+  ];
+
+  // Find the previous highest bidder to notify them they've been outbid
+  if (lot.current_bid_cents != null && lot.current_bid_cents > 0) {
+    const { data: prevBids } = await supabase
+      .from('weedbay_bids')
+      .select('bidder_id')
+      .eq('lot_id', lotId)
+      .eq('amount_cents', lot.current_bid_cents)
+      .neq('bidder_id', dispensary.id)
+      .limit(1);
+
+    if (prevBids && prevBids.length > 0) {
+      bidNotifs.push({
+        user_id: prevBids[0].bidder_id,
+        title: `You've been outbid on ${lot.title}`,
+        body: `Current bid: ${formatCents(amountCents)}`,
+        url: `/marketplace/lots/${lotId}`,
+        type: 'outbid',
+      });
+    }
+  }
+
+  createNotifications(bidNotifs).catch((err) => {
+    console.error('[marketplace/bid] Notification error:', err);
+  });
 
   return NextResponse.json({
     ok: true,

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { getSupabase } from '@/lib/supabase';
+import NotificationPreferences from '@/components/NotificationPreferences';
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -460,6 +461,9 @@ export default function SettingsPage() {
           </button>
         </form>
       </div>
+
+      {/* Notification Preferences */}
+      <NotificationPreferences />
     </div>
   );
 }

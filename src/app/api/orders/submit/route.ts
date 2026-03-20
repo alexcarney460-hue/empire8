@@ -3,6 +3,7 @@ import { getSupabaseServer } from '@/lib/supabase-server';
 import { getAuthenticatedDispensary } from '@/lib/dispensary-auth';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { sendBrandOrderEmails } from '@/lib/order-emails';
+import { createNotifications, formatCents } from '@/lib/notifications';
 
 /* -- Types ----------------------------------------------------------------- */
 
@@ -225,6 +226,48 @@ export async function POST(req: NextRequest) {
         { error: 'Failed to save order items. Please try again.' },
         { status: 500 },
       );
+    }
+
+    // Notify each brand about the new order (fire-and-forget)
+    const brandGroups = new Map<string, { brandName: string; itemCount: number; totalCents: number }>();
+    for (const item of orderItems) {
+      const existing = brandGroups.get(item.brand_id);
+      if (existing) {
+        existing.itemCount += item.quantity;
+        existing.totalCents += item.line_total_cents;
+      } else {
+        brandGroups.set(item.brand_id, {
+          brandName: item.brand_name,
+          itemCount: item.quantity,
+          totalCents: item.line_total_cents,
+        });
+      }
+    }
+
+    // Look up brand_accounts to find the account ID for each brand
+    const brandIds = Array.from(brandGroups.keys());
+    const { data: brandAccounts } = await supabase
+      .from('brand_accounts')
+      .select('id, brand_id')
+      .in('brand_id', brandIds);
+
+    if (brandAccounts && brandAccounts.length > 0) {
+      const orderNotifs = brandAccounts
+        .filter((ba) => ba.brand_id && brandGroups.has(ba.brand_id))
+        .map((ba) => {
+          const group = brandGroups.get(ba.brand_id!)!;
+          return {
+            user_id: ba.id,
+            title: `New order received from ${dispensary.company_name}`,
+            body: `${group.itemCount} items, ${formatCents(group.totalCents)} total.`,
+            url: '/brand-dashboard/orders',
+            type: 'new_order',
+          };
+        });
+
+      createNotifications(orderNotifs).catch((err) => {
+        console.error('[orders/submit] Notification error:', err);
+      });
     }
 
     // Send brand-split order emails (fire-and-forget to avoid blocking response)

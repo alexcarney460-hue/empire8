@@ -1,11 +1,12 @@
 {
-  "name": "Empire 8 Sales Direct — Cannabis Wholesale",
+  "name": "Empire 8 Sales Direct",
   "short_name": "Empire 8",
-  "description": "Licensed cannabis distribution. Wholesale flower, pre-rolls, vapes, edibles, and concentrates for New York dispensaries.",
-  "start_url": "/",
+  "description": "Cannabis wholesale marketplace — orders, lots, and real-time updates",
+  "start_url": "/dashboard",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#1B3A2D",
+  "background_color": "#0F0520",
+  "theme_color": "#4A0E78",
+  "categories": ["business", "shopping"],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -22,6 +23,14 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide"
     }
   ]
 }

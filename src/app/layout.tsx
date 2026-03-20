@@ -9,6 +9,7 @@ import PageTracker from '@/components/PageTracker';
 import AgeGate from '@/components/AgeGate';
 import { DispensaryCartProvider } from '@/context/DispensaryCartContext';
 import DispensaryCartDrawer from '@/components/DispensaryCartDrawer';
+import InstallPrompt from '@/components/InstallPrompt';
 
 /*
  * ── Analytics IDs ──────────────────────────────────────────────────────
@@ -125,7 +126,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
+    statusBarStyle: 'black-translucent',
     title: 'Empire 8',
   },
 };
@@ -198,12 +199,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body className={`${barlow.variable} ${barlowCondensed.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify([orgSchema, websiteSchema]) }}
         />
+
+        {/* ── Service Worker Registration ─────────────────────────── */}
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('/sw.js')
+                .then(function(reg) {
+                  console.log('[SW] Registered, scope:', reg.scope);
+                })
+                .catch(function(err) {
+                  console.warn('[SW] Registration failed:', err);
+                });
+            }
+          `}
+        </Script>
 
         {/* ── Google Analytics 4 ──────────────────────────────────── */}
         {GA_ID && (
@@ -251,6 +269,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ChatWidget />
             <PageTracker />
             <DispensaryCartDrawer />
+            <InstallPrompt />
           </AgeGate>
         </DispensaryCartProvider>
       </body>

@@ -13,8 +13,11 @@ import {
   LogOut,
   Gavel,
   HandCoins,
+  Bell,
 } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
+import NotificationToggle from '@/components/NotificationToggle';
+import NotificationBell from '@/components/NotificationBell';
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 
@@ -30,6 +33,7 @@ const NAV_ITEMS: readonly NavItem[] = [
   { label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Orders', href: '/dashboard/orders', icon: ShoppingCart },
   { label: 'Browse Brands', href: '/brands', icon: Package },
+  { label: 'Notifications', href: '/dashboard/notifications', icon: Bell },
   { label: 'Account Settings', href: '/dashboard/settings', icon: Settings },
 ] as const;
 
@@ -59,6 +63,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [companyName, setCompanyName] = useState<string>('');
   const [isMobile, setIsMobile] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   // Detect mobile viewport
   useEffect(() => {
@@ -107,6 +112,26 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       }
     }
     loadCompanyName();
+  }, []);
+
+  // Fetch unread notification count
+  useEffect(() => {
+    async function loadUnreadCount() {
+      try {
+        const res = await fetch('/api/user-notifications?filter=unread');
+        if (res.ok) {
+          const json = await res.json();
+          if (json.ok) {
+            setUnreadCount(json.data?.unread_count ?? 0);
+          }
+        }
+      } catch {
+        // Non-critical
+      }
+    }
+    loadUnreadCount();
+    const interval = setInterval(loadUnreadCount, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   // Lock body scroll when mobile sidebar is open
@@ -238,6 +263,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
+            const showBadge = item.href === '/dashboard/notifications' && unreadCount > 0;
             return (
               <Link
                 key={item.href}
@@ -258,7 +284,27 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 }}
               >
                 <Icon size={18} strokeWidth={active ? 2.2 : 1.8} />
-                {item.label}
+                <span style={{ flex: 1 }}>{item.label}</span>
+                {showBadge && (
+                  <span
+                    style={{
+                      minWidth: 18,
+                      height: 18,
+                      borderRadius: 9,
+                      backgroundColor: COLORS.gold,
+                      color: '#1A0633',
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '0 5px',
+                      lineHeight: 1,
+                    }}
+                  >
+                    {unreadCount > 99 ? '99+' : unreadCount}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -306,13 +352,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           })}
         </nav>
 
-        {/* Sign out */}
+        {/* Push notifications + Sign out */}
         <div
           style={{
             padding: '12px 10px 20px',
             borderTop: `1px solid ${COLORS.sidebarBorder}`,
           }}
         >
+          <NotificationToggle />
           <button
             onClick={handleLogout}
             style={{
@@ -378,10 +425,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               fontWeight: 600,
               color: COLORS.textPrimary,
               margin: 0,
+              flex: 1,
             }}
           >
             {companyName || 'Dashboard'}
           </p>
+          <NotificationBell />
         </header>
 
         {/* Page content */}
