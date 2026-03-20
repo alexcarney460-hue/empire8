@@ -4,7 +4,7 @@ import { useState, FormEvent, ReactNode } from 'react';
 import { useVisitorTracking } from '@/hooks/useVisitorTracking';
 
 interface Props {
-  formType: 'contact' | 'wholesale' | 'distribution' | 'affiliate';
+  formType: 'contact' | 'wholesale' | 'distribution' | 'affiliate' | 'whitelabel';
   fields: string[];
   children: (props: {
     values: Record<string, string>;
