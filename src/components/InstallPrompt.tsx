@@ -67,7 +67,8 @@ export default function InstallPrompt() {
 
     // Don't show if already installed (standalone mode)
     if (window.matchMedia('(display-mode: standalone)').matches) return;
-    if ((navigator as Record<string, unknown>).standalone === true) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((navigator as any).standalone === true) return;
 
     // For iOS, show the manual instruction banner directly
     if (detected === 'ios') {
