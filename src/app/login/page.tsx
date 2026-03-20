@@ -76,7 +76,8 @@ export default function LoginPage() {
       if (isAdmin) {
         // Set admin cookie via API so middleware recognizes us
         await fetch('/api/auth/admin-session', { method: 'POST' });
-        router.push('/admin');
+        // Hard redirect so the browser sends the new cookie on the next request
+        window.location.href = '/admin';
         return;
       }
 
