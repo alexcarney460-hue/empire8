@@ -13,14 +13,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Cannabis Product Catalog — Empire 8 Sales Direct',
     description: 'Full cannabis product catalog for licensed NY dispensaries. Wholesale pricing on flower, concentrates, edibles, and more.',
-    url: 'https://empire8salesdirect.com/catalog',
+    url: 'https://empire8ny.com/catalog',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Cannabis Product Catalog | Empire 8 Sales Direct',
     description: 'Cannabis wholesale catalog for NY dispensaries. Premium products at competitive wholesale pricing.',
   },
-  alternates: { canonical: 'https://empire8salesdirect.com/catalog' },
+  alternates: { canonical: 'https://empire8ny.com/catalog' },
 };
 
 const CATEGORIES = ['All', 'Gloves', 'Trimmers', 'Accessories'] as const;
@@ -37,14 +37,14 @@ export default function CatalogPage() {
     '@type': 'ItemList',
     name: 'Empire 8 Sales Direct Product Catalog',
     description: 'Licensed cannabis wholesale products for NY dispensaries.',
-    url: 'https://empire8salesdirect.com/catalog',
+    url: 'https://empire8ny.com/catalog',
     numberOfItems: PRODUCTS.length,
     itemListElement: PRODUCTS.map((p, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `https://empire8salesdirect.com/catalog/${p.slug}`,
+      url: `https://empire8ny.com/catalog/${p.slug}`,
       name: p.name,
-      image: `https://empire8salesdirect.com${p.img}`,
+      image: `https://empire8ny.com${p.img}`,
     })),
   };
 
@@ -54,8 +54,8 @@ export default function CatalogPage() {
     name: 'Product Catalog — Cannabis Wholesale',
     description:
       'Licensed cannabis wholesale products for NY dispensaries. Premium flower, concentrates, edibles, and accessories at wholesale pricing.',
-    url: 'https://empire8salesdirect.com/catalog',
-    isPartOf: { '@type': 'WebSite', name: 'Empire 8 Sales Direct', url: 'https://empire8salesdirect.com' },
+    url: 'https://empire8ny.com/catalog',
+    isPartOf: { '@type': 'WebSite', name: 'Empire 8 Sales Direct', url: 'https://empire8ny.com' },
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: PRODUCTS.length,
@@ -63,8 +63,8 @@ export default function CatalogPage() {
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://empire8salesdirect.com' },
-        { '@type': 'ListItem', position: 2, name: 'Catalog', item: 'https://empire8salesdirect.com/catalog' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://empire8ny.com' },
+        { '@type': 'ListItem', position: 2, name: 'Catalog', item: 'https://empire8ny.com/catalog' },
       ],
     },
   };

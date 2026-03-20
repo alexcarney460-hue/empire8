@@ -5,16 +5,33 @@ import AnimateIn from '@/components/AnimateIn';
 import WhiteLabelForm from '@/components/forms/WhiteLabelForm';
 
 export const metadata: Metadata = {
-  title: 'White Label Cannabis Products — Empire 8 Sales Direct',
+  title: 'White Label Cannabis Products | Launch Your Brand',
   description:
     'Launch your own cannabis brand with Empire 8. We handle manufacturing, compliance, packaging, and distribution across New York State. Your brand, our infrastructure.',
-  keywords: ['white label cannabis', 'private label cannabis NY', 'cannabis brand creation', 'white label vapes', 'white label edibles', 'cannabis manufacturing NY'],
+  keywords: [
+    'white label cannabis',
+    'private label cannabis NY',
+    'cannabis brand creation',
+    'white label vapes',
+    'white label edibles',
+    'cannabis manufacturing NY',
+    'launch cannabis brand new york',
+  ],
   openGraph: {
-    title: 'White Label Cannabis Products — Empire 8 Sales Direct',
-    description: 'Launch your own cannabis brand with Empire 8. Manufacturing, compliance, packaging, and statewide distribution.',
-    url: 'https://empire8salesdirect.com/whitelabel',
+    title: 'White Label Cannabis Products | Launch Your Brand | Empire 8',
+    description:
+      'Launch your own cannabis brand with Empire 8. Manufacturing, compliance, packaging, and statewide distribution.',
+    url: 'https://empire8ny.com/whitelabel',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'White Label Cannabis Products — Empire 8' }],
   },
-  alternates: { canonical: 'https://empire8salesdirect.com/whitelabel' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'White Label Cannabis Products | Empire 8',
+    description:
+      'Launch your cannabis brand with Empire 8. Manufacturing, compliance, and NY statewide distribution.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: { canonical: 'https://empire8ny.com/whitelabel' },
 };
 
 const SERVICES = [

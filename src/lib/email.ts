@@ -39,7 +39,7 @@ export interface TrackingData {
 // Resend client (lazy init)
 // ---------------------------------------------------------------------------
 
-const FROM_ADDRESS = 'Empire 8 Sales Direct <info@empire8salesdirect.com>';
+const FROM_ADDRESS = 'Empire 8 Sales Direct <info@empire8ny.com>';
 
 let _resend: Resend | null = null;
 
@@ -118,7 +118,7 @@ function emailLayout(title: string, preheader: string, body: string): string {
             <td style="background-color:${BRAND.light};padding:24px 40px;border-top:1px solid ${BRAND.border};">
               <p style="margin:0;color:${BRAND.muted};font-size:12px;text-align:center;line-height:1.6;">
                 Empire 8 Sales Direct &bull; New York, NY 10001<br>
-                <a href="https://empire8salesdirect.com" style="color:${BRAND.primary};text-decoration:none;">empire8salesdirect.com</a>
+                <a href="https://empire8ny.com" style="color:${BRAND.primary};text-decoration:none;">empire8ny.com</a>
               </p>
             </td>
           </tr>
@@ -260,7 +260,7 @@ function buildOrderConfirmationHtml(order: OrderData): string {
     <!-- Footer note -->
     <p style="margin:28px 0 0;color:${BRAND.muted};font-size:13px;line-height:1.6;">
       You'll receive another email with tracking information once your order ships. If you have any questions, reply to this email or contact us at
-      <a href="mailto:info@empire8salesdirect.com" style="color:${BRAND.primary};text-decoration:none;">info@empire8salesdirect.com</a>.
+      <a href="mailto:info@empire8ny.com" style="color:${BRAND.primary};text-decoration:none;">info@empire8ny.com</a>.
     </p>
   `;
 
@@ -354,7 +354,7 @@ function buildShippingNotificationHtml(trackingData: TrackingData): string {
 
     <p style="margin:0;color:${BRAND.muted};font-size:13px;line-height:1.6;">
       Tracking information may take a few hours to update after shipment. If you have any questions, reply to this email or contact
-      <a href="mailto:info@empire8salesdirect.com" style="color:${BRAND.primary};text-decoration:none;">info@empire8salesdirect.com</a>.
+      <a href="mailto:info@empire8ny.com" style="color:${BRAND.primary};text-decoration:none;">info@empire8ny.com</a>.
     </p>
   `;
 
@@ -494,7 +494,7 @@ function buildOrderShippedHtml(order: OrderData, tracking: TrackingData): string
 
     <p style="margin:0;color:${BRAND.muted};font-size:13px;line-height:1.6;">
       Tracking may take a few hours to update. Questions? Contact
-      <a href="mailto:info@empire8salesdirect.com" style="color:${BRAND.primary};text-decoration:none;">info@empire8salesdirect.com</a>.
+      <a href="mailto:info@empire8ny.com" style="color:${BRAND.primary};text-decoration:none;">info@empire8ny.com</a>.
     </p>
   `;
 
@@ -618,7 +618,7 @@ function buildRenewalReminderHtml(data: RenewalEmailData): string {
 
     <p style="margin:0;color:${BRAND.muted};font-size:13px;line-height:1.6;">
       To pause or cancel your subscription, visit your
-      <a href="https://empire8salesdirect.com/account" style="color:${BRAND.primary};text-decoration:none;">account page</a>
+      <a href="https://empire8ny.com/account" style="color:${BRAND.primary};text-decoration:none;">account page</a>
       or reply to this email.
     </p>
   `;
@@ -746,7 +746,7 @@ function buildAutoshipReceiptHtml(data: AutoshipReceiptData): string {
 
     <p style="margin:0;color:${BRAND.muted};font-size:13px;line-height:1.6;">
       To manage your subscription, visit your
-      <a href="https://empire8salesdirect.com/account" style="color:${BRAND.primary};text-decoration:none;">account page</a>
+      <a href="https://empire8ny.com/account" style="color:${BRAND.primary};text-decoration:none;">account page</a>
       or reply to this email.
     </p>
   `;
@@ -860,7 +860,7 @@ function buildPaymentFailedHtml(data: PaymentFailedData): string {
 
     <p style="margin:0;color:${BRAND.muted};font-size:13px;line-height:1.6;">
       If you need help, reply to this email or contact
-      <a href="mailto:info@empire8salesdirect.com" style="color:${BRAND.primary};text-decoration:none;">info@empire8salesdirect.com</a>.
+      <a href="mailto:info@empire8ny.com" style="color:${BRAND.primary};text-decoration:none;">info@empire8ny.com</a>.
     </p>
   `;
 

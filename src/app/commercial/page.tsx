@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   description:
     'Empire 8 Sales Direct is a licensed cannabis wholesale supplier serving dispensaries across New York. Premium flower, edibles, concentrates, and accessories at competitive wholesale pricing.',
   keywords: ['cannabis wholesale', 'dispensary supplier', 'wholesale cannabis NY', 'cannabis distributor', 'dispensary wholesale', 'cannabis products wholesale'],
-  alternates: { canonical: 'https://empire8salesdirect.com/commercial' },
+  alternates: { canonical: 'https://empire8ny.com/commercial' },
   openGraph: {
     title: 'Cannabis Wholesale for Dispensaries — Empire 8 Sales Direct',
     description: 'Licensed cannabis wholesale supplier for NY dispensaries. Premium products, competitive pricing, and reliable delivery across all 62 counties.',
-    url: 'https://empire8salesdirect.com/commercial',
+    url: 'https://empire8ny.com/commercial',
   },
   twitter: {
     card: 'summary_large_image',
@@ -89,7 +89,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Do you offer NET terms for dispensaries?',
-    a: 'Qualified dispensary accounts have access to NET 30 terms with approved credit. Contact us at info@empire8salesdirect.com for credit applications and custom payment arrangements.',
+    a: 'Qualified dispensary accounts have access to NET 30 terms with approved credit. Contact us at info@empire8ny.com for credit applications and custom payment arrangements.',
   },
 ];
 

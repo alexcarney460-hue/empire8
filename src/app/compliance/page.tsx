@@ -6,9 +6,27 @@ const PURPLE_DARK = '#2D0849';
 const GOLD = '#C8A23C';
 
 export const metadata: Metadata = {
-  title: 'Compliance — Empire 8 Sales Direct',
+  title: 'NYS OCM Compliance',
   description:
     'Empire 8 Sales Direct compliance statement. NYS OCM licensed adult-use cannabis distributor operating in full compliance with 9 NYCRR Parts 128 & 129.',
+  keywords: [
+    'NYS OCM compliance',
+    'cannabis compliance new york',
+    'OCM licensed distributor',
+    'cannabis regulations NY',
+    '9 NYCRR Parts 128 129',
+  ],
+  openGraph: {
+    title: 'NYS OCM Compliance | Empire 8 Sales Direct',
+    description: 'NYS OCM licensed adult-use cannabis distributor. Full compliance with 9 NYCRR Parts 128 & 129.',
+    url: 'https://empire8ny.com/compliance',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'NYS OCM Compliance | Empire 8 Sales Direct',
+    description: 'Cannabis compliance and regulatory information for Empire 8 Sales Direct.',
+  },
+  alternates: { canonical: 'https://empire8ny.com/compliance' },
   robots: { index: true, follow: true },
 };
 

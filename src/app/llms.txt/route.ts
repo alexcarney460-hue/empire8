@@ -1,76 +1,67 @@
-import PRODUCTS from '@/lib/products';
-
 export const dynamic = 'force-static';
 
 export function GET() {
-  const gloves = PRODUCTS.filter((p) => p.category === 'Gloves');
-  const trimmers = PRODUCTS.filter((p) => p.category === 'Trimmers');
-  const accessories = PRODUCTS.filter((p) => p.category === 'Accessories');
-
   const body = `# Empire 8 Sales Direct
-> Professional-grade disposable gloves and cannabis trimming supplies.
+> Licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties.
 
-## What We Sell
-Empire 8 Sales Direct is an online store selling disposable gloves (nitrile, by the box or case) and cannabis trimming equipment (scissors, trim trays, cleaning supplies). We serve cannabis operations, food service, medical, janitorial, and industrial customers nationwide in the United States.
-
-## Product Catalog
-
-### Gloves (${gloves.length} products)
-${gloves.map((p) => `- ${p.name}: $${p.price.toFixed(2)} ${p.unit} — ${p.tagline}`).join('\n')}
-
-### Trimming Scissors (${trimmers.length} products)
-${trimmers.map((p) => `- ${p.name}: $${p.price.toFixed(2)} ${p.unit} — ${p.tagline}`).join('\n')}
-
-### Accessories (${accessories.length} products)
-${accessories.map((p) => `- ${p.name}: $${p.price.toFixed(2)} ${p.unit} — ${p.tagline}`).join('\n')}
-
-## Pricing Tiers (Gloves — Cases)
-We offer volume-based pricing on glove cases (10 boxes / 1,000 gloves per case):
-
-| Tier         | Quantity       | Price Per Case |
-|--------------|----------------|----------------|
-| Retail       | 1–29 cases     | $80.00         |
-| Wholesale    | 30–119 cases   | $70.00         |
-| Distribution | 120+ cases     | $60.00         |
-
-Individual glove boxes (100 gloves) are available at $10.00/box.
-
-## How to Order
-1. Browse our catalog at https://empire8salesdirect.com/catalog
-2. Add items to cart and select size/quantity
-3. Checkout with secure Square payment processing
-4. We accept all major credit cards
-
-For wholesale (30+ cases) or distribution (120+ cases) orders:
-- Visit https://empire8salesdirect.com/wholesale
-- Or email info@empire8salesdirect.com
-
-## Shipping
-- We ship nationwide within the United States
-- Orders are processed and shipped promptly
-- Track your order at https://empire8salesdirect.com/track
-
-## Contact
-- Email: info@empire8salesdirect.com
-- Website: https://empire8salesdirect.com/contact
-- Live chat available on our website
-
-## Industries Served
-- Cannabis cultivation and trimming operations
-- Food handling and food service
-- Medical and dental offices
-- Janitorial and sanitation
-- Auto mechanics and detailing
-- General manufacturing and industrial
+## What We Do
+Empire 8 Sales Direct is a B2B cannabis wholesale platform connecting NY-licensed brands with dispensaries. We offer wholesale ordering, anonymous marketplace auctions (Weedbay), white label manufacturing, and brand distribution services.
 
 ## Key Pages
-- Catalog: https://empire8salesdirect.com/catalog
-- Wholesale Program: https://empire8salesdirect.com/wholesale
-- Dispensary Sign Up: https://empire8salesdirect.com/dispensary-signup
-- Commercial Accounts: https://empire8salesdirect.com/commercial
-- Affiliate Program: https://empire8salesdirect.com/affiliate
-- About Us: https://empire8salesdirect.com/about
-- Contact: https://empire8salesdirect.com/contact
+- /brands — Browse our curated portfolio of NY-licensed cannabis brands
+- /marketplace — Weedbay: anonymous large-lot cannabis auctions
+- /dispensary-signup — Licensed dispensaries can apply for wholesale access
+- /whitelabel — White label cannabis product manufacturing
+- /about — Company mission and NY coverage map
+- /compliance — NYS OCM compliance information
+- /locations — Delivery zones covering all 62 NY counties
+- /catalog — Full product catalog with wholesale pricing
+- /contact — Get in touch with our sales team
+
+## Products & Categories
+Flower, Concentrates, Vapes/Cartridges, Pre-Rolls, Edibles, Beverages, Tinctures, Capsules
+
+## Services
+- **Wholesale Ordering**: Competitive B2B pricing for licensed dispensaries
+- **Weedbay Marketplace**: Anonymous large-lot auctions for surplus inventory
+- **White Label Manufacturing**: Custom cannabis products under your brand
+- **Brand Distribution**: Get your licensed brand into NY dispensaries
+- **Compliance Support**: Full NYS OCM regulatory compliance on every shipment
+- **Dedicated Account Management**: Personal rep for every dispensary partner
+
+## Coverage
+All 62 New York counties organized into 7 delivery zones:
+- Zone 1: Long Island (Nassau, Suffolk)
+- Zone 2: Metro NYC (Manhattan, Brooklyn, Queens, Bronx, Staten Island)
+- Zone 3: Hudson Valley (Westchester, Rockland, Orange, Dutchess, Ulster, Sullivan)
+- Zone 4: Capital Region (Albany, Schenectady, Rensselaer, Saratoga)
+- Zone 5: North Country (Clinton, Essex, Franklin, Jefferson, St. Lawrence)
+- Zone 6: Central NY (Syracuse, Utica, Binghamton, Oneida)
+- Zone 7: Western Tier (Buffalo, Rochester, Niagara, Erie)
+
+## Pricing Tiers
+| Tier          | Description                                        |
+|---------------|----------------------------------------------------|
+| Starter       | New dispensary accounts, competitive wholesale      |
+| Wholesale     | Volume ordering, deeper discounts, priority fill    |
+| Distribution  | High-volume partners, best pricing, NET 30 terms   |
+
+## Licensing
+NYS OCM Licensed Distributor.
+All products are lab-tested and NYS compliant.
+For use only by adults 21 years of age and older.
+
+## How to Order
+1. Apply at https://empire8ny.com/dispensary-signup
+2. Get approved and assigned a dedicated account manager
+3. Browse the catalog or join Weedbay marketplace auctions
+4. Receive temperature-controlled delivery within the week
+
+## Contact
+- Email: info@empire8ny.com
+- Sales: sales@empire8ny.com
+- Website: https://empire8ny.com
+- Live chat available on our website
 `;
 
   return new Response(body, {

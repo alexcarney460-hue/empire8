@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const BASE = 'https://empire8salesdirect.com';
+const BASE = 'https://empire8ny.com';
 
 /**
  * AI agent discovery manifest (similar to ChatGPT plugin spec).
@@ -15,13 +15,15 @@ export function GET() {
     name_for_human: 'Empire 8 Sales Direct',
     name_for_model: 'empire8salesdirect',
     description_for_human:
-      'Licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties. Premium flower, concentrates, edibles, and dispensary supplies at wholesale pricing.',
+      'Licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties. Premium flower, concentrates, edibles, pre-rolls, vapes, beverages, tinctures, and capsules at wholesale pricing.',
     description_for_model:
-      'Empire 8 Sales Direct is a licensed cannabis wholesale supplier serving dispensaries across all 62 counties in New York state. ' +
-      'Products include premium flower, concentrates (live resin, distillate, shatter), edibles, pre-rolls, vape cartridges, and dispensary accessories. ' +
-      'Three pricing tiers: Starter (new dispensary accounts), Wholesale (volume ordering), Distribution (high-volume partners with NET 30 terms). ' +
-      'All products are lab-tested and NYS compliant with 1-2 business day processing. Delivers across New York state. ' +
-      'The product catalog is available as structured JSON at /products.json for programmatic access.',
+      'Empire 8 Sales Direct is a NYS OCM licensed B2B cannabis wholesale platform serving dispensaries across all 62 counties in New York state. ' +
+      'Products include premium flower, concentrates (live resin, distillate, shatter), edibles, pre-rolls, vape cartridges, beverages, tinctures, and capsules. ' +
+      'Services include wholesale ordering, Weedbay anonymous marketplace auctions for large lots, white label cannabis manufacturing, and brand distribution. ' +
+      'Three pricing tiers: Starter (new dispensary accounts), Wholesale (volume ordering with deeper discounts), Distribution (high-volume partners with NET 30 terms). ' +
+      'All products are lab-tested and NYS OCM compliant. Temperature-controlled delivery fleet with same-week fulfillment. ' +
+      'Coverage spans 7 delivery zones: Long Island, Metro NYC, Hudson Valley, Capital Region, North Country, Central NY, and Western Tier. ' +
+      'The product catalog is available as structured JSON at /products.json. The machine-readable site description is at /llms.txt.',
     auth: { type: 'none' },
     api: {
       type: 'openapi',
@@ -29,9 +31,10 @@ export function GET() {
       has_user_authentication: false,
     },
     logo_url: `${BASE}/logo.jpg`,
-    contact_email: 'info@empire8salesdirect.com',
+    contact_email: 'info@empire8ny.com',
     legal_info_url: `${BASE}/about`,
     product_catalog_url: `${BASE}/products.json`,
+    llms_txt_url: `${BASE}/llms.txt`,
     website_url: BASE,
     categories: [
       'cannabis wholesale',
@@ -39,8 +42,14 @@ export function GET() {
       'cannabis flower',
       'cannabis concentrates',
       'cannabis edibles',
+      'cannabis pre-rolls',
+      'cannabis vapes',
+      'cannabis beverages',
+      'white label cannabis',
+      'cannabis marketplace',
     ],
     supported_countries: ['US'],
+    supported_regions: ['New York'],
     currency: 'USD',
     pricing_model: {
       type: 'tiered',
@@ -59,6 +68,20 @@ export function GET() {
           net_terms_available: true,
         },
       ],
+    },
+    service_area: {
+      type: 'state',
+      name: 'New York',
+      zones: [
+        'Long Island',
+        'Metro NYC',
+        'Hudson Valley',
+        'Capital Region',
+        'North Country',
+        'Central NY',
+        'Western Tier',
+      ],
+      county_count: 62,
     },
   };
 

@@ -7,10 +7,11 @@ import FAQSection from './(home)/FAQSection';
 import CTASection from './(home)/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Empire 8 Sales Direct | NY Cannabis Distribution Partner',
+  title: 'Empire 8 Sales Direct — NY Cannabis Wholesale & Marketplace',
   description:
-    'Licensed B2B cannabis distribution across all 62 New York counties. Connecting top cannabis brands with dispensaries. OCM compliant. Temperature-controlled fleet.',
+    'Licensed B2B cannabis wholesale and Weedbay marketplace across all 62 New York counties. Connecting top cannabis brands with dispensaries. OCM compliant. Temperature-controlled fleet.',
   keywords: [
+    'cannabis wholesale new york',
     'cannabis distribution new york',
     'NY cannabis distributor',
     'B2B cannabis distribution',
@@ -18,17 +19,24 @@ export const metadata: Metadata = {
     'cannabis supply chain new york',
     'dispensary wholesale supply',
     'licensed cannabis distributor NY',
+    'weedbay marketplace',
+    'cannabis auction new york',
+    'wholesale cannabis lots',
   ],
-  alternates: { canonical: 'https://empire8salesdirect.com' },
+  alternates: { canonical: 'https://empire8ny.com' },
   openGraph: {
-    title: 'Empire 8 Sales Direct | NY Cannabis Distribution Partner',
-    description: 'Licensed B2B cannabis distribution across all 62 New York counties. Connecting top cannabis brands with dispensaries statewide.',
-    url: 'https://empire8salesdirect.com',
+    title: 'Empire 8 Sales Direct — NY Cannabis Wholesale & Marketplace',
+    description:
+      'Licensed B2B cannabis wholesale and Weedbay marketplace across all 62 New York counties. Top brands, competitive pricing.',
+    url: 'https://empire8ny.com',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Empire 8 Sales Direct — NY Cannabis Wholesale & Marketplace' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Empire 8 Sales Direct | NY Cannabis Distribution',
-    description: 'Licensed B2B cannabis distribution across all 62 New York counties. OCM compliant. Temperature-controlled statewide delivery.',
+    title: 'Empire 8 Sales Direct — NY Cannabis Wholesale & Marketplace',
+    description:
+      'Licensed B2B cannabis wholesale and Weedbay marketplace across all 62 NY counties. OCM compliant. Statewide delivery.',
+    images: ['/og-image.jpg'],
   },
 };
 

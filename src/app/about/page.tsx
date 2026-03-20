@@ -6,13 +6,27 @@ import AnimateIn from '@/components/AnimateIn';
 export const metadata: Metadata = {
   title: 'About Empire 8 Sales Direct — Licensed Cannabis Wholesale in NY',
   description:
-    'Empire 8 Sales Direct is a NYS OCM licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties. Learn about our mission, team, and commitment to compliance.',
+    'Empire 8 Sales Direct is a NYS OCM licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties. Learn about our mission and compliance.',
+  keywords: [
+    'about empire 8',
+    'cannabis wholesale company NY',
+    'NYS OCM licensed supplier',
+    'cannabis distributor about',
+    'NY cannabis supply chain',
+  ],
   openGraph: {
     title: 'About Empire 8 Sales Direct',
     description: 'Licensed cannabis wholesale supplier serving dispensaries across New York State.',
-    url: 'https://empire8salesdirect.com/about',
+    url: 'https://empire8ny.com/about',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'About Empire 8 Sales Direct' }],
   },
-  alternates: { canonical: 'https://empire8salesdirect.com/about' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Empire 8 Sales Direct',
+    description: 'NYS OCM licensed cannabis wholesale supplier serving all 62 New York counties.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: { canonical: 'https://empire8ny.com/about' },
 };
 
 const VALUES = [
@@ -45,9 +59,27 @@ const STATS = [
   { stat: 'NET 30', label: 'Terms Available' },
 ];
 
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Empire 8 Sales Direct',
+  description:
+    'Empire 8 Sales Direct is a NYS OCM licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties.',
+  url: 'https://empire8ny.com/about',
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Empire 8 Sales Direct',
+    url: 'https://empire8ny.com',
+  },
+};
+
 export default function AboutPage() {
   return (
     <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
 
       {/* Hero */}
       <section style={{ backgroundColor: '#0F0520', padding: '72px 24px 80px', position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(200,162,60,0.12)' }}>

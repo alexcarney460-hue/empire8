@@ -72,8 +72,8 @@ export interface OrderEmailsResult {
 // Resend client (lazy init — mirrors email.ts pattern)
 // ---------------------------------------------------------------------------
 
-const FROM_ADDRESS = 'Empire 8 Sales Direct <info@empire8salesdirect.com>';
-const ADMIN_EMAIL_FALLBACK = 'info@empire8salesdirect.com';
+const FROM_ADDRESS = 'Empire 8 Sales Direct <info@empire8ny.com>';
+const ADMIN_EMAIL_FALLBACK = 'info@empire8ny.com';
 
 let _resend: Resend | null = null;
 
@@ -196,9 +196,9 @@ function emailLayout(title: string, preheader: string, body: string): string {
             <td style="background-color:${C.light};padding:24px 40px;border-top:1px solid ${C.border};">
               <p style="margin:0;color:${C.muted};font-size:12px;text-align:center;line-height:1.6;">
                 Empire 8 Sales Direct &bull; New York, NY 10001<br>
-                <a href="mailto:info@empire8salesdirect.com" style="color:${C.purple};text-decoration:none;">info@empire8salesdirect.com</a>
+                <a href="mailto:info@empire8ny.com" style="color:${C.purple};text-decoration:none;">info@empire8ny.com</a>
                 &bull;
-                <a href="https://empire8salesdirect.com" style="color:${C.purple};text-decoration:none;">empire8salesdirect.com</a>
+                <a href="https://empire8ny.com" style="color:${C.purple};text-decoration:none;">empire8ny.com</a>
               </p>
             </td>
           </tr>
@@ -329,7 +329,7 @@ function buildBrandOrderHtml(
 
     <p style="margin:28px 0 0;color:${C.muted};font-size:13px;line-height:1.6;">
       Questions about this order? Contact
-      <a href="mailto:info@empire8salesdirect.com" style="color:${C.purple};text-decoration:none;">info@empire8salesdirect.com</a>.
+      <a href="mailto:info@empire8ny.com" style="color:${C.purple};text-decoration:none;">info@empire8ny.com</a>.
     </p>
   `;
 
@@ -401,7 +401,7 @@ function buildDispensaryConfirmationHtml(
 
     <p style="margin:28px 0 0;color:${C.muted};font-size:13px;line-height:1.6;">
       Questions about your order? Contact
-      <a href="mailto:info@empire8salesdirect.com" style="color:${C.purple};text-decoration:none;">info@empire8salesdirect.com</a>.
+      <a href="mailto:info@empire8ny.com" style="color:${C.purple};text-decoration:none;">info@empire8ny.com</a>.
     </p>
   `;
 

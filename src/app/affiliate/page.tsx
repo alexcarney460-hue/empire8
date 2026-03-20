@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Affiliate Program — Earn Up to 20% | Empire 8 Sales Direct',
     description: 'Earn up to 20% commission on every referred sale. Real-time dashboard, custom promo codes, and fast payouts.',
-    url: 'https://empire8salesdirect.com/affiliate',
+    url: 'https://empire8ny.com/affiliate',
   },
-  alternates: { canonical: 'https://empire8salesdirect.com/affiliate' },
+  alternates: { canonical: 'https://empire8ny.com/affiliate' },
 };
 
 const TIERS = [
@@ -335,8 +335,8 @@ export default function AffiliatePage() {
                   {contact ? (
                     <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>
                       Reach out to our partner team:{' '}
-                      <a href="mailto:info@empire8salesdirect.com" style={{ color: 'var(--color-gold)', fontWeight: 700, textDecoration: 'none' }}>
-                        info@empire8salesdirect.com
+                      <a href="mailto:info@empire8ny.com" style={{ color: 'var(--color-gold)', fontWeight: 700, textDecoration: 'none' }}>
+                        info@empire8ny.com
                       </a>
                     </p>
                   ) : (

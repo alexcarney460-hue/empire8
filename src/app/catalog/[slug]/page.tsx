@@ -22,8 +22,8 @@ export async function generateMetadata({
   const product = getProductBySlug(slug);
   if (!product) return {};
 
-  const url = `https://empire8salesdirect.com/catalog/${product.slug}`;
-  const imgUrl = `https://empire8salesdirect.com${product.img}`;
+  const url = `https://empire8ny.com/catalog/${product.slug}`;
+  const imgUrl = `https://empire8ny.com${product.img}`;
   const wholesalePrice = (product.price * 0.875).toFixed(2);
 
   return {
@@ -34,7 +34,7 @@ export async function generateMetadata({
       `${product.shortName} wholesale`,
       ...product.useCases,
       product.category.toLowerCase(),
-      'disposable gloves case',
+      'cannabis wholesale NY',
       'Empire 8',
     ],
     openGraph: {
@@ -68,13 +68,13 @@ export default async function ProductPage({
   const wholesalePrice = priceForAccount(product.price, 'wholesale');
   const distroPrice = priceForAccount(product.price, 'distribution');
 
-  const productUrl = `https://empire8salesdirect.com/catalog/${product.slug}`;
+  const productUrl = `https://empire8ny.com/catalog/${product.slug}`;
 
   const availabilityUrl = product.inStock
     ? 'https://schema.org/InStock'
     : 'https://schema.org/OutOfStock';
 
-  const seller = { '@type': 'Organization', name: 'Empire 8 Sales Direct', url: 'https://empire8salesdirect.com' };
+  const seller = { '@type': 'Organization', name: 'Empire 8 Sales Direct', url: 'https://empire8ny.com' };
 
   // Extract material and weight from specs when available
   const materialSpec = product.specs.find((s) => s.label === 'Material');
@@ -113,7 +113,7 @@ export default async function ProductPage({
         price: wholesaleTierPrice.toFixed(2),
         priceCurrency: 'USD',
         availability: availabilityUrl,
-        url: 'https://empire8salesdirect.com/wholesale',
+        url: 'https://empire8ny.com/wholesale',
         priceValidUntil: '2026-12-31',
         seller,
         eligibleCustomerType: 'https://schema.org/Business',
@@ -130,7 +130,7 @@ export default async function ProductPage({
         price: distroTierPrice.toFixed(2),
         priceCurrency: 'USD',
         availability: availabilityUrl,
-        url: 'https://empire8salesdirect.com/dispensary-signup',
+        url: 'https://empire8ny.com/dispensary-signup',
         priceValidUntil: '2026-12-31',
         seller,
         eligibleCustomerType: 'https://schema.org/Business',
@@ -148,7 +148,7 @@ export default async function ProductPage({
     '@type': 'Product',
     name: product.name,
     description: product.description,
-    image: product.images.map((img) => `https://empire8salesdirect.com${img}`),
+    image: product.images.map((img) => `https://empire8ny.com${img}`),
     sku: product.slug,
     brand: { '@type': 'Brand', name: 'Empire 8 Sales Direct' },
     category: product.category,
@@ -174,9 +174,9 @@ export default async function ProductPage({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home',    item: 'https://empire8salesdirect.com' },
-      { '@type': 'ListItem', position: 2, name: 'Catalog', item: 'https://empire8salesdirect.com/catalog' },
-      { '@type': 'ListItem', position: 3, name: product.category, item: `https://empire8salesdirect.com/catalog#${product.category.toLowerCase()}` },
+      { '@type': 'ListItem', position: 1, name: 'Home',    item: 'https://empire8ny.com' },
+      { '@type': 'ListItem', position: 2, name: 'Catalog', item: 'https://empire8ny.com/catalog' },
+      { '@type': 'ListItem', position: 3, name: product.category, item: `https://empire8ny.com/catalog#${product.category.toLowerCase()}` },
       { '@type': 'ListItem', position: 4, name: product.shortName, item: productUrl },
     ],
   };

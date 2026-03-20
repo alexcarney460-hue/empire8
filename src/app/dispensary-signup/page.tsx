@@ -6,21 +6,33 @@ import AnimateIn from '@/components/AnimateIn';
 import DistributionForm from '@/components/forms/DistributionForm';
 
 export const metadata: Metadata = {
-  title: 'Dispensary Sign Up | Empire 8 Sales Direct',
+  title: 'Dispensary Sign Up | Partner with Empire 8',
   description:
-    'Licensed NY dispensaries — sign up with Empire 8 Sales Direct for premium cannabis product supply, competitive wholesale pricing, and statewide delivery.',
-  keywords: ['dispensary sign up', 'cannabis wholesale NY', 'dispensary supplier new york', 'cannabis distribution', 'OCM licensed distributor'],
+    'Licensed NY dispensaries -- sign up with Empire 8 Sales Direct for premium cannabis supply, competitive wholesale pricing, and statewide delivery.',
+  keywords: [
+    'dispensary sign up',
+    'cannabis wholesale NY',
+    'dispensary supplier new york',
+    'cannabis distribution',
+    'OCM licensed distributor',
+    'dispensary partnership NY',
+    'cannabis wholesale account',
+  ],
   openGraph: {
-    title: 'Dispensary Sign Up | Empire 8 Sales Direct',
-    description: 'Licensed NY dispensaries — sign up with Empire 8 Sales Direct for premium cannabis product supply, competitive wholesale pricing, and statewide delivery.',
-    url: 'https://empire8salesdirect.com/dispensary-signup',
+    title: 'Dispensary Sign Up | Partner with Empire 8',
+    description:
+      'Licensed NY dispensaries -- sign up for premium cannabis supply, competitive wholesale pricing, and statewide delivery.',
+    url: 'https://empire8ny.com/dispensary-signup',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Dispensary Sign Up — Empire 8' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dispensary Sign Up | Empire 8 Sales Direct',
-    description: 'Licensed NY dispensaries — sign up with Empire 8 Sales Direct for premium cannabis product supply, competitive wholesale pricing, and statewide delivery.',
+    title: 'Dispensary Sign Up | Empire 8',
+    description:
+      'Sign up as a licensed NY dispensary for premium cannabis wholesale supply and statewide delivery.',
+    images: ['/og-image.jpg'],
   },
-  alternates: { canonical: 'https://empire8salesdirect.com/dispensary-signup' },
+  alternates: { canonical: 'https://empire8ny.com/dispensary-signup' },
 };
 
 const OFFERINGS = [
@@ -56,9 +68,31 @@ const WHY_EMPIRE8 = [
 ];
 
 
+const signupSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Dispensary Sign Up',
+  description: 'Sign up as a licensed NY dispensary to partner with Empire 8 Sales Direct for wholesale cannabis supply.',
+  url: 'https://empire8ny.com/dispensary-signup',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Empire 8 Sales Direct',
+    url: 'https://empire8ny.com',
+  },
+  potentialAction: {
+    '@type': 'RegisterAction',
+    target: 'https://empire8ny.com/dispensary-signup',
+    name: 'Sign up as a dispensary partner',
+  },
+};
+
 export default function DispensarySignUpPage() {
   return (
     <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520', minHeight: '100vh' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(signupSchema) }}
+      />
 
       {/* Hero */}
       <section

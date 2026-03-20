@@ -5,7 +5,7 @@
  * "XML file" verification method, replace the placeholder below with
  * the actual code Bing provides (a hex string).
  *
- * The XML will be served at: https://empire8salesdirect.com/BingSiteAuth.xml
+ * The XML will be served at: https://empire8ny.com/BingSiteAuth.xml
  */
 
 const BING_VERIFICATION_CODE = 'REPLACE_WITH_BING_XML_VERIFICATION_CODE';

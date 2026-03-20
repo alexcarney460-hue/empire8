@@ -118,7 +118,7 @@ export async function POST(req: NextRequest, { params }: Params) {
     };
   });
 
-  const origin = 'https://empire8salesdirect.com';
+  const origin = 'https://empire8ny.com';
 
   try {
     const response = await squareClient.checkout.paymentLinks.create({
@@ -129,13 +129,13 @@ export async function POST(req: NextRequest, { params }: Params) {
         metadata: {
           autoship: 'true',
           subscription_id: sub.id,
-          source: 'empire8salesdirect.com',
+          source: 'empire8ny.com',
           renewal: 'true',
           update_card: 'true',
         },
       },
       checkoutOptions: {
-        merchantSupportEmail: 'info@empire8salesdirect.com',
+        merchantSupportEmail: 'info@empire8ny.com',
         allowTipping: false,
         redirectUrl: `${origin}/checkout/success?renewal=true&card_updated=true`,
         askForShippingAddress: true,

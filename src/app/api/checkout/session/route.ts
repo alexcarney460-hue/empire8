@@ -127,7 +127,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const origin = req.headers.get('origin') ?? 'https://empire8salesdirect.com';
+    const origin = req.headers.get('origin') ?? 'https://empire8ny.com';
 
     // Build Square order line items using server-validated prices
     const lineItems = validatedItems.map((item) => {
@@ -177,13 +177,13 @@ export async function POST(req: NextRequest) {
         lineItems,
         metadata: {
           autoship: hasAutoship ? 'true' : 'false',
-          source: 'empire8salesdirect.com',
+          source: 'empire8ny.com',
           shipping_carrier: shipping.carrier,
           shipping_service: shipping.service,
         },
       },
       checkoutOptions: {
-        merchantSupportEmail: 'info@empire8salesdirect.com',
+        merchantSupportEmail: 'info@empire8ny.com',
         allowTipping: false,
         redirectUrl: `${origin}/checkout/success`,
         askForShippingAddress: true,

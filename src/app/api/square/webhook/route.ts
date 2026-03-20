@@ -446,7 +446,7 @@ export async function processSquareEvent(
       // The fetch itself is fast (<1s) — the heavy Shippo work runs in the other function.
       if (order && shippingAddr?.address_line_1 && shippingAddr?.locality) {
         const internalSecret = process.env.INTERNAL_API_SECRET || process.env.CRON_SECRET;
-        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://empire8salesdirect.com';
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://empire8ny.com';
 
         try {
           const autoShipRes = await fetch(`${siteUrl}/api/shipping/auto-ship`, {
@@ -566,7 +566,7 @@ export async function processSquareEvent(
 // ---------------------------------------------------------------------------
 export async function POST(req: NextRequest) {
   const signatureKey = process.env.SQUARE_WEBHOOK_SIGNATURE_KEY?.trim();
-  const notificationUrl = (process.env.SQUARE_WEBHOOK_URL?.trim()) ?? 'https://empire8salesdirect.com/api/square/webhook';
+  const notificationUrl = (process.env.SQUARE_WEBHOOK_URL?.trim()) ?? 'https://empire8ny.com/api/square/webhook';
 
   const rawBody = await req.text();
   const signature = req.headers.get('x-square-hmacsha256-signature');

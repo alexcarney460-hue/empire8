@@ -32,12 +32,12 @@ SERVICES:
 - Custom product sourcing and brand partnerships
 
 CONTACT:
-- Email: info@empire8salesdirect.com
-- Website: empire8salesdirect.com
+- Email: info@empire8ny.com
+- Website: empire8ny.com
 - Apply for wholesale: /wholesale
 - Dispensary sign up: /dispensary-signup
 
-Always be helpful and direct. If asked about something outside your knowledge, direct them to info@empire8salesdirect.com. Do not make up prices or product details not listed above.`;
+Always be helpful and direct. If asked about something outside your knowledge, direct them to info@empire8ny.com. Do not make up prices or product details not listed above.`;
 
 export async function POST(req: Request) {
   if (!anthropic) {

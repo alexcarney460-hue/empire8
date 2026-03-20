@@ -12,19 +12,19 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact Empire 8 Sales Direct',
     description: 'Wholesale cannabis supply inquiries, dispensary account setup, and distribution questions. We respond within 1 business day.',
-    url: 'https://empire8salesdirect.com/contact',
+    url: 'https://empire8ny.com/contact',
   },
   twitter: {
     card: 'summary',
     title: 'Contact Empire 8 Sales Direct',
     description: 'Wholesale cannabis inquiries and dispensary account setup. We respond within 1 business day.',
   },
-  alternates: { canonical: 'https://empire8salesdirect.com/contact' },
+  alternates: { canonical: 'https://empire8ny.com/contact' },
 };
 
 const CONTACT_OPTIONS = [
-  { icon: Mail, label: 'Email Us', value: 'info@empire8salesdirect.com', sub: 'We respond within 1 business day', href: 'mailto:info@empire8salesdirect.com' },
-  { icon: Mail, label: 'Order Support', value: 'info@empire8salesdirect.com', sub: 'Mon\u2013Fri, 9am\u20135pm EST', href: 'mailto:info@empire8salesdirect.com' },
+  { icon: Mail, label: 'Email Us', value: 'info@empire8ny.com', sub: 'We respond within 1 business day', href: 'mailto:info@empire8ny.com' },
+  { icon: Mail, label: 'Order Support', value: 'info@empire8ny.com', sub: 'Mon\u2013Fri, 9am\u20135pm EST', href: 'mailto:info@empire8ny.com' },
   { icon: Clock, label: 'Business Hours', value: 'Mon\u2013Fri 9am\u20135pm EST', sub: 'Orders placed after hours ship next day', href: null },
 ];
 
@@ -33,13 +33,13 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: 'Empire 8 Sales Direct',
-  url: 'https://empire8salesdirect.com',
-  logo: 'https://empire8salesdirect.com/logo.jpg',
-  image: 'https://empire8salesdirect.com/og-image.jpg',
+  url: 'https://empire8ny.com',
+  logo: 'https://empire8ny.com/logo.jpg',
+  image: 'https://empire8ny.com/og-image.jpg',
   description:
     'Licensed cannabis wholesale supplier and distributor serving dispensaries across New York State. Premium flower, concentrates, edibles, and accessories.',
   telephone: '+1-800-000-0000',
-  email: 'info@empire8salesdirect.com',
+  email: 'info@empire8ny.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'New York',

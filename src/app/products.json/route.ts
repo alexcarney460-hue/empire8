@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import PRODUCTS from '@/lib/products';
 
-const BASE = 'https://empire8salesdirect.com';
+const BASE = 'https://empire8ny.com';
 
 /**
  * Machine-readable product feed optimized for AI shopping agents.
@@ -86,7 +86,7 @@ export function GET() {
       url: BASE,
       description:
         'Professional-grade disposable gloves and cannabis trimming supplies. Retail, wholesale, and distribution pricing.',
-      contact: 'info@empire8salesdirect.com',
+      contact: 'info@empire8ny.com',
       shipsTo: 'US (48 contiguous states)',
       processingTime: '1-2 business days',
     },

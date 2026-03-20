@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import PRODUCTS from '@/lib/products';
 
-const BASE = 'https://empire8salesdirect.com';
+const BASE = 'https://empire8ny.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/forgot-password`,    lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
     { url: `${BASE}/privacy`,            lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
     { url: `${BASE}/terms`,              lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${BASE}/locations`,            lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/llms.txt`,            lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
   ];
 

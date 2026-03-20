@@ -187,7 +187,7 @@ export async function POST(req: Request) {
         .join('\n') || 'No tracking data';
 
       resend.emails.send({
-        from: 'Empire 8 Sales Direct <notifications@empire8salesdirect.com>',
+        from: 'Empire 8 Sales Direct <notifications@empire8ny.com>',
         to: 'gardenablaze@gmail.com',
         subject: subjectLine,
         text: [

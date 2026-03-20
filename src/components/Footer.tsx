@@ -6,6 +6,7 @@ const COMPANY_LINKS = [
   { label: 'Marketplace', href: '/marketplace' },
   { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
   { label: 'White Label', href: '/whitelabel' },
+  { label: 'Delivery Zones', href: '/locations' },
   { label: 'Contact', href: '/contact' },
 ];
 

@@ -15,13 +15,13 @@ import { getSupabaseServer } from '@/lib/supabase-server';
  *   { action: "import-csv" }  — import leads from master CSV into outreach_leads table
  *
  * Sends personalized cold emails via Resend using a subdomain
- * (outreach@mail.empire8salesdirect.com) to protect the main domain.
+ * (outreach@mail.empire8ny.com) to protect the main domain.
  *
  * Rate limited: max 100/batch via API, use the CLI script for higher volume.
  */
 
-const OUTREACH_FROM = 'Empire 8 Sales Direct <outreach@mail.empire8salesdirect.com>';
-const UNSUBSCRIBE_URL = 'https://empire8salesdirect.com/api/unsubscribe';
+const OUTREACH_FROM = 'Empire 8 Sales Direct <outreach@mail.empire8ny.com>';
+const UNSUBSCRIBE_URL = 'https://empire8ny.com/api/unsubscribe';
 
 function getResend(): Resend | null {
   const key = process.env.RESEND_API_KEY?.trim();
@@ -61,8 +61,8 @@ Would it make sense to set up a wholesale account so you can browse our catalog?
 
 — Alex
 Empire 8 Sales Direct
-info@empire8salesdirect.com
-empire8salesdirect.com`,
+info@empire8ny.com
+empire8ny.com`,
     },
     followup_1: {
       subject: `re: wholesale for ${company}?`,
@@ -79,7 +79,7 @@ Empire 8 Sales Direct`,
 
 If you're set on suppliers right now, no worries. But if you're looking for better wholesale pricing on cannabis products, we're probably worth a look.
 
-empire8salesdirect.com/wholesale if you ever want to browse the catalog.
+empire8ny.com/wholesale if you ever want to browse the catalog.
 
 — Alex`,
     },
@@ -95,7 +95,7 @@ Most labs we work with restock monthly. Want me to send pricing for your volume?
 
 — Alex
 Empire 8 Sales Direct
-info@empire8salesdirect.com`,
+info@empire8ny.com`,
     },
     distributor: {
       subject: `wholesale partnership with ${company}`,
@@ -109,7 +109,7 @@ Worth a conversation?
 
 — Alex
 Empire 8 Sales Direct
-info@empire8salesdirect.com`,
+info@empire8ny.com`,
     },
   };
 

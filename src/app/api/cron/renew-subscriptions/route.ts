@@ -209,7 +209,7 @@ export async function GET(req: NextRequest) {
 
           // Send payment failed email with link to update card
           try {
-            const origin = 'https://empire8salesdirect.com';
+            const origin = 'https://empire8ny.com';
             await sendPaymentFailedEmail(sub.email, {
               subscriptionId: sub.id,
               items: items.map((i) => ({
@@ -232,7 +232,7 @@ export async function GET(req: NextRequest) {
       // -----------------------------------------------------------------------
       // FALLBACK FLOW: No card on file — create a payment link (legacy)
       // -----------------------------------------------------------------------
-      const origin = 'https://empire8salesdirect.com';
+      const origin = 'https://empire8ny.com';
       const response = await squareClient.checkout.paymentLinks.create({
         idempotencyKey: randomUUID(),
         order: {
@@ -241,12 +241,12 @@ export async function GET(req: NextRequest) {
           metadata: {
             autoship: 'true',
             subscription_id: sub.id,
-            source: 'empire8salesdirect.com',
+            source: 'empire8ny.com',
             renewal: 'true',
           },
         },
         checkoutOptions: {
-          merchantSupportEmail: 'info@empire8salesdirect.com',
+          merchantSupportEmail: 'info@empire8ny.com',
           allowTipping: false,
           redirectUrl: `${origin}/checkout/success?renewal=true`,
           askForShippingAddress: true,

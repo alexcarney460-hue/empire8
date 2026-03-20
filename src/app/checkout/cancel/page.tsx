@@ -74,7 +74,7 @@ export default function CheckoutCancelPage() {
             <ArrowLeft size={14} /> Back to Catalog
           </Link>
           <a
-            href="mailto:info@empire8salesdirect.com"
+            href="mailto:info@empire8ny.com"
             style={{
               backgroundColor: 'transparent',
               color: '#fff',

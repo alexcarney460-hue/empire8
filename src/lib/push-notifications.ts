@@ -6,12 +6,12 @@ import { getSupabaseServer } from '@/lib/supabase-server';
  * Then set in .env.local:
  *   NEXT_PUBLIC_VAPID_PUBLIC_KEY=...
  *   VAPID_PRIVATE_KEY=...
- *   VAPID_SUBJECT=mailto:info@empire8salesdirect.com
+ *   VAPID_SUBJECT=mailto:info@empire8ny.com
  * ───────────────────────────────────────────────────────────────────── */
 
 const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY ?? '';
 const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY ?? '';
-const VAPID_SUBJECT = process.env.VAPID_SUBJECT ?? 'mailto:info@empire8salesdirect.com';
+const VAPID_SUBJECT = process.env.VAPID_SUBJECT ?? 'mailto:info@empire8ny.com';
 
 function ensureVapidConfigured(): boolean {
   if (!VAPID_PUBLIC_KEY || !VAPID_PRIVATE_KEY) {
