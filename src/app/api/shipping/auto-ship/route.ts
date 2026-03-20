@@ -13,7 +13,7 @@ import { DEFAULT_WEIGHTS } from '@/lib/shipping';
 
 export async function POST(req: NextRequest) {
   // Verify internal call via secret header
-  const secret = process.env.INTERNAL_API_SECRET || process.env.CRON_SECRET || process.env.ADMIN_ANALYTICS_TOKEN;
+  const secret = process.env.INTERNAL_API_SECRET || process.env.CRON_SECRET;
   const authHeader = req.headers.get('x-internal-secret');
   if (!secret || authHeader !== secret) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -141,6 +141,6 @@ export async function POST(req: NextRequest) {
     }
   } catch (err) {
     console.error(`[Auto-Ship] Failed for order ${orderId}:`, err instanceof Error ? err.message : 'unknown');
-    return NextResponse.json({ ok: false, error: err instanceof Error ? err.message : 'Auto-ship failed' }, { status: 500 });
+    return NextResponse.json({ ok: false, error: 'Auto-ship failed' }, { status: 500 });
   }
 }

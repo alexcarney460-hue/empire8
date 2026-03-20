@@ -447,7 +447,7 @@ export async function processSquareEvent(
       // We AWAIT the fetch to guarantee the request is sent before the function exits.
       // The fetch itself is fast (<1s) — the heavy Shippo work runs in the other function.
       if (order && shippingAddr?.address_line_1 && shippingAddr?.locality) {
-        const internalSecret = process.env.INTERNAL_API_SECRET || process.env.CRON_SECRET || process.env.ADMIN_ANALYTICS_TOKEN;
+        const internalSecret = process.env.INTERNAL_API_SECRET || process.env.CRON_SECRET;
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://empire8salesdirect.com';
 
         try {

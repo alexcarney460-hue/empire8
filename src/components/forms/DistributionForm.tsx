@@ -111,7 +111,7 @@ export default function DistributionForm() {
             </div>
             <div>
               <label className="label-caps" style={labelStyle}>State</label>
-              <input type="text" value={values.state || 'NY'} onChange={(e) => onChange('state', e.target.value)} style={{ ...inputStyle, backgroundColor: '#F0F0EE' }} readOnly />
+              <input type="text" value={values.state || 'NY'} onChange={(e) => onChange('state', e.target.value)} style={{ ...inputStyle, backgroundColor: 'rgba(255,255,255,0.04)' }} readOnly />
             </div>
             <div>
               <label className="label-caps" style={labelStyle}>Zip *</label>

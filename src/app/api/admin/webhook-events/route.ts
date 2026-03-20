@@ -39,7 +39,8 @@ export async function GET(req: NextRequest) {
   const { data, error, count } = await query;
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] webhook-events error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true, data, total: count ?? 0, limit, offset });
@@ -140,7 +141,8 @@ async function retryEvent(
       })
       .eq('id', webhookEvent.id);
 
-    return NextResponse.json({ ok: false, error: `Retry failed: ${errorMsg}`, event_id: eventId }, { status: 500 });
+    console.error('[Admin] webhook retry failed:', errorMsg);
+    return NextResponse.json({ ok: false, error: 'Retry failed due to an internal error', event_id: eventId }, { status: 500 });
   }
 }
 
@@ -158,7 +160,8 @@ async function retryAllFailed(
     .limit(50);
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] webhook-events error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
   }
 
   if (!failedEvents || failedEvents.length === 0) {

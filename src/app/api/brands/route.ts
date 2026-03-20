@@ -13,7 +13,7 @@ export async function GET() {
       const { data: brands, error } = await supabase
         .from('brands')
         .select('id, name, slug, description, logo_url, category')
-        .eq('active', true)
+        .eq('is_active', true)
         .order('name', { ascending: true });
 
       if (!error && brands && brands.length > 0) {

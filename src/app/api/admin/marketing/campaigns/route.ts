@@ -20,7 +20,10 @@ export async function GET(req: Request) {
   if (status) query = query.eq('status', status);
 
   const { data, error } = await query;
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] campaigns error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true, data });
 }
@@ -47,7 +50,10 @@ export async function POST(req: Request) {
     status: 'draft',
   }).select().single();
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] campaigns error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true, data }, { status: 201 });
 }

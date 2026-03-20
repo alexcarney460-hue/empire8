@@ -1,11 +1,17 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseServer } from '@/lib/supabase-server';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
 
 /**
  * CAN-SPAM compliant unsubscribe endpoint.
  * GET /api/unsubscribe?email=xxx — marks lead as unsubscribed
  */
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
+  const ip = getClientIp(req);
+  if (!rateLimit(`unsubscribe:${ip}`, 5, 60_000)) {
+    return new NextResponse('Too many requests. Please try again later.', { status: 429 });
+  }
+
   const { searchParams } = new URL(req.url);
   const email = searchParams.get('email')?.trim().toLowerCase();
 

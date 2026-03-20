@@ -5,53 +5,53 @@ import { Truck, BadgeCheck, ArrowRight, Package, ChevronRight, Shield, Building2
 import AnimateIn from '@/components/AnimateIn';
 
 export const metadata: Metadata = {
-  title: 'Commercial Disposable Gloves — Bulk Industry Pricing',
+  title: 'Cannabis Wholesale for Dispensaries — Empire 8 Sales Direct',
   description:
-    'Bulk disposable gloves for food service, medical, janitorial, automotive, and industrial use. Nitrile, latex, and vinyl. Case pricing with fast nationwide shipping.',
-  keywords: ['commercial disposable gloves', 'bulk nitrile gloves', 'food service gloves', 'medical exam gloves', 'industrial gloves bulk', 'janitorial gloves case'],
+    'Empire 8 Sales Direct is a licensed cannabis wholesale supplier serving dispensaries across New York. Premium flower, edibles, concentrates, and accessories at competitive wholesale pricing.',
+  keywords: ['cannabis wholesale', 'dispensary supplier', 'wholesale cannabis NY', 'cannabis distributor', 'dispensary wholesale', 'cannabis products wholesale'],
   alternates: { canonical: 'https://empire8salesdirect.com/commercial' },
   openGraph: {
-    title: 'Commercial Disposable Gloves — Bulk Industry Pricing',
-    description: 'Nitrile, latex, and vinyl gloves for every industry. Retail $70/case, wholesale $60/case (30+), distribution $50/case (120+).',
+    title: 'Cannabis Wholesale for Dispensaries — Empire 8 Sales Direct',
+    description: 'Licensed cannabis wholesale supplier for NY dispensaries. Premium products, competitive pricing, and reliable delivery across all 62 counties.',
     url: 'https://empire8salesdirect.com/commercial',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Commercial Disposable Gloves | Empire 8 Sales Direct',
-    description: 'Bulk gloves for food service, medical, janitorial, and industrial operations. ASTM certified, fast shipping.',
+    title: 'Cannabis Wholesale for Dispensaries | Empire 8 Sales Direct',
+    description: 'Licensed cannabis wholesale serving NY dispensaries. Premium products, volume pricing, fast delivery.',
   },
 };
 
 const INDUSTRIES = [
-  { icon: Utensils, name: 'Food Service', desc: 'Restaurants, catering, delis, and food processing', color: '#E65100' },
-  { icon: Stethoscope, name: 'Medical & Dental', desc: 'Clinics, offices, and exam-grade applications', color: '#1565C0' },
-  { icon: Building2, name: 'Janitorial & Facilities', desc: 'Commercial cleaning, maintenance, and sanitation', color: '#2E7D32' },
-  { icon: Wrench, name: 'Automotive & Trades', desc: 'Mechanics, body shops, painting, and detailing', color: '#37474F' },
-  { icon: Beaker, name: 'Laboratory & Research', desc: 'Scientific, quality control, and testing environments', color: '#6A1B9A' },
-  { icon: Shield, name: 'Safety & Compliance', desc: 'Hazmat handling, industrial safety, and PPE programs', color: '#C62828' },
+  { icon: Building2, name: 'Dispensaries', desc: 'Licensed retail dispensaries across all 62 New York counties', color: '#2E7D32' },
+  { icon: Beaker, name: 'Cultivators', desc: 'Indoor and outdoor cannabis cultivation operations', color: '#6A1B9A' },
+  { icon: Wrench, name: 'Processors', desc: 'Cannabis extraction, manufacturing, and processing facilities', color: '#37474F' },
+  { icon: Utensils, name: 'Edibles & Infusions', desc: 'Cannabis-infused food and beverage producers', color: '#E65100' },
+  { icon: Stethoscope, name: 'Medical Cannabis', desc: 'Medical marijuana dispensaries and patient programs', color: '#1565C0' },
+  { icon: Shield, name: 'Compliance & Testing', desc: 'Licensed testing labs and compliance-focused operations', color: '#C62828' },
 ];
 
 const PRODUCT_TEASERS = [
-  { slug: 'nitrile-5mil-box', category: 'Nitrile', name: '5 mil Nitrile Gloves — Box', detail: '5 mil · S–XXL · 100 gloves', price: '$7.00', badge: null, img: '/products/product-5.avif' },
-  { slug: 'nitrile-5mil-case', category: 'Nitrile', name: '5 mil Nitrile Gloves — Case', detail: '10 boxes · 1,000 gloves', price: '$70.00', badge: 'Best Value', img: '/products/product-3.avif' },
+  { slug: 'flower-premium', category: 'Flower', name: 'Premium Indoor Flower', detail: 'Lab-tested, hand-trimmed, licensed NY product', price: 'Contact', badge: null, img: '/products/product-5.avif' },
+  { slug: 'concentrate-live-resin', category: 'Concentrates', name: 'Live Resin Concentrates', detail: 'Full-spectrum extraction, wholesale units', price: 'Contact', badge: 'Popular', img: '/products/product-3.avif' },
 ];
 
 const TIER_CARDS = [
   {
-    tier: 'Retail',
+    tier: 'Starter',
     color: 'var(--color-warm-gray)',
     accentBg: '#F7F7F6',
-    headline: 'Order What You Need',
-    description: '$70/case ($7/box) for 1–29 cases. No application needed — perfect for small businesses and offices.',
-    cta: 'Shop Now',
-    href: '/catalog',
+    headline: 'New Dispensary Accounts',
+    description: 'Getting started with Empire 8. Competitive wholesale pricing with no long-term commitment required.',
+    cta: 'Get Started',
+    href: '/wholesale',
   },
   {
     tier: 'Wholesale',
     color: 'var(--color-purple-muted)',
     accentBg: '#EDF7F0',
-    headline: 'Volume Discounts',
-    description: '$60/case ($6/box) on 30+ case orders. Save $10/case with fast restock and priority fulfillment.',
+    headline: 'Volume Wholesale',
+    description: 'Deeper discounts for dispensaries with consistent order volume. Priority fulfillment and faster restocking.',
     cta: 'Get Wholesale Pricing',
     href: '/wholesale',
   },
@@ -59,8 +59,8 @@ const TIER_CARDS = [
     tier: 'Distribution',
     color: 'var(--color-gold)',
     accentBg: '#FDF6E8',
-    headline: 'Enterprise Programs',
-    description: '$50/case ($5/box) on 120+ case orders. Save $20/case with NET terms, dedicated rep, and bulk freight pricing.',
+    headline: 'Distribution Partners',
+    description: 'Best pricing for high-volume dispensary partners. NET 30 terms, dedicated rep, and bulk delivery scheduling.',
     cta: 'Dispensary Sign Up',
     href: '/dispensary-signup',
   },
@@ -68,42 +68,42 @@ const TIER_CARDS = [
 
 const FAQ_ITEMS = [
   {
-    q: 'What types of gloves do you carry?',
-    a: 'We carry nitrile (blue and black), latex exam-grade, and vinyl disposable gloves — all 5 mil thickness. Every glove is powder-free and available in sizes XS through XXL, sold by the 100-count case.',
+    q: 'What cannabis products do you distribute?',
+    a: 'We distribute a full range of licensed cannabis products including premium flower, concentrates, edibles, pre-rolls, vape cartridges, and accessories. All products are lab-tested and compliant with New York state regulations.',
   },
   {
-    q: 'What certifications do your gloves have?',
-    a: 'Our nitrile and latex gloves are ASTM-certified for industrial and exam-grade use (ASTM D6319 and ASTM D3578). Vinyl gloves meet FDA food-contact requirements. All products carry an AQL rating of 1.5–2.5.',
+    q: 'Do I need a license to order?',
+    a: 'Yes. Empire 8 Sales Direct serves licensed dispensaries and cannabis retailers in New York. You must hold a valid NYS cannabis retail or dispensary license to open a wholesale account.',
   },
   {
-    q: 'Is there a minimum order?',
-    a: 'Retail customers can order 1–29 cases at $70/case ($7/box) with no application needed. Wholesale accounts ($60/case) require 30+ cases per order. Distribution accounts ($50/case) require 120+ cases per order and are designed for commercial operations and resellers.',
+    q: 'Which areas do you serve?',
+    a: 'We serve licensed dispensaries across all 62 counties in New York state, from New York City to Buffalo and everywhere in between.',
   },
   {
-    q: 'What are your shipping rates?',
-    a: 'Shipping is calculated by weight, starting at $7.99 for light packages. We automatically select the cheapest carrier rate for every order. We ship to all 48 contiguous states with 1–2 day processing.',
+    q: 'What are your delivery options?',
+    a: 'We offer scheduled delivery across New York state with 1-2 business day processing. Delivery logistics are coordinated with your account rep to fit your restocking schedule.',
   },
   {
     q: 'Can I set up recurring orders?',
-    a: 'Yes! Our Subscribe & Save program gives you 10% off every order with automatic monthly, biweekly, or quarterly delivery. Select "Subscribe & Save" when adding items to your cart. You can pause, change frequency, or cancel anytime from your account page.',
+    a: 'Yes. We offer recurring order programs for dispensaries that want consistent restocking. Your account rep can set up weekly, biweekly, or monthly delivery schedules based on your volume.',
   },
   {
-    q: 'Do you offer NET terms for businesses?',
-    a: 'Distribution accounts have access to NET 30 terms with approved credit. Contact us at info@empire8salesdirect.com for custom payment arrangements on large or recurring orders.',
+    q: 'Do you offer NET terms for dispensaries?',
+    a: 'Qualified dispensary accounts have access to NET 30 terms with approved credit. Contact us at info@empire8salesdirect.com for credit applications and custom payment arrangements.',
   },
 ];
 
 const STATS = [
-  { value: '500+', label: 'Businesses Served' },
-  { value: '5 mil', label: 'Glove Thickness' },
-  { value: '48',  label: 'States Shipped' },
+  { value: '62', label: 'NY Counties Served' },
+  { value: '100+', label: 'Brand Partners' },
+  { value: 'Licensed',  label: 'NY Cannabis Distributor' },
   { value: '1-2d', label: 'Processing Time' },
 ];
 
 const FEATURE_ITEMS = [
-  { icon: Package, label: 'Bulk Case Pricing', sub: 'Volume discounts that scale with your business' },
-  { icon: BadgeCheck, label: 'ASTM Certified', sub: 'Industrial and exam-grade certifications' },
-  { icon: Truck, label: 'Fast Shipping', sub: 'Best-rate carriers to all 48 states' },
+  { icon: Package, label: 'Wholesale Pricing', sub: 'Volume discounts that scale with your dispensary' },
+  { icon: BadgeCheck, label: 'Licensed Distributor', sub: 'Fully licensed NY cannabis wholesale operation' },
+  { icon: Truck, label: 'Statewide Delivery', sub: 'Reliable delivery across all 62 NY counties' },
 ];
 
 export default function CommercialPage() {
@@ -128,7 +128,7 @@ export default function CommercialPage() {
                 whiteSpace: 'nowrap',
               }}
             >
-              ASTM Certified &nbsp;·&nbsp; Bulk Case Pricing &nbsp;·&nbsp; Fast Shipping &nbsp;·&nbsp; Retail $7/box &nbsp;·&nbsp; Wholesale $60/case &nbsp;·&nbsp; Distribution $50/case &nbsp;·&nbsp; All Industries Served
+              Licensed NY Distributor &nbsp;·&nbsp; Wholesale Cannabis &nbsp;·&nbsp; Statewide Delivery &nbsp;·&nbsp; 62 Counties &nbsp;·&nbsp; Premium Flower &nbsp;·&nbsp; Concentrates &nbsp;·&nbsp; Dispensary Supply
             </span>
           ))}
         </div>
@@ -181,27 +181,27 @@ export default function CommercialPage() {
               style={{ color: '#1565C0', display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 24 }}
             >
               <span style={{ width: 28, height: 1.5, backgroundColor: '#1565C0', display: 'inline-block', borderRadius: 99 }} />
-              Commercial &amp; Industrial Supply
+              Cannabis Wholesale Supply
             </span>
 
             <h1
               className="font-display e8-fade-up-1"
               style={{ fontSize: 'clamp(2.75rem, 5.5vw, 4.75rem)', lineHeight: 0.93, marginBottom: 26, letterSpacing: '-0.01em', color: 'var(--color-charcoal)' }}
             >
-              Professional Gloves
+              Cannabis Wholesale
               <br />
               for Every
               <br />
-              <span style={{ color: '#1565C0' }}>Industry.</span>
+              <span style={{ color: '#1565C0' }}>Dispensary.</span>
             </h1>
 
             <p
               className="e8-fade-up-2"
               style={{ fontSize: '1.05rem', color: 'var(--color-warm-gray)', maxWidth: 440, lineHeight: 1.8, marginBottom: 40 }}
             >
-              ASTM-certified nitrile, latex, and vinyl disposable gloves.
-              Bulk case pricing for food service, medical, janitorial,
-              automotive, and industrial operations.
+              Licensed cannabis wholesale supplier serving dispensaries
+              across all 62 New York counties. Premium flower, concentrates,
+              edibles, and accessories at competitive wholesale pricing.
             </p>
 
             <div className="e8-fade-up-3" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
@@ -225,7 +225,7 @@ export default function CommercialPage() {
                   boxShadow: '0 4px 20px rgba(21,101,192,0.25)',
                 }}
               >
-                Shop Gloves <ArrowRight size={14} />
+                Browse Products <ArrowRight size={14} />
               </Link>
               <Link
                 href="/wholesale"
@@ -305,7 +305,7 @@ export default function CommercialPage() {
               >
                 <Image
                   src="/products/product-1.avif"
-                  alt="Professional Nitrile Gloves"
+                  alt="Cannabis Wholesale Products"
                   fill
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -338,8 +338,8 @@ export default function CommercialPage() {
                   <Shield size={18} color="#1565C0" />
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.82rem', color: 'var(--color-charcoal)' }}>ASTM Certified</div>
-                  <div style={{ fontSize: '0.73rem', color: 'var(--color-warm-gray)', marginTop: 1 }}>Industrial &amp; Exam Grade</div>
+                  <div style={{ fontWeight: 700, fontSize: '0.82rem', color: 'var(--color-charcoal)' }}>Licensed Distributor</div>
+                  <div style={{ fontSize: '0.73rem', color: 'var(--color-warm-gray)', marginTop: 1 }}>NYS Cannabis Wholesale</div>
                 </div>
               </div>
 
@@ -362,7 +362,7 @@ export default function CommercialPage() {
                   boxShadow: '0 4px 16px rgba(21,101,192,0.3)',
                 }}
               >
-                100 ct / case
+                All 62 NY Counties
               </div>
             </div>
           </div>
@@ -400,13 +400,13 @@ export default function CommercialPage() {
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 56 }}>
             <span className="label-caps" style={{ color: '#1565C0' }}>
-              Industries We Serve
+              Who We Serve
             </span>
             <h2
               className="font-display"
               style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 10, color: 'var(--color-charcoal)' }}
             >
-              The Right Glove for Every Job
+              Cannabis Wholesale for Every Operator
             </h2>
           </AnimateIn>
 
@@ -659,7 +659,7 @@ export default function CommercialPage() {
         </div>
       </section>
 
-      {/* WHY VALUE SUPPLIERS */}
+      {/* WHY EMPIRE 8 */}
       <section style={{ backgroundColor: '#FAFAFA', padding: '96px 24px', borderTop: '1px solid var(--color-border)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 72, alignItems: 'center' }}>
           <AnimateIn>
@@ -668,13 +668,13 @@ export default function CommercialPage() {
               Why Empire 8 Sales Direct
             </span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 14, marginBottom: 20, color: 'var(--color-charcoal)', lineHeight: 1.05 }}>
-              Built for Businesses That Go Through Gloves.
+              Built for Dispensaries That Need Reliable Supply.
             </h2>
             <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.85, marginBottom: 12, fontSize: '0.95rem' }}>
-              We supply the gloves your team burns through every week — at prices that make sense for operations buying by the case, not the box.
+              We supply the cannabis products your dispensary needs to keep shelves stocked — at wholesale prices that protect your margins.
             </p>
             <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.85, marginBottom: 36, fontSize: '0.95rem' }}>
-              Volume pricing that rewards bigger orders — the more cases you buy, the more you save per case.
+              Volume pricing that rewards consistent ordering. The more you order, the better your per-unit cost.
             </p>
             <Link
               href="/catalog"
@@ -701,9 +701,9 @@ export default function CommercialPage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
             {[
-              { label: 'Retail from 1 Case', sub: 'No application needed for 1–29 cases' },
-              { label: 'Fast Processing', sub: '1–2 business day turnaround on all orders' },
-              { label: 'Volume Discounts', sub: 'Tiered pricing — bigger orders save more per case' },
+              { label: 'Licensed Distributor', sub: 'Fully licensed NY cannabis wholesale operation' },
+              { label: 'Fast Processing', sub: '1-2 business day turnaround on all orders' },
+              { label: 'Volume Pricing', sub: 'Tiered wholesale pricing that rewards bigger orders' },
               { label: 'Dedicated Support', sub: 'Real people, not chatbots, for account help' },
             ].map(({ label, sub }, i) => (
               <AnimateIn key={label} delay={i * 80}>

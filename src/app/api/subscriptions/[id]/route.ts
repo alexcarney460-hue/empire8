@@ -21,6 +21,19 @@ export async function GET(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Database unavailable.' }, { status: 500 });
   }
 
+  // Require authenticated session
+  const authHeader = req.headers.get('authorization');
+  const sbCookieMatch = req.headers.get('cookie')?.match(/sb-[^=]+-auth-token=([^;]+)/);
+  const token = sbCookieMatch?.[1] || authHeader?.replace('Bearer ', '') || null;
+  if (!token) {
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 });
+  }
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+  if (authError || !user?.email) {
+    return NextResponse.json({ error: 'Invalid or expired session.' }, { status: 401 });
+  }
+
   const { data, error } = await supabase
     .from('subscriptions')
     .select('*')
@@ -29,6 +42,11 @@ export async function GET(req: NextRequest, { params }: Params) {
 
   if (error || !data) {
     return NextResponse.json({ error: 'Subscription not found.' }, { status: 404 });
+  }
+
+  // Verify the authenticated user owns this subscription
+  if (user.email.toLowerCase() !== data.email) {
+    return NextResponse.json({ error: 'You can only view your own subscriptions.' }, { status: 403 });
   }
 
   return NextResponse.json({ subscription: data });
@@ -50,6 +68,19 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Database unavailable.' }, { status: 500 });
   }
 
+  // Require authenticated session
+  const authHeader = req.headers.get('authorization');
+  const sbCookieMatch = req.headers.get('cookie')?.match(/sb-[^=]+-auth-token=([^;]+)/);
+  const token = sbCookieMatch?.[1] || authHeader?.replace('Bearer ', '') || null;
+  if (!token) {
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 });
+  }
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+  if (authError || !user?.email) {
+    return NextResponse.json({ error: 'Invalid or expired session.' }, { status: 401 });
+  }
+
   let body: Record<string, unknown>;
   try {
     body = await req.json();
@@ -68,10 +99,9 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Subscription not found.' }, { status: 404 });
   }
 
-  // Require email match for ownership verification
-  const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
-  if (email !== existing.email) {
-    return NextResponse.json({ error: 'Unauthorized.' }, { status: 403 });
+  // Verify the authenticated user owns this subscription
+  if (user.email.toLowerCase() !== existing.email) {
+    return NextResponse.json({ error: 'You can only modify your own subscriptions.' }, { status: 403 });
   }
 
   // Build update payload (immutable — we construct a new object)

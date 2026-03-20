@@ -31,7 +31,10 @@ export async function GET(req: Request) {
     .order('created_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] orders error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true, data, total: count ?? 0, page, limit });
 }

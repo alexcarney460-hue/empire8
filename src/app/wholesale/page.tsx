@@ -5,28 +5,28 @@ import AnimateIn from '@/components/AnimateIn';
 import WholesaleForm from '@/components/forms/WholesaleForm';
 
 export const metadata: Metadata = {
-  title: 'Wholesale Gloves Supplier — $70/Case Bulk Pricing',
+  title: 'Cannabis Wholesale Supplier — Dispensary Pricing for NY',
   description:
-    'Wholesale gloves at $70/case on 30+ case orders. Nitrile, latex, and vinyl disposable gloves. Priority fulfillment for dispensaries, hydro stores, and grows.',
-  keywords: ['wholesale gloves supplier', 'bulk glove pricing', 'wholesale disposable gloves', 'bulk nitrile gloves', 'cannabis dispensary supplies', 'hydro store gloves'],
+    'Empire 8 Sales Direct is a licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties. Volume pricing, priority fulfillment, and dedicated account support.',
+  keywords: ['cannabis wholesale supplier', 'NY dispensary wholesale', 'cannabis wholesale New York', 'dispensary supplier', 'licensed cannabis distributor', 'wholesale cannabis products'],
   openGraph: {
-    title: 'Wholesale Gloves Supplier — $70/Case Bulk Pricing',
-    description: 'Wholesale glove pricing at $70/case on 30+ case orders. Priority fulfillment and dedicated support. Apply online.',
+    title: 'Cannabis Wholesale Supplier — Dispensary Pricing for NY',
+    description: 'Licensed cannabis wholesale for NY dispensaries. Volume pricing, priority fulfillment, and dedicated support. Apply online.',
     url: 'https://empire8salesdirect.com/wholesale',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Wholesale Gloves — $70/Case | Empire 8 Sales Direct',
-    description: 'Bulk glove pricing for dispensaries, grows, and hydro stores. $70/case on 30+ case orders. Apply online.',
+    title: 'Cannabis Wholesale for NY Dispensaries | Empire 8 Sales Direct',
+    description: 'Licensed cannabis wholesale supplier serving all 62 NY counties. Volume pricing and dedicated account support. Apply online.',
   },
   alternates: { canonical: 'https://empire8salesdirect.com/wholesale' },
 };
 
 const BENEFITS = [
-  { icon: DollarSign, title: 'Volume Discounts', desc: '$70/case at 30+ cases. Distribution pricing ($60/case) at 120+ cases.' },
-  { icon: Truck, title: 'Priority Fulfillment', desc: 'Wholesale accounts get restocked before retail.' },
-  { icon: BadgeCheck, title: 'Dedicated Support', desc: 'Direct line to your account rep for reorders and custom requests.' },
-  { icon: User, title: 'Net 30 Available', desc: 'Qualify for NET terms after your first three orders.' },
+  { icon: DollarSign, title: 'Volume Pricing', desc: 'Competitive wholesale pricing on cannabis products. Tiered discounts that scale with order volume.' },
+  { icon: Truck, title: 'Priority Fulfillment', desc: 'Wholesale accounts get priority processing and restocking ahead of retail orders.' },
+  { icon: BadgeCheck, title: 'Dedicated Support', desc: 'Direct line to your account rep for reorders, product questions, and custom requests.' },
+  { icon: User, title: 'Net 30 Available', desc: 'Qualify for NET terms after your first three orders. Designed for dispensary cash flow.' },
 ];
 
 
@@ -45,15 +45,15 @@ export default function WholesalePage() {
             <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
           </span>
           <h1 className="font-display" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.0, color: 'var(--color-charcoal)', marginBottom: 20 }}>
-            Case Pricing for the Trade.
+            Cannabis Wholesale for NY Dispensaries.
           </h1>
           <p style={{ color: 'var(--color-warm-gray)', fontSize: '1.05rem', maxWidth: 520, margin: '0 auto 36px', lineHeight: 1.8 }}>
-            Hydro stores, dispensaries, and commercial grows — apply once and get $70/case pricing on orders of 30+ cases.
+            Licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties. Apply once for wholesale pricing and priority fulfillment.
           </p>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, backgroundColor: 'rgba(200,146,42,0.08)', border: '1px solid rgba(200,146,42,0.25)', borderRadius: 16, padding: '18px 32px' }}>
-            <span className="font-display" style={{ fontSize: '2.25rem', color: 'var(--color-gold)', lineHeight: 1 }}>$70</span>
+            <span className="font-display" style={{ fontSize: '1.5rem', color: 'var(--color-gold)', lineHeight: 1 }}>Wholesale</span>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ color: 'var(--color-charcoal)', fontWeight: 700, fontSize: '0.9rem' }}>/case — Wholesale Tier (30+ cases)</div>
+              <div style={{ color: 'var(--color-charcoal)', fontWeight: 700, fontSize: '0.9rem' }}>Volume pricing for licensed dispensaries</div>
               <div style={{ color: 'var(--color-warm-gray)', fontSize: '0.8rem' }}>Apply online · Approval in 1 business day</div>
             </div>
           </div>
@@ -126,10 +126,10 @@ export default function WholesalePage() {
         <AnimateIn style={{ maxWidth: 560, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <span className="label-caps" style={{ color: 'rgba(200,146,42,0.85)', display: 'block', marginBottom: 16 }}>Need More?</span>
           <h2 className="font-display" style={{ color: '#fff', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginBottom: 16, lineHeight: 1.05 }}>
-            Looking for Dispensary Pricing?
+            Looking for Dispensary-Tier Pricing?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: 36, lineHeight: 1.75 }}>
-            Dispensary accounts get $60/case pricing (120+ cases) with NET 30 terms and a dedicated rep.
+            High-volume dispensary accounts get premium pricing with NET 30 terms and a dedicated rep.
           </p>
           <Link
             href="/dispensary-signup"

@@ -23,9 +23,9 @@ export async function GET(_req: Request, ctx: RouteContext) {
     if (supabase) {
       const { data: brand, error: brandError } = await supabase
         .from('brands')
-        .select('id, name, slug, description, logo_url, website_url, category')
+        .select('id, name, slug, description, logo_url, website, category')
         .eq('slug', slug)
-        .eq('active', true)
+        .eq('is_active', true)
         .single();
 
       if (!brandError && brand) {
@@ -35,7 +35,7 @@ export async function GET(_req: Request, ctx: RouteContext) {
             'id, name, slug, description, category, image_url, unit_price_cents, unit_type, min_order_qty',
           )
           .eq('brand_id', brand.id)
-          .eq('active', true)
+          .eq('is_available', true)
           .order('category', { ascending: true })
           .order('name', { ascending: true });
 
@@ -75,7 +75,7 @@ export async function GET(_req: Request, ctx: RouteContext) {
     slug: staticBrand.slug,
     description: staticBrand.description,
     logo_url: staticBrand.logo_url,
-    website_url: staticBrand.website_url,
+    website: staticBrand.website_url,
     category: staticBrand.category,
   };
 

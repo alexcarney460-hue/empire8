@@ -15,7 +15,10 @@ export async function GET(req: Request) {
     .select('*')
     .order('created_at', { ascending: false });
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] segments error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
   return NextResponse.json({ ok: true, data });
 }
 
@@ -62,7 +65,10 @@ Output JSON:
       filter_criteria: parsed.filter_criteria || {},
     }).select().single();
 
-    if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    if (error) {
+    console.error('[Admin] segments error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
     return NextResponse.json({ ok: true, data, agent_run: result.run_id }, { status: 201 });
   }
 
@@ -76,6 +82,9 @@ Output JSON:
     filter_criteria: filter_criteria || {},
   }).select().single();
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] segments error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
   return NextResponse.json({ ok: true, data }, { status: 201 });
 }

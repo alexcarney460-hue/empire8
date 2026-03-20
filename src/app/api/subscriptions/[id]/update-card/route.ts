@@ -27,6 +27,19 @@ export async function POST(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Database unavailable.' }, { status: 500 });
   }
 
+  // Require authenticated session
+  const authHeader = req.headers.get('authorization');
+  const sbCookieMatch = req.headers.get('cookie')?.match(/sb-[^=]+-auth-token=([^;]+)/);
+  const token = sbCookieMatch?.[1] || authHeader?.replace('Bearer ', '') || null;
+  if (!token) {
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 });
+  }
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+  if (authError || !user?.email) {
+    return NextResponse.json({ error: 'Invalid or expired session.' }, { status: 401 });
+  }
+
   if (!squareClient || !SQUARE_LOCATION_ID) {
     return NextResponse.json({ error: 'Square not configured.' }, { status: 500 });
   }
@@ -38,7 +51,7 @@ export async function POST(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Invalid JSON.' }, { status: 400 });
   }
 
-  // Verify subscription exists and email matches
+  // Verify subscription exists
   const { data: sub, error: fetchError } = await supabase
     .from('subscriptions')
     .select('*')
@@ -49,9 +62,9 @@ export async function POST(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Subscription not found.' }, { status: 404 });
   }
 
-  const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
-  if (email !== sub.email) {
-    return NextResponse.json({ error: 'Unauthorized.' }, { status: 403 });
+  // Verify the authenticated user owns this subscription
+  if (user.email.toLowerCase() !== sub.email) {
+    return NextResponse.json({ error: 'You can only update your own subscriptions.' }, { status: 403 });
   }
 
   if (sub.status === 'cancelled') {

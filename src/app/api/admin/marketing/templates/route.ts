@@ -22,7 +22,10 @@ export async function GET(req: Request) {
   if (channel) query = query.eq('channel', channel);
 
   const { data, error } = await query;
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] templates error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true, data });
 }
@@ -75,7 +78,10 @@ ${channel === 'email' ? `Output JSON:
       created_by: 'agent',
     }).select().single();
 
-    if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    if (error) {
+    console.error('[Admin] templates error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
     return NextResponse.json({ ok: true, data, agent_run: result.run_id }, { status: 201 });
   }
 
@@ -95,6 +101,9 @@ ${channel === 'email' ? `Output JSON:
     created_by: 'manual',
   }).select().single();
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] templates error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
   return NextResponse.json({ ok: true, data }, { status: 201 });
 }

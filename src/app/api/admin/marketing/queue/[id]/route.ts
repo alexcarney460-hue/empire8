@@ -22,7 +22,8 @@ export async function GET(req: Request, ctx: Ctx) {
     .single();
 
   if (error)
-    return NextResponse.json({ ok: false, error: error.message }, { status: 404 });
+    console.error('[Admin] queue/:id error:', error.message);
+    return NextResponse.json({ ok: false, error: 'Not found' }, { status: 404 });
 
   return NextResponse.json({ ok: true, data });
 }
@@ -58,7 +59,8 @@ export async function PATCH(req: Request, ctx: Ctx) {
     .single();
 
   if (error)
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] queue/:id error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
 
   return NextResponse.json({ ok: true, data });
 }
@@ -80,7 +82,8 @@ export async function DELETE(req: Request, ctx: Ctx) {
     .eq('id', id);
 
   if (error)
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] queue/:id error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
 
   return NextResponse.json({ ok: true });
 }

@@ -6,19 +6,19 @@ import PRODUCTS from '@/lib/products';
 import { formatPrice } from '@/lib/pricing';
 
 export const metadata: Metadata = {
-  title: 'Buy Nitrile Gloves Online — Gloves by the Case',
+  title: 'Cannabis Product Catalog — Empire 8 Sales Direct',
   description:
-    'Shop nitrile, latex, and vinyl disposable gloves by the case. Cannabis trimming scissors and harvest accessories. From $60/case with wholesale pricing.',
-  keywords: ['buy nitrile gloves online', 'gloves by the case', 'disposable gloves case', 'cannabis trimming scissors', 'trimming supplies', 'wholesale gloves online'],
+    'Browse our full cannabis product catalog. Premium flower, concentrates, edibles, pre-rolls, and dispensary supplies. Wholesale pricing for licensed NY dispensaries.',
+  keywords: ['cannabis wholesale catalog', 'dispensary products', 'wholesale cannabis NY', 'cannabis flower wholesale', 'dispensary supply', 'cannabis distributor catalog'],
   openGraph: {
-    title: 'Buy Nitrile Gloves Online — Gloves by the Case',
-    description: 'Nitrile, latex, and vinyl gloves by the case. Cannabis trimming tools. Wholesale and distribution pricing available.',
+    title: 'Cannabis Product Catalog — Empire 8 Sales Direct',
+    description: 'Full cannabis product catalog for licensed NY dispensaries. Wholesale pricing on flower, concentrates, edibles, and more.',
     url: 'https://empire8salesdirect.com/catalog',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Buy Nitrile Gloves Online | Empire 8 Sales Direct',
-    description: 'Disposable gloves by the case plus cannabis trimming supplies. Wholesale pricing from $70/case.',
+    title: 'Cannabis Product Catalog | Empire 8 Sales Direct',
+    description: 'Cannabis wholesale catalog for NY dispensaries. Premium products at competitive wholesale pricing.',
   },
   alternates: { canonical: 'https://empire8salesdirect.com/catalog' },
 };
@@ -36,7 +36,7 @@ export default function CatalogPage() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Empire 8 Sales Direct Product Catalog',
-    description: 'Professional-grade disposable gloves and cannabis trimming supplies.',
+    description: 'Licensed cannabis wholesale products for NY dispensaries.',
     url: 'https://empire8salesdirect.com/catalog',
     numberOfItems: PRODUCTS.length,
     itemListElement: PRODUCTS.map((p, i) => ({
@@ -51,9 +51,9 @@ export default function CatalogPage() {
   const collectionPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Product Catalog — Gloves, Trimmers & Cannabis Supplies',
+    name: 'Product Catalog — Cannabis Wholesale',
     description:
-      'Professional-grade nitrile gloves by the case, cannabis trimming scissors, and harvest accessories. Retail, wholesale, and distribution pricing.',
+      'Licensed cannabis wholesale products for NY dispensaries. Premium flower, concentrates, edibles, and accessories at wholesale pricing.',
     url: 'https://empire8salesdirect.com/catalog',
     isPartOf: { '@type': 'WebSite', name: 'Empire 8 Sales Direct', url: 'https://empire8salesdirect.com' },
     mainEntity: {
@@ -209,7 +209,7 @@ export default function CatalogPage() {
           <div style={{ position: 'relative' }}>
             <div className="label-caps" style={{ color: 'rgba(200,146,42,0.85)', fontSize: '0.65rem', marginBottom: 10 }}>Volume Pricing</div>
             <h3 className="font-display" style={{ fontSize: 'clamp(1.25rem, 3vw, 1.75rem)', color: '#fff', marginBottom: 8, lineHeight: 1.1 }}>
-              Wholesale $70/case. Distribution $60/case.
+              Wholesale and distribution pricing available.
             </h3>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.88rem', lineHeight: 1.6 }}>
               Apply online — approval within 1 business day.

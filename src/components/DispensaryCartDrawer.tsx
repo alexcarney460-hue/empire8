@@ -190,7 +190,6 @@ export default function DispensaryCartDrawer() {
 
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
 
   // Focus trap: focus drawer on open
@@ -214,7 +213,6 @@ export default function DispensaryCartDrawer() {
     if (items.length === 0) return;
     setSubmitting(true);
     setSubmitError(null);
-    setSubmitSuccess(null);
 
     try {
       const res = await fetch('/api/orders/submit', {
@@ -241,8 +239,8 @@ export default function DispensaryCartDrawer() {
         return;
       }
 
-      setSubmitSuccess(`Order ${data.orderNumber} submitted successfully.`);
       clearCart();
+      window.location.href = `/order-confirmation?order=${data.orderId}`;
     } catch {
       setSubmitError('Network error. Please try again.');
     } finally {
@@ -253,7 +251,7 @@ export default function DispensaryCartDrawer() {
   const brandGroups = getItemsByBrand();
   const totalCents = getCartTotal();
   const itemCount = getCartItemCount();
-  const isEmpty = items.length === 0 && !submitSuccess;
+  const isEmpty = items.length === 0;
 
   if (!isOpen) return null;
 
@@ -344,27 +342,6 @@ export default function DispensaryCartDrawer() {
 
         {/* Body */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '0 24px' }}>
-          {/* Success message */}
-          {submitSuccess && (
-            <div
-              style={{
-                margin: '24px 0',
-                padding: 16,
-                borderRadius: 10,
-                backgroundColor: 'rgba(39,174,96,0.12)',
-                border: '1px solid rgba(39,174,96,0.3)',
-                textAlign: 'center',
-              }}
-            >
-              <p style={{ margin: 0, color: '#27AE60', fontWeight: 600, fontSize: '0.9rem' }}>
-                {submitSuccess}
-              </p>
-              <p style={{ margin: '8px 0 0', color: THEME.textMuted, fontSize: '0.78rem' }}>
-                We will reach out to confirm your order shortly.
-              </p>
-            </div>
-          )}
-
           {/* Empty state */}
           {isEmpty && (
             <div

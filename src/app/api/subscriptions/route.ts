@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseServer } from '@/lib/supabase-server';
-import { getSupabase } from '@/lib/supabase';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import {
   computeNextRenewal,
@@ -24,6 +23,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Database unavailable.' }, { status: 500 });
   }
 
+  // Require authenticated session
+  const authHeader = req.headers.get('authorization');
+  const sbCookieMatch = req.headers.get('cookie')?.match(/sb-[^=]+-auth-token=([^;]+)/);
+  const token = sbCookieMatch?.[1] || authHeader?.replace('Bearer ', '') || null;
+  if (!token) {
+    return NextResponse.json({ error: 'Authentication required.' }, { status: 401 });
+  }
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+  if (authError || !user?.email) {
+    return NextResponse.json({ error: 'Invalid or expired session.' }, { status: 401 });
+  }
+
   let body: Record<string, unknown>;
   try {
     body = await req.json();
@@ -32,6 +44,11 @@ export async function POST(req: NextRequest) {
   }
 
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
+
+  // Verify the authenticated user matches the subscription email
+  if (user.email.toLowerCase() !== email) {
+    return NextResponse.json({ error: 'You can only create subscriptions for your own email.' }, { status: 403 });
+  }
   const items = body.items as SubscriptionItem[] | undefined;
   const frequency = (body.frequency as string) ?? 'monthly';
   const squareOrderId = typeof body.squareOrderId === 'string' ? body.squareOrderId : null;

@@ -30,7 +30,10 @@ export async function POST(req: Request) {
 
   const { data, error } = await query.select('id');
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] sends/approve error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true, approved: data?.length ?? 0 });
 }

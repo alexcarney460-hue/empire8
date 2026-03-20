@@ -16,7 +16,10 @@ export async function GET(req: Request) {
     .select('id, name, description, role, capabilities, triggers, model, is_active, config')
     .order('name');
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] agents error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
   return NextResponse.json({ ok: true, data });
 }
 
@@ -44,7 +47,7 @@ export async function POST(req: Request) {
       duration_ms: result.duration_ms,
     });
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : 'Agent execution failed';
-    return NextResponse.json({ ok: false, error: message }, { status: 500 });
+    console.error('[Admin] agent execution error:', err instanceof Error ? err.message : 'unknown');
+    return NextResponse.json({ ok: false, error: 'Agent execution failed' }, { status: 500 });
   }
 }

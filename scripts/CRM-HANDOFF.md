@@ -1,4 +1,4 @@
-# Value Suppliers — CRM Handoff
+# Empire 8 Sales Direct — CRM Handoff
 
 ## Supabase Project
 - **Account:** alexcarney460@gmail.com
@@ -9,7 +9,7 @@
 
 ## CRM Tables
 
-### `companies` — Cannabis grows, dispensaries, tattoo shops, salons, auto shops, etc.
+### `companies` — Cannabis dispensaries, grows, processors, distributors, etc.
 | Column | Type | Notes |
 |--------|------|-------|
 | id | bigint | Auto-increment PK |
@@ -40,56 +40,27 @@
 | lifecycle_stage | text | `lead`, `customer` |
 | review_text | text | Google Review excerpt |
 | review_rating | integer | Review star rating |
-| review_keywords | text[] | Keywords mentioned (gloves, nitrile, etc.) |
+| review_keywords | text[] | Keywords mentioned (cannabis, dispensary, etc.) |
 
 ### `lists` — Static lists
 ### `list_contacts` — List membership (list_id + contact_id)
 
 ## Scripts
 
-### `scripts/scrape-glove-leads.mjs` — Main lead scraper
-Scrapes businesses that use disposable gloves via Google Places across 110+ US cities, mines reviews for glove/PPE keyword mentions, scrapes websites for emails/phones, and pushes everything to Supabase.
-
-**Phases:**
-1. Search Google Places for businesses (38 query types × 110+ cities)
-2. Mine reviews for glove/PPE keywords (30+ keywords)
-3. Push companies to Supabase + scrape websites for emails
-4. Create glove buyer contacts from reviewers
-5. Create "Glove Buyers" list
-
-```bash
-GOOGLE_PLACES_API_KEY=AIzaSyCche2EK4cijAZNntMEs48vCYbpZdpKhrU \
-SUPABASE_URL=https://hpakqrnvjnzznhffoqaf.supabase.co \
-SUPABASE_KEY=<service_role_key> \
-MAX_LEADS=20000 \
-node scripts/scrape-glove-leads.mjs
-```
-
-**Options:**
-- `MAX_LEADS=20000` — Target number of businesses
-- `DRY_RUN=true` — Scrape without writing to DB
-
-**Output files:**
-- `glove-buyer-businesses.csv` — All businesses found
-- `glove-buyer-reviewers.csv` — All glove-related reviewer contacts
+### Lead Scraping
+Lead scraping scripts target cannabis dispensaries and licensed operators. See the main HANDOFF.md for details on the cannabis/hemp license scraper pipeline.
 
 ## Target Business Types
-Cannabis dispensaries, cannabis grow facilities, hydroponics stores, tattoo shops, auto detailing/body shops, dental offices, veterinary clinics, nail salons, hair salons, barber shops, commercial kitchens, catering companies, food trucks, janitorial supply stores, testing laboratories, manufacturing facilities, medical clinics, urgent care clinics, paint shops
+Cannabis dispensaries, cannabis grow facilities, cannabis processors, cannabis distributors, medical marijuana dispensaries, cannabis testing labs
 
-## Glove/PPE Keywords Monitored
-gloves, nitrile, latex gloves, vinyl gloves, disposable gloves, exam gloves, PPE, trimming, cannabis trim, grow operation, cultivation, dispensary supplies, food safe, food handling, tattoo supplies, cleaning supplies, janitorial supplies, auto detailing, salon supplies, lab supplies, bulk supplies, wholesale supplies, case pricing
+## Cannabis Keywords Monitored
+cannabis, dispensary, marijuana, THC, CBD, flower, concentrates, edibles, pre-rolls, vape, cultivation, grow operation, cannabis retail, licensed dispensary, wholesale cannabis
 
-## Search Queries Used
-cannabis dispensary, marijuana dispensary, cannabis grow facility, cannabis cultivation, indoor grow operation, hydroponics store, tattoo shop, tattoo parlor, auto detailing shop, auto body shop, mechanic shop, dental office, dental clinic, veterinary clinic, nail salon, hair salon, barber shop, commercial kitchen, catering company, janitorial supply store, testing laboratory, manufacturing facility, and more (38 total)
+## Search Focus
+New York state licensed cannabis dispensaries and operators across all 62 counties.
 
-## 110+ Target Cities
-Heavy on cannabis-legal states: California (15 cities incl. Humboldt, Mendocino), Colorado (5), Oregon (5), Washington (5), Michigan (5), plus all major US metros. Oklahoma heavily represented (4 cities) due to large cannabis market.
-
-## API Keys
-- **Google Places API Key:** `AIzaSyCche2EK4cijAZNntMEs48vCYbpZdpKhrU`
-
-### `scripts/enrich-consumers.mjs` — Reviewer contact enrichment (TODO)
-Enriches glove-related reviewer contacts (name + city) with email + phone via 3 free people-search sites in parallel: FastPeopleSearch, TruePeopleSearch, ThatsThem. Not yet created — adapt from Viking Labs or Fresno Pool Care template.
+### `scripts/enrich-consumers.mjs` — Contact enrichment (TODO)
+Enriches cannabis operator contacts (name + city) with email + phone via people-search sites. Not yet created.
 
 ```bash
 SUPABASE_URL=https://hpakqrnvjnzznhffoqaf.supabase.co \
@@ -117,13 +88,13 @@ const { data } = await supabase
   .select('*')
   .or('name.ilike.%dispensary%,name.ilike.%cannabis%,name.ilike.%grow%');
 
-// Contacts who mentioned gloves in reviews
+// Contacts who mentioned cannabis in reviews
 const { data } = await supabase
   .from('contacts')
   .select('*')
-  .contains('review_keywords', ['gloves']);
+  .contains('review_keywords', ['cannabis']);
 
-// Contacts in "Glove Buyers" list
+// Contacts in a specific list
 const { data } = await supabase
   .from('list_contacts')
   .select('contact_id, contacts(*)')

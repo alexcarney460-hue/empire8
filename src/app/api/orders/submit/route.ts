@@ -174,7 +174,7 @@ export async function POST(req: NextRequest) {
       .insert({
         order_number: orderNumber,
         dispensary_id: dispensary.id,
-        status: 'pending',
+        status: 'submitted',
         total_cents: totalCents,
         item_count: verifiedItems.reduce((s, i) => s + i.quantity, 0),
         notes: null,

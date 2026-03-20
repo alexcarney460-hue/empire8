@@ -15,11 +15,12 @@ export function GET() {
     name_for_human: 'Empire 8 Sales Direct',
     name_for_model: 'empire8salesdirect',
     description_for_human:
-      'Professional-grade disposable gloves and cannabis trimming supplies. Retail, wholesale, and distribution pricing. Ships to 48 US states.',
+      'Licensed cannabis wholesale supplier serving dispensaries across all 62 New York counties. Premium flower, concentrates, edibles, and dispensary supplies at wholesale pricing.',
     description_for_model:
-      'Empire 8 Sales Direct is a B2B/B2C supplier of professional-grade disposable gloves (nitrile, 5 mil, powder-free) and cannabis trimming equipment (scissors, trim trays, cleaning supplies). ' +
-      'Products are sold individually and by the case. Three pricing tiers: Retail (1-29 cases, $80/case), Wholesale (30-119 cases, $70/case, requires approved account), Distribution (120+ cases, $60/case, NET 30 terms available). ' +
-      'All products are in stock with 1-2 business day processing. Ships to 48 contiguous US states. ' +
+      'Empire 8 Sales Direct is a licensed cannabis wholesale supplier serving dispensaries across all 62 counties in New York state. ' +
+      'Products include premium flower, concentrates (live resin, distillate, shatter), edibles, pre-rolls, vape cartridges, and dispensary accessories. ' +
+      'Three pricing tiers: Starter (new dispensary accounts), Wholesale (volume ordering), Distribution (high-volume partners with NET 30 terms). ' +
+      'All products are lab-tested and NYS compliant with 1-2 business day processing. Delivers across New York state. ' +
       'The product catalog is available as structured JSON at /products.json for programmatic access.',
     auth: { type: 'none' },
     api: {
@@ -33,11 +34,11 @@ export function GET() {
     product_catalog_url: `${BASE}/products.json`,
     website_url: BASE,
     categories: [
-      'disposable gloves',
-      'cannabis supplies',
-      'trimming equipment',
-      'industrial supplies',
-      'wholesale supplies',
+      'cannabis wholesale',
+      'dispensary supply',
+      'cannabis flower',
+      'cannabis concentrates',
+      'cannabis edibles',
     ],
     supported_countries: ['US'],
     currency: 'USD',
@@ -45,26 +46,16 @@ export function GET() {
       type: 'tiered',
       tiers: [
         {
-          name: 'Retail',
-          description: 'Standard pricing. No minimum, no application required.',
-          min_cases: 1,
-          max_cases: 29,
-          glove_case_price_usd: 80.0,
+          name: 'Starter',
+          description: 'New dispensary accounts. Competitive wholesale pricing, no long-term commitment.',
         },
         {
           name: 'Wholesale',
-          description: 'For businesses ordering 30+ cases. Requires approved application.',
-          min_cases: 30,
-          max_cases: 119,
-          glove_case_price_usd: 70.0,
-          savings_per_case_usd: 10.0,
+          description: 'Volume ordering for established dispensaries. Deeper discounts and priority fulfillment.',
         },
         {
           name: 'Distribution',
-          description: 'For large operations ordering 120+ cases. NET 30 terms available.',
-          min_cases: 120,
-          glove_case_price_usd: 60.0,
-          savings_per_case_usd: 20.0,
+          description: 'High-volume dispensary partners. Best pricing with NET 30 terms and dedicated rep.',
           net_terms_available: true,
         },
       ],

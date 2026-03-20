@@ -17,7 +17,8 @@ export async function GET(req: Request) {
     .order('id', { ascending: true });
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] inventory error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true, inventory: data });
@@ -68,7 +69,8 @@ export async function PATCH(req: Request) {
     .single();
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] inventory error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true, product: data });

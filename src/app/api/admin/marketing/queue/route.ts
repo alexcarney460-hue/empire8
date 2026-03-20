@@ -26,7 +26,8 @@ export async function GET(req: Request) {
   const { data, error } = await query;
 
   if (error)
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] queue error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
 
   return NextResponse.json({ ok: true, data });
 }
@@ -67,7 +68,8 @@ export async function POST(req: Request) {
     .single();
 
   if (error)
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] queue error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
 
   return NextResponse.json({ ok: true, data }, { status: 201 });
 }

@@ -58,7 +58,10 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 
   const { data, error } = await supabase.from('contacts').update(update).eq('id', id).select().single();
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] contacts/:id error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true, data });
 }
@@ -73,7 +76,10 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   const { id } = await params;
   const { error } = await supabase.from('contacts').delete().eq('id', id);
 
-  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (error) {
+    console.error('[Admin] contacts/:id error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true });
 }

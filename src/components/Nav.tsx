@@ -113,12 +113,36 @@ export default function Nav() {
 
           {/* Right actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            {/* Dashboard link — only visible when logged in */}
+            {isLoggedIn && (
+              <Link
+                href="/dashboard"
+                className="desktop-nav"
+                style={{
+                  marginRight: 4,
+                  backgroundColor: 'var(--color-gold)',
+                  color: '#fff',
+                  padding: '8px 18px',
+                  borderRadius: 8,
+                  fontFamily: "'Barlow', Arial, sans-serif",
+                  fontWeight: 700,
+                  fontSize: '0.68rem',
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  transition: 'background-color 150ms ease, transform 200ms ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Dashboard
+              </Link>
+            )}
+
             {/* Dispensary Cart Button — only visible when logged in */}
             {isLoggedIn && (
               <button
                 onClick={openCart}
                 aria-label={`Open cart${cartCount > 0 ? `, ${cartCount} items` : ''}`}
-                className="desktop-nav"
                 style={{
                   position: 'relative',
                   width: 36,
@@ -291,6 +315,27 @@ export default function Nav() {
                 <span style={{ fontSize: '1.2rem', color: 'var(--color-gold)', opacity: 0.7 }}>&#8594;</span>
               </Link>
             ))}
+            {isLoggedIn && (
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                className="font-display"
+                style={{
+                  color: 'var(--color-gold)',
+                  textDecoration: 'none',
+                  fontSize: '2.2rem',
+                  padding: '14px 0',
+                  borderBottom: '1px solid var(--color-border)',
+                  letterSpacing: '-0.01em',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                Dashboard
+                <span style={{ fontSize: '1.2rem', color: 'var(--color-gold)', opacity: 0.7 }}>&#8594;</span>
+              </Link>
+            )}
           </nav>
 
           {/* Quick pills */}

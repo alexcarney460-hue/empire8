@@ -450,7 +450,7 @@ export default function BrandDetailPage({
             }}
           >
             {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} brandId={data.brand.id} brandName={data.brand.name} />
             ))}
           </div>
         )}

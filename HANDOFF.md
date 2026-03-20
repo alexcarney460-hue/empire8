@@ -1,15 +1,15 @@
-# Value Suppliers -- Project Handoff
+# Empire 8 Sales Direct -- Project Handoff
 
-Last updated: 2026-03-16
+Last updated: 2026-03-19
 
 ---
 
 ## Project Overview
 
-**Value Suppliers** (valuesuppliers.co) is a wholesale glove e-commerce store built on Next.js, deployed on Vercel. Payments are processed through Square, shipping labels are auto-purchased via Shippo, and customer/order data lives in Supabase.
+**Empire 8 Sales Direct** (empire8salesdirect.com) is a licensed cannabis wholesale supplier serving dispensaries across all 62 counties in New York. Built on Next.js, deployed on Vercel. Payments are processed through Square, shipping labels are auto-purchased via Shippo, and customer/order data lives in Supabase.
 
-- **Domain**: valuesuppliers.co
-- **Business**: Wholesale disposable gloves (nitrile, latex, vinyl) + trimming accessories
+- **Domain**: empire8salesdirect.com
+- **Business**: Licensed cannabis wholesale supplier serving NY dispensaries
 - **Warehouse**: 1401 N Clovis Ave STE #103, Clovis, CA 93727
 
 ---
@@ -274,36 +274,6 @@ CRM contacts. Created or updated on purchase. Key fields: `id`, `email`, `firstn
 
 ---
 
-## Marketing Campaign — Triple OG Gloves
-
-### Overview
-
-The product brand for social media marketing is **Triple OG Gloves** — cannabis-specific branding for the 5 mil nitrile gloves sold through ValueSuppliers.co. The site stays as ValueSuppliers.co; Triple OG is the product brand used in social content.
-
-### Landing Page
-
-- **URL**: `/triple-og` -- dark, edgy landing page for social media traffic
-- Sections: hero, social proof stats, product benefits, specs, use cases, pricing tiers, CTA
-- Links back to `/catalog` for purchases and `/wholesale` for applications
-
-### Social Content Calendar
-
-- **File**: `scripts/seed-marketing-content.mjs`
-- 14 Instagram posts over 2 weeks (Reels, Carousels, Static, Stories)
-- Each post has full reel scripts, carousel slide breakdowns, image prompts, captions, and hashtag sets
-- Preview: `node scripts/seed-marketing-content.mjs --preview`
-- Seed to admin queue: `node scripts/seed-marketing-content.mjs`
-- All content avoids Tier 1 shadowban-risk hashtags, focuses on education and lifestyle
-
-### Product Video Reels (Runway Gen-4)
-
-- **File**: `scripts/generate-product-reels.py`
-- 8 shot definitions matched to content calendar posts (glove snap, stretch test, case hero, trim room, etc.)
-- Uses Runway Gen-4 Turbo API (image-to-video) with AVIF-to-JPEG conversion via ffmpeg
-- API key: `C:/Users/Claud/Desktop/keys/runwayapi.txt`
-- **Needs Runway credits** to generate — pipeline tested and working
-- Usage: `python scripts/generate-product-reels.py --list` or `--all` or `--shot glove-snap`
-
 ---
 
 ## Lead Generation & CRM Pipeline
@@ -345,8 +315,8 @@ The product brand for social media marketing is **Triple OG Gloves** — cannabi
 - **Plain text** emails (better deliverability for cold outreach)
 - **Dedup**: JSONL sent log at `tmp/outreach-sent.jsonl`
 - **Rate limiting**: 350ms between sends, backs off on 429s
-- **From address**: `grow@mail.valuesuppliers.co` (subdomain to protect main domain)
-- **BLOCKED**: Resend domain `mail.valuesuppliers.co` not yet verified. Need to add DNS records in Resend dashboard (resend.com/domains). The current API key is send-only (can't manage domains via API).
+- **From address**: `grow@mail.empire8salesdirect.com` (subdomain to protect main domain)
+- **BLOCKED**: Resend domain `mail.empire8salesdirect.com` not yet verified. Need to add DNS records in Resend dashboard (resend.com/domains). The current API key is send-only (can't manage domains via API).
 
 Usage:
 ```bash

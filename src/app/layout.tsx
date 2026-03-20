@@ -252,7 +252,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <DispensaryCartProvider>
           <AgeGate>
             <Nav />
-            <main>{children}</main>
+            <div>{children}</div>
             <Footer />
             <ChatWidget />
             <PageTracker />

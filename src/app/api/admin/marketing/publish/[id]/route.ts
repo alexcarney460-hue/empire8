@@ -27,7 +27,8 @@ export async function POST(req: Request, ctx: Ctx) {
     .single();
 
   if (error)
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    console.error('[Admin] publish/:id error:', error.message);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
 
   return NextResponse.json({ ok: true, data });
 }

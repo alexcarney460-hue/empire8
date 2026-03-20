@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { ShoppingCart, CheckCircle } from 'lucide-react';
 import { useState, useCallback } from 'react';
-import { useCart } from '@/context/CartContext';
+import { useDispensaryCart } from '@/context/DispensaryCartContext';
 
 export type BrandProduct = {
   id: string;
@@ -16,6 +16,12 @@ export type BrandProduct = {
   unit_type: string;
   min_order_qty: number;
 };
+
+interface ProductCardProps {
+  product: BrandProduct;
+  brandId: string;
+  brandName: string;
+}
 
 function formatUnitPrice(cents: number): string {
   return `$${(cents / 100).toFixed(2)}`;
@@ -35,11 +41,10 @@ function getCategoryColor(category: string): string {
   return CATEGORY_COLORS[category] ?? '#C8A23C';
 }
 
-export default function ProductCard({ product }: { product: BrandProduct }) {
-  const { addItem } = useCart();
+export default function ProductCard({ product, brandId, brandName }: ProductCardProps) {
+  const { addToCart } = useDispensaryCart();
   const [added, setAdded] = useState(false);
 
-  const unitPrice = product.unit_price_cents / 100;
   const hasImage = Boolean(product.image_url);
 
   const handleAddToCart = useCallback(
@@ -47,14 +52,15 @@ export default function ProductCard({ product }: { product: BrandProduct }) {
       e.preventDefault();
       e.stopPropagation();
 
-      addItem(
+      addToCart(
         {
-          id: product.id,
-          name: product.name,
-          price: unitPrice,
-          plan: 'one-time',
-          img: product.image_url ?? '',
-          unit: `/ ${product.unit_type}`,
+          productId: product.id,
+          brandId,
+          brandName,
+          productName: product.name,
+          unitPriceCents: product.unit_price_cents,
+          imageUrl: product.image_url,
+          unitType: product.unit_type,
         },
         product.min_order_qty || 1,
       );
@@ -62,7 +68,7 @@ export default function ProductCard({ product }: { product: BrandProduct }) {
       setAdded(true);
       setTimeout(() => setAdded(false), 2000);
     },
-    [addItem, product, unitPrice],
+    [addToCart, product, brandId, brandName],
   );
 
   return (
