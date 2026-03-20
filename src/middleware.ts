@@ -217,7 +217,18 @@ export function middleware(request: NextRequest) {
 
   // Fallback: Supabase session-based admin auth for admin pages
   if (hasSupabaseAdminSession(request)) {
-    return NextResponse.next();
+    // Auto-set the admin_token cookie so subsequent requests are fast
+    const response = NextResponse.next();
+    if (expectedToken) {
+      response.cookies.set('admin_token', expectedToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+      });
+    }
+    return response;
   }
 
   // If env is not set AND no Supabase fallback, block all admin access
@@ -225,16 +236,10 @@ export function middleware(request: NextRequest) {
     return new NextResponse('Service unavailable', { status: 503 });
   }
 
-  // Admin page without valid auth — return 401
-  return new NextResponse(
-    '<html><body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#f5f5f5">' +
-    '<div style="text-align:center"><h1 style="font-size:1.5rem;color:#333">Admin Access Required</h1>' +
-    '<p style="color:#666">Append <code>?token=YOUR_TOKEN</code> to authenticate, or log in at <a href="/account">/account</a> with an admin email.</p></div></body></html>',
-    {
-      status: 401,
-      headers: { 'Content-Type': 'text/html; charset=utf-8' },
-    },
-  );
+  // Admin page without valid auth — redirect to login
+  const loginUrl = request.nextUrl.clone();
+  loginUrl.pathname = '/login';
+  return NextResponse.redirect(loginUrl);
 }
 
 export const config = {
