@@ -276,10 +276,11 @@ export default function Nav() {
             position: 'fixed',
             inset: 0,
             zIndex: 200,
-            backgroundColor: '#fff',
+            backgroundColor: '#0F0520',
             display: 'flex',
             flexDirection: 'column',
             padding: '24px',
+            overflowY: 'auto',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 48 }}>
@@ -297,14 +298,14 @@ export default function Nav() {
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                color: 'var(--color-charcoal)',
+                color: '#fff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 40,
-                height: 40,
+                width: 44,
+                height: 44,
                 borderRadius: 8,
-                backgroundColor: 'var(--color-bg)',
+                backgroundColor: 'rgba(255,255,255,0.06)',
               }}
             >
               <X size={22} />
@@ -319,11 +320,11 @@ export default function Nav() {
                 onClick={() => setOpen(false)}
                 className="font-display"
                 style={{
-                  color: 'var(--color-charcoal)',
+                  color: '#fff',
                   textDecoration: 'none',
                   fontSize: '2.2rem',
                   padding: '14px 0',
-                  borderBottom: '1px solid var(--color-border)',
+                  borderBottom: '1px solid rgba(200,162,60,0.12)',
                   letterSpacing: '-0.01em',
                   display: 'flex',
                   justifyContent: 'space-between',
@@ -367,9 +368,9 @@ export default function Nav() {
                     textAlign: 'center',
                     padding: '14px 0',
                     borderRadius: 10,
-                    border: '1.5px solid var(--color-border)',
-                    color: 'var(--color-charcoal)',
-                    fontSize: '0.72rem',
+                    border: '1.5px solid rgba(200,162,60,0.3)',
+                    color: '#fff',
+                    fontSize: '0.82rem',
                     letterSpacing: '0.14em',
                     textDecoration: 'none',
                     fontWeight: 600,
@@ -387,8 +388,8 @@ export default function Nav() {
                     padding: '14px 0',
                     borderRadius: 10,
                     backgroundColor: 'var(--color-gold)',
-                    color: '#fff',
-                    fontSize: '0.72rem',
+                    color: '#1A0633',
+                    fontSize: '0.82rem',
                     letterSpacing: '0.14em',
                     textDecoration: 'none',
                     fontWeight: 700,
@@ -414,12 +415,12 @@ export default function Nav() {
                 className="label-caps"
                 style={{
                   padding: '7px 16px',
-                  border: '1px solid var(--color-border)',
+                  border: '1px solid rgba(200,162,60,0.2)',
                   borderRadius: 9999,
-                  color: 'var(--color-warm-gray)',
+                  color: 'rgba(255,255,255,0.6)',
                   fontSize: '0.65rem',
                   textDecoration: 'none',
-                  backgroundColor: 'var(--color-bg)',
+                  backgroundColor: 'rgba(255,255,255,0.04)',
                   transition: 'border-color 150ms ease, color 150ms ease',
                 }}
               >
