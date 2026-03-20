@@ -83,6 +83,8 @@ export default function LoginPage() {
       const isAdmin = ADMIN_EMAILS.includes(authData.user.email?.toLowerCase() ?? '');
 
       if (isAdmin) {
+        // Set admin cookie via API so middleware recognizes us
+        await fetch('/api/auth/admin-session', { method: 'POST' });
         router.push('/admin');
         return;
       }
