@@ -29,6 +29,13 @@ export async function requireAdmin(req: Request): Promise<NextResponse | null> {
     if (safeEqual(auth, expected)) {
       return null; // Authenticated via token
     }
+
+    // Also check admin_token cookie (set by middleware on admin login)
+    const cookieHeader = req.headers.get('cookie') || '';
+    const cookieMatch = cookieHeader.match(/admin_token=([^;]+)/);
+    if (cookieMatch && safeEqual(cookieMatch[1], adminToken)) {
+      return null; // Authenticated via admin cookie
+    }
   }
 
   // --- Fallback: Supabase session-based admin auth ---
