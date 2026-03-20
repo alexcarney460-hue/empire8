@@ -120,17 +120,6 @@ export default function Footer() {
           <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem' }}>
             &copy; {new Date().getFullYear()} Empire 8 Sales Direct. All rights reserved.
           </p>
-          <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-            <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem', textDecoration: 'none' }}>
-              Privacy
-            </Link>
-            <Link href="/terms" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem', textDecoration: 'none' }}>
-              Terms
-            </Link>
-            <Link href="/compliance" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.78rem', textDecoration: 'none' }}>
-              Compliance
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
