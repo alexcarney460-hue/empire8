@@ -46,7 +46,7 @@ export async function GET(
     const { data: lot, error: lotError } = await supabase
       .from('weedbay_lots')
       .select(
-        'id, seller_id, title, description, category, quantity, unit, starting_price_cents, current_bid_cents, bid_count, reserve_price_cents, buy_now_price_cents, ends_at, strain_name, thc_percentage, cbd_percentage, grow_method, lab_results_url, platform_fee_pct, status, winner_id, winner_bid_cents, created_at',
+        'id, seller_id, title, description, category, quantity, unit, starting_price_cents, current_bid_cents, bid_count, reserve_price_cents, buy_now_price_cents, ends_at, strain_name, thc_percentage, cbd_percentage, grow_method, lab_results_url, images, platform_fee_pct, status, winner_id, winner_bid_cents, created_at',
       )
       .eq('id', id)
       .maybeSingle();

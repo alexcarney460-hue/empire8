@@ -130,7 +130,6 @@ export default function MyBidsPage() {
             animation: 'e8-spin 0.7s linear infinite',
           }}
         />
-        <style>{`@keyframes e8-spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }

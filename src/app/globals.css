@@ -435,3 +435,7 @@ select option {
   background: #1A0E2E;
   color: #fff;
 }
+
+/* ── Shared utility keyframes ── */
+@keyframes e8-spin { to { transform: rotate(360deg); } }
+@keyframes e8-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }

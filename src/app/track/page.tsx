@@ -107,16 +107,16 @@ export default function TrackOrderPage() {
   const StatusIcon = statusInfo?.icon ?? Package;
 
   return (
-    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#fff', minHeight: '100vh' }}>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520', minHeight: '100vh' }}>
 
       {/* Hero */}
       <section
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: '#0F0520',
           padding: '72px 24px 80px',
           position: 'relative',
           overflow: 'hidden',
-          borderBottom: '1px solid var(--color-border)',
+          borderBottom: '1px solid rgba(200,162,60,0.12)',
         }}
       >
         <div
@@ -152,13 +152,13 @@ export default function TrackOrderPage() {
             style={{
               fontSize: 'clamp(2.25rem, 5vw, 3.5rem)',
               lineHeight: 1.0,
-              color: 'var(--color-charcoal)',
+              color: '#fff',
               marginBottom: 20,
             }}
           >
             Track Your Order.
           </h1>
-          <p style={{ color: 'var(--color-warm-gray)', fontSize: '1.05rem', maxWidth: 500, margin: '0 auto', lineHeight: 1.8 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.05rem', maxWidth: 500, margin: '0 auto', lineHeight: 1.8 }}>
             Enter your email address and tracking number to see the latest status of your shipment.
           </p>
         </div>
@@ -172,10 +172,10 @@ export default function TrackOrderPage() {
           <form
             onSubmit={handleSubmit}
             style={{
-              backgroundColor: '#fff',
+              backgroundColor: 'rgba(255,255,255,0.04)',
               borderRadius: 20,
               padding: '40px 36px',
-              border: '1px solid var(--color-border)',
+              border: '1px solid rgba(200,162,60,0.12)',
               boxShadow: 'var(--shadow-sm)',
             }}
           >
@@ -185,7 +185,7 @@ export default function TrackOrderPage() {
                 <label
                   htmlFor="track-email"
                   className="label-caps"
-                  style={{ display: 'block', marginBottom: 8, color: 'var(--color-warm-gray)', fontSize: '0.68rem' }}
+                  style={{ display: 'block', marginBottom: 8, color: 'rgba(255,255,255,0.6)', fontSize: '0.68rem' }}
                 >
                   Email Address
                 </label>
@@ -200,10 +200,10 @@ export default function TrackOrderPage() {
                     width: '100%',
                     padding: '12px 16px',
                     borderRadius: 10,
-                    border: '1px solid var(--color-border)',
-                    backgroundColor: 'var(--color-bg)',
+                    border: '1px solid rgba(200,162,60,0.12)',
+                    backgroundColor: 'rgba(255,255,255,0.06)',
                     fontSize: '0.95rem',
-                    color: 'var(--color-charcoal)',
+                    color: '#fff',
                     outline: 'none',
                     transition: 'border-color 200ms ease, box-shadow 200ms ease',
                     boxSizing: 'border-box',
@@ -213,7 +213,7 @@ export default function TrackOrderPage() {
                     e.currentTarget.style.boxShadow = '0 0 0 3px rgba(62,85,55,0.08)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border)';
+                    e.currentTarget.style.borderColor = 'rgba(200,162,60,0.12)';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 />
@@ -224,7 +224,7 @@ export default function TrackOrderPage() {
                 <label
                   htmlFor="track-number"
                   className="label-caps"
-                  style={{ display: 'block', marginBottom: 8, color: 'var(--color-warm-gray)', fontSize: '0.68rem' }}
+                  style={{ display: 'block', marginBottom: 8, color: 'rgba(255,255,255,0.6)', fontSize: '0.68rem' }}
                 >
                   Tracking Number
                 </label>
@@ -239,10 +239,10 @@ export default function TrackOrderPage() {
                     width: '100%',
                     padding: '12px 16px',
                     borderRadius: 10,
-                    border: '1px solid var(--color-border)',
-                    backgroundColor: 'var(--color-bg)',
+                    border: '1px solid rgba(200,162,60,0.12)',
+                    backgroundColor: 'rgba(255,255,255,0.06)',
                     fontSize: '0.95rem',
-                    color: 'var(--color-charcoal)',
+                    color: '#fff',
                     outline: 'none',
                     transition: 'border-color 200ms ease, box-shadow 200ms ease',
                     fontFamily: "'Barlow', Arial, sans-serif",
@@ -254,7 +254,7 @@ export default function TrackOrderPage() {
                     e.currentTarget.style.boxShadow = '0 0 0 3px rgba(62,85,55,0.08)';
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border)';
+                    e.currentTarget.style.borderColor = 'rgba(200,162,60,0.12)';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 />
@@ -341,7 +341,7 @@ export default function TrackOrderPage() {
                 <p style={{ color: '#944', fontSize: '0.95rem', fontWeight: 600, marginBottom: 4 }}>
                   {error}
                 </p>
-                <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', lineHeight: 1.6 }}>
                   Double-check that you entered the email used at checkout and the full tracking number from your shipping confirmation.
                 </p>
               </div>
@@ -356,7 +356,7 @@ export default function TrackOrderPage() {
               style={{
                 marginTop: 28,
                 borderRadius: 20,
-                border: '1px solid var(--color-border)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 overflow: 'hidden',
                 boxShadow: 'var(--shadow-sm)',
               }}
@@ -366,7 +366,7 @@ export default function TrackOrderPage() {
                 style={{
                   padding: '28px 32px',
                   backgroundColor: statusInfo.bg,
-                  borderBottom: '1px solid var(--color-border)',
+                  borderBottom: '1px solid rgba(200,162,60,0.12)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 16,
@@ -377,7 +377,7 @@ export default function TrackOrderPage() {
                     width: 48,
                     height: 48,
                     borderRadius: 12,
-                    backgroundColor: '#fff',
+                    backgroundColor: 'rgba(255,255,255,0.04)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -390,7 +390,7 @@ export default function TrackOrderPage() {
                 <div>
                   <span
                     className="label-caps"
-                    style={{ color: 'var(--color-warm-gray)', fontSize: '0.62rem', display: 'block', marginBottom: 4 }}
+                    style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.62rem', display: 'block', marginBottom: 4 }}
                   >
                     Order Status
                   </span>
@@ -462,13 +462,13 @@ export default function TrackOrderPage() {
               {order.items.length > 0 && (
                 <div
                   style={{
-                    borderTop: '1px solid var(--color-border)',
+                    borderTop: '1px solid rgba(200,162,60,0.12)',
                     padding: '24px 32px',
                   }}
                 >
                   <span
                     className="label-caps"
-                    style={{ color: 'var(--color-warm-gray)', fontSize: '0.62rem', display: 'block', marginBottom: 16 }}
+                    style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.62rem', display: 'block', marginBottom: 16 }}
                   >
                     Items in This Order
                   </span>
@@ -482,19 +482,19 @@ export default function TrackOrderPage() {
                           alignItems: 'center',
                           padding: '12px 16px',
                           borderRadius: 10,
-                          backgroundColor: 'var(--color-bg)',
-                          border: '1px solid var(--color-border)',
+                          backgroundColor: 'rgba(255,255,255,0.02)',
+                          border: '1px solid rgba(200,162,60,0.12)',
                         }}
                       >
                         <div>
-                          <span style={{ color: 'var(--color-charcoal)', fontSize: '0.9rem', fontWeight: 600 }}>
+                          <span style={{ color: '#fff', fontSize: '0.9rem', fontWeight: 600 }}>
                             {item.product_name}
                           </span>
-                          <span style={{ color: 'var(--color-warm-gray)', fontSize: '0.82rem', marginLeft: 8 }}>
+                          <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginLeft: 8 }}>
                             x{item.quantity}
                           </span>
                         </div>
-                        <span style={{ color: 'var(--color-charcoal)', fontSize: '0.9rem', fontWeight: 600 }}>
+                        <span style={{ color: '#fff', fontSize: '0.9rem', fontWeight: 600 }}>
                           {formatCurrency(item.unit_price * item.quantity, order.currency)}
                         </span>
                       </div>
@@ -507,12 +507,12 @@ export default function TrackOrderPage() {
               {order.tracking_url && (
                 <div
                   style={{
-                    borderTop: '1px solid var(--color-border)',
+                    borderTop: '1px solid rgba(200,162,60,0.12)',
                     padding: '20px 32px',
-                    backgroundColor: 'var(--color-bg)',
+                    backgroundColor: 'rgba(255,255,255,0.02)',
                   }}
                 >
-                  <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', lineHeight: 1.6 }}>
                     You can also track directly with your carrier:{' '}
                     <a
                       href={order.tracking_url}
@@ -536,8 +536,8 @@ export default function TrackOrderPage() {
               marginTop: 40,
               padding: '24px 28px',
               borderRadius: 16,
-              backgroundColor: 'var(--color-bg)',
-              border: '1px solid var(--color-border)',
+              backgroundColor: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(200,162,60,0.12)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -546,10 +546,10 @@ export default function TrackOrderPage() {
             }}
           >
             <div>
-              <p style={{ color: 'var(--color-charcoal)', fontSize: '0.95rem', fontWeight: 600, marginBottom: 4 }}>
+              <p style={{ color: '#fff', fontSize: '0.95rem', fontWeight: 600, marginBottom: 4 }}>
                 Need help with your order?
               </p>
-              <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.82rem' }}>
+              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem' }}>
                 Can&apos;t find your tracking info? Contact our support team.
               </p>
             </div>
@@ -561,9 +561,9 @@ export default function TrackOrderPage() {
                 gap: 6,
                 padding: '10px 18px',
                 borderRadius: 8,
-                border: '1px solid var(--color-border)',
-                backgroundColor: '#fff',
-                color: 'var(--color-charcoal)',
+                border: '1px solid rgba(200,162,60,0.12)',
+                backgroundColor: 'rgba(255,255,255,0.04)',
+                color: '#fff',
                 fontFamily: "'Barlow', Arial, sans-serif",
                 fontWeight: 700,
                 fontSize: '0.72rem',
@@ -578,8 +578,8 @@ export default function TrackOrderPage() {
                 (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-purple-light)';
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-border)';
-                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#fff';
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(200,162,60,0.12)';
+                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'rgba(255,255,255,0.04)';
               }}
             >
               Contact Support <ArrowRight size={12} />
@@ -588,12 +588,6 @@ export default function TrackOrderPage() {
         </AnimateIn>
       </div>
 
-      {/* Spinner keyframe */}
-      <style>{`
-        @keyframes e8-spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 }
@@ -605,13 +599,13 @@ function InfoField({ label, value, mono }: { label: string; value: string; mono?
     <div>
       <span
         className="label-caps"
-        style={{ color: 'var(--color-warm-gray)', fontSize: '0.62rem', display: 'block', marginBottom: 4 }}
+        style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.62rem', display: 'block', marginBottom: 4 }}
       >
         {label}
       </span>
       <span
         style={{
-          color: 'var(--color-charcoal)',
+          color: '#fff',
           fontSize: '0.95rem',
           fontWeight: 600,
           fontFamily: mono ? "'Barlow', monospace" : undefined,

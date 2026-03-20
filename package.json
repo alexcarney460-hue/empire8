@@ -13,12 +13,9 @@
     "@supabase/supabase-js": "^2.98.0",
     "lucide-react": "^0.564.0",
     "next": "16.1.6",
-    "next-auth": "^4.24.13",
-    "pdf-lib": "^1.17.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "resend": "^6.9.3",
-    "shippo": "^2.18.0",
     "square": "^44.0.0",
     "web-push": "^3.6.7"
   },

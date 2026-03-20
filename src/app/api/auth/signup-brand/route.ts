@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { createClient } from '@supabase/supabase-js';
 import { getSupabaseServer } from '@/lib/supabase-server';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 
 type BrandSignupPayload = {
-  user_id: string;
   company_name: string;
   contact_name: string;
   email: string;
@@ -31,11 +32,70 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Authenticate user from Supabase session cookie
+    const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const anonKey = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!url || !(serviceKey || anonKey)) {
+      return NextResponse.json(
+        { error: 'Service unavailable.' },
+        { status: 503 }
+      );
+    }
+
+    const authSupabase = createClient(url, serviceKey || anonKey!, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+
+    const cookieStore = await cookies();
+    const authCookie = cookieStore.getAll().find((c) => c.name.match(/^sb-.*-auth-token$/));
+    if (!authCookie) {
+      return NextResponse.json(
+        { error: 'Authentication required. Please sign in first.' },
+        { status: 401 }
+      );
+    }
+
+    let accessToken: string | null = null;
+    try {
+      const raw = decodeURIComponent(authCookie.value);
+      if (raw.startsWith('[')) {
+        const parts = JSON.parse(raw);
+        accessToken = typeof parts[0] === 'string' ? parts[0] : null;
+      } else if (raw.startsWith('base64-')) {
+        const decoded = Buffer.from(raw.slice(7), 'base64').toString('utf-8');
+        const parsed = JSON.parse(decoded);
+        accessToken = parsed.access_token ?? null;
+      } else {
+        const parsed = JSON.parse(raw);
+        accessToken = parsed.access_token ?? parsed[0] ?? null;
+      }
+    } catch {
+      accessToken = authCookie.value;
+    }
+
+    if (!accessToken) {
+      return NextResponse.json(
+        { error: 'Invalid session. Please sign in again.' },
+        { status: 401 }
+      );
+    }
+
+    const { data: userData, error: userError } = await authSupabase.auth.getUser(accessToken);
+    if (userError || !userData.user) {
+      return NextResponse.json(
+        { error: 'Invalid or expired session. Please sign in again.' },
+        { status: 401 }
+      );
+    }
+
+    const verifiedUserId = userData.user.id;
+
     const body = (await req.json()) as Partial<BrandSignupPayload>;
 
     // Validate required fields
     const requiredFields: (keyof BrandSignupPayload)[] = [
-      'user_id',
       'company_name',
       'contact_name',
       'email',
@@ -99,7 +159,7 @@ export async function POST(req: NextRequest) {
     const { data: existingAccount } = await supabase
       .from('brand_accounts')
       .select('id')
-      .eq('user_id', payload.user_id)
+      .eq('user_id', verifiedUserId)
       .maybeSingle();
 
     if (existingAccount) {
@@ -151,7 +211,7 @@ export async function POST(req: NextRequest) {
     const { error: insertError } = await supabase
       .from('brand_accounts')
       .insert({
-        user_id: payload.user_id,
+        user_id: verifiedUserId,
         brand_id: brandId,
         company_name: payload.company_name.trim(),
         contact_name: payload.contact_name.trim(),

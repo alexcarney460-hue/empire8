@@ -161,25 +161,24 @@ export default function AccountPage() {
 
   if (checking) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#0F0520' }}>
         <div style={{ width: 32, height: 32, borderRadius: '50%', border: '3px solid var(--color-border)', borderTopColor: 'var(--color-royal)', animation: 'e8-spin 0.7s linear infinite' }} />
-        <style>{`@keyframes e8-spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh', paddingTop: 'var(--nav-height)' }}>
+    <div style={{ backgroundColor: '#0F0520', minHeight: '100vh', paddingTop: 'var(--nav-height)' }}>
       {/* Hero */}
-      <section style={{ borderBottom: '1px solid var(--color-border)', padding: '56px 24px 48px' }}>
+      <section style={{ borderBottom: '1px solid rgba(200,162,60,0.12)', padding: '56px 24px 48px' }}>
         <div style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center' }}>
           <p className="label-caps" style={{ color: 'var(--color-gold)', fontSize: '0.65rem', marginBottom: 12 }}>
             {view === 'dashboard' ? 'My Account' : view === 'signup' ? 'Create Account' : 'Sign In'}
           </p>
-          <h1 className="font-display" style={{ fontSize: '2.2rem', color: 'var(--color-charcoal)', lineHeight: 1.15, marginBottom: 8 }}>
+          <h1 className="font-display" style={{ fontSize: '2.2rem', color: '#fff', lineHeight: 1.15, marginBottom: 8 }}>
             {view === 'dashboard' ? `Welcome back` : view === 'signup' ? 'Create Your Account' : 'Account Login'}
           </h1>
-          <p style={{ fontSize: '0.9rem', color: 'var(--color-warm-gray)' }}>
+          <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)' }}>
             {view === 'dashboard'
               ? profile?.company_name ?? profile?.email
               : view === 'signup'
@@ -194,8 +193,8 @@ export default function AccountPage() {
         {(view === 'login' || view === 'signup') ? (
           <div
             style={{
-              backgroundColor: '#fff',
-              border: '1px solid var(--color-border)',
+              backgroundColor: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(200,162,60,0.12)',
               borderRadius: 20,
               padding: '36px 32px',
               boxShadow: 'var(--shadow-sm)',
@@ -208,7 +207,7 @@ export default function AccountPage() {
             )}
             <form onSubmit={view === 'signup' ? handleSignup : handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-charcoal)', marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#fff', marginBottom: 6 }}>
                   Email
                 </label>
                 <input
@@ -219,19 +218,19 @@ export default function AccountPage() {
                   placeholder="you@company.com"
                   style={{
                     width: '100%',
-                    border: '1px solid var(--color-border)',
+                    border: '1px solid rgba(200,162,60,0.12)',
                     borderRadius: 10,
                     padding: '10px 14px',
                     fontSize: '0.875rem',
-                    color: 'var(--color-charcoal)',
+                    color: '#fff',
                     outline: 'none',
                     boxSizing: 'border-box',
-                    backgroundColor: '#fafaf9',
+                    backgroundColor: 'rgba(255,255,255,0.06)',
                   }}
                 />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-charcoal)', marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#fff', marginBottom: 6 }}>
                   Password
                 </label>
                 <input
@@ -242,14 +241,14 @@ export default function AccountPage() {
                   placeholder="••••••••"
                   style={{
                     width: '100%',
-                    border: '1px solid var(--color-border)',
+                    border: '1px solid rgba(200,162,60,0.12)',
                     borderRadius: 10,
                     padding: '10px 14px',
                     fontSize: '0.875rem',
-                    color: 'var(--color-charcoal)',
+                    color: '#fff',
                     outline: 'none',
                     boxSizing: 'border-box',
-                    backgroundColor: '#fafaf9',
+                    backgroundColor: 'rgba(255,255,255,0.06)',
                   }}
                 />
               </div>
@@ -283,10 +282,10 @@ export default function AccountPage() {
               </button>
             </form>
 
-            <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--color-border)', textAlign: 'center' }}>
+            <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid rgba(200,162,60,0.12)', textAlign: 'center' }}>
               {view === 'login' ? (
                 <>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--color-warm-gray)', marginBottom: 12 }}>
+                  <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', marginBottom: 12 }}>
                     Don&apos;t have an account?
                   </p>
                   <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -297,7 +296,7 @@ export default function AccountPage() {
                         fontWeight: 600,
                         color: 'var(--color-royal)',
                         background: 'none',
-                        border: '1px solid var(--color-border)',
+                        border: '1px solid rgba(200,162,60,0.12)',
                         borderRadius: 9999,
                         padding: '6px 14px',
                         cursor: 'pointer',
@@ -312,7 +311,7 @@ export default function AccountPage() {
                         fontWeight: 600,
                         color: 'var(--color-royal)',
                         textDecoration: 'none',
-                        border: '1px solid var(--color-border)',
+                        border: '1px solid rgba(200,162,60,0.12)',
                         borderRadius: 9999,
                         padding: '6px 14px',
                       }}
@@ -326,7 +325,7 @@ export default function AccountPage() {
                         fontWeight: 600,
                         color: 'var(--color-royal)',
                         textDecoration: 'none',
-                        border: '1px solid var(--color-border)',
+                        border: '1px solid rgba(200,162,60,0.12)',
                         borderRadius: 9999,
                         padding: '6px 14px',
                       }}
@@ -336,7 +335,7 @@ export default function AccountPage() {
                   </div>
                 </>
               ) : (
-                <p style={{ fontSize: '0.8rem', color: 'var(--color-warm-gray)' }}>
+                <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>
                   Already have an account?{' '}
                   <button
                     onClick={() => { setView('login'); setError(''); setSuccess(''); }}
@@ -363,10 +362,10 @@ export default function AccountPage() {
                   padding: '16px 20px',
                 }}
               >
-                <p style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--color-charcoal)', margin: 0 }}>
+                <p style={{ fontSize: '0.84rem', fontWeight: 600, color: '#fff', margin: 0 }}>
                   Please verify your email to place orders
                 </p>
-                <p style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)', margin: 0, lineHeight: 1.5 }}>
+                <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.5 }}>
                   Check your inbox for a verification link. You can browse and add items to your cart, but checkout requires a verified email.
                 </p>
                 {resendSuccess && (
@@ -402,13 +401,13 @@ export default function AccountPage() {
             {/* Account type card */}
             <div
               style={{
-                border: '1px solid var(--color-border)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 borderRadius: 20,
                 padding: '28px 28px',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <p className="label-caps" style={{ color: 'var(--color-warm-gray)', fontSize: '0.6rem', marginBottom: 16 }}>Account Details</p>
+              <p className="label-caps" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.6rem', marginBottom: 16 }}>Account Details</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <Row label="Email" value={profile?.email ?? '—'} />
                 <Row label="Account Type" value={accountLabel[profile?.account_type ?? 'retail'] ?? 'Retail'} highlight={profile?.account_type !== 'retail'} />
@@ -424,13 +423,13 @@ export default function AccountPage() {
             {/* Quick links */}
             <div
               style={{
-                border: '1px solid var(--color-border)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 borderRadius: 20,
                 padding: '24px 28px',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <p className="label-caps" style={{ color: 'var(--color-warm-gray)', fontSize: '0.6rem', marginBottom: 16 }}>Quick Links</p>
+              <p className="label-caps" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.6rem', marginBottom: 16 }}>Quick Links</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {[
                   ...(ADMIN_EMAILS.includes(profile?.email?.toLowerCase() ?? '') ? [{ label: 'Admin Dashboard', href: '/admin' }] : []),
@@ -449,10 +448,10 @@ export default function AccountPage() {
                       alignItems: 'center',
                       fontSize: '0.85rem',
                       fontWeight: 500,
-                      color: 'var(--color-charcoal)',
+                      color: '#fff',
                       textDecoration: 'none',
                       padding: '8px 0',
-                      borderBottom: '1px solid var(--color-border)',
+                      borderBottom: '1px solid rgba(200,162,60,0.12)',
                     }}
                   >
                     {label}
@@ -476,8 +475,8 @@ export default function AccountPage() {
               onClick={handleLogout}
               style={{
                 backgroundColor: 'transparent',
-                color: 'var(--color-warm-gray)',
-                border: '1px solid var(--color-border)',
+                color: 'rgba(255,255,255,0.6)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 borderRadius: 9999,
                 padding: '11px 24px',
                 fontFamily: "'Barlow', Arial, sans-serif",
@@ -501,8 +500,8 @@ export default function AccountPage() {
 function Row({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-      <span style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)' }}>{label}</span>
-      <span style={{ fontSize: '0.82rem', fontWeight: 600, color: highlight ? 'var(--color-royal)' : 'var(--color-charcoal)' }}>
+      <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)' }}>{label}</span>
+      <span style={{ fontSize: '0.82rem', fontWeight: 600, color: highlight ? 'var(--color-royal)' : '#fff' }}>
         {value}
       </span>
     </div>

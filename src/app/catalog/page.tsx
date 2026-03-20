@@ -70,11 +70,11 @@ export default function CatalogPage() {
   };
 
   return (
-    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#fff', minHeight: '100vh' }}>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520', minHeight: '100vh' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([itemListSchema, collectionPageSchema]) }} />
 
       {/* Header */}
-      <div style={{ backgroundColor: '#fff', borderBottom: '1px solid var(--color-border)', padding: '56px 24px 48px', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ backgroundColor: '#0F0520', borderBottom: '1px solid rgba(200,162,60,0.12)', padding: '56px 24px 48px', position: 'relative', overflow: 'hidden' }}>
         {/* Subtle amber glow */}
         <div style={{ position: 'absolute', top: '-40%', right: '5%', width: 400, height: 400, borderRadius: '50%', background: 'rgba(200,146,42,0.07)', filter: 'blur(80px)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
@@ -84,11 +84,11 @@ export default function CatalogPage() {
           </span>
           <h1
             className="font-display"
-            style={{ color: 'var(--color-charcoal)', fontSize: 'clamp(2rem, 5vw, 3rem)', marginTop: 10 }}
+            style={{ color: '#fff', fontSize: 'clamp(2rem, 5vw, 3rem)', marginTop: 10 }}
           >
             Full Product Catalog
           </h1>
-          <p style={{ color: 'var(--color-warm-gray)', marginTop: 14, maxWidth: 480, fontSize: '0.95rem', lineHeight: 1.75 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: 14, maxWidth: 480, fontSize: '0.95rem', lineHeight: 1.75 }}>
             Stocked and ready to ship. All products available by the case at retail, wholesale, and distribution pricing.
           </p>
         </div>
@@ -111,7 +111,7 @@ export default function CatalogPage() {
           background: 'linear-gradient(135deg, rgba(74,14,120,0.08) 0%, rgba(200,162,60,0.08) 100%)',
           border: '1px solid rgba(74,14,120,0.12)',
         }}>
-          <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--color-charcoal)', lineHeight: 1.5 }}>
+          <p style={{ margin: 0, fontSize: '0.88rem', color: '#fff', lineHeight: 1.5 }}>
             Looking for cannabis products? Browse our licensed brand partners and their full product lines.
           </p>
           <Link
@@ -140,7 +140,7 @@ export default function CatalogPage() {
       </div>
 
       {/* Category filter bar */}
-      <div style={{ backgroundColor: '#fff', borderBottom: '1px solid var(--color-border)', padding: '16px 24px', position: 'sticky', top: 'var(--nav-height)', zIndex: 10 }}>
+      <div style={{ backgroundColor: '#0F0520', borderBottom: '1px solid rgba(200,162,60,0.12)', padding: '16px 24px', position: 'sticky', top: 'var(--nav-height)', zIndex: 10 }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {CATEGORIES.map((cat) => (
             <a
@@ -149,9 +149,9 @@ export default function CatalogPage() {
               style={{
                 padding: '8px 20px',
                 borderRadius: 9999,
-                border: '1px solid var(--color-border)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 backgroundColor: 'transparent',
-                color: 'var(--color-charcoal)',
+                color: '#fff',
                 fontFamily: "'Barlow', Arial, sans-serif",
                 fontWeight: 600,
                 fontSize: '0.8rem',
@@ -193,7 +193,7 @@ export default function CatalogPage() {
         <section id="gloves" style={{ marginBottom: 64 }}>
           <div style={{ marginBottom: 28 }}>
             <span className="label-caps" style={{ color: 'var(--color-gold)', fontSize: '0.68rem' }}>Disposable Gloves</span>
-            <h2 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginTop: 6, color: 'var(--color-charcoal)' }}>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginTop: 6, color: '#fff' }}>
               Gloves
             </h2>
           </div>
@@ -208,7 +208,7 @@ export default function CatalogPage() {
         <section id="trimmers" style={{ marginBottom: 64 }}>
           <div style={{ marginBottom: 28 }}>
             <span className="label-caps" style={{ color: 'var(--color-gold)', fontSize: '0.68rem' }}>Trimming Tools</span>
-            <h2 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginTop: 6, color: 'var(--color-charcoal)' }}>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginTop: 6, color: '#fff' }}>
               Trimmers & Scissors
             </h2>
           </div>
@@ -223,7 +223,7 @@ export default function CatalogPage() {
         <section id="accessories" style={{ marginBottom: 48 }}>
           <div style={{ marginBottom: 28 }}>
             <span className="label-caps" style={{ color: 'var(--color-gold)', fontSize: '0.68rem' }}>Harvest Accessories</span>
-            <h2 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginTop: 6, color: 'var(--color-charcoal)' }}>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginTop: 6, color: '#fff' }}>
               Accessories
             </h2>
           </div>
@@ -314,8 +314,8 @@ function ProductCard({ product }: { product: (typeof PRODUCTS)[number] }) {
       <div
         className="tilt-card"
         style={{
-          backgroundColor: '#fff',
-          border: '1px solid var(--color-border)',
+          backgroundColor: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(200,162,60,0.12)',
           borderRadius: 16,
           overflow: 'hidden',
           height: '100%',
@@ -353,19 +353,19 @@ function ProductCard({ product }: { product: (typeof PRODUCTS)[number] }) {
           </span>
           <h3
             className="font-heading"
-            style={{ fontSize: '0.95rem', marginTop: 6, marginBottom: 4, color: 'var(--color-charcoal)', lineHeight: 1.3 }}
+            style={{ fontSize: '0.95rem', marginTop: 6, marginBottom: 4, color: '#fff', lineHeight: 1.3 }}
           >
             {product.name}
           </h3>
-          <p style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)', marginBottom: 16, flex: 1, lineHeight: 1.5 }}>
+          <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: 16, flex: 1, lineHeight: 1.5 }}>
             {product.specs.find((s) => s.label === 'Count' || s.label === 'Size' || s.label === 'Sizes' || s.label === 'Dimensions')?.value ?? ''}
           </p>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <span className="font-mono" style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-charcoal)' }}>
+              <span className="font-mono" style={{ fontSize: '1.05rem', fontWeight: 600, color: '#fff' }}>
                 {formatPrice(product.price)}
               </span>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-warm-gray)', marginLeft: 4 }}>{product.unit}</span>
+              <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', marginLeft: 4 }}>{product.unit}</span>
             </div>
             <span
               className="e8-card-arrow"
@@ -381,7 +381,7 @@ function ProductCard({ product }: { product: (typeof PRODUCTS)[number] }) {
               View <ArrowRight size={12} />
             </span>
           </div>
-          <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid var(--color-border)' }}>
+          <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid rgba(200,162,60,0.12)' }}>
             <span style={{ fontSize: '0.75rem', color: 'var(--color-purple-muted)', fontWeight: 600 }}>
               Wholesale pricing available →
             </span>

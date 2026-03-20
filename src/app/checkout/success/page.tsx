@@ -15,7 +15,7 @@ export default function CheckoutSuccessPage() {
       style={{
         paddingTop: 'var(--nav-height)',
         minHeight: '100vh',
-        backgroundColor: 'var(--color-bg)',
+        backgroundColor: '#0F0520',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -48,12 +48,12 @@ export default function CheckoutSuccessPage() {
 
         <h1
           className="font-display"
-          style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', color: 'var(--color-charcoal)', margin: '12px 0 16px', lineHeight: 1.1 }}
+          style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', color: '#fff', margin: '12px 0 16px', lineHeight: 1.1 }}
         >
           You're all set.
         </h1>
 
-        <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.7, marginBottom: 40, fontSize: '1rem' }}>
+        <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: 40, fontSize: '1rem' }}>
           Your order is confirmed and being prepared for shipment. A confirmation email is on its way to your inbox.
         </p>
 
@@ -61,35 +61,35 @@ export default function CheckoutSuccessPage() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 40 }}>
           <div
             style={{
-              backgroundColor: '#fff',
-              border: '1px solid var(--color-border)',
+              backgroundColor: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(200,162,60,0.12)',
               borderRadius: 14,
               padding: '20px 18px',
               textAlign: 'left',
             }}
           >
             <Package size={20} color="var(--color-royal)" style={{ marginBottom: 10 }} />
-            <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--color-charcoal)', marginBottom: 4 }}>
+            <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#fff', marginBottom: 4 }}>
               Ships in 1–2 days
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)', lineHeight: 1.5 }}>
+            <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
               Orders placed before 3pm EST ship same day.
             </div>
           </div>
           <div
             style={{
-              backgroundColor: '#EDF7F0',
-              border: '1px solid rgba(74,124,89,0.2)',
+              backgroundColor: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(200,162,60,0.12)',
               borderRadius: 14,
               padding: '20px 18px',
               textAlign: 'left',
             }}
           >
             <RefreshCw size={20} color="var(--color-purple-muted)" style={{ marginBottom: 10 }} />
-            <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--color-charcoal)', marginBottom: 4 }}>
+            <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#fff', marginBottom: 4 }}>
               Subscribe & Save
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)', lineHeight: 1.5 }}>
+            <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
               Save 10% on every order with automatic monthly delivery. Manage your subscription anytime in your account.
             </div>
           </div>
@@ -122,10 +122,10 @@ export default function CheckoutSuccessPage() {
             href="/contact"
             style={{
               backgroundColor: 'transparent',
-              color: 'var(--color-charcoal)',
+              color: '#fff',
               padding: '14px 28px',
               borderRadius: 9,
-              border: '1.5px solid var(--color-border)',
+              border: '1.5px solid rgba(200,162,60,0.12)',
               fontFamily: "'Barlow', Arial, sans-serif",
               fontWeight: 600,
               fontSize: '0.85rem',

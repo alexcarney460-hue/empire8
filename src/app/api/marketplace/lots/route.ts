@@ -88,7 +88,7 @@ export async function GET(req: NextRequest) {
   let query = supabase
     .from('weedbay_lots')
     .select(
-      'id, title, category, quantity, unit, starting_price_cents, current_bid_cents, bid_count, buy_now_price_cents, ends_at, strain_name, thc_percentage, grow_method, created_at',
+      'id, title, category, quantity, unit, starting_price_cents, current_bid_cents, bid_count, buy_now_price_cents, ends_at, strain_name, thc_percentage, grow_method, images, created_at',
       { count: 'exact' },
     )
     .eq('status', 'active')

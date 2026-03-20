@@ -29,7 +29,7 @@ import {
  */
 
 const ADMIN_PATHS = ['/admin', '/api/admin'];
-const DASHBOARD_PATHS = ['/dashboard'];
+const DASHBOARD_PATHS = ['/dashboard', '/brand-dashboard'];
 
 function isAdminPath(pathname: string): boolean {
   return ADMIN_PATHS.some(
@@ -244,6 +244,7 @@ export const config = {
     '/api/admin/:path*',
     // Dashboard auth
     '/dashboard/:path*',
+    '/brand-dashboard/:path*',
     // Visitor tracking — match all pages except static assets and Next internals
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
   ],

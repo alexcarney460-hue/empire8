@@ -19,7 +19,7 @@ import {
 
 type Bid = {
   id: string;
-  bidder_number: number;
+  label: string;
   amount_cents: number;
   created_at: string;
 };
@@ -259,6 +259,8 @@ export default function LotDetailPage() {
   const [maxBid, setMaxBid] = useState('');
   const [showAutoBid, setShowAutoBid] = useState(false);
   const [timeLeft, setTimeLeft] = useState('');
+  const [bidSubmitting, setBidSubmitting] = useState(false);
+  const [bidError, setBidError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -305,21 +307,102 @@ export default function LotDetailPage() {
   const urgent = lot ? isUrgent(lot.ends_at) : false;
   const isActive = lot?.status === 'active';
 
-  const handlePlaceBid = useCallback(() => {
-    // Placeholder -- bid submission would POST to /api/marketplace/bids
+  const fetchLotData = useCallback(async () => {
+    if (!id) return;
+    try {
+      const res = await fetch(`/api/marketplace/lots/${id}`);
+      const json = await res.json();
+      if (res.ok && json.ok) {
+        setLot(json.data);
+      }
+    } catch {
+      // Silent refresh failure -- lot data stays stale but user can retry
+    }
+  }, [id]);
+
+  const handlePlaceBid = useCallback(async () => {
+    if (!lot) return;
+    setBidError(null);
+
     const amountDollars = parseFloat(bidAmount);
-    const amountCents = Math.round(amountDollars * 100);
-    if (isNaN(amountDollars) || amountCents < minimumBidCents) {
-      alert(`Minimum bid is ${formatCurrency(minimumBidCents)}`);
+    if (isNaN(amountDollars) || !bidAmount.trim()) {
+      setBidError('Please enter a bid amount.');
       return;
     }
-    alert(`Bid of ${formatCurrency(amountCents)} submitted. (Integration pending)`);
-  }, [bidAmount, minimumBidCents]);
 
-  const handleBuyNow = useCallback(() => {
+    const amountCents = Math.round(amountDollars * 100);
+    if (amountCents < minimumBidCents) {
+      setBidError(`Minimum bid is ${formatCurrency(minimumBidCents)}`);
+      return;
+    }
+
+    const payload: { amount_cents: number; max_auto_bid_cents?: number } = {
+      amount_cents: amountCents,
+    };
+
+    if (maxBid.trim()) {
+      const maxDollars = parseFloat(maxBid);
+      if (!isNaN(maxDollars) && maxDollars > 0) {
+        payload.max_auto_bid_cents = Math.round(maxDollars * 100);
+      }
+    }
+
+    setBidSubmitting(true);
+    try {
+      const res = await fetch(`/api/marketplace/lots/${lot.id}/bid`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json();
+
+      if (!res.ok || !json.ok) {
+        setBidError(json.error ?? 'Failed to place bid.');
+        return;
+      }
+
+      // Success -- clear inputs and refresh lot data
+      setBidAmount('');
+      setMaxBid('');
+      await fetchLotData();
+    } catch {
+      setBidError('Network error. Please try again.');
+    } finally {
+      setBidSubmitting(false);
+    }
+  }, [lot, bidAmount, maxBid, minimumBidCents, fetchLotData]);
+
+  const handleBuyNow = useCallback(async () => {
     if (!lot?.buy_now_price_cents) return;
-    alert(`Buy Now for ${formatCurrency(lot.buy_now_price_cents)} selected. (Integration pending)`);
-  }, [lot?.buy_now_price_cents]);
+
+    const confirmed = window.confirm(
+      `Buy now for ${formatCurrency(lot.buy_now_price_cents)}?`,
+    );
+    if (!confirmed) return;
+
+    setBidSubmitting(true);
+    setBidError(null);
+    try {
+      const res = await fetch(`/api/marketplace/lots/${lot.id}/bid`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount_cents: lot.buy_now_price_cents }),
+      });
+      const json = await res.json();
+
+      if (!res.ok || !json.ok) {
+        setBidError(json.error ?? 'Failed to complete purchase.');
+        return;
+      }
+
+      // Refresh lot data to show sold status
+      await fetchLotData();
+    } catch {
+      setBidError('Network error. Please try again.');
+    } finally {
+      setBidSubmitting(false);
+    }
+  }, [lot?.buy_now_price_cents, lot?.id, fetchLotData]);
 
   if (loading) {
     return (
@@ -568,7 +651,7 @@ export default function LotDetailPage() {
                       }}
                     >
                       <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>
-                        Bidder #{bid.bidder_number}
+                        {bid.label}
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                         <span
@@ -740,9 +823,27 @@ export default function LotDetailPage() {
                     </span>
                   </div>
 
+                  {/* Bid error message */}
+                  {bidError && (
+                    <div
+                      style={{
+                        padding: '10px 14px',
+                        borderRadius: 8,
+                        backgroundColor: 'rgba(192,57,43,0.12)',
+                        border: '1px solid rgba(192,57,43,0.3)',
+                        color: '#E74C3C',
+                        fontSize: '0.82rem',
+                        marginBottom: 12,
+                      }}
+                    >
+                      {bidError}
+                    </div>
+                  )}
+
                   {/* Place Bid button */}
                   <button
                     onClick={handlePlaceBid}
+                    disabled={bidSubmitting}
                     style={{
                       width: '100%',
                       padding: '14px 0',
@@ -856,6 +957,7 @@ export default function LotDetailPage() {
                   {lot.buy_now_price_cents != null && (
                     <button
                       onClick={handleBuyNow}
+                      disabled={bidSubmitting}
                       style={{
                         width: '100%',
                         padding: '14px 0',

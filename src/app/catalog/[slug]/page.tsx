@@ -182,20 +182,20 @@ export default async function ProductPage({
   };
 
   return (
-    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#fff', minHeight: '100vh' }}>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520', minHeight: '100vh' }}>
       <TrackViewItem id={product.slug} name={product.name} price={product.price} category={product.category} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([productSchema, breadcrumbSchema]) }} />
 
       {/* Breadcrumb */}
-      <div style={{ backgroundColor: '#fff', borderBottom: '1px solid var(--color-border)', padding: '12px 24px' }}>
+      <div style={{ backgroundColor: '#0F0520', borderBottom: '1px solid rgba(200,162,60,0.12)', padding: '12px 24px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 6 }}>
-          <Link href="/" style={{ color: 'var(--color-warm-gray)', fontSize: '0.8rem', textDecoration: 'none' }}>Home</Link>
-          <ChevronRight size={12} color="var(--color-warm-gray)" />
-          <Link href="/catalog" style={{ color: 'var(--color-warm-gray)', fontSize: '0.8rem', textDecoration: 'none' }}>Catalog</Link>
-          <ChevronRight size={12} color="var(--color-warm-gray)" />
-          <Link href={`/catalog?category=${product.category}`} style={{ color: 'var(--color-warm-gray)', fontSize: '0.8rem', textDecoration: 'none' }}>{product.category}</Link>
-          <ChevronRight size={12} color="var(--color-warm-gray)" />
-          <span style={{ color: 'var(--color-charcoal)', fontSize: '0.8rem', fontWeight: 600 }}>{product.shortName}</span>
+          <Link href="/" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', textDecoration: 'none' }}>Home</Link>
+          <ChevronRight size={12} color="rgba(255,255,255,0.6)" />
+          <Link href="/catalog" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', textDecoration: 'none' }}>Catalog</Link>
+          <ChevronRight size={12} color="rgba(255,255,255,0.6)" />
+          <Link href={`/catalog?category=${product.category}`} style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', textDecoration: 'none' }}>{product.category}</Link>
+          <ChevronRight size={12} color="rgba(255,255,255,0.6)" />
+          <span style={{ color: '#fff', fontSize: '0.8rem', fontWeight: 600 }}>{product.shortName}</span>
         </div>
       </div>
 
@@ -258,8 +258,8 @@ export default async function ProductPage({
                 <div
                   key={label}
                   style={{
-                    backgroundColor: '#fff',
-                    border: '1px solid var(--color-border)',
+                    backgroundColor: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(200,162,60,0.12)',
                     borderRadius: 10,
                     padding: '12px 14px',
                     display: 'flex',
@@ -269,8 +269,8 @@ export default async function ProductPage({
                 >
                   <Icon size={16} color="var(--color-royal)" />
                   <div>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-charcoal)' }}>{label}</div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--color-warm-gray)' }}>{sub}</div>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#fff' }}>{label}</div>
+                    <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)' }}>{sub}</div>
                   </div>
                 </div>
               ))}
@@ -286,20 +286,20 @@ export default async function ProductPage({
 
             <h1
               className="font-display"
-              style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', color: 'var(--color-charcoal)', marginTop: 8, lineHeight: 1.1, marginBottom: 12 }}
+              style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', color: '#fff', marginTop: 8, lineHeight: 1.1, marginBottom: 12 }}
             >
               {product.name}
             </h1>
 
-            <p style={{ color: 'var(--color-warm-gray)', fontSize: '1rem', lineHeight: 1.7, marginBottom: 28 }}>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.7, marginBottom: 28 }}>
               {product.tagline}
             </p>
 
             {/* Pricing tiers */}
             <div
               style={{
-                backgroundColor: '#fff',
-                border: '1px solid var(--color-border)',
+                backgroundColor: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 borderRadius: 16,
                 overflow: 'hidden',
                 marginBottom: 28,
@@ -309,20 +309,20 @@ export default async function ProductPage({
               <div
                 style={{
                   padding: '18px 20px',
-                  borderBottom: '1px solid var(--color-border)',
+                  borderBottom: '1px solid rgba(200,162,60,0.12)',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  backgroundColor: 'var(--color-bg)',
+                  backgroundColor: 'rgba(255,255,255,0.02)',
                 }}
               >
                 <div>
-                  <div className="label-caps" style={{ color: 'var(--color-warm-gray)', fontSize: '0.65rem', marginBottom: 2 }}>Retail Price</div>
-                  <div style={{ color: 'var(--color-warm-gray)', fontSize: '0.78rem' }}>No minimum — order any quantity</div>
+                  <div className="label-caps" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.65rem', marginBottom: 2 }}>Retail Price</div>
+                  <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.78rem' }}>No minimum — order any quantity</div>
                 </div>
-                <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 600, color: 'var(--color-charcoal)' }}>
+                <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 600, color: '#fff' }}>
                   {formatPrice(product.price)}
-                  <span style={{ fontSize: '0.75rem', color: 'var(--color-warm-gray)', fontWeight: 400, fontFamily: 'inherit' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', fontWeight: 400, fontFamily: 'inherit' }}>
                     {' '}{product.unit}
                   </span>
                 </div>
@@ -332,7 +332,7 @@ export default async function ProductPage({
               <div
                 style={{
                   padding: '18px 20px',
-                  borderBottom: '1px solid var(--color-border)',
+                  borderBottom: '1px solid rgba(200,162,60,0.12)',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -343,12 +343,12 @@ export default async function ProductPage({
                     <div className="label-caps" style={{ color: 'var(--color-purple-muted)', fontSize: '0.65rem' }}>Wholesale</div>
                     <span style={{ backgroundColor: 'var(--color-purple-light)', color: 'var(--color-royal)', fontSize: '0.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 4 }}>SAVE $10/CASE</span>
                   </div>
-                  <div style={{ color: 'var(--color-warm-gray)', fontSize: '0.78rem' }}>30+ cases · Approved accounts only</div>
+                  <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.78rem' }}>30+ cases · Approved accounts only</div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
                   <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 600, color: 'var(--color-royal)' }}>
                     {formatPrice(wholesalePrice)}
-                    <span style={{ fontSize: '0.75rem', color: 'var(--color-warm-gray)', fontWeight: 400, fontFamily: 'inherit' }}>
+                    <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', fontWeight: 400, fontFamily: 'inherit' }}>
                       {' '}{product.unit}
                     </span>
                   </div>
@@ -372,12 +372,12 @@ export default async function ProductPage({
                     <div className="label-caps" style={{ color: 'var(--color-gold)', fontSize: '0.65rem' }}>Distribution</div>
                     <span style={{ backgroundColor: '#FEF3DC', color: 'var(--color-gold)', fontSize: '0.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 4 }}>SAVE $20/CASE</span>
                   </div>
-                  <div style={{ color: 'var(--color-warm-gray)', fontSize: '0.78rem' }}>120+ cases · NET 30 terms available</div>
+                  <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.78rem' }}>120+ cases · NET 30 terms available</div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
                   <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 600, color: 'var(--color-gold)' }}>
                     {formatPrice(distroPrice)}
-                    <span style={{ fontSize: '0.75rem', color: 'var(--color-warm-gray)', fontWeight: 400, fontFamily: 'inherit' }}>
+                    <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', fontWeight: 400, fontFamily: 'inherit' }}>
                       {' '}{product.unit}
                     </span>
                   </div>
@@ -392,7 +392,7 @@ export default async function ProductPage({
             <div style={{ marginBottom: 32 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
                 <InventoryBadge slug={product.slug} />
-                <span style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)' }}>Ships within 1-2 business days</span>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)' }}>Ships within 1-2 business days</span>
               </div>
               <AddToCartPanel
                 id={product.slug}
@@ -405,13 +405,13 @@ export default async function ProductPage({
             </div>
 
             {/* Specs */}
-            <h2 className="font-heading" style={{ fontSize: '1rem', color: 'var(--color-charcoal)', marginBottom: 16 }}>
+            <h2 className="font-heading" style={{ fontSize: '1rem', color: '#fff', marginBottom: 16 }}>
               Specifications
             </h2>
             <div
               style={{
-                backgroundColor: '#fff',
-                border: '1px solid var(--color-border)',
+                backgroundColor: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 borderRadius: 12,
                 overflow: 'hidden',
                 marginBottom: 36,
@@ -425,39 +425,39 @@ export default async function ProductPage({
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '12px 16px',
-                    borderBottom: i < product.specs.length - 1 ? '1px solid var(--color-border)' : 'none',
-                    backgroundColor: i % 2 === 0 ? '#fff' : 'var(--color-bg)',
+                    borderBottom: i < product.specs.length - 1 ? '1px solid rgba(200,162,60,0.12)' : 'none',
+                    backgroundColor: i % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.02)',
                   }}
                 >
-                  <span style={{ fontSize: '0.82rem', color: 'var(--color-warm-gray)', fontWeight: 600 }}>{spec.label}</span>
-                  <span style={{ fontSize: '0.82rem', color: 'var(--color-charcoal)', fontWeight: 500 }}>{spec.value}</span>
+                  <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>{spec.label}</span>
+                  <span style={{ fontSize: '0.82rem', color: '#fff', fontWeight: 500 }}>{spec.value}</span>
                 </div>
               ))}
             </div>
 
             {/* Description */}
-            <h2 className="font-heading" style={{ fontSize: '1rem', color: 'var(--color-charcoal)', marginBottom: 12 }}>
+            <h2 className="font-heading" style={{ fontSize: '1rem', color: '#fff', marginBottom: 12 }}>
               About This Product
             </h2>
-            <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.9rem', lineHeight: 1.8, marginBottom: 28 }}>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', lineHeight: 1.8, marginBottom: 28 }}>
               {product.description}
             </p>
 
             {/* Features */}
-            <h2 className="font-heading" style={{ fontSize: '1rem', color: 'var(--color-charcoal)', marginBottom: 14 }}>
+            <h2 className="font-heading" style={{ fontSize: '1rem', color: '#fff', marginBottom: 14 }}>
               Key Features
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px', display: 'flex', flexDirection: 'column', gap: 10 }}>
               {product.features.map((f) => (
                 <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
                   <CheckCircle size={16} color="var(--color-purple-muted)" style={{ marginTop: 2, flexShrink: 0 }} />
-                  <span style={{ fontSize: '0.875rem', color: 'var(--color-charcoal)', lineHeight: 1.5 }}>{f}</span>
+                  <span style={{ fontSize: '0.875rem', color: '#fff', lineHeight: 1.5 }}>{f}</span>
                 </li>
               ))}
             </ul>
 
             {/* Use cases */}
-            <h2 className="font-heading" style={{ fontSize: '1rem', color: 'var(--color-charcoal)', marginBottom: 14 }}>
+            <h2 className="font-heading" style={{ fontSize: '1rem', color: '#fff', marginBottom: 14 }}>
               Common Applications
             </h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
@@ -484,12 +484,12 @@ export default async function ProductPage({
 
       {/* Related products */}
       {related.length > 0 && (
-        <section style={{ backgroundColor: '#fff', padding: '64px 24px', borderTop: '1px solid var(--color-border)' }}>
+        <section style={{ backgroundColor: '#0F0520', padding: '64px 24px', borderTop: '1px solid rgba(200,162,60,0.12)' }}>
           <div style={{ maxWidth: 1280, margin: '0 auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32, flexWrap: 'wrap', gap: 12 }}>
               <div>
                 <span className="label-caps" style={{ color: 'var(--color-gold)', fontSize: '0.68rem' }}>You Might Also Need</span>
-                <h2 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginTop: 6, color: 'var(--color-charcoal)' }}>
+                <h2 className="font-display" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginTop: 6, color: '#fff' }}>
                   Related Products
                 </h2>
               </div>
@@ -519,8 +519,8 @@ export default async function ProductPage({
                   <div
                     className="tilt-card"
                     style={{
-                      backgroundColor: '#fff',
-                      border: '1px solid var(--color-border)',
+                      backgroundColor: 'rgba(255,255,255,0.04)',
+                      border: '1px solid rgba(200,162,60,0.12)',
                       borderRadius: 16,
                       overflow: 'hidden',
                     }}
@@ -548,13 +548,13 @@ export default async function ProductPage({
                     </div>
                     <div style={{ padding: '16px 18px 20px' }}>
                       <span className="label-caps" style={{ color: 'var(--color-gold)', fontSize: '0.65rem' }}>{rp.category}</span>
-                      <h3 className="font-heading" style={{ fontSize: '0.92rem', marginTop: 6, marginBottom: 4, color: 'var(--color-charcoal)', lineHeight: 1.3 }}>
+                      <h3 className="font-heading" style={{ fontSize: '0.92rem', marginTop: 6, marginBottom: 4, color: '#fff', lineHeight: 1.3 }}>
                         {rp.name}
                       </h3>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
-                        <span className="font-mono" style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--color-charcoal)' }}>
+                        <span className="font-mono" style={{ fontSize: '1rem', fontWeight: 600, color: '#fff' }}>
                           {formatPrice(rp.price)}
-                          <span style={{ fontSize: '0.72rem', color: 'var(--color-warm-gray)', fontWeight: 400, fontFamily: 'inherit' }}> {rp.unit}</span>
+                          <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.6)', fontWeight: 400, fontFamily: 'inherit' }}> {rp.unit}</span>
                         </span>
                         <span style={{ color: 'var(--color-royal)', fontSize: '0.78rem', fontWeight: 600 }}>View →</span>
                       </div>

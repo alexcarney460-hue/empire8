@@ -8,7 +8,7 @@ import type { Lot } from '@/components/marketplace/LotCard';
 
 type SortOption = 'ending_soon' | 'newest' | 'price_asc' | 'most_bids';
 
-const CATEGORIES = ['All', 'Flower', 'Concentrates', 'Edibles', 'Pre-Rolls', 'Extracts', 'Other'] as const;
+const CATEGORIES = ['All', 'flower', 'concentrate', 'edible', 'vape', 'pre-roll', 'tincture', 'topical', 'other'] as const;
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: 'ending_soon', label: 'Ending Soon' },
@@ -79,7 +79,7 @@ export default function MarketplacePage() {
     const query = search.toLowerCase().trim();
     const filtered = lots.filter((lot) => {
       const matchesSearch = !query || lot.title.toLowerCase().includes(query);
-      const matchesCategory = category === 'All' || lot.category === category;
+      const matchesCategory = category === 'All' || lot.category?.toLowerCase() === category.toLowerCase();
       return matchesSearch && matchesCategory;
     });
     return sortLots(filtered, sort);
@@ -230,7 +230,7 @@ export default function MarketplacePage() {
                   transition: 'background-color 150ms ease, color 150ms ease, border-color 150ms ease',
                 }}
               >
-                {cat}
+                {cat === 'All' ? cat : cat.charAt(0).toUpperCase() + cat.slice(1)}
               </button>
             ))}
           </div>

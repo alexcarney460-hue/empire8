@@ -13,7 +13,7 @@ export default function CheckoutCancelPage() {
       style={{
         paddingTop: 'var(--nav-height)',
         minHeight: '100vh',
-        backgroundColor: 'var(--color-bg)',
+        backgroundColor: '#0F0520',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -36,18 +36,18 @@ export default function CheckoutCancelPage() {
           <XCircle size={32} color="var(--color-alert-red)" />
         </div>
 
-        <span className="label-caps" style={{ color: 'var(--color-warm-gray)', fontSize: '0.68rem' }}>
+        <span className="label-caps" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.68rem' }}>
           Checkout Cancelled
         </span>
 
         <h1
           className="font-display"
-          style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', color: 'var(--color-charcoal)', margin: '10px 0 14px', lineHeight: 1.1 }}
+          style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', color: '#fff', margin: '10px 0 14px', lineHeight: 1.1 }}
         >
           No charges were made.
         </h1>
 
-        <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.7, marginBottom: 36, fontSize: '0.95rem' }}>
+        <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: 36, fontSize: '0.95rem' }}>
           Your cart is still saved. Pick up where you left off, or reach out if you need help placing your order.
         </p>
 
@@ -77,10 +77,10 @@ export default function CheckoutCancelPage() {
             href="mailto:info@empire8salesdirect.com"
             style={{
               backgroundColor: 'transparent',
-              color: 'var(--color-charcoal)',
+              color: '#fff',
               padding: '14px 28px',
               borderRadius: 9,
-              border: '1.5px solid var(--color-border)',
+              border: '1.5px solid rgba(200,162,60,0.12)',
               fontFamily: "'Barlow', Arial, sans-serif",
               fontWeight: 600,
               fontSize: '0.85rem',

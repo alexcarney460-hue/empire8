@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/compliance`,          lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/login`,              lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
     { url: `${BASE}/signup`,             lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${BASE}/signup/brand`,       lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${BASE}/forgot-password`,    lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
     { url: `${BASE}/privacy`,            lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
     { url: `${BASE}/terms`,              lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
     { url: `${BASE}/llms.txt`,            lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
