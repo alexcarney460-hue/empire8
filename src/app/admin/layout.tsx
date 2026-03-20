@@ -15,6 +15,8 @@ const NAV_ITEMS = [
   { label: 'Accounting', href: '/admin/accounting' },
   { label: 'Analytics', href: '/admin/analytics' },
   { label: 'Marketing', href: '/admin/marketing' },
+  { label: 'CrowdTest', href: '/admin/crowdtest' },
+  { label: 'ThinkTank', href: '/admin/thinktank' },
   { label: 'Settings', href: '/admin/settings' },
 ] as const;
 
