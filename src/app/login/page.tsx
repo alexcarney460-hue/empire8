@@ -69,16 +69,7 @@ export default function LoginPage() {
         return;
       }
 
-      // Check if user has a dispensary account and if it's approved
-      const { data: dispensaryRow } = await supabase
-        .from('dispensary_accounts')
-        .select('id, is_approved')
-        .eq('user_id', authData.user.id)
-        .maybeSingle();
-
-      const dispensary = dispensaryRow as { id: string; is_approved: boolean } | null;
-
-      // Check if admin
+      // Check if admin first
       const { ADMIN_EMAILS } = await import('@/lib/admin/constants');
       const isAdmin = ADMIN_EMAILS.includes(authData.user.email?.toLowerCase() ?? '');
 
@@ -89,19 +80,46 @@ export default function LoginPage() {
         return;
       }
 
-      if (!dispensary) {
-        setError('No dispensary account found. Please sign up first.');
-        setLoading(false);
+      // Check for dispensary account
+      const { data: dispensaryRow } = await supabase
+        .from('dispensary_accounts')
+        .select('id, is_approved')
+        .eq('user_id', authData.user.id)
+        .maybeSingle();
+
+      const dispensary = dispensaryRow as { id: string; is_approved: boolean } | null;
+
+      // Check for brand account
+      const { data: brandRow } = await supabase
+        .from('brand_accounts')
+        .select('id, is_approved')
+        .eq('user_id', authData.user.id)
+        .maybeSingle();
+
+      const brand = brandRow as { id: string; is_approved: boolean } | null;
+
+      // Route based on account type
+      if (dispensary) {
+        if (!dispensary.is_approved) {
+          setError('Your dispensary account is pending approval. You will receive an email once approved.');
+          setLoading(false);
+          return;
+        }
+        router.push('/dashboard');
         return;
       }
 
-      if (!dispensary.is_approved) {
-        setError('Your dispensary account is pending approval. You will receive an email once approved.');
-        setLoading(false);
+      if (brand) {
+        if (!brand.is_approved) {
+          setError('Your brand account is pending approval. You will receive an email once approved.');
+          setLoading(false);
+          return;
+        }
+        router.push('/brand-dashboard');
         return;
       }
 
-      router.push('/dashboard');
+      setError('No account found. Please sign up first.');
     } catch {
       setError('Network error. Please try again.');
       setLoading(false);
@@ -332,7 +350,7 @@ export default function LoginPage() {
                 href="/signup"
                 style={{ color: COLORS.gold, textDecoration: 'none', fontWeight: 600 }}
               >
-                Apply as a Dispensary
+                Apply Now
               </Link>
             </p>
           </div>
