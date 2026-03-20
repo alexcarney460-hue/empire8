@@ -1,0 +1,44 @@
+{
+  "host": "empire8ny.com",
+  "name": "Empire 8 Sales Direct",
+  "shortName": "Empire 8",
+  "launcherName": "Empire 8",
+  "display": "standalone",
+  "themeColor": "#4A0E78",
+  "navigationColor": "#0F0520",
+  "navigationColorDark": "#0F0520",
+  "backgroundColor": "#0F0520",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://empire8ny.com/icon-512.png",
+  "maskableIconUrl": "https://empire8ny.com/icon-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./empire8-keystore.jks",
+    "alias": "empire8"
+  },
+  "appVersionCode": 1,
+  "appVersionName": "1.0.0",
+  "shortcuts": [
+    {
+      "name": "Marketplace",
+      "shortName": "Weedbay",
+      "url": "/marketplace",
+      "chosenIconUrl": "https://empire8ny.com/icon-192.png"
+    },
+    {
+      "name": "My Orders",
+      "shortName": "Orders",
+      "url": "/dashboard/orders",
+      "chosenIconUrl": "https://empire8ny.com/icon-192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://empire8ny.com/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "packageId": "com.empire8ny.app"
+}
