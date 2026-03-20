@@ -11,46 +11,69 @@ export async function GET(req: Request) {
     return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   try {
-    const { data: orders, error } = await supabase
-      .from('orders')
-      .select('email, total, created_at, status');
+    // Fetch all sales orders with dispensary info
+    const { data: orders, error: ordersErr } = await supabase
+      .from('sales_orders')
+      .select('dispensary_id, total, status, created_at');
 
-    if (error) throw error;
+    if (ordersErr) throw ordersErr;
 
-    const customerMap: Record<string, {
-      email: string;
-      total_spent: number;
+    // Fetch dispensary names
+    const { data: dispensaries, error: dispErr } = await supabase
+      .from('dispensary_accounts')
+      .select('id, name');
+
+    if (dispErr) throw dispErr;
+
+    const nameMap: Record<string, string> = {};
+    for (const d of dispensaries ?? []) {
+      nameMap[d.id] = d.name || 'Unknown';
+    }
+
+    // Group by dispensary_id
+    const grouped: Record<string, {
+      dispensary_id: string;
+      dispensary_name: string;
       order_count: number;
-      last_order: string;
+      total_spent: number;
+      last_order_date: string;
     }> = {};
 
     for (const order of orders ?? []) {
-      if (!order.email) continue;
-      const email = order.email.toLowerCase();
-      const isActive = order.status !== 'cancelled' && order.status !== 'refunded';
+      if (!order.dispensary_id) continue;
+      const isActive = order.status !== 'cancelled' && order.status !== 'voided';
 
-      if (!customerMap[email]) {
-        customerMap[email] = { email, total_spent: 0, order_count: 0, last_order: '' };
+      if (!grouped[order.dispensary_id]) {
+        grouped[order.dispensary_id] = {
+          dispensary_id: order.dispensary_id,
+          dispensary_name: nameMap[order.dispensary_id] || 'Unknown',
+          order_count: 0,
+          total_spent: 0,
+          last_order_date: '',
+        };
       }
 
       if (isActive) {
-        customerMap[email].total_spent += Number(order.total) || 0;
-        customerMap[email].order_count += 1;
+        grouped[order.dispensary_id].total_spent += Number(order.total) || 0;
+        grouped[order.dispensary_id].order_count += 1;
       }
 
-      if (order.created_at > (customerMap[email].last_order || '')) {
-        customerMap[email].last_order = order.created_at;
+      if (order.created_at > (grouped[order.dispensary_id].last_order_date || '')) {
+        grouped[order.dispensary_id].last_order_date = order.created_at;
       }
     }
 
-    const customers = Object.values(customerMap)
+    const rows = Object.values(grouped)
       .sort((a, b) => b.total_spent - a.total_spent)
-      .map((c) => ({
-        ...c,
-        total_spent: Math.round(c.total_spent * 100) / 100,
+      .map((row) => ({
+        ...row,
+        total_spent: Math.round(row.total_spent * 100) / 100,
+        avg_order: row.order_count > 0
+          ? Math.round((row.total_spent / row.order_count) * 100) / 100
+          : 0,
       }));
 
-    return NextResponse.json({ ok: true, data: customers });
+    return NextResponse.json({ ok: true, data: rows });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     return NextResponse.json({ ok: false, error: message }, { status: 500 });

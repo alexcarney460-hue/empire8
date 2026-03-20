@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createHmac, timingSafeEqual } from 'crypto';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { getSupabaseServer } from '@/lib/supabase-server';
-import { autoShipOrder } from '@/lib/shippo';
-import { DEFAULT_WEIGHTS } from '@/lib/shipping';
 import { squareClient } from '@/lib/square';
 import {
   sendOrderConfirmationEmail,

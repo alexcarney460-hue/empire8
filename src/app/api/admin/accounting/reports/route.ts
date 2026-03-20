@@ -17,9 +17,9 @@ export async function GET(req: Request) {
     const groupBy = url.searchParams.get('group_by') || 'day';
 
     let query = supabase
-      .from('orders')
+      .from('sales_orders')
       .select('total, created_at, status')
-      .not('status', 'in', '("cancelled","refunded")');
+      .not('status', 'in', '("cancelled","voided")');
 
     if (from) query = query.gte('created_at', from);
     if (to) query = query.lte('created_at', to + 'T23:59:59.999Z');
@@ -37,7 +37,6 @@ export async function GET(req: Request) {
       if (groupBy === 'month') {
         periodKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
       } else if (groupBy === 'week') {
-        // ISO week start (Monday)
         const d = new Date(date);
         const day = d.getDay();
         const diff = d.getDate() - day + (day === 0 ? -6 : 1);

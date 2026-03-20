@@ -12,9 +12,5 @@ export const squareClient = accessToken
 
 export const SQUARE_LOCATION_ID = process.env.SQUARE_LOCATION_ID?.trim() ?? '';
 
-// Subscription plan variation IDs (create once in Square Dashboard → Items → Subscriptions)
-// Set these env vars after creating plans in Square Dashboard
-export const SQUARE_AUTOSHIP_PLAN_ID = process.env.SQUARE_AUTOSHIP_PLAN_ID ?? '';
-
 // 10% additional discount for Subscribe & Save on top of tier pricing
 export const AUTOSHIP_DISCOUNT = 0.10;

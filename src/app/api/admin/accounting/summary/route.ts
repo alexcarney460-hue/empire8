@@ -11,22 +11,28 @@ export async function GET(req: Request) {
     return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   try {
-    // Total revenue + order count
+    // Total revenue + order count from sales_orders
     const { data: orders, error: ordersErr } = await supabase
-      .from('orders')
+      .from('sales_orders')
       .select('total, status');
 
     if (ordersErr) throw ordersErr;
 
     const allOrders = orders ?? [];
-    const nonRefunded = allOrders.filter((o) => o.status !== 'refunded' && o.status !== 'cancelled');
-    const revenue = nonRefunded.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
-    const orderCount = nonRefunded.length;
+    const activeOrders = allOrders.filter(
+      (o) => o.status !== 'cancelled' && o.status !== 'voided'
+    );
+    const revenue = activeOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+    const orderCount = activeOrders.length;
     const avgOrderValue = orderCount > 0 ? revenue / orderCount : 0;
 
-    const refundedOrders = allOrders.filter((o) => o.status === 'refunded');
-    const refundCount = refundedOrders.length;
-    const refundAmount = refundedOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+    // Active dispensaries count
+    const { count: dispensaryCount, error: dispErr } = await supabase
+      .from('dispensary_accounts')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'active');
+
+    if (dispErr) throw dispErr;
 
     return NextResponse.json({
       ok: true,
@@ -34,8 +40,7 @@ export async function GET(req: Request) {
         revenue: Math.round(revenue * 100) / 100,
         order_count: orderCount,
         avg_order_value: Math.round(avgOrderValue * 100) / 100,
-        refund_count: refundCount,
-        refund_amount: Math.round(refundAmount * 100) / 100,
+        active_dispensaries: dispensaryCount ?? 0,
       },
     });
   } catch (err: unknown) {
