@@ -248,6 +248,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {/* Sign Out */}
           <button
             onClick={async () => {
+              await fetch('/api/auth/logout', { method: 'POST' });
               const supabase = getSupabase();
               await supabase.auth.signOut();
               window.location.href = '/';

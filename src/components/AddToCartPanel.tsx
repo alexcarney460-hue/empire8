@@ -502,7 +502,7 @@ export default function AddToCartPanel({ id, name, price, img, unit, product }: 
           </div>
         </div>
         <Link
-          href="/wholesale"
+          href="/dispensary-signup"
           style={{
             color: 'var(--color-royal)',
             fontFamily: "'Barlow', Arial, sans-serif",

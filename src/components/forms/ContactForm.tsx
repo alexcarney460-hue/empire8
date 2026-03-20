@@ -11,10 +11,10 @@ const inputStyle: React.CSSProperties = {
   width: '100%',
   padding: '11px 14px',
   borderRadius: 10,
-  border: '1px solid var(--color-border, #E2E8F0)',
+  border: '1px solid rgba(200,162,60,0.2)',
   fontSize: '0.88rem',
-  color: 'var(--color-charcoal, #0F172A)',
-  background: '#FAFAF9',
+  color: '#fff',
+  background: 'rgba(255,255,255,0.06)',
   outline: 'none',
   fontFamily: 'inherit',
 };
@@ -30,27 +30,27 @@ export default function ContactForm() {
         <>
           <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <div>
-              <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'var(--color-charcoal)', fontSize: '0.68rem' }}>First Name</label>
+              <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'rgba(255,255,255,0.7)', fontSize: '0.68rem' }}>First Name</label>
               <input type="text" required placeholder="First Name" value={values.first_name} onChange={(e) => onChange('first_name', e.target.value)} style={inputStyle} />
             </div>
             <div>
-              <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'var(--color-charcoal)', fontSize: '0.68rem' }}>Last Name</label>
+              <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'rgba(255,255,255,0.7)', fontSize: '0.68rem' }}>Last Name</label>
               <input type="text" required placeholder="Last Name" value={values.last_name} onChange={(e) => onChange('last_name', e.target.value)} style={inputStyle} />
             </div>
           </div>
 
           <div>
-            <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'var(--color-charcoal)', fontSize: '0.68rem' }}>Email Address</label>
+            <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'rgba(255,255,255,0.7)', fontSize: '0.68rem' }}>Email Address</label>
             <input type="email" required placeholder="you@example.com" value={values.email} onChange={(e) => onChange('email', e.target.value)} style={inputStyle} />
           </div>
 
           <div>
-            <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'var(--color-charcoal)', fontSize: '0.68rem' }}>Phone Number (optional)</label>
+            <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'rgba(255,255,255,0.7)', fontSize: '0.68rem' }}>Phone Number (optional)</label>
             <input type="tel" placeholder="(555) 000-0000" value={values.phone} onChange={(e) => onChange('phone', e.target.value)} style={inputStyle} />
           </div>
 
           <div>
-            <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'var(--color-charcoal)', fontSize: '0.68rem' }}>Inquiry Type</label>
+            <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'rgba(255,255,255,0.7)', fontSize: '0.68rem' }}>Inquiry Type</label>
             <select value={values.inquiry_type} onChange={(e) => onChange('inquiry_type', e.target.value)} style={inputStyle}>
               <option value="">Select a topic</option>
               {INQUIRY_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
@@ -58,7 +58,7 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'var(--color-charcoal)', fontSize: '0.68rem' }}>Message</label>
+            <label className="label-caps" style={{ display: 'block', marginBottom: 8, color: 'rgba(255,255,255,0.7)', fontSize: '0.68rem' }}>Message</label>
             <textarea rows={5} required placeholder="How can we help?" value={values.message} onChange={(e) => onChange('message', e.target.value)} style={{ ...inputStyle, resize: 'vertical' }} />
           </div>
 

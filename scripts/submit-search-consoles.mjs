@@ -6,8 +6,8 @@ import { chromium } from 'playwright';
 import { readFileSync, writeFileSync, cpSync, mkdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-const SITE_URL = 'https://valuesuppliers.co';
-const SITEMAP_URL = 'https://valuesuppliers.co/sitemap.xml';
+const SITE_URL = 'https://empire8salesdirect.com';
+const SITEMAP_URL = 'https://empire8salesdirect.com/sitemap.xml';
 const LAYOUT_PATH = resolve(import.meta.dirname, '../src/app/layout.tsx');
 const EDGE_PROFILE = 'C:/Users/Claud/AppData/Local/Microsoft/Edge/User Data';
 const TEMP_PROFILE = 'C:/Users/Claud/AppData/Local/Temp/edge-playwright-profile';

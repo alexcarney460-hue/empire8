@@ -122,9 +122,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   }, [isMobile, sidebarOpen]);
 
   const handleLogout = useCallback(async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
     const supabase = getSupabase();
     await supabase.auth.signOut();
-    window.location.href = '/account';
+    window.location.href = '/';
   }, []);
 
   const isActive = (href: string): boolean => {

@@ -1,5 +1,5 @@
 """
-PRODUCER — Video Production Agent for Triple OG Gloves Reels
+PRODUCER — Video Production Agent for Empire 8 Sales Direct Reels
 
 Renders story-driven reels with MINIMAL text overlays.
 Cinematic AI-generated images with zoompan animation.
@@ -136,10 +136,10 @@ def _make_scene_clip(img_path: str, scene: dict, clip_path: str) -> bool:
 
 
 def _make_end_card(clip_path: str, duration: float = 5.0) -> bool:
-    """Create the Triple OG Gloves end card via Runway image-to-video.
+    """Create the Empire 8 end card via Runway image-to-video.
 
     Uses the REAL product box photo as the reference image so the packaging
-    matches what's actually on valuesuppliers.co. Cinematic hero shot.
+    matches what's actually on empire8salesdirect.com. Cinematic hero shot.
     Falls back to FFmpeg text card only if Runway fails.
     """
     if RUNWAY_AVAILABLE:
@@ -198,8 +198,8 @@ def _make_end_card(clip_path: str, duration: float = 5.0) -> bool:
         "-f", "lavfi",
         "-i", f"color=c=0x0A0A0A:s=1080x1920:d={duration}:r=30",
         "-vf",
-        f"drawtext=text='TRIPLE OG GLOVES':fontfile={FONT_BOLD}:fontsize=56:fontcolor=0x4AE54A:x=(w-text_w)/2:y=(h-text_h)/2-20,"
-        f"drawtext=text='valuesuppliers.co':fontfile={FONT_SEMI}:fontsize=30:fontcolor=white:x=(w-text_w)/2:y=(h+text_h)/2+50,"
+        f"drawtext=text='EMPIRE 8':fontfile={FONT_BOLD}:fontsize=56:fontcolor=0x4AE54A:x=(w-text_w)/2:y=(h-text_h)/2-20,"
+        f"drawtext=text='empire8salesdirect.com':fontfile={FONT_SEMI}:fontsize=30:fontcolor=white:x=(w-text_w)/2:y=(h+text_h)/2+50,"
         f"drawtext=text='Quality Demands Quality.':fontfile={FONT_SEMI}:fontsize=22:fontcolor=0x8B2FC9:x=(w-text_w)/2:y=(h+text_h)/2+110",
         "-c:v", "libx264", "-pix_fmt", "yuv420p",
         "-t", str(duration),

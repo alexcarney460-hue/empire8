@@ -27,7 +27,7 @@ const INDUSTRIES = [
   { icon: Beaker, name: 'Cultivators', desc: 'Indoor and outdoor cannabis cultivation operations', color: '#6A1B9A' },
   { icon: Wrench, name: 'Processors', desc: 'Cannabis extraction, manufacturing, and processing facilities', color: '#37474F' },
   { icon: Utensils, name: 'Edibles & Infusions', desc: 'Cannabis-infused food and beverage producers', color: '#E65100' },
-  { icon: Stethoscope, name: 'Medical Cannabis', desc: 'Medical marijuana dispensaries and patient programs', color: '#1565C0' },
+  { icon: Stethoscope, name: 'Medical Cannabis', desc: 'Medical marijuana dispensaries and patient programs', color: '#4A0E78' },
   { icon: Shield, name: 'Compliance & Testing', desc: 'Licensed testing labs and compliance-focused operations', color: '#C62828' },
 ];
 
@@ -39,8 +39,8 @@ const PRODUCT_TEASERS = [
 const TIER_CARDS = [
   {
     tier: 'Starter',
-    color: 'var(--color-warm-gray)',
-    accentBg: '#F7F7F6',
+    color: 'rgba(255,255,255,0.5)',
+    accentBg: 'rgba(255,255,255,0.06)',
     headline: 'New Dispensary Accounts',
     description: 'Getting started with Empire 8. Competitive wholesale pricing with no long-term commitment required.',
     cta: 'Get Started',
@@ -48,8 +48,8 @@ const TIER_CARDS = [
   },
   {
     tier: 'Wholesale',
-    color: 'var(--color-purple-muted)',
-    accentBg: '#EDF7F0',
+    color: '#4A0E78',
+    accentBg: 'rgba(74,14,120,0.15)',
     headline: 'Volume Wholesale',
     description: 'Deeper discounts for dispensaries with consistent order volume. Priority fulfillment and faster restocking.',
     cta: 'Get Wholesale Pricing',
@@ -58,7 +58,7 @@ const TIER_CARDS = [
   {
     tier: 'Distribution',
     color: 'var(--color-gold)',
-    accentBg: '#FDF6E8',
+    accentBg: 'rgba(200,162,60,0.12)',
     headline: 'Distribution Partners',
     description: 'Best pricing for high-volume dispensary partners. NET 30 terms, dedicated rep, and bulk delivery scheduling.',
     cta: 'Dispensary Sign Up',
@@ -108,7 +108,7 @@ const FEATURE_ITEMS = [
 
 export default function CommercialPage() {
   return (
-    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#fff' }}>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520' }}>
 
       {/* MARQUEE TRUST BAR */}
       <div
@@ -128,7 +128,7 @@ export default function CommercialPage() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Licensed NY Distributor &nbsp;·&nbsp; Wholesale Cannabis &nbsp;·&nbsp; Statewide Delivery &nbsp;·&nbsp; 62 Counties &nbsp;·&nbsp; Premium Flower &nbsp;·&nbsp; Concentrates &nbsp;·&nbsp; Dispensary Supply
+              Licensed NY Distributor &nbsp;&middot;&nbsp; Wholesale Cannabis &nbsp;&middot;&nbsp; Statewide Delivery &nbsp;&middot;&nbsp; 62 Counties &nbsp;&middot;&nbsp; Premium Flower &nbsp;&middot;&nbsp; Concentrates &nbsp;&middot;&nbsp; Dispensary Supply
             </span>
           ))}
         </div>
@@ -137,7 +137,7 @@ export default function CommercialPage() {
       {/* HERO */}
       <section
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: '#0F0520',
           padding: '72px 24px 88px',
           position: 'relative',
           overflow: 'hidden',
@@ -159,8 +159,8 @@ export default function CommercialPage() {
           <Image src="/logo.jpg" alt="" width={600} height={220} style={{ objectFit: 'contain', width: 'clamp(300px, 40vw, 580px)', height: 'auto' }} />
         </div>
 
-        <div className="e8-glow-gold" style={{ width: 520, height: 520, top: '-20%', right: '6%', background: 'rgba(28,28,28,0.05)' }} />
-        <div className="e8-glow-gold" style={{ width: 280, height: 280, bottom: '-5%', left: '4%', background: 'rgba(28,28,28,0.04)' }} />
+        <div className="e8-glow-gold" style={{ width: 520, height: 520, top: '-20%', right: '6%', background: 'rgba(74,14,120,0.12)' }} />
+        <div className="e8-glow-gold" style={{ width: 280, height: 280, bottom: '-5%', left: '4%', background: 'rgba(200,162,60,0.06)' }} />
 
         <div
           style={{
@@ -178,26 +178,26 @@ export default function CommercialPage() {
           <div>
             <span
               className="label-caps e8-fade-up"
-              style={{ color: '#1565C0', display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 24 }}
+              style={{ color: '#C8A23C', display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 24 }}
             >
-              <span style={{ width: 28, height: 1.5, backgroundColor: '#1565C0', display: 'inline-block', borderRadius: 99 }} />
+              <span style={{ width: 28, height: 1.5, backgroundColor: '#C8A23C', display: 'inline-block', borderRadius: 99 }} />
               Cannabis Wholesale Supply
             </span>
 
             <h1
               className="font-display e8-fade-up-1"
-              style={{ fontSize: 'clamp(2.75rem, 5.5vw, 4.75rem)', lineHeight: 0.93, marginBottom: 26, letterSpacing: '-0.01em', color: 'var(--color-charcoal)' }}
+              style={{ fontSize: 'clamp(2.75rem, 5.5vw, 4.75rem)', lineHeight: 0.93, marginBottom: 26, letterSpacing: '-0.01em', color: '#fff' }}
             >
               Cannabis Wholesale
               <br />
               for Every
               <br />
-              <span style={{ color: '#1565C0' }}>Dispensary.</span>
+              <span style={{ color: '#C8A23C' }}>Dispensary.</span>
             </h1>
 
             <p
               className="e8-fade-up-2"
-              style={{ fontSize: '1.05rem', color: 'var(--color-warm-gray)', maxWidth: 440, lineHeight: 1.8, marginBottom: 40 }}
+              style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.6)', maxWidth: 440, lineHeight: 1.8, marginBottom: 40 }}
             >
               Licensed cannabis wholesale supplier serving dispensaries
               across all 62 New York counties. Premium flower, concentrates,
@@ -209,7 +209,7 @@ export default function CommercialPage() {
                 href="/catalog"
                 className="e8-btn-gold"
                 style={{
-                  backgroundColor: '#1565C0',
+                  backgroundColor: '#4A0E78',
                   color: '#fff',
                   padding: '14px 30px',
                   borderRadius: 9999,
@@ -222,19 +222,19 @@ export default function CommercialPage() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 8,
-                  boxShadow: '0 4px 20px rgba(21,101,192,0.25)',
+                  boxShadow: '0 4px 20px rgba(74,14,120,0.35)',
                 }}
               >
                 Browse Products <ArrowRight size={14} />
               </Link>
               <Link
-                href="/wholesale"
+                href="/dispensary-signup"
                 style={{
                   backgroundColor: 'transparent',
-                  color: 'var(--color-charcoal)',
+                  color: '#fff',
                   padding: '14px 30px',
                   borderRadius: 9999,
-                  border: '1.5px solid var(--color-border)',
+                  border: '1.5px solid rgba(200,162,60,0.12)',
                   fontFamily: "'Barlow', Arial, sans-serif",
                   fontWeight: 600,
                   fontSize: '0.82rem',
@@ -258,7 +258,7 @@ export default function CommercialPage() {
                 gap: '0 28px',
                 marginTop: 48,
                 paddingTop: 36,
-                borderTop: '1px solid var(--color-border)',
+                borderTop: '1px solid rgba(200,162,60,0.12)',
                 width: 'fit-content',
               }}
             >
@@ -266,11 +266,11 @@ export default function CommercialPage() {
                 <div key={stat.label} className={`e8-stat e8-stat-${i + 1}`}>
                   <div
                     className="font-mono"
-                    style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--color-charcoal)', lineHeight: 1 }}
+                    style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}
                   >
                     {stat.value}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--color-warm-gray)', marginTop: 4, whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.6)', marginTop: 4, whiteSpace: 'nowrap' }}>
                     {stat.label}
                   </div>
                 </div>
@@ -284,7 +284,7 @@ export default function CommercialPage() {
                 position: 'absolute',
                 inset: '-18%',
                 borderRadius: '50%',
-                background: 'rgba(21,101,192,0.08)',
+                background: 'rgba(74,14,120,0.15)',
                 filter: 'blur(72px)',
                 pointerEvents: 'none',
                 zIndex: 0,
@@ -328,18 +328,18 @@ export default function CommercialPage() {
                     width: 36,
                     height: 36,
                     borderRadius: 10,
-                    backgroundColor: '#E3F2FD',
+                    backgroundColor: 'rgba(74,14,120,0.2)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
                   }}
                 >
-                  <Shield size={18} color="#1565C0" />
+                  <Shield size={18} color="#C8A23C" />
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.82rem', color: 'var(--color-charcoal)' }}>Licensed Distributor</div>
-                  <div style={{ fontSize: '0.73rem', color: 'var(--color-warm-gray)', marginTop: 1 }}>NYS Cannabis Wholesale</div>
+                  <div style={{ fontWeight: 700, fontSize: '0.82rem', color: '#fff' }}>Licensed Distributor</div>
+                  <div style={{ fontSize: '0.73rem', color: 'rgba(255,255,255,0.6)', marginTop: 1 }}>NYS Cannabis Wholesale</div>
                 </div>
               </div>
 
@@ -350,7 +350,7 @@ export default function CommercialPage() {
                   top: 20,
                   right: -16,
                   zIndex: 2,
-                  backgroundColor: '#1565C0',
+                  backgroundColor: '#4A0E78',
                   color: '#fff',
                   borderRadius: 9999,
                   padding: '7px 16px',
@@ -359,7 +359,7 @@ export default function CommercialPage() {
                   fontWeight: 700,
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  boxShadow: '0 4px 16px rgba(21,101,192,0.3)',
+                  boxShadow: '0 4px 16px rgba(74,14,120,0.4)',
                 }}
               >
                 All 62 NY Counties
@@ -370,7 +370,7 @@ export default function CommercialPage() {
       </section>
 
       {/* FEATURE BAR */}
-      <section style={{ backgroundColor: '#F8FAF8', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '32px 24px' }}>
+      <section style={{ backgroundColor: '#150A28', borderTop: '1px solid rgba(200,162,60,0.12)', borderBottom: '1px solid rgba(200,162,60,0.12)', padding: '32px 24px' }}>
         <div
           style={{
             maxWidth: 1100,
@@ -384,11 +384,11 @@ export default function CommercialPage() {
           {FEATURE_ITEMS.map(({ icon: Icon, label, sub }, i) => (
             <AnimateIn key={label} delay={i * 90} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
               <div className="e8-icon-circle">
-                <Icon size={20} color="#1565C0" />
+                <Icon size={20} color="#C8A23C" />
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--color-charcoal)' }}>{label}</div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)', marginTop: 2 }}>{sub}</div>
+                <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#fff' }}>{label}</div>
+                <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginTop: 2 }}>{sub}</div>
               </div>
             </AnimateIn>
           ))}
@@ -396,15 +396,15 @@ export default function CommercialPage() {
       </section>
 
       {/* INDUSTRIES WE SERVE */}
-      <section style={{ backgroundColor: '#fff', padding: '96px 24px' }}>
+      <section style={{ backgroundColor: '#0F0520', padding: '96px 24px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 56 }}>
-            <span className="label-caps" style={{ color: '#1565C0' }}>
+            <span className="label-caps" style={{ color: '#C8A23C' }}>
               Who We Serve
             </span>
             <h2
               className="font-display"
-              style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 10, color: 'var(--color-charcoal)' }}
+              style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 10, color: '#fff' }}
             >
               Cannabis Wholesale for Every Operator
             </h2>
@@ -417,8 +417,8 @@ export default function CommercialPage() {
                 <AnimateIn key={ind.name} delay={i * 80}>
                   <div
                     style={{
-                      backgroundColor: '#fff',
-                      border: '1px solid var(--color-border)',
+                      backgroundColor: 'rgba(255,255,255,0.04)',
+                      border: '1px solid rgba(200,162,60,0.12)',
                       borderRadius: 20,
                       padding: '32px 28px',
                       boxShadow: 'var(--shadow-xs)',
@@ -441,10 +441,10 @@ export default function CommercialPage() {
                     >
                       <Icon size={22} color={ind.color} />
                     </div>
-                    <h3 className="font-heading" style={{ fontSize: '1.1rem', color: 'var(--color-charcoal)' }}>
+                    <h3 className="font-heading" style={{ fontSize: '1.1rem', color: '#fff' }}>
                       {ind.name}
                     </h3>
-                    <p style={{ fontSize: '0.88rem', color: 'var(--color-warm-gray)', lineHeight: 1.65, margin: 0 }}>
+                    <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.65, margin: 0 }}>
                       {ind.desc}
                     </p>
                   </div>
@@ -456,16 +456,16 @@ export default function CommercialPage() {
       </section>
 
       {/* FEATURED PRODUCTS */}
-      <section style={{ backgroundColor: '#FAFAFA', padding: '96px 24px', borderTop: '1px solid var(--color-border)' }}>
+      <section style={{ backgroundColor: '#150A28', padding: '96px 24px', borderTop: '1px solid rgba(200,162,60,0.12)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <AnimateIn style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48, flexWrap: 'wrap', gap: 16 }}>
             <div>
-              <span className="label-caps" style={{ color: '#1565C0' }}>
+              <span className="label-caps" style={{ color: '#C8A23C' }}>
                 Our Products
               </span>
               <h2
                 className="font-display"
-                style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}
+                style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: '#fff' }}
               >
                 Stocked and Ready to Ship
               </h2>
@@ -473,7 +473,7 @@ export default function CommercialPage() {
             <Link
               href="/catalog"
               style={{
-                color: '#1565C0',
+                color: '#C8A23C',
                 textDecoration: 'none',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -485,7 +485,7 @@ export default function CommercialPage() {
                 fontFamily: "'Barlow', Arial, sans-serif",
                 padding: '8px 18px',
                 borderRadius: 9999,
-                border: '1.5px solid var(--color-border)',
+                border: '1.5px solid rgba(200,162,60,0.12)',
               }}
             >
               View All Products <ArrowRight size={14} />
@@ -499,8 +499,8 @@ export default function CommercialPage() {
                   <div
                     className="tilt-card"
                     style={{
-                      backgroundColor: '#fff',
-                      border: '1px solid var(--color-border)',
+                      backgroundColor: 'rgba(255,255,255,0.04)',
+                      border: '1px solid rgba(200,162,60,0.12)',
                       borderRadius: 20,
                       overflow: 'hidden',
                       boxShadow: 'var(--shadow-xs)',
@@ -514,7 +514,7 @@ export default function CommercialPage() {
                         style={{
                           position: 'absolute',
                           inset: 0,
-                          background: 'radial-gradient(ellipse 70% 55% at 50% 100%, rgba(21,101,192,0.08) 0%, transparent 70%)',
+                          background: 'radial-gradient(ellipse 70% 55% at 50% 100%, rgba(74,14,120,0.15) 0%, transparent 70%)',
                           pointerEvents: 'none',
                           zIndex: 1,
                         }}
@@ -533,7 +533,7 @@ export default function CommercialPage() {
                             position: 'absolute',
                             top: 12,
                             right: 12,
-                            backgroundColor: '#1565C0',
+                            backgroundColor: '#4A0E78',
                             color: '#fff',
                             padding: '5px 12px',
                             borderRadius: 9999,
@@ -547,20 +547,20 @@ export default function CommercialPage() {
                     </div>
 
                     <div style={{ padding: '20px 20px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                      <span className="label-caps" style={{ color: '#1565C0', fontSize: '0.62rem' }}>
+                      <span className="label-caps" style={{ color: '#C8A23C', fontSize: '0.62rem' }}>
                         {product.category}
                       </span>
-                      <h3 className="font-heading" style={{ fontSize: '1rem', marginTop: 6, marginBottom: 4, color: 'var(--color-charcoal)' }}>
+                      <h3 className="font-heading" style={{ fontSize: '1rem', marginTop: 6, marginBottom: 4, color: '#fff' }}>
                         {product.name}
                       </h3>
-                      <p style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)', marginBottom: 'auto', paddingBottom: 18 }}>
+                      <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginBottom: 'auto', paddingBottom: 18 }}>
                         {product.detail}
                       </p>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--color-border)', paddingTop: 14 }}>
-                        <span className="font-mono" style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--color-charcoal)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(200,162,60,0.12)', paddingTop: 14 }}>
+                        <span className="font-mono" style={{ fontSize: '1.1rem', fontWeight: 600, color: '#fff' }}>
                           {product.price}
                         </span>
-                        <span className="e8-card-arrow label-caps" style={{ color: '#1565C0', fontSize: '0.68rem' }}>
+                        <span className="e8-card-arrow label-caps" style={{ color: '#C8A23C', fontSize: '0.68rem' }}>
                           View <ArrowRight size={12} />
                         </span>
                       </div>
@@ -574,15 +574,15 @@ export default function CommercialPage() {
       </section>
 
       {/* TIER CARDS */}
-      <section style={{ backgroundColor: '#fff', padding: '96px 24px', borderTop: '1px solid var(--color-border)' }}>
+      <section style={{ backgroundColor: '#0F0520', padding: '96px 24px', borderTop: '1px solid rgba(200,162,60,0.12)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 56 }}>
-            <span className="label-caps" style={{ color: '#1565C0' }}>
+            <span className="label-caps" style={{ color: '#C8A23C' }}>
               Pricing Programs
             </span>
             <h2
               className="font-display"
-              style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 10, color: 'var(--color-charcoal)' }}
+              style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 10, color: '#fff' }}
             >
               Pricing Built for Your Scale
             </h2>
@@ -594,8 +594,8 @@ export default function CommercialPage() {
                 <div
                   className="tilt-card"
                   style={{
-                    backgroundColor: '#fff',
-                    border: '1px solid var(--color-border)',
+                    backgroundColor: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(200,162,60,0.12)',
                     borderRadius: 20,
                     padding: '36px 28px 32px',
                     borderTop: `4px solid ${card.color}`,
@@ -622,11 +622,11 @@ export default function CommercialPage() {
                   </div>
                   <h3
                     className="font-heading"
-                    style={{ color: 'var(--color-charcoal)', fontSize: '1.2rem', lineHeight: 1.3 }}
+                    style={{ color: '#fff', fontSize: '1.2rem', lineHeight: 1.3 }}
                   >
                     {card.headline}
                   </h3>
-                  <p style={{ color: 'var(--color-warm-gray)', fontSize: '0.88rem', lineHeight: 1.75, flex: 1 }}>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.88rem', lineHeight: 1.75, flex: 1 }}>
                     {card.description}
                   </p>
                   <Link
@@ -660,20 +660,20 @@ export default function CommercialPage() {
       </section>
 
       {/* WHY EMPIRE 8 */}
-      <section style={{ backgroundColor: '#FAFAFA', padding: '96px 24px', borderTop: '1px solid var(--color-border)' }}>
+      <section style={{ backgroundColor: '#150A28', padding: '96px 24px', borderTop: '1px solid rgba(200,162,60,0.12)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 72, alignItems: 'center' }}>
           <AnimateIn>
-            <span className="label-caps" style={{ color: '#1565C0', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ width: 24, height: 1.5, backgroundColor: '#1565C0', display: 'inline-block', borderRadius: 99 }} />
+            <span className="label-caps" style={{ color: '#C8A23C', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ width: 24, height: 1.5, backgroundColor: '#C8A23C', display: 'inline-block', borderRadius: 99 }} />
               Why Empire 8 Sales Direct
             </span>
-            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 14, marginBottom: 20, color: 'var(--color-charcoal)', lineHeight: 1.05 }}>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 14, marginBottom: 20, color: '#fff', lineHeight: 1.05 }}>
               Built for Dispensaries That Need Reliable Supply.
             </h2>
-            <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.85, marginBottom: 12, fontSize: '0.95rem' }}>
+            <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.85, marginBottom: 12, fontSize: '0.95rem' }}>
               We supply the cannabis products your dispensary needs to keep shelves stocked — at wholesale prices that protect your margins.
             </p>
-            <p style={{ color: 'var(--color-warm-gray)', lineHeight: 1.85, marginBottom: 36, fontSize: '0.95rem' }}>
+            <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.85, marginBottom: 36, fontSize: '0.95rem' }}>
               Volume pricing that rewards consistent ordering. The more you order, the better your per-unit cost.
             </p>
             <Link
@@ -683,7 +683,7 @@ export default function CommercialPage() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 8,
-                backgroundColor: '#1565C0',
+                backgroundColor: '#4A0E78',
                 color: '#fff',
                 padding: '13px 28px',
                 borderRadius: 9999,
@@ -709,10 +709,10 @@ export default function CommercialPage() {
               <AnimateIn key={label} delay={i * 80}>
                 <div
                   style={{
-                    backgroundColor: '#fff',
+                    backgroundColor: 'rgba(255,255,255,0.04)',
                     borderRadius: 16,
                     padding: '22px 20px',
-                    border: '1px solid var(--color-border)',
+                    border: '1px solid rgba(200,162,60,0.12)',
                     height: '100%',
                   }}
                 >
@@ -721,17 +721,17 @@ export default function CommercialPage() {
                       width: 32,
                       height: 32,
                       borderRadius: 9,
-                      backgroundColor: '#E3F2FD',
+                      backgroundColor: 'rgba(74,14,120,0.2)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       marginBottom: 12,
                     }}
                   >
-                    <BadgeCheck size={15} color="#1565C0" />
+                    <BadgeCheck size={15} color="#C8A23C" />
                   </div>
-                  <div style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--color-charcoal)', marginBottom: 4 }}>{label}</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--color-warm-gray)', lineHeight: 1.5 }}>{sub}</div>
+                  <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#fff', marginBottom: 4 }}>{label}</div>
+                  <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{sub}</div>
                 </div>
               </AnimateIn>
             ))}
@@ -740,11 +740,11 @@ export default function CommercialPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{ backgroundColor: '#fff', padding: '96px 24px', borderTop: '1px solid var(--color-border)' }}>
+      <section style={{ backgroundColor: '#0F0520', padding: '96px 24px', borderTop: '1px solid rgba(200,162,60,0.12)' }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 56 }}>
-            <span className="label-caps" style={{ color: '#1565C0' }}>Common Questions</span>
-            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
+            <span className="label-caps" style={{ color: '#C8A23C' }}>Common Questions</span>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginTop: 10, color: '#fff' }}>
               Frequently Asked Questions
             </h2>
           </AnimateIn>
@@ -754,20 +754,20 @@ export default function CommercialPage() {
               <AnimateIn key={item.q} delay={i * 60}>
                 <div
                   style={{
-                    backgroundColor: '#FAFAFA',
-                    border: '1px solid var(--color-border)',
+                    backgroundColor: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(200,162,60,0.12)',
                     borderRadius: 16,
                     padding: '24px 28px',
                     boxShadow: 'var(--shadow-xs)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                    <ChevronRight size={16} color="#1565C0" style={{ marginTop: 3, flexShrink: 0 }} />
+                    <ChevronRight size={16} color="#C8A23C" style={{ marginTop: 3, flexShrink: 0 }} />
                     <div>
-                      <h3 className="font-heading" style={{ fontSize: '1rem', color: 'var(--color-charcoal)', marginBottom: 8, lineHeight: 1.3 }}>
+                      <h3 className="font-heading" style={{ fontSize: '1rem', color: '#fff', marginBottom: 8, lineHeight: 1.3 }}>
                         {item.q}
                       </h3>
-                      <p style={{ fontSize: '0.9rem', color: 'var(--color-warm-gray)', lineHeight: 1.75, margin: 0 }}>
+                      <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, margin: 0 }}>
                         {item.a}
                       </p>
                     </div>
@@ -778,10 +778,10 @@ export default function CommercialPage() {
           </div>
 
           <AnimateIn style={{ textAlign: 'center', marginTop: 40 }}>
-            <p style={{ fontSize: '0.88rem', color: 'var(--color-warm-gray)' }}>
+            <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.6)' }}>
               Have a different question?{' '}
-              <Link href="/contact" style={{ color: '#1565C0', fontWeight: 700, textDecoration: 'none' }}>
-                Contact us →
+              <Link href="/contact" style={{ color: '#C8A23C', fontWeight: 700, textDecoration: 'none' }}>
+                Contact us &rarr;
               </Link>
             </p>
           </AnimateIn>
@@ -818,11 +818,11 @@ export default function CommercialPage() {
       >
         <div
           className="e8-glow-gold"
-          style={{ width: 640, height: 400, top: '-30%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(21,101,192,0.12)' }}
+          style={{ width: 640, height: 400, top: '-30%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(74,14,120,0.18)' }}
         />
 
         <AnimateIn style={{ maxWidth: 640, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <span className="label-caps" style={{ color: 'rgba(21,101,192,0.85)', display: 'block', marginBottom: 20 }}>
+          <span className="label-caps" style={{ color: 'rgba(200,162,60,0.85)', display: 'block', marginBottom: 20 }}>
             Get Started Today
           </span>
           <h2
@@ -840,7 +840,7 @@ export default function CommercialPage() {
               href="/catalog"
               className="e8-btn-gold"
               style={{
-                backgroundColor: '#1565C0',
+                backgroundColor: '#4A0E78',
                 color: '#fff',
                 padding: '15px 34px',
                 borderRadius: 9999,
@@ -853,13 +853,13 @@ export default function CommercialPage() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 8,
-                boxShadow: '0 4px 20px rgba(21,101,192,0.3)',
+                boxShadow: '0 4px 20px rgba(74,14,120,0.4)',
               }}
             >
               Shop Now <ArrowRight size={14} />
             </Link>
             <Link
-              href="/wholesale"
+              href="/dispensary-signup"
               className="e8-btn-ghost"
               style={{
                 backgroundColor: 'transparent',

@@ -355,7 +355,6 @@ export function TestRunnerSection({ onTestCreated }: { onTestCreated: () => void
 
       <style>{`
         @keyframes e8spin { to { transform: rotate(360deg); } }
-        select option { background: #1A0E2E; color: #fff; }
       `}</style>
     </div>
   );

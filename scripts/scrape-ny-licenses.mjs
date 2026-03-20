@@ -28,8 +28,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // ---------------------------------------------------------------------------
 
 const SUPABASE_URL = 'https://ypqmcakzjvmtcypkyhce.supabase.co';
-// Hardcoded — do NOT use process.env.SUPABASE_SERVICE_ROLE_KEY (global env may point to wrong project)
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwcW1jYWt6anZtdGN5cGt5aGNlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Mzk2NDA0NCwiZXhwIjoyMDg5NTQwMDQ0fQ.o8WPfoSfaTZ6vOz-kHTKhpXSjJf1WLknC_0fJOy5eBk';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 const NY_OCM_API = 'https://data.ny.gov/resource/jskf-tt3q.json';
 const BATCH_SIZE = 50;
@@ -260,10 +259,12 @@ async function pushToSupabase(groups) {
           } else if (single?.[0]) {
             totalInserted++;
             // Add to list
-            await supabase.from('list_companies').upsert(
-              { list_id: listId, company_id: single[0].id },
-              { onConflict: 'list_id,company_id', ignoreDuplicates: true }
-            ).catch(() => {});
+            try {
+              await supabase.from('list_companies').upsert(
+                { list_id: listId, company_id: single[0].id },
+                { onConflict: 'list_id,company_id', ignoreDuplicates: true }
+              );
+            } catch { /* ignore dupes */ }
           }
         }
         continue;
@@ -279,11 +280,11 @@ async function pushToSupabase(groups) {
           company_id: c.id,
         }));
 
-        // list_companies might not have unique constraint, insert individually
+        // list_companies has unique(list_id, company_id), ignore dupes
         for (const lr of listRows) {
-          await supabase.from('list_companies')
-            .insert(lr)
-            .catch(() => {}); // ignore dupes
+          try {
+            await supabase.from('list_companies').insert(lr);
+          } catch { /* ignore dupes */ }
         }
       }
 
@@ -317,18 +318,19 @@ async function pushToSupabase(groups) {
           const firstName = nameParts[0] || '';
           const lastName = nameParts.slice(1).join(' ') || '';
 
-          await supabase.from('contacts').upsert({
-            firstname: firstName,
-            lastname: lastName,
-            phone: r.phone || null,
-            company_id: company.id,
-            city: r.city,
-            state: 'NY',
-            source: 'ny_ocm_registry',
-            lead_status: 'NEW',
-            lifecycle_stage: 'lead',
-          }, { onConflict: 'firstname,lastname,company_id', ignoreDuplicates: true })
-          .catch(() => {}); // ignore dupes if no unique constraint
+          try {
+            await supabase.from('contacts').insert({
+              firstname: firstName,
+              lastname: lastName,
+              phone: r.phone || null,
+              company_id: company.id,
+              city: r.city,
+              state: 'NY',
+              source: 'ny_ocm_registry',
+              lead_status: 'NEW',
+              lifecycle_stage: 'lead',
+            });
+          } catch { /* ignore dupes */ }
         }
 
         await sleep(200);

@@ -352,7 +352,7 @@ export default async function ProductPage({
                       {' '}{product.unit}
                     </span>
                   </div>
-                  <Link href="/wholesale" style={{ fontSize: '0.72rem', color: 'var(--color-purple-muted)', textDecoration: 'none', fontWeight: 600 }}>
+                  <Link href="/dispensary-signup" style={{ fontSize: '0.72rem', color: 'var(--color-purple-muted)', textDecoration: 'none', fontWeight: 600 }}>
                     Apply →
                   </Link>
                 </div>
@@ -579,7 +579,7 @@ export default async function ProductPage({
           </p>
           <div className="e8-btn-group" style={{ maxWidth: 380, margin: '0 auto' }}>
             <Link
-              href="/wholesale"
+              href="/dispensary-signup"
               style={{
                 backgroundColor: 'var(--color-gold)',
                 color: '#fff',

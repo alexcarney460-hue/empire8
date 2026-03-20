@@ -103,7 +103,7 @@ export async function GET(req: Request) {
       data: { brands, products },
     });
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : 'Unknown error';
-    return NextResponse.json({ ok: false, error: message }, { status: 500 });
+    console.error('[accounting/products] error:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred.' }, { status: 500 });
   }
 }

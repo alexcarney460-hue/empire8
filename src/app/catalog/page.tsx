@@ -94,6 +94,51 @@ export default function CatalogPage() {
         </div>
       </div>
 
+      {/* Cannabis products banner */}
+      <div style={{
+        maxWidth: 1280,
+        margin: '0 auto',
+        padding: '20px 24px 0',
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 12,
+          padding: '14px 20px',
+          borderRadius: 12,
+          background: 'linear-gradient(135deg, rgba(74,14,120,0.08) 0%, rgba(200,162,60,0.08) 100%)',
+          border: '1px solid rgba(74,14,120,0.12)',
+        }}>
+          <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--color-charcoal)', lineHeight: 1.5 }}>
+            Looking for cannabis products? Browse our licensed brand partners and their full product lines.
+          </p>
+          <Link
+            href="/brands"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              padding: '8px 18px',
+              borderRadius: 9999,
+              backgroundColor: 'var(--color-royal)',
+              color: '#fff',
+              fontFamily: "'Barlow', Arial, sans-serif",
+              fontWeight: 700,
+              fontSize: '0.75rem',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              transition: 'transform 180ms ease, box-shadow 180ms ease',
+            }}
+          >
+            Visit Brands Page <ArrowRight size={12} />
+          </Link>
+        </div>
+      </div>
+
       {/* Category filter bar */}
       <div style={{ backgroundColor: '#fff', borderBottom: '1px solid var(--color-border)', padding: '16px 24px', position: 'sticky', top: 'var(--nav-height)', zIndex: 10 }}>
         <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -121,7 +166,7 @@ export default function CatalogPage() {
           ))}
           <div style={{ flex: 1 }} />
           <Link
-            href="/wholesale"
+            href="/dispensary-signup"
             style={{
               padding: '8px 20px',
               borderRadius: 9999,
@@ -217,7 +262,7 @@ export default function CatalogPage() {
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', position: 'relative' }}>
             <Link
-              href="/wholesale"
+              href="/dispensary-signup"
               className="e8-btn-gold"
               style={{
                 backgroundColor: 'var(--color-gold)',

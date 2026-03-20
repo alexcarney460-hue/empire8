@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
     const productIds = items.map((item) => item.productId);
     const { data: dbProducts, error: productsError } = await supabase
       .from('brand_products')
-      .select('id, unit_price_cents, active')
+      .select('id, unit_price_cents, is_active')
       .in('id', productIds);
 
     if (productsError) {
@@ -136,7 +136,7 @@ export async function POST(req: NextRequest) {
     // Build a price lookup map from the database
     const priceMap = new Map<string, number>();
     for (const p of dbProducts ?? []) {
-      if (p.active) {
+      if (p.is_active) {
         priceMap.set(p.id, p.unit_price_cents);
       }
     }

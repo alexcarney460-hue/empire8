@@ -6,7 +6,7 @@ import { crmFetch } from '../../components/api';
 
 interface Activity { id: number; type: string; subject: string | null; body: string | null; created_at: string; }
 interface Communication { id: number; channel: string; direction: string; subject: string | null; body: string | null; created_at: string; }
-interface Order { id: number; email: string | null; status: string | null; total: number | null; created_at: string; }
+interface Order { id: number; email: string | null; status: string | null; total_cents: number | null; created_at: string; }
 
 interface ContactDetail {
   id: number; firstname: string | null; lastname: string | null; email: string | null;
@@ -210,7 +210,7 @@ export default function ContactDetailPage() {
                   </div>
                   <div className="flex items-center gap-3">
                     {o.status && <span className="text-xs px-2 py-0.5 rounded-full bg-slate-700 text-slate-300">{o.status}</span>}
-                    {o.total != null && <span className="text-sm font-semibold text-emerald-400">${o.total.toLocaleString()}</span>}
+                    {o.total_cents != null && <span className="text-sm font-semibold text-emerald-400">${(o.total_cents / 100).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>}
                   </div>
                 </div>
               ))}

@@ -3,7 +3,7 @@
  * Seeds marketing agent definitions and workflows into Supabase.
  */
 
-const TOKEN = 'sbp_68e014c71859485dca19cb9793e2d31d441cf753';
+const TOKEN = process.env.SUPABASE_MANAGEMENT_TOKEN || '';
 const PROJECT = 'hpakqrnvjnzznhffoqaf';
 
 async function query(sql) {

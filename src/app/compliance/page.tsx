@@ -35,13 +35,13 @@ const headingStyle: React.CSSProperties = {
   fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif",
   fontWeight: 700,
   fontSize: '1.3rem',
-  color: PURPLE,
+  color: GOLD,
   marginBottom: 16,
   letterSpacing: '0.01em',
 };
 
 const textStyle: React.CSSProperties = {
-  color: '#444',
+  color: 'rgba(255,255,255,0.6)',
   fontSize: '0.95rem',
   lineHeight: 1.8,
   marginBottom: 12,
@@ -51,7 +51,7 @@ export default function CompliancePage() {
   const healthWarning = getRotatingWarning();
 
   return (
-    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#fff', minHeight: '100vh' }}>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520', minHeight: '100vh' }}>
 
       {/* Hero */}
       <section
@@ -121,24 +121,24 @@ export default function CompliancePage() {
           <h2 style={headingStyle}>License Information</h2>
           <div
             style={{
-              backgroundColor: '#FAFAFA',
-              border: '1px solid #E4E1DB',
+              backgroundColor: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(200,162,60,0.12)',
               borderRadius: 16,
               padding: '28px 28px',
             }}
           >
             <div style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: '12px 16px', fontSize: '0.95rem' }}>
-              <span style={{ color: '#888', fontWeight: 600 }}>Company</span>
-              <span style={{ color: '#1C1C1C', fontWeight: 600 }}>Empire 8 Sales Direct</span>
+              <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>Company</span>
+              <span style={{ color: '#fff', fontWeight: 600 }}>Empire 8 Sales Direct</span>
 
-              <span style={{ color: '#888', fontWeight: 600 }}>License Type</span>
-              <span style={{ color: '#1C1C1C' }}>Adult-Use Cannabis Distributor (NYS OCM)</span>
+              <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>License Type</span>
+              <span style={{ color: '#fff' }}>Adult-Use Cannabis Distributor (NYS OCM)</span>
 
-              <span style={{ color: '#888', fontWeight: 600 }}>License #</span>
-              <span style={{ color: '#1C1C1C' }}>[PENDING APPLICATION]</span>
+              <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>License #</span>
+              <span style={{ color: '#fff' }}>[PENDING APPLICATION]</span>
 
-              <span style={{ color: '#888', fontWeight: 600 }}>Jurisdiction</span>
-              <span style={{ color: '#1C1C1C' }}>New York State Office of Cannabis Management</span>
+              <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>Jurisdiction</span>
+              <span style={{ color: '#fff' }}>New York State Office of Cannabis Management</span>
             </div>
           </div>
         </div>
@@ -181,13 +181,13 @@ export default function CompliancePage() {
           <h2 style={headingStyle}>Health Warning</h2>
           <div
             style={{
-              backgroundColor: 'rgba(74,14,120,0.04)',
-              border: `1px solid rgba(74,14,120,0.15)`,
+              backgroundColor: 'rgba(74,14,120,0.15)',
+              border: `1px solid rgba(74,14,120,0.3)`,
               borderRadius: 12,
               padding: '20px 24px',
             }}
           >
-            <p style={{ ...textStyle, color: PURPLE, fontWeight: 600, marginBottom: 0 }}>
+            <p style={{ ...textStyle, color: GOLD, fontWeight: 600, marginBottom: 0 }}>
               {healthWarning}
             </p>
           </div>
@@ -199,8 +199,8 @@ export default function CompliancePage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div
               style={{
-                backgroundColor: '#FAFAFA',
-                border: '1px solid #E4E1DB',
+                backgroundColor: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 borderRadius: 12,
                 padding: '16px 20px',
                 display: 'flex',
@@ -211,20 +211,20 @@ export default function CompliancePage() {
               }}
             >
               <div>
-                <div style={{ fontWeight: 600, color: '#1C1C1C', fontSize: '0.95rem' }}>Poison Control</div>
-                <div style={{ color: '#888', fontSize: '0.85rem' }}>For cannabis-related emergencies</div>
+                <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.95rem' }}>Poison Control</div>
+                <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>For cannabis-related emergencies</div>
               </div>
               <a
                 href="tel:1-800-222-1222"
-                style={{ color: PURPLE, fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}
+                style={{ color: GOLD, fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}
               >
                 1-800-222-1222
               </a>
             </div>
             <div
               style={{
-                backgroundColor: '#FAFAFA',
-                border: '1px solid #E4E1DB',
+                backgroundColor: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(200,162,60,0.12)',
                 borderRadius: 12,
                 padding: '16px 20px',
                 display: 'flex',
@@ -235,12 +235,12 @@ export default function CompliancePage() {
               }}
             >
               <div>
-                <div style={{ fontWeight: 600, color: '#1C1C1C', fontSize: '0.95rem' }}>NY HOPEline</div>
-                <div style={{ color: '#888', fontSize: '0.85rem' }}>Substance use support &amp; referrals</div>
+                <div style={{ fontWeight: 600, color: '#fff', fontSize: '0.95rem' }}>NY HOPEline</div>
+                <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>Substance use support &amp; referrals</div>
               </div>
               <a
                 href="tel:1-844-863-9314"
-                style={{ color: PURPLE, fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}
+                style={{ color: GOLD, fontWeight: 700, fontSize: '1rem', textDecoration: 'none' }}
               >
                 1-844-863-9314
               </a>
@@ -258,7 +258,7 @@ export default function CompliancePage() {
               href="https://cannabis.ny.gov"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: PURPLE, fontWeight: 600, textDecoration: 'underline' }}
+              style={{ color: GOLD, fontWeight: 600, textDecoration: 'underline' }}
             >
               cannabis.ny.gov
             </a>
@@ -268,17 +268,17 @@ export default function CompliancePage() {
         {/* Footer links */}
         <div
           style={{
-            borderTop: '1px solid #E4E1DB',
+            borderTop: '1px solid rgba(200,162,60,0.12)',
             paddingTop: 32,
             display: 'flex',
             gap: 24,
             flexWrap: 'wrap',
           }}
         >
-          <Link href="/privacy" style={{ color: PURPLE, fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
+          <Link href="/privacy" style={{ color: GOLD, fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
             Privacy Policy
           </Link>
-          <Link href="/terms" style={{ color: PURPLE, fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
+          <Link href="/terms" style={{ color: GOLD, fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
             Terms of Service
           </Link>
         </div>

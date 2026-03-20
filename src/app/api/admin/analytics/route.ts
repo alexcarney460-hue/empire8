@@ -122,8 +122,8 @@ export async function GET(req: NextRequest) {
         topCountries,
       },
     });
-  } catch (err: any) {
-    console.error('[analytics] error', err);
-    return NextResponse.json({ ok: false, error: err?.message ?? 'Internal error' }, { status: 500 });
+  } catch (err: unknown) {
+    console.error('[analytics] error:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred.' }, { status: 500 });
   }
 }

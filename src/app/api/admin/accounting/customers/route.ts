@@ -75,7 +75,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json({ ok: true, data: rows });
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : 'Unknown error';
-    return NextResponse.json({ ok: false, error: message }, { status: 500 });
+    console.error('[accounting/customers] error:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred.' }, { status: 500 });
   }
 }

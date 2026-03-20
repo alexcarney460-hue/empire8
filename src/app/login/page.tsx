@@ -244,7 +244,7 @@ export default function LoginPage() {
               </div>
 
               {/* Password */}
-              <div style={{ marginBottom: 32 }}>
+              <div style={{ marginBottom: 12 }}>
                 <label
                   className="label-caps"
                   htmlFor="password"
@@ -277,6 +277,22 @@ export default function LoginPage() {
                     }}
                   />
                 </div>
+              </div>
+
+              {/* Forgot password link */}
+              <div style={{ marginBottom: 32, textAlign: 'right' }}>
+                <Link
+                  href="/forgot-password"
+                  style={{
+                    color: COLORS.gold,
+                    textDecoration: 'none',
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                    transition: 'opacity 150ms ease',
+                  }}
+                >
+                  Forgot Password?
+                </Link>
               </div>
 
               {/* Submit */}

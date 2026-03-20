@@ -8,7 +8,7 @@ import { randomUUID } from 'crypto';
 import { writeFileSync, existsSync, readFileSync } from 'fs';
 import { resolve } from 'path';
 
-const SITE_URL = 'https://valuesuppliers.co';
+const SITE_URL = 'https://empire8salesdirect.com';
 const SITEMAP_URL = `${SITE_URL}/sitemap.xml`;
 
 const KEY_PAGES = [
@@ -99,7 +99,7 @@ export async function GET() {
 
   // Submit to Bing IndexNow
   const indexNowPayload = {
-    host: 'valuesuppliers.co',
+    host: 'empire8salesdirect.com',
     key: indexNowKey,
     keyLocation: `${SITE_URL}/${indexNowKey}.txt`,
     urlList: fullUrls,
@@ -168,7 +168,7 @@ export async function GET() {
   console.log('\n📋 MANUAL STEPS STILL NEEDED:');
   console.log('1. Deploy the IndexNow key file (git add, commit, push)');
   console.log('2. Google Search Console: https://search.google.com/search-console');
-  console.log('   → Add property → URL prefix → valuesuppliers.co');
+  console.log('   → Add property → URL prefix → empire8salesdirect.com');
   console.log('   → Verify via HTML tag method → paste code into layout.tsx');
   console.log('3. Bing Webmaster Tools: https://www.bing.com/webmasters');
   console.log('   → Import from GSC (easiest) or add manually');

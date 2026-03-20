@@ -356,6 +356,49 @@ export default function Nav() {
                 <span style={{ fontSize: '1.2rem', color: 'var(--color-gold)', opacity: 0.7 }}>&#8594;</span>
               </Link>
             )}
+            {!isLoggedIn && (
+              <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="label-caps"
+                  style={{
+                    flex: 1,
+                    textAlign: 'center',
+                    padding: '14px 0',
+                    borderRadius: 10,
+                    border: '1.5px solid var(--color-border)',
+                    color: 'var(--color-charcoal)',
+                    fontSize: '0.72rem',
+                    letterSpacing: '0.14em',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setOpen(false)}
+                  className="label-caps"
+                  style={{
+                    flex: 1,
+                    textAlign: 'center',
+                    padding: '14px 0',
+                    borderRadius: 10,
+                    backgroundColor: 'var(--color-gold)',
+                    color: '#fff',
+                    fontSize: '0.72rem',
+                    letterSpacing: '0.14em',
+                    textDecoration: 'none',
+                    fontWeight: 700,
+                    boxShadow: 'var(--shadow-gold)',
+                  }}
+                >
+                  Create Account
+                </Link>
+              </div>
+            )}
           </nav>
 
           {/* Quick pills */}

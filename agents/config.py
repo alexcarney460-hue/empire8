@@ -1,5 +1,6 @@
-"""Shared config for Triple OG Gloves reel production agents."""
+"""Shared config for Empire 8 Sales Direct reel production agents."""
 
+import os
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
@@ -14,20 +15,17 @@ FFMPEG = "C:/Users/Claud/AppData/Local/Microsoft/WinGet/Links/ffmpeg.exe"
 RUNWAY_KEY_FILE = Path.home() / "Desktop" / "keys" / "runwayapi.txt"
 RUNWAY_API_KEY = RUNWAY_KEY_FILE.read_text().strip() if RUNWAY_KEY_FILE.exists() else ""
 
-# Gemini image gen (backup — keys may be revoked)
-GEMINI_KEYS = [
-    "AIzaSyB_8sKMOp-3MGNV2WcWPUJF3cXA-uSK4ME",
-    "AIzaSyAyDqVpIEozKnOweTWd-hShVth6RoOs9OE",
-]
+# Gemini image gen (backup)
+GEMINI_KEYS = [k for k in [os.environ.get('GEMINI_API_KEY', '')] if k]
 
 # Relative font paths (avoids Windows drive colon escaping in FFmpeg)
 FONT_BOLD = "assets/fonts/Montserrat-ExtraBold.ttf"
 FONT_SEMI = "assets/fonts/Montserrat-SemiBold.ttf"
 
-# Triple OG Gloves brand — colors matched from actual product packaging
+# Empire 8 Sales Direct brand
 BRAND = {
-    "name": "Triple OG Gloves",
-    "url": "valuesuppliers.co",
+    "name": "Empire 8 Sales Direct",
+    "url": "empire8salesdirect.com",
     "instagram": "@tripleoggloves",
     "tagline": "Supplied for the Grow.",
     "slogan": "Quality Demands Quality.",

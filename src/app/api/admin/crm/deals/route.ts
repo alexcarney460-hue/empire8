@@ -3,63 +3,73 @@ import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { getSupabaseServer } from '@/lib/supabase-server';
 
 export async function GET(req: Request) {
-  const denied = await requireAdmin(req);
-  if (denied) return denied;
+  try {
+    const denied = await requireAdmin(req);
+    if (denied) return denied;
 
-  const supabase = getSupabaseServer();
-  if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
+    const supabase = getSupabaseServer();
+    if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
-  const url = new URL(req.url);
-  const q = url.searchParams.get('q') || '';
-  const stage = url.searchParams.get('stage') || '';
-  const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'));
-  const limit = Math.min(100, Math.max(1, parseInt(url.searchParams.get('limit') || '25')));
-  const offset = (page - 1) * limit;
+    const url = new URL(req.url);
+    const q = url.searchParams.get('q') || '';
+    const stage = url.searchParams.get('stage') || '';
+    const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'));
+    const limit = Math.min(100, Math.max(1, parseInt(url.searchParams.get('limit') || '25')));
+    const offset = (page - 1) * limit;
 
-  let query = supabase
-    .from('deals')
-    .select('*, companies(id, name), contacts(id, firstname, lastname)', { count: 'exact' });
+    let query = supabase
+      .from('deals')
+      .select('*, companies(id, name), contacts(id, firstname, lastname)', { count: 'exact' });
 
-  if (q) {
-    const safeQ = q.replace(/[,()*\\"]/g, '');
-    if (safeQ) {
-      query = query.ilike('name', `%${safeQ}%`);
+    if (q) {
+      const safeQ = q.replace(/[,()*\\"]/g, '');
+      if (safeQ) {
+        query = query.ilike('name', `%${safeQ}%`);
+      }
     }
+
+    if (stage) {
+      query = query.eq('stage', stage);
+    }
+
+    const { data, count, error } = await query
+      .order('created_at', { ascending: false })
+      .range(offset, offset + limit - 1);
+
+    if (error) {
+      console.error('[Admin] deals error:', error.message);
+      return NextResponse.json({ ok: false, error: 'An internal error occurred.' }, { status: 500 });
+    }
+
+    return NextResponse.json({ ok: true, data, total: count ?? 0 });
+  } catch (err) {
+    console.error('[deals-list] Unexpected error:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred.' }, { status: 500 });
   }
-
-  if (stage) {
-    query = query.eq('stage', stage);
-  }
-
-  const { data, count, error } = await query
-    .order('created_at', { ascending: false })
-    .range(offset, offset + limit - 1);
-
-  if (error) {
-    console.error('[Admin] deals error:', error.message);
-    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
-  }
-
-  return NextResponse.json({ ok: true, data, total: count ?? 0 });
 }
 
 export async function POST(req: Request) {
-  const denied = await requireAdmin(req);
-  if (denied) return denied;
+  try {
+    const denied = await requireAdmin(req);
+    if (denied) return denied;
 
-  const supabase = getSupabaseServer();
-  if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
+    const supabase = getSupabaseServer();
+    if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
-  const body = await req.json();
-  const allowedFields = ['name', 'stage', 'amount', 'close_date', 'contact_id', 'company_id', 'description', 'pipeline'];
-  const filtered = Object.fromEntries(Object.entries(body).filter(([k]) => allowedFields.includes(k)));
-  if (!filtered.name) return NextResponse.json({ ok: false, error: 'name is required' }, { status: 400 });
-  const { data, error } = await supabase.from('deals').insert(filtered).select().single();
+    const body = await req.json();
+    const allowedFields = ['name', 'stage', 'amount', 'close_date', 'contact_id', 'company_id', 'description', 'pipeline'];
+    const filtered = Object.fromEntries(Object.entries(body).filter(([k]) => allowedFields.includes(k)));
+    if (!filtered.name) return NextResponse.json({ ok: false, error: 'name is required' }, { status: 400 });
+    const { data, error } = await supabase.from('deals').insert(filtered).select().single();
 
-  if (error) {
-    console.error('[Admin] deals error:', error.message);
-    return NextResponse.json({ ok: false, error: 'An internal error occurred' }, { status: 500 });
+    if (error) {
+      console.error('[Admin] deals error:', error.message);
+      return NextResponse.json({ ok: false, error: 'An internal error occurred.' }, { status: 500 });
+    }
+
+    return NextResponse.json({ ok: true, data }, { status: 201 });
+  } catch (err) {
+    console.error('[deals-create] Unexpected error:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred.' }, { status: 500 });
   }
-
-  return NextResponse.json({ ok: true, data }, { status: 201 });
 }

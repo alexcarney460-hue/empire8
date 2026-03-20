@@ -22,7 +22,7 @@ import { dirname, join } from 'path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const MASTER_CSV = join(__dirname, '..', 'cannabis-hemp-grows-2026-03-17.csv');
 
-const BRAVE_API_KEY = 'BSAcMxzO8AD021dICd0f-5Zq5vuJJ8F';
+const BRAVE_API_KEY = process.env.BRAVE_API_KEY || '';
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const LIMIT_IDX = process.argv.indexOf('--limit');

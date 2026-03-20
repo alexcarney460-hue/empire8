@@ -429,3 +429,9 @@ a { transition: color 150ms ease, opacity 150ms ease; }
     min-width: 44px;
   }
 }
+
+/* Dark select options for all forms */
+select option {
+  background: #1A0E2E;
+  color: #fff;
+}

@@ -20,20 +20,20 @@ const headingStyle: React.CSSProperties = {
   fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif",
   fontWeight: 700,
   fontSize: '1.3rem',
-  color: PURPLE,
+  color: GOLD,
   marginBottom: 16,
   letterSpacing: '0.01em',
 };
 
 const textStyle: React.CSSProperties = {
-  color: '#444',
+  color: 'rgba(255,255,255,0.6)',
   fontSize: '0.95rem',
   lineHeight: 1.8,
   marginBottom: 12,
 };
 
 const listStyle: React.CSSProperties = {
-  color: '#444',
+  color: 'rgba(255,255,255,0.6)',
   fontSize: '0.95rem',
   lineHeight: 1.8,
   paddingLeft: 24,
@@ -42,7 +42,7 @@ const listStyle: React.CSSProperties = {
 
 export default function TermsPage() {
   return (
-    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#fff', minHeight: '100vh' }}>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520', minHeight: '100vh' }}>
 
       {/* Hero */}
       <section
@@ -250,14 +250,14 @@ export default function TermsPage() {
           </p>
           <div
             style={{
-              backgroundColor: '#FAFAFA',
-              border: '1px solid #E4E1DB',
+              backgroundColor: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(200,162,60,0.12)',
               borderRadius: 12,
               padding: '20px 24px',
               marginTop: 8,
             }}
           >
-            <p style={{ ...textStyle, marginBottom: 4 }}><strong>Empire 8 Sales Direct</strong></p>
+            <p style={{ ...textStyle, color: '#fff', marginBottom: 4 }}><strong>Empire 8 Sales Direct</strong></p>
             <p style={{ ...textStyle, marginBottom: 4 }}>Legal Department</p>
             <p style={{ ...textStyle, marginBottom: 0 }}>New York, NY</p>
           </div>
@@ -266,17 +266,17 @@ export default function TermsPage() {
         {/* Footer links */}
         <div
           style={{
-            borderTop: '1px solid #E4E1DB',
+            borderTop: '1px solid rgba(200,162,60,0.12)',
             paddingTop: 32,
             display: 'flex',
             gap: 24,
             flexWrap: 'wrap',
           }}
         >
-          <Link href="/compliance" style={{ color: PURPLE, fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
+          <Link href="/compliance" style={{ color: GOLD, fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
             Compliance
           </Link>
-          <Link href="/privacy" style={{ color: PURPLE, fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
+          <Link href="/privacy" style={{ color: GOLD, fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
             Privacy Policy
           </Link>
         </div>

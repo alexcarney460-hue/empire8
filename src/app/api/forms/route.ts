@@ -213,8 +213,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, contact_id: contactId, company_id: companyId });
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : 'Internal error';
-    console.error('[forms] error:', message);
-    return NextResponse.json({ ok: false, error: message }, { status: 500 });
+    console.error('[forms] error:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ ok: false, error: 'An internal error occurred.' }, { status: 500 });
   }
 }

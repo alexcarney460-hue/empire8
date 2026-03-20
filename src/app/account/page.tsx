@@ -306,7 +306,7 @@ export default function AccountPage() {
                       Create Account
                     </button>
                     <Link
-                      href="/wholesale"
+                      href="/dispensary-signup"
                       style={{
                         fontSize: '0.75rem',
                         fontWeight: 600,

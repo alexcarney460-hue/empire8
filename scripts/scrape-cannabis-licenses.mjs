@@ -29,7 +29,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // Config
 // ---------------------------------------------------------------------------
 
-const BRAVE_API_KEY = 'BSAcMxzO8AD021dICd0f-5Zq5vuJJ8F';
+const BRAVE_API_KEY = process.env.BRAVE_API_KEY || '';
 const SUPABASE_URL = 'https://hpakqrnvjnzznhffoqaf.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
