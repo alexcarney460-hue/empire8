@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Brands', href: '/brands' },
   { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
+  { label: 'White Label', href: '/whitelabel' },
   { label: 'Compliance', href: '/compliance' },
   { label: 'Contact', href: '/contact' },
 ];

@@ -241,6 +241,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               );
             })}
           </div>
+
+          {/* Sign Out */}
+          <button
+            onClick={async () => {
+              const supabase = getSupabase();
+              await supabase.auth.signOut();
+              window.location.href = '/';
+            }}
+            style={{
+              marginLeft: 'auto',
+              flexShrink: 0,
+              padding: '6px 14px',
+              borderRadius: 9999,
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              whiteSpace: 'nowrap',
+              border: `1px solid ${COLORS.border}`,
+              background: 'transparent',
+              color: COLORS.textSecondary,
+              cursor: 'pointer',
+              transition: 'background-color 150ms, color 150ms',
+            }}
+          >
+            Sign Out
+          </button>
         </div>
       </nav>
 

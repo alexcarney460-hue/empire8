@@ -4,6 +4,7 @@ import Image from 'next/image';
 const COMPANY_LINKS = [
   { label: 'About Us', href: '/about' },
   { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
+  { label: 'White Label', href: '/whitelabel' },
   { label: 'Contact', href: '/contact' },
 ];
 
