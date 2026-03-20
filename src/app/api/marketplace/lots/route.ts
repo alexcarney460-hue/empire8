@@ -158,10 +158,45 @@ export async function GET(req: NextRequest) {
 // ---------------------------------------------------------------------------
 
 export async function POST(req: NextRequest) {
-  const dispensary = await getAuthenticatedDispensary();
+  // Try dispensary auth first, then fall back to admin auth
+  let dispensary = await getAuthenticatedDispensary();
+
+  if (!dispensary) {
+    // Allow admins to post lots too — look up their dispensary account
+    const { requireAdmin } = await import('@/lib/admin/requireAdmin');
+    const denied = await requireAdmin(req);
+    if (!denied) {
+      // Admin authenticated — look up their dispensary account via Supabase session
+      const { cookies } = await import('next/headers');
+      const { createClient } = await import('@supabase/supabase-js');
+      const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+      if (url && key) {
+        const sb = createClient(url, key, { auth: { persistSession: false } });
+        const cookieStore = await cookies();
+        const authCookie = cookieStore.getAll().find((c) => c.name.match(/^sb-.*-auth-token$/));
+        if (authCookie) {
+          try {
+            const raw = decodeURIComponent(authCookie.value);
+            let token: string | null = null;
+            if (raw.startsWith('[')) { token = JSON.parse(raw)[0]; }
+            else { const p = JSON.parse(raw); token = p.access_token ?? p[0] ?? null; }
+            if (token) {
+              const { data: u } = await sb.auth.getUser(token);
+              if (u?.user) {
+                const { data: d } = await sb.from('dispensary_accounts').select('*').eq('user_id', u.user.id).maybeSingle();
+                if (d) dispensary = d as unknown as typeof dispensary;
+              }
+            }
+          } catch { /* fall through */ }
+        }
+      }
+    }
+  }
+
   if (!dispensary) {
     return NextResponse.json(
-      { ok: false, error: 'Unauthorized' },
+      { ok: false, error: 'Unauthorized. Please log in to create a lot.' },
       { status: 401 },
     );
   }

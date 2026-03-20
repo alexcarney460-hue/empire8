@@ -742,6 +742,7 @@ export default function CreateLotPage() {
           </div>
         </div>
       </section>
+      <style>{`select option { background: #1A0E2E; color: #fff; }`}</style>
     </div>
   );
 }
