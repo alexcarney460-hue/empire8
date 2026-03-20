@@ -29,14 +29,16 @@ function trackInstallEvent(action: string, platform: Platform): void {
   try {
     // Google Analytics 4
     if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as unknown as Record<string, unknown>).gtag?.('event', action, {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).gtag('event', action, {
         event_category: 'PWA',
         event_label: platform,
       });
     }
     // Meta Pixel
     if (typeof window !== 'undefined' && 'fbq' in window) {
-      (window as unknown as Record<string, unknown>).fbq?.('trackCustom', `PWA_${action}`, {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).fbq('trackCustom', `PWA_${action}`, {
         platform,
       });
     }
