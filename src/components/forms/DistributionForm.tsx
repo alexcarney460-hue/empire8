@@ -7,10 +7,10 @@ const inputStyle: React.CSSProperties = {
   width: '100%',
   padding: '11px 14px',
   borderRadius: 10,
-  border: '1px solid var(--color-border, #E2E8F0)',
+  border: '1px solid rgba(200,162,60,0.2)',
   fontSize: '0.88rem',
-  color: 'var(--color-charcoal, #0F172A)',
-  background: '#FAFAF9',
+  color: '#fff',
+  background: 'rgba(255,255,255,0.06)',
   outline: 'none',
   fontFamily: 'inherit',
 };
@@ -19,7 +19,7 @@ const labelStyle: React.CSSProperties = {
   display: 'block',
   marginBottom: 8,
   fontSize: '0.68rem',
-  color: 'var(--color-charcoal)',
+  color: 'rgba(255,255,255,0.7)',
 };
 
 const PRODUCT_CATEGORIES = [
@@ -127,7 +127,7 @@ export default function DistributionForm() {
                 const selected = (values.product_categories || '').split(',').filter(Boolean);
                 const isChecked = selected.includes(cat);
                 return (
-                  <label key={cat} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', color: 'var(--color-charcoal)', cursor: 'pointer' }}>
+                  <label key={cat} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', cursor: 'pointer' }}>
                     <input
                       type="checkbox"
                       checked={isChecked}

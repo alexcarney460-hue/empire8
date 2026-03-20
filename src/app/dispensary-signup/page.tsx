@@ -58,41 +58,48 @@ const WHY_EMPIRE8 = [
 
 export default function DispensarySignUpPage() {
   return (
-    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#fff', minHeight: '100vh' }}>
+    <div style={{ paddingTop: 'var(--nav-height)', backgroundColor: '#0F0520', minHeight: '100vh' }}>
 
       {/* Hero */}
-      <section style={{ backgroundColor: '#fff', padding: '72px 24px 80px', position: 'relative', overflow: 'hidden', borderBottom: '1px solid var(--color-border)' }}>
-        <div style={{ position: 'absolute', top: '-20%', right: '5%', width: 500, height: 500, borderRadius: '50%', background: 'rgba(200,146,42,0.07)', filter: 'blur(80px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: '-10%', left: '3%', width: 300, height: 300, borderRadius: '50%', background: 'rgba(27,58,45,0.05)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+      <section
+        style={{
+          background: 'linear-gradient(168deg, #2D0A4E 0%, #4A0E78 35%, #2D0A4E 70%, #1A0633 100%)',
+          padding: '80px 24px 88px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div style={{ position: 'absolute', top: '-20%', right: '5%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,162,60,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-10%', left: '3%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(107,47,160,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-          <span className="label-caps" style={{ color: 'var(--color-gold)', display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-            <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
+          <span className="label-caps" style={{ color: '#C8A23C', display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+            <span style={{ width: 24, height: 1.5, backgroundColor: '#C8A23C', display: 'inline-block', borderRadius: 99 }} />
             Dispensary Sign Up
-            <span style={{ width: 24, height: 1.5, backgroundColor: 'var(--color-gold)', display: 'inline-block', borderRadius: 99 }} />
+            <span style={{ width: 24, height: 1.5, backgroundColor: '#C8A23C', display: 'inline-block', borderRadius: 99 }} />
           </span>
-          <h1 className="font-display" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.0, color: 'var(--color-charcoal)', marginBottom: 20 }}>
+          <h1 className="font-display" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.0, color: '#fff', marginBottom: 20 }}>
             Partner with New York&apos;s Premier Cannabis Supplier
           </h1>
-          <p style={{ color: 'var(--color-warm-gray)', fontSize: '1.05rem', maxWidth: 580, margin: '0 auto', lineHeight: 1.8 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.05rem', maxWidth: 580, margin: '0 auto', lineHeight: 1.8 }}>
             Empire 8 Sales Direct supplies licensed dispensaries across all 62 New York counties with premium cannabis products. Apply below to become a partner.
           </p>
         </div>
       </section>
 
       {/* Zone Map */}
-      <section style={{ backgroundColor: '#0F0520', padding: '64px 24px', borderBottom: '1px solid rgba(200,162,60,0.15)' }}>
+      <section style={{ backgroundColor: '#0F0520', padding: '64px 24px', borderBottom: '1px solid rgba(200,162,60,0.1)' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 32 }}>
             <span className="label-caps" style={{ color: '#C8A23C' }}>Coverage Area</span>
             <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: '#fff' }}>
               Statewide Delivery Zones
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.95rem', maxWidth: 560, margin: '12px auto 0', lineHeight: 1.7 }}>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.95rem', maxWidth: 560, margin: '12px auto 0', lineHeight: 1.7 }}>
               Empire 8 delivers across all 7 zones covering every county in New York State.
             </p>
           </AnimateIn>
           <AnimateIn delay={100}>
-            <div style={{ borderRadius: 16, overflow: 'hidden', border: '2px solid rgba(200,162,60,0.25)', boxShadow: '0 8px 40px rgba(0,0,0,0.4)' }}>
+            <div style={{ borderRadius: 16, overflow: 'hidden', border: '2px solid rgba(200,162,60,0.2)', boxShadow: '0 8px 40px rgba(0,0,0,0.4)' }}>
               <Image
                 src="/zone-map.jpg"
                 alt="Empire 8 Sales Direct — Regional Sales and Distribution Map covering all 7 zones across New York State"
@@ -107,11 +114,11 @@ export default function DispensarySignUpPage() {
       </section>
 
       {/* What We Offer */}
-      <section style={{ backgroundColor: '#FAFAFA', padding: '80px 24px', borderBottom: '1px solid var(--color-border)' }}>
+      <section style={{ backgroundColor: '#150A28', padding: '80px 24px', borderBottom: '1px solid rgba(200,162,60,0.1)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 52 }}>
-            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Our Services</span>
-            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
+            <span className="label-caps" style={{ color: '#C8A23C' }}>Our Services</span>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: '#fff' }}>
               What We Offer
             </h2>
           </AnimateIn>
@@ -121,20 +128,19 @@ export default function DispensarySignUpPage() {
                 <div
                   className="tilt-card"
                   style={{
-                    backgroundColor: '#fff',
+                    backgroundColor: 'rgba(255,255,255,0.04)',
                     borderRadius: 20,
                     padding: '28px 24px',
-                    border: '1px solid var(--color-border)',
-                    borderTop: '3px solid var(--color-gold)',
+                    border: '1px solid rgba(200,162,60,0.12)',
+                    borderTop: '3px solid #C8A23C',
                     height: '100%',
-                    boxShadow: 'var(--shadow-xs)',
                   }}
                 >
-                  <div style={{ width: 48, height: 48, backgroundColor: 'var(--color-purple-light)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
-                    <Icon size={22} color="var(--color-gold)" />
+                  <div style={{ width: 48, height: 48, backgroundColor: 'rgba(200,162,60,0.1)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
+                    <Icon size={22} color="#C8A23C" />
                   </div>
-                  <h3 className="font-heading" style={{ fontSize: '1rem', marginBottom: 8, color: 'var(--color-charcoal)' }}>{title}</h3>
-                  <p style={{ fontSize: '0.875rem', color: 'var(--color-warm-gray)', lineHeight: 1.7 }}>{desc}</p>
+                  <h3 className="font-heading" style={{ fontSize: '1rem', marginBottom: 8, color: '#fff' }}>{title}</h3>
+                  <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7 }}>{desc}</p>
                 </div>
               </AnimateIn>
             ))}
@@ -143,11 +149,11 @@ export default function DispensarySignUpPage() {
       </section>
 
       {/* Why Dispensaries Choose Empire 8 */}
-      <section style={{ backgroundColor: '#fff', padding: '80px 24px', borderBottom: '1px solid var(--color-border)' }}>
+      <section style={{ backgroundColor: '#0F0520', padding: '80px 24px', borderBottom: '1px solid rgba(200,162,60,0.1)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 52 }}>
-            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Why Empire 8</span>
-            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
+            <span className="label-caps" style={{ color: '#C8A23C' }}>Why Empire 8</span>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: '#fff' }}>
               Why Dispensaries Choose Empire 8
             </h2>
           </AnimateIn>
@@ -157,20 +163,19 @@ export default function DispensarySignUpPage() {
                 <div
                   className="tilt-card"
                   style={{
-                    backgroundColor: '#fff',
+                    backgroundColor: 'rgba(255,255,255,0.04)',
                     borderRadius: 20,
                     padding: '28px 24px',
-                    border: '1px solid var(--color-border)',
-                    borderTop: '3px solid var(--color-gold)',
+                    border: '1px solid rgba(200,162,60,0.12)',
+                    borderTop: '3px solid #C8A23C',
                     height: '100%',
-                    boxShadow: 'var(--shadow-xs)',
                   }}
                 >
-                  <div style={{ width: 48, height: 48, backgroundColor: 'var(--color-purple-light)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
-                    <Icon size={22} color="var(--color-gold)" />
+                  <div style={{ width: 48, height: 48, backgroundColor: 'rgba(200,162,60,0.1)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
+                    <Icon size={22} color="#C8A23C" />
                   </div>
-                  <h3 className="font-heading" style={{ fontSize: '1rem', marginBottom: 8, color: 'var(--color-charcoal)' }}>{title}</h3>
-                  <p style={{ fontSize: '0.875rem', color: 'var(--color-warm-gray)', lineHeight: 1.7 }}>{desc}</p>
+                  <h3 className="font-heading" style={{ fontSize: '1rem', marginBottom: 8, color: '#fff' }}>{title}</h3>
+                  <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7 }}>{desc}</p>
                 </div>
               </AnimateIn>
             ))}
@@ -179,20 +184,26 @@ export default function DispensarySignUpPage() {
       </section>
 
       {/* Application */}
-      <section style={{ backgroundColor: '#FAFAFA', padding: '80px 24px' }}>
+      <section
+        style={{
+          background: 'linear-gradient(168deg, #1A0633 0%, #2D0A4E 50%, #1A0633 100%)',
+          padding: '80px 24px',
+          borderBottom: '1px solid rgba(200,162,60,0.1)',
+        }}
+      >
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
           <AnimateIn style={{ textAlign: 'center', marginBottom: 44 }}>
-            <span className="label-caps" style={{ color: 'var(--color-gold)' }}>Apply Now</span>
-            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: 'var(--color-charcoal)' }}>
+            <span className="label-caps" style={{ color: '#C8A23C' }}>Apply Now</span>
+            <h2 className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', marginTop: 10, color: '#fff' }}>
               Apply to Become a Dispensary Partner
             </h2>
-            <p style={{ color: 'var(--color-warm-gray)', marginTop: 12, maxWidth: 520, margin: '12px auto 0', lineHeight: 1.7 }}>
+            <p style={{ color: 'rgba(255,255,255,0.55)', marginTop: 12, maxWidth: 520, margin: '12px auto 0', lineHeight: 1.7 }}>
               Submit your information below. A New York Cannabis License is required. Applications are reviewed within 2 business days.
             </p>
           </AnimateIn>
 
           <AnimateIn>
-            <div style={{ backgroundColor: '#fff', border: '1px solid var(--color-border)', borderRadius: 24, padding: '44px 40px', boxShadow: 'var(--shadow-sm)' }}>
+            <div style={{ backgroundColor: 'rgba(255,255,255,0.06)', border: '1px solid rgba(200,162,60,0.15)', borderRadius: 24, padding: '44px 40px' }}>
               <DistributionForm />
             </div>
           </AnimateIn>
@@ -201,15 +212,20 @@ export default function DispensarySignUpPage() {
 
       {/* CTA */}
       <section
-        className="e8-dot-grid"
-        style={{ backgroundColor: 'var(--color-royal)', padding: '80px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}
+        style={{
+          background: 'linear-gradient(135deg, #4A0E78 0%, #2D0A4E 100%)',
+          padding: '80px 24px',
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
       >
-        <div style={{ position: 'absolute', top: '-30%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 300, borderRadius: '50%', background: 'rgba(200,146,42,0.09)', filter: 'blur(80px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '-30%', left: '50%', transform: 'translateX(-50%)', width: 500, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,162,60,0.09) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <AnimateIn style={{ maxWidth: 560, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <h2 className="font-display" style={{ color: '#fff', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginBottom: 16, lineHeight: 1.05 }}>
             Questions Before You Apply?
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: 36, lineHeight: 1.75 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: 36, lineHeight: 1.75 }}>
             Reach out and we&apos;ll walk you through the dispensary program and what to expect.
           </p>
           <Link
@@ -218,8 +234,8 @@ export default function DispensarySignUpPage() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
-              backgroundColor: 'var(--color-gold)',
-              color: '#fff',
+              backgroundColor: '#C8A23C',
+              color: '#1A0633',
               padding: '14px 32px',
               borderRadius: 9999,
               fontFamily: "'Barlow', Arial, sans-serif",
@@ -228,7 +244,7 @@ export default function DispensarySignUpPage() {
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
               textDecoration: 'none',
-              boxShadow: 'var(--shadow-gold)',
+              boxShadow: '0 4px 24px rgba(200,162,60,0.35)',
             }}
           >
             Contact Us <ArrowRight size={14} />
@@ -237,9 +253,9 @@ export default function DispensarySignUpPage() {
       </section>
 
       {/* Compliance Disclaimer */}
-      <section style={{ backgroundColor: '#0F0520', padding: '32px 24px', borderTop: '1px solid rgba(200,162,60,0.15)' }}>
+      <section style={{ backgroundColor: '#0A0418', padding: '32px 24px', borderTop: '1px solid rgba(200,162,60,0.1)' }}>
         <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', lineHeight: 1.8, margin: 0 }}>
+          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', lineHeight: 1.8, margin: 0 }}>
             For use only by adults 21 years of age and older. Empire 8 Sales Direct does not make health or medical claims about cannabis products. NYS OCM Licensed Distributor.
           </p>
         </div>
