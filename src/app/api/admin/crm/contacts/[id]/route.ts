@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { getSupabaseServer } from '@/lib/supabase-server';
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const denied = await requireAdmin(req);
   if (denied) return denied;
@@ -10,6 +12,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   const { id } = await params;
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
+  }
 
   const { data: contact, error } = await supabase
     .from('contacts')
@@ -48,6 +53,9 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
   if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   const { id } = await params;
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
+  }
   const body = await req.json();
   const allowedFields = ['firstname', 'lastname', 'email', 'phone', 'city', 'state', 'role', 'source', 'lead_status', 'lifecycle_stage', 'company_id', 'owner', 'notes', 'last_contacted_at'];
   const update: Record<string, unknown> = {};
@@ -74,6 +82,9 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   const { id } = await params;
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
+  }
   const { error } = await supabase.from('contacts').delete().eq('id', id);
 
   if (error) {

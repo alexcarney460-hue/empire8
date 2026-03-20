@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { getSupabaseServer } from '@/lib/supabase-server';
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 type OrderStatus = 'submitted' | 'processing' | 'shipped' | 'delivered';
 
 const VALID_STATUSES: ReadonlyArray<OrderStatus> = [
@@ -31,9 +33,9 @@ export async function GET(
   }
 
   const { id } = await params;
-  if (!id) {
+  if (!UUID_RE.test(id)) {
     return NextResponse.json(
-      { ok: false, error: 'Missing order ID' },
+      { ok: false, error: 'Invalid ID format' },
       { status: 400 },
     );
   }
@@ -142,9 +144,9 @@ export async function PATCH(
   }
 
   const { id } = await params;
-  if (!id) {
+  if (!UUID_RE.test(id)) {
     return NextResponse.json(
-      { ok: false, error: 'Missing order ID' },
+      { ok: false, error: 'Invalid ID format' },
       { status: 400 },
     );
   }
@@ -166,6 +168,12 @@ export async function PATCH(
     }
 
     if (body.notes !== undefined) {
+      if (typeof body.notes === 'string' && body.notes.length > 5000) {
+        return NextResponse.json(
+          { ok: false, error: 'Notes must be 5000 characters or fewer' },
+          { status: 400 },
+        );
+      }
       updates.notes = typeof body.notes === 'string' ? body.notes : null;
     }
 

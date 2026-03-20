@@ -18,7 +18,7 @@ export async function GET(req: Request) {
     // Fetch sales orders
     let ordersQuery = supabase
       .from('sales_orders')
-      .select('id, dispensary_id, status, total, created_at, updated_at')
+      .select('id, dispensary_id, status, total_cents, created_at, updated_at')
       .order('created_at', { ascending: false });
 
     if (from) ordersQuery = ordersQuery.gte('created_at', from);
@@ -30,29 +30,29 @@ export async function GET(req: Request) {
     // Fetch dispensary names for mapping
     const { data: dispensaries, error: dispErr } = await supabase
       .from('dispensary_accounts')
-      .select('id, name');
+      .select('id, company_name');
 
     if (dispErr) throw dispErr;
 
     const nameMap: Record<string, string> = {};
     for (const d of dispensaries ?? []) {
-      nameMap[d.id] = d.name || '';
+      nameMap[d.id] = d.company_name || '';
     }
 
     // Fetch all line items for these orders
     const orderIds = (orders ?? []).map((o) => o.id);
-    let itemsByOrder: Record<string, Array<{ product_name: string; brand_name: string; quantity: number; unit_price: number; total_price: number }>> = {};
+    let itemsByOrder: Record<string, Array<{ product_name: string; brand_name: string; quantity: number; unit_price_cents: number; line_total_cents: number }>> = {};
 
     if (orderIds.length > 0) {
       const { data: items, error: itemsErr } = await supabase
         .from('sales_order_items')
-        .select('sales_order_id, product_name, brand_name, quantity, unit_price, total_price')
-        .in('sales_order_id', orderIds);
+        .select('order_id, product_name, brand_name, quantity, unit_price_cents, line_total_cents')
+        .in('order_id', orderIds);
 
       if (itemsErr) throw itemsErr;
 
       for (const item of items ?? []) {
-        const key = item.sales_order_id;
+        const key = item.order_id;
         if (!itemsByOrder[key]) itemsByOrder[key] = [];
         itemsByOrder[key].push(item);
       }
@@ -91,7 +91,7 @@ export async function GET(req: Request) {
             escCsv(order.id),
             escCsv(dispensaryName),
             escCsv(order.status),
-            escCsv(order.total),
+            escCsv((order.total_cents / 100).toFixed(2)),
             '',
             '',
             '',
@@ -107,12 +107,12 @@ export async function GET(req: Request) {
               escCsv(order.id),
               escCsv(dispensaryName),
               escCsv(order.status),
-              escCsv(order.total),
+              escCsv((order.total_cents / 100).toFixed(2)),
               escCsv(item.product_name),
               escCsv(item.brand_name),
               escCsv(item.quantity),
-              escCsv(item.unit_price),
-              escCsv(item.total_price),
+              escCsv((item.unit_price_cents / 100).toFixed(2)),
+              escCsv((item.line_total_cents / 100).toFixed(2)),
               escCsv(order.created_at),
             ].join(',')
           );

@@ -59,12 +59,14 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE),
+  /* verification: Uncomment and replace with real codes when available
   verification: {
-    google: 'REPLACE_WITH_GOOGLE_VERIFICATION_CODE',
+    google: 'YOUR_GOOGLE_VERIFICATION_CODE',
     other: {
-      'msvalidate.01': 'REPLACE_WITH_BING_VERIFICATION_CODE',
+      'msvalidate.01': 'YOUR_BING_VERIFICATION_CODE',
     },
   },
+  */
   title: {
     default: 'Empire 8 Sales Direct — Licensed Cannabis Wholesale Supplier in New York',
     template: '%s | Empire 8 Sales Direct',
@@ -137,15 +139,11 @@ const orgSchema = {
   image: `${BASE}/og-image.jpg`,
   description:
     'NYS OCM licensed cannabis wholesale supplier serving dispensaries across New York with reliable supply chain management and full regulatory compliance.',
-  /* TODO: Replace with real phone number */
-  telephone: '+1-212-000-0000',
   email: 'info@empire8salesdirect.com',
   address: {
     '@type': 'PostalAddress',
-    /* TODO: Replace with real street address */
     addressLocality: 'New York',
     addressRegion: 'NY',
-    postalCode: '10001',
     addressCountry: 'US',
   },
   openingHoursSpecification: [
@@ -161,16 +159,12 @@ const orgSchema = {
       '@type': 'ContactPoint',
       contactType: 'customer service',
       email: 'info@empire8salesdirect.com',
-      /* TODO: Replace with real phone number */
-      telephone: '+1-212-000-0000',
       availableLanguage: 'English',
     },
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
       email: 'sales@empire8salesdirect.com',
-      /* TODO: Replace with real phone number */
-      telephone: '+1-212-000-0000',
       availableLanguage: 'English',
     },
   ],

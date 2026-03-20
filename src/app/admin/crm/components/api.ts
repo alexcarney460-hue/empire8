@@ -1,6 +1,6 @@
 /** Shared fetch wrapper that injects the admin Bearer token. */
 export async function crmFetch(path: string, opts: RequestInit = {}) {
-  const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
+  const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN || '';
   const headers: Record<string, string> = {
     ...(opts.headers as Record<string, string> ?? {}),
   };

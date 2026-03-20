@@ -14,20 +14,20 @@ export async function GET(req: Request) {
     // Fetch all sales orders with dispensary info
     const { data: orders, error: ordersErr } = await supabase
       .from('sales_orders')
-      .select('dispensary_id, total, status, created_at');
+      .select('dispensary_id, total_cents, status, created_at');
 
     if (ordersErr) throw ordersErr;
 
     // Fetch dispensary names
     const { data: dispensaries, error: dispErr } = await supabase
       .from('dispensary_accounts')
-      .select('id, name');
+      .select('id, company_name');
 
     if (dispErr) throw dispErr;
 
     const nameMap: Record<string, string> = {};
     for (const d of dispensaries ?? []) {
-      nameMap[d.id] = d.name || 'Unknown';
+      nameMap[d.id] = d.company_name || 'Unknown';
     }
 
     // Group by dispensary_id
@@ -54,7 +54,7 @@ export async function GET(req: Request) {
       }
 
       if (isActive) {
-        grouped[order.dispensary_id].total_spent += Number(order.total) || 0;
+        grouped[order.dispensary_id].total_spent += (Number(order.total_cents) || 0) / 100;
         grouped[order.dispensary_id].order_count += 1;
       }
 

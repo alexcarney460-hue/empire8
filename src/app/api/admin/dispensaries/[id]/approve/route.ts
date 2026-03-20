@@ -4,6 +4,8 @@ import { getSupabaseServer } from '@/lib/supabase-server';
 
 export const dynamic = 'force-dynamic';
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -13,8 +15,8 @@ export async function POST(
 
   const { id } = await params;
 
-  if (!id || typeof id !== 'string') {
-    return NextResponse.json({ ok: false, error: 'Missing dispensary ID' }, { status: 400 });
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
   }
 
   const supabase = getSupabaseServer();

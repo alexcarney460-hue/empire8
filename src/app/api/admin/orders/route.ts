@@ -60,9 +60,12 @@ export async function GET(req: NextRequest) {
 
     // Search by order number or dispensary company name
     if (search) {
-      query = query.or(
-        `order_number.ilike.%${search}%,dispensary_accounts.company_name.ilike.%${search}%`,
-      );
+      const sanitized = search.replace(/[^a-zA-Z0-9\s@.\-_#]/g, '');
+      if (sanitized) {
+        query = query.or(
+          `order_number.ilike.%${sanitized}%,dispensary_accounts.company_name.ilike.%${sanitized}%`,
+        );
+      }
     }
 
     const { data, count, error } = await query;

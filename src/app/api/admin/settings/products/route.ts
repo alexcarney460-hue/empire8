@@ -78,6 +78,36 @@ export async function POST(req: Request) {
     ? (body.slug as string).trim()
     : (name as string).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+  // Validate that brand_id references an existing active brand
+  const { data: brandExists } = await supabase
+    .from('brands')
+    .select('id')
+    .eq('id', brand_id as string)
+    .eq('is_active', true)
+    .maybeSingle();
+
+  if (!brandExists) {
+    return NextResponse.json(
+      { ok: false, error: 'Brand not found or is inactive' },
+      { status: 400 },
+    );
+  }
+
+  // Check slug uniqueness within the same brand
+  const { data: existingSlug } = await supabase
+    .from('brand_products')
+    .select('id')
+    .eq('slug', slug)
+    .eq('brand_id', brand_id as string)
+    .maybeSingle();
+
+  if (existingSlug) {
+    return NextResponse.json(
+      { ok: false, error: 'A product with this slug already exists for this brand' },
+      { status: 409 },
+    );
+  }
+
   const { data, error } = await supabase
     .from('brand_products')
     .insert({

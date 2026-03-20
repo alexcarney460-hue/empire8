@@ -29,7 +29,7 @@ type FilterTab = 'all' | 'pending' | 'approved';
 
 /* ── Helpers ── */
 function adminFetch(path: string, opts: RequestInit = {}) {
-  const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
+  const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN || '';
   const headers: Record<string, string> = {
     ...(opts.headers as Record<string, string> ?? {}),
   };
@@ -116,11 +116,18 @@ export default function DispensariesPage() {
   const [total, setTotal] = useState(0);
   const [pendingCount, setPendingCount] = useState(0);
   const [page, setPage] = useState(1);
+  const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const limit = 25;
+
+  // Debounce search input by 300ms
+  useEffect(() => {
+    const t = setTimeout(() => setSearch(searchInput), 300);
+    return () => clearTimeout(t);
+  }, [searchInput]);
 
   const fetchDispensaries = useCallback(async () => {
     setLoading(true);
@@ -218,8 +225,8 @@ export default function DispensariesPage() {
             </svg>
             <input
               type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Search company, email, or license..."
               style={{
                 width: '100%',

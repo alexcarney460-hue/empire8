@@ -69,18 +69,29 @@ export default function ReportsPage() {
     }
   }, [from, to, groupBy]);
 
+  const [exportError, setExportError] = useState('');
+
   const handleExport = useCallback(() => {
+    setExportError('');
     const h: Record<string, string> = {};
     if (token) h['Authorization'] = `Bearer ${token}`;
     const url = `/api/admin/accounting/export?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
     fetch(url, { headers: h })
-      .then((r) => r.blob())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Export failed (HTTP ${res.status})`);
+        }
+        return res.blob();
+      })
       .then((blob) => {
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = `sales-export-${new Date().toISOString().slice(0, 10)}.csv`;
         a.click();
         URL.revokeObjectURL(a.href);
+      })
+      .catch((err) => {
+        setExportError(err instanceof Error ? err.message : 'Failed to export CSV');
       });
   }, [from, to]);
 
@@ -307,6 +318,22 @@ export default function ReportsPage() {
           {/* Export CSV */}
           {rows.length > 0 && (
             <div style={{ textAlign: 'right' }}>
+              {exportError && (
+                <div
+                  style={{
+                    display: 'inline-block',
+                    marginRight: 12,
+                    padding: '8px 14px',
+                    borderRadius: 8,
+                    fontSize: 13,
+                    color: '#f87171',
+                    background: 'rgba(239,68,68,0.1)',
+                    border: '1px solid rgba(239,68,68,0.25)',
+                  }}
+                >
+                  {exportError}
+                </div>
+              )}
               <button
                 onClick={handleExport}
                 style={{

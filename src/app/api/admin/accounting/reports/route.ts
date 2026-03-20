@@ -18,7 +18,7 @@ export async function GET(req: Request) {
 
     let query = supabase
       .from('sales_orders')
-      .select('total, created_at, status')
+      .select('total_cents, created_at, status')
       .not('status', 'in', '("cancelled","voided")');
 
     if (from) query = query.gte('created_at', from);
@@ -49,7 +49,7 @@ export async function GET(req: Request) {
       if (!grouped[periodKey]) {
         grouped[periodKey] = { period: periodKey, revenue: 0, order_count: 0 };
       }
-      grouped[periodKey].revenue += Number(order.total) || 0;
+      grouped[periodKey].revenue += (Number(order.total_cents) || 0) / 100;
       grouped[periodKey].order_count += 1;
     }
 

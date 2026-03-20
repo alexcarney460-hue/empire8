@@ -35,9 +35,12 @@ export async function GET(req: NextRequest) {
 
   // Search filter: company_name, email, or license_number
   if (search) {
-    query = query.or(
-      `company_name.ilike.%${search}%,email.ilike.%${search}%,license_number.ilike.%${search}%`
-    );
+    const sanitized = search.replace(/[^a-zA-Z0-9\s@.\-_#]/g, '');
+    if (sanitized) {
+      query = query.or(
+        `company_name.ilike.%${sanitized}%,email.ilike.%${sanitized}%,license_number.ilike.%${sanitized}%`
+      );
+    }
   }
 
   query = query

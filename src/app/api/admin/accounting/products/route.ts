@@ -6,9 +6,9 @@ interface SalesOrderItem {
   brand_name: string;
   product_name: string;
   quantity: number;
-  unit_price: number;
-  total_price: number;
-  sales_order_id: string;
+  unit_price_cents: number;
+  line_total_cents: number;
+  order_id: string;
 }
 
 export async function GET(req: Request) {
@@ -22,7 +22,7 @@ export async function GET(req: Request) {
   try {
     const { data: items, error } = await supabase
       .from('sales_order_items')
-      .select('brand_name, product_name, quantity, unit_price, total_price, sales_order_id');
+      .select('brand_name, product_name, quantity, unit_price_cents, line_total_cents, order_id');
 
     if (error) throw error;
 
@@ -46,7 +46,8 @@ export async function GET(req: Request) {
       const brand = item.brand_name || 'Unknown Brand';
       const product = item.product_name || 'Unknown Product';
       const qty = item.quantity || 1;
-      const revenue = item.total_price || qty * (item.unit_price || 0);
+      const revenueCents = item.line_total_cents || qty * (item.unit_price_cents || 0);
+      const revenue = revenueCents / 100;
 
       // Brand aggregation
       if (!brandMap[brand]) {
@@ -58,7 +59,7 @@ export async function GET(req: Request) {
         };
       }
       brandMap[brand].total_revenue += revenue;
-      brandMap[brand].order_ids.add(item.sales_order_id);
+      brandMap[brand].order_ids.add(item.order_id);
       brandMap[brand].productRevenue[product] =
         (brandMap[brand].productRevenue[product] || 0) + revenue;
 

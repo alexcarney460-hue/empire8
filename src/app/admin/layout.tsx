@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getSupabase } from '@/lib/supabase';
 import { ADMIN_EMAILS } from '@/lib/admin/constants';
+import { COLORS } from '@/lib/admin/theme';
 
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/admin' },
@@ -16,17 +17,6 @@ const NAV_ITEMS = [
   { label: 'Marketing', href: '/admin/marketing' },
   { label: 'Settings', href: '/admin/settings' },
 ] as const;
-
-const COLORS = {
-  bgPage: '#0F0520',
-  bgNav: '#1A0830',
-  purple: '#4A0E78',
-  gold: '#C8A23C',
-  goldMuted: 'rgba(200, 162, 60, 0.15)',
-  textPrimary: '#F0EAF8',
-  textSecondary: '#9B8AAE',
-  border: 'rgba(200, 162, 60, 0.12)',
-} as const;
 
 function isActive(pathname: string, href: string): boolean {
   if (href === '/admin') return pathname === '/admin';
@@ -176,6 +166,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       }}
     >
       <nav
+        aria-label="Admin navigation"
         style={{
           position: 'sticky',
           top: 0,

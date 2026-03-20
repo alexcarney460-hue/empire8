@@ -37,7 +37,6 @@ export async function POST(req: Request) {
 
   const body = await req.json();
 
-  // AI-generate via agent removed (agent-runner deleted)
   if (body.generate) {
     return NextResponse.json({ ok: false, error: 'AI template generation is not available.' }, { status: 501 });
   }

@@ -44,7 +44,7 @@ interface DispensaryDetail {
 
 /* ── Helpers ── */
 function adminFetch(path: string, opts: RequestInit = {}) {
-  const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
+  const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN || '';
   const headers: Record<string, string> = {
     ...(opts.headers as Record<string, string> ?? {}),
   };
@@ -264,15 +264,20 @@ export default function DispensaryDetailPage() {
   }
 
   async function handleReject() {
-    if (!confirm('Reject this dispensary application? This will delete the account.')) return;
+    const reason = prompt('Reject this dispensary application?\n\nEnter a rejection reason (optional):');
+    if (reason === null) return; // user cancelled the prompt
     setRejecting(true);
     try {
-      // Delete the dispensary account (uses PATCH to mark as rejected, or we can delete)
-      // For now, we use the detail endpoint to note rejection. In a full implementation,
-      // this would soft-delete or set a rejected status.
+      const rejectionNote = reason.trim()
+        ? `REJECTED by admin: ${reason.trim()}`
+        : 'REJECTED by admin';
+      const existingNotes = dispensary?.notes ? `${dispensary.notes}\n` : '';
       const res = await adminFetch(`/api/admin/dispensaries/${id}`, {
         method: 'PATCH',
-        body: JSON.stringify({ notes: 'REJECTED by admin' }),
+        body: JSON.stringify({
+          is_approved: false,
+          notes: `${existingNotes}${rejectionNote} (${new Date().toISOString()})`,
+        }),
       });
       if (res.ok) {
         router.push('/admin/dispensaries');

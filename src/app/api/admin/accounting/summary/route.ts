@@ -14,7 +14,7 @@ export async function GET(req: Request) {
     // Total revenue + order count from sales_orders
     const { data: orders, error: ordersErr } = await supabase
       .from('sales_orders')
-      .select('total, status');
+      .select('total_cents, status');
 
     if (ordersErr) throw ordersErr;
 
@@ -22,7 +22,8 @@ export async function GET(req: Request) {
     const activeOrders = allOrders.filter(
       (o) => o.status !== 'cancelled' && o.status !== 'voided'
     );
-    const revenue = activeOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+    const totalCents = activeOrders.reduce((sum, o) => sum + (Number(o.total_cents) || 0), 0);
+    const revenue = totalCents / 100;
     const orderCount = activeOrders.length;
     const avgOrderValue = orderCount > 0 ? revenue / orderCount : 0;
 
@@ -30,7 +31,7 @@ export async function GET(req: Request) {
     const { count: dispensaryCount, error: dispErr } = await supabase
       .from('dispensary_accounts')
       .select('id', { count: 'exact', head: true })
-      .eq('status', 'active');
+      .eq('is_approved', true);
 
     if (dispErr) throw dispErr;
 

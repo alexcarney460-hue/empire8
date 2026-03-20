@@ -57,6 +57,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: 'Contact email is required' }, { status: 400 });
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(contact_email.trim())) {
+    return NextResponse.json({ ok: false, error: 'Invalid email format for contact_email' }, { status: 400 });
+  }
+
   const brandSlug = slug?.trim() || name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
   // Check slug uniqueness

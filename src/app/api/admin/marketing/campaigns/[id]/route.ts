@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { getSupabaseServer } from '@/lib/supabase-server';
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const denied = await requireAdmin(req);
   if (denied) return denied;
@@ -10,6 +12,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   const { id } = await params;
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
+  }
 
   const [campaignRes, stepsRes, sendsRes, runsRes] = await Promise.all([
     supabase.from('campaigns').select('*').eq('id', id).single(),
@@ -39,6 +44,9 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
   if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   const { id } = await params;
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
+  }
   const body = await req.json();
 
   const allowed = ['name', 'description', 'status', 'scheduled_at', 'send_window_start', 'send_window_end', 'send_days', 'batch_size'];
@@ -64,6 +72,9 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   const { id } = await params;
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
+  }
   const { error } = await supabase.from('campaigns').delete().eq('id', id);
   if (error) {
     console.error('[Admin] campaigns/:id error:', error.message);

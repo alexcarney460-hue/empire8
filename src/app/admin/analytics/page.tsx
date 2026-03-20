@@ -135,7 +135,7 @@ export default function AnalyticsPage() {
   useEffect(() => {
     (async () => {
       try {
-        const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
+        const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN || '';
         const res = await fetch('/api/admin/analytics', {
           headers: { Authorization: 'Bearer ' + (token ?? '') },
         });

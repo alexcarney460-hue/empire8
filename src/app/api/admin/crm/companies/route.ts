@@ -20,9 +20,10 @@ export async function GET(req: Request) {
     .select('*, contacts(id)', { count: 'exact' });
 
   if (q) {
-    const safeQ = q.replace(/[,()*\\"]/g, '');
-    if (safeQ) {
-      query = query.or(`name.ilike.%${safeQ}%,domain.ilike.%${safeQ}%,city.ilike.%${safeQ}%,industry.ilike.%${safeQ}%`);
+    // Sanitize search query to prevent PostgREST filter injection
+    const sanitized = q.replace(/[^a-zA-Z0-9\s@.\-_#]/g, '');
+    if (sanitized) {
+      query = query.or(`name.ilike.%${sanitized}%,domain.ilike.%${sanitized}%,city.ilike.%${sanitized}%,industry.ilike.%${sanitized}%`);
     }
   }
 

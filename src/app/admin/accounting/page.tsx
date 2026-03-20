@@ -38,7 +38,7 @@ export default function AccountingLanding() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN;
+    const token = process.env.NEXT_PUBLIC_ADMIN_ANALYTICS_TOKEN || '';
     fetch('/api/admin/accounting/summary', {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })

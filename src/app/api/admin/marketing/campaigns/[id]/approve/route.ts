@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { getSupabaseServer } from '@/lib/supabase-server';
 
-/** Approve a campaign: update status (personalizer removed) */
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** Approve a campaign and update its status to 'approved'. */
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const denied = await requireAdmin(req);
   if (denied) return denied;
@@ -11,6 +13,9 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   if (!supabase) return NextResponse.json({ ok: false, error: 'DB unavailable' }, { status: 503 });
 
   const { id } = await params;
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
+  }
 
   // Get campaign
   const { data: campaign } = await supabase

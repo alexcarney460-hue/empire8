@@ -29,7 +29,6 @@ export async function POST(req: Request) {
 
   const body = await req.json();
 
-  // AI-powered segment creation removed (agent-runner deleted)
   if (body.generate) {
     return NextResponse.json({ ok: false, error: 'AI segment generation is not available.' }, { status: 501 });
   }

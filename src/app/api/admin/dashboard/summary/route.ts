@@ -39,14 +39,15 @@ export async function GET(req: Request) {
         .select('id', { count: 'exact', head: true })
         .in('status', ['submitted', 'processing']),
 
-      // Revenue last 30 days: sum of total_cents
+      // Revenue last 30 days: sum of total_cents (exclude cancelled)
       (() => {
         const thirtyDaysAgo = new Date();
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         return supabase
           .from('sales_orders')
           .select('total_cents')
-          .gte('created_at', thirtyDaysAgo.toISOString());
+          .gte('created_at', thirtyDaysAgo.toISOString())
+          .neq('status', 'cancelled');
       })(),
     ]);
 

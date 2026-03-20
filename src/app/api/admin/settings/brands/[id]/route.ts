@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { getSupabaseServer } from '@/lib/supabase-server';
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 type RouteContext = { params: Promise<{ id: string }> };
 
 export async function PATCH(req: Request, context: RouteContext) {
@@ -14,8 +16,8 @@ export async function PATCH(req: Request, context: RouteContext) {
   }
 
   const { id } = await context.params;
-  if (!id) {
-    return NextResponse.json({ ok: false, error: 'Missing brand id' }, { status: 400 });
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
   }
 
   let body: Record<string, unknown>;
@@ -38,6 +40,34 @@ export async function PATCH(req: Request, context: RouteContext) {
 
   if (Object.keys(updates).length === 0) {
     return NextResponse.json({ ok: false, error: 'No valid fields to update' }, { status: 400 });
+  }
+
+  // Check slug uniqueness if slug is being updated
+  if (updates.slug) {
+    const { data: existing } = await supabase
+      .from('brands')
+      .select('id')
+      .eq('slug', updates.slug as string)
+      .neq('id', id)
+      .maybeSingle();
+
+    if (existing) {
+      return NextResponse.json(
+        { ok: false, error: 'A brand with this slug already exists' },
+        { status: 409 },
+      );
+    }
+  }
+
+  // Validate contact_email format if provided
+  if (updates.contact_email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(updates.contact_email as string)) {
+      return NextResponse.json(
+        { ok: false, error: 'Invalid email format' },
+        { status: 400 },
+      );
+    }
   }
 
   const { data, error } = await supabase
@@ -65,8 +95,8 @@ export async function DELETE(req: Request, context: RouteContext) {
   }
 
   const { id } = await context.params;
-  if (!id) {
-    return NextResponse.json({ ok: false, error: 'Missing brand id' }, { status: 400 });
+  if (!UUID_RE.test(id)) {
+    return NextResponse.json({ ok: false, error: 'Invalid ID format' }, { status: 400 });
   }
 
   // Soft delete: set is_active = false

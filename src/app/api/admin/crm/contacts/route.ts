@@ -20,10 +20,10 @@ export async function GET(req: Request) {
     .select('*, companies(id, name, domain)', { count: 'exact' });
 
   if (q) {
-    // Sanitize search query to prevent PostgREST injection
-    const safeQ = q.replace(/[,()*\\"]/g, '');
-    if (safeQ) {
-      query = query.or(`firstname.ilike.%${safeQ}%,lastname.ilike.%${safeQ}%,email.ilike.%${safeQ}%,phone.ilike.%${safeQ}%`);
+    // Sanitize search query to prevent PostgREST filter injection
+    const sanitized = q.replace(/[^a-zA-Z0-9\s@.\-_#]/g, '');
+    if (sanitized) {
+      query = query.or(`firstname.ilike.%${sanitized}%,lastname.ilike.%${sanitized}%,email.ilike.%${sanitized}%,phone.ilike.%${sanitized}%`);
     }
   }
 
