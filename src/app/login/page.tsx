@@ -70,11 +70,13 @@ export default function LoginPage() {
       }
 
       // Check if user has a dispensary account and if it's approved
-      const { data: dispensary } = await supabase
+      const { data: dispensaryRow } = await supabase
         .from('dispensary_accounts')
         .select('id, is_approved')
         .eq('user_id', authData.user.id)
         .maybeSingle();
+
+      const dispensary = dispensaryRow as { id: string; is_approved: boolean } | null;
 
       // Check if admin
       const { ADMIN_EMAILS } = await import('@/lib/admin/constants');
