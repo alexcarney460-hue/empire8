@@ -55,6 +55,20 @@ type NewProductForm = {
   image_url: string;
 };
 
+type MenuUpload = {
+  id: string;
+  brand_id: string;
+  brand_name: string | null;
+  filename: string;
+  rows_processed: number;
+  rows_added: number;
+  rows_updated: number;
+  errors_count: number;
+  method: string;
+  status: string;
+  created_at: string;
+};
+
 type FeatureFlags = {
   email_notifications: boolean;
   auto_approve_dispensaries: boolean;
@@ -186,6 +200,19 @@ export default function SettingsPage() {
   const [productForm, setProductForm] = useState<NewProductForm>(EMPTY_PRODUCT_FORM);
   const [productSaving, setProductSaving] = useState(false);
 
+  /* -- Menu upload state -- */
+  const [menuUploads, setMenuUploads] = useState<MenuUpload[]>([]);
+  const [menuUploadsLoading, setMenuUploadsLoading] = useState(false);
+  const [menuUploadBrandId, setMenuUploadBrandId] = useState<string>('');
+  const [menuUploadFile, setMenuUploadFile] = useState<File | null>(null);
+  const [menuUploading, setMenuUploading] = useState(false);
+  const [menuUploadResult, setMenuUploadResult] = useState<{
+    rows_processed: number;
+    rows_added: number;
+    rows_updated: number;
+    errors: string[];
+  } | null>(null);
+
   /* -- Config state -- */
   const [adminEmail, setAdminEmail] = useState<string>('');
   const [features, setFeatures] = useState<FeatureFlags>({
@@ -244,10 +271,26 @@ export default function SettingsPage() {
     }
   }, []);
 
+  const fetchMenuUploads = useCallback(async () => {
+    setMenuUploadsLoading(true);
+    try {
+      const res = await fetch('/api/admin/settings/menu-upload', { headers: authHeaders() });
+      const json = await res.json();
+      if (json.ok) {
+        setMenuUploads(json.uploads);
+      }
+    } catch (err) {
+      console.error('Failed to fetch menu uploads', err);
+    } finally {
+      setMenuUploadsLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     fetchBrands();
     fetchConfig();
-  }, [fetchBrands, fetchConfig]);
+    fetchMenuUploads();
+  }, [fetchBrands, fetchConfig, fetchMenuUploads]);
 
   // Load feature flags from localStorage
   useEffect(() => {
@@ -440,6 +483,60 @@ export default function SettingsPage() {
       }
       return updated;
     });
+  }
+
+  /* ---------------------------------------------------------------- */
+  /*  Menu upload actions                                              */
+  /* ---------------------------------------------------------------- */
+
+  async function uploadMenu() {
+    if (!menuUploadBrandId || !menuUploadFile) return;
+    setMenuUploading(true);
+    setMenuUploadResult(null);
+    try {
+      const fd = new FormData();
+      fd.append('brand_id', menuUploadBrandId);
+      fd.append('file', menuUploadFile);
+      const res = await fetch('/api/admin/settings/menu-upload', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${TOKEN}` },
+        body: fd,
+      });
+      const json = await res.json();
+      if (json.ok) {
+        setMenuUploadResult({
+          rows_processed: json.rows_processed,
+          rows_added: json.rows_added,
+          rows_updated: json.rows_updated,
+          errors: json.errors,
+        });
+        setMenuUploadFile(null);
+        // Reset the file input
+        const fileInput = document.getElementById('menu-csv-input') as HTMLInputElement | null;
+        if (fileInput) fileInput.value = '';
+        fetchMenuUploads();
+        fetchProducts(selectedBrandId);
+      } else {
+        alert(json.error || 'Upload failed');
+      }
+    } catch {
+      alert('Network error uploading menu');
+    } finally {
+      setMenuUploading(false);
+    }
+  }
+
+  function downloadCsvTemplate() {
+    const header = 'name,category,description,unit_price_cents,unit_type,min_order_qty';
+    const example = 'Blue Dream 3.5g,Flower,Premium indoor hybrid,3500,unit,10';
+    const content = `${header}\n${example}\n`;
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'menu-upload-template.csv';
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   /* ---------------------------------------------------------------- */
@@ -708,6 +805,163 @@ export default function SettingsPage() {
             <p style={{ color: colors.textMuted, fontSize: '0.85rem', textAlign: 'center', padding: 24 }}>
               No brands found. Add one to get started.
             </p>
+          )}
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  SECTION 1.5: Menu Upload                                     */}
+      {/* ============================================================ */}
+      <section style={sectionStyle}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: colors.text, marginBottom: 4 }}>
+              Menu Upload
+            </h2>
+            <p style={{ color: colors.textMuted, fontSize: '0.82rem', margin: 0 }}>
+              Upload product menus via CSV. Existing products are matched by slug and updated.
+            </p>
+          </div>
+          <button onClick={downloadCsvTemplate} style={btnSecondary}>
+            Download CSV Template
+          </button>
+        </div>
+
+        {/* Upload form */}
+        <div style={{ background: colors.inputBg, border: `1px solid ${colors.border}`, borderRadius: 12, padding: 20, marginBottom: 20 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'flex-end' }}>
+            <label style={{ flex: '0 0 260px' }}>
+              <span style={labelStyle}>Brand</span>
+              <select
+                value={menuUploadBrandId}
+                onChange={(e) => setMenuUploadBrandId(e.target.value)}
+                style={{ ...inputStyle, width: '100%' }}
+              >
+                <option value="">-- Select a brand --</option>
+                {brands.filter((b) => b.is_active).map((b) => (
+                  <option key={b.id} value={b.id}>{b.name}</option>
+                ))}
+              </select>
+            </label>
+            <label style={{ flex: '1 1 280px' }}>
+              <span style={labelStyle}>CSV File</span>
+              <input
+                id="menu-csv-input"
+                type="file"
+                accept=".csv"
+                onChange={(e) => setMenuUploadFile(e.target.files?.[0] ?? null)}
+                style={{ ...inputStyle, width: '100%', padding: '6px 12px' }}
+              />
+            </label>
+            <button
+              onClick={uploadMenu}
+              disabled={menuUploading || !menuUploadBrandId || !menuUploadFile}
+              style={{ ...btnPrimary, opacity: menuUploading || !menuUploadBrandId || !menuUploadFile ? 0.5 : 1 }}
+            >
+              {menuUploading ? 'Uploading...' : 'Upload Menu'}
+            </button>
+          </div>
+
+          {/* Upload result */}
+          {menuUploadResult && (
+            <div style={{ marginTop: 16, padding: 14, borderRadius: 10, background: menuUploadResult.errors.length === 0 ? 'rgba(16,185,129,0.12)' : 'rgba(245,158,11,0.12)', border: `1px solid ${menuUploadResult.errors.length === 0 ? colors.success : colors.warning}` }}>
+              <div style={{ fontSize: '0.88rem', fontWeight: 700, color: colors.text, marginBottom: 6 }}>
+                Upload Complete
+              </div>
+              <div style={{ fontSize: '0.82rem', color: colors.textMuted, lineHeight: 1.6 }}>
+                Rows processed: {menuUploadResult.rows_processed}
+                <br />
+                Added: {menuUploadResult.rows_added} | Updated: {menuUploadResult.rows_updated}
+                {menuUploadResult.errors.length > 0 && (
+                  <>
+                    <br />
+                    Errors: {menuUploadResult.errors.length}
+                  </>
+                )}
+              </div>
+              {menuUploadResult.errors.length > 0 && (
+                <div style={{ marginTop: 8, fontSize: '0.78rem', color: colors.danger }}>
+                  {menuUploadResult.errors.map((err, idx) => (
+                    <div key={idx}>{err}</div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Recent uploads table */}
+        <div>
+          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: colors.textMuted, marginBottom: 10, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            Recent Uploads
+          </div>
+          {menuUploadsLoading ? (
+            <p style={{ color: colors.textMuted, fontSize: '0.85rem', textAlign: 'center', padding: 20 }}>
+              Loading uploads...
+            </p>
+          ) : menuUploads.length === 0 ? (
+            <p style={{ color: colors.textMuted, fontSize: '0.85rem', textAlign: 'center', padding: 20 }}>
+              No uploads recorded yet.
+            </p>
+          ) : (
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
+                <thead>
+                  <tr style={{ borderBottom: `2px solid ${colors.border}` }}>
+                    {['Brand', 'Filename', 'Rows', 'Added', 'Updated', 'Errors', 'Method', 'Status', 'Date'].map((h) => (
+                      <th key={h} style={{ textAlign: 'left', padding: '8px 10px', color: colors.textMuted, fontWeight: 600, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {menuUploads.map((upload) => (
+                    <tr key={upload.id} style={{ borderBottom: `1px solid ${colors.border}` }}>
+                      <td style={{ padding: '10px 10px', fontWeight: 600, color: colors.text }}>
+                        {upload.brand_name ?? '--'}
+                      </td>
+                      <td style={{ padding: '10px 10px', color: colors.textMuted, fontFamily: 'monospace', fontSize: '0.78rem', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {upload.filename}
+                      </td>
+                      <td style={{ padding: '10px 10px', color: colors.textMuted }}>{upload.rows_processed}</td>
+                      <td style={{ padding: '10px 10px', color: colors.success, fontWeight: 600 }}>{upload.rows_added}</td>
+                      <td style={{ padding: '10px 10px', color: colors.accent, fontWeight: 600 }}>{upload.rows_updated}</td>
+                      <td style={{ padding: '10px 10px', color: upload.errors_count > 0 ? colors.danger : colors.textMuted, fontWeight: upload.errors_count > 0 ? 600 : 400 }}>
+                        {upload.errors_count}
+                      </td>
+                      <td style={{ padding: '10px 10px', color: colors.textMuted }}>
+                        <span style={{ padding: '2px 8px', borderRadius: 9999, background: upload.method === 'api' ? 'rgba(124,58,237,0.2)' : 'rgba(138,123,160,0.15)', fontSize: '0.7rem', fontWeight: 600 }}>
+                          {upload.method}
+                        </span>
+                      </td>
+                      <td style={{ padding: '10px 10px' }}>
+                        <span style={{
+                          padding: '2px 8px',
+                          borderRadius: 9999,
+                          fontSize: '0.7rem',
+                          fontWeight: 600,
+                          background:
+                            upload.status === 'success' ? 'rgba(16,185,129,0.2)' :
+                            upload.status === 'partial' ? 'rgba(245,158,11,0.2)' :
+                            'rgba(239,68,68,0.2)',
+                          color:
+                            upload.status === 'success' ? colors.success :
+                            upload.status === 'partial' ? colors.warning :
+                            colors.danger,
+                        }}>
+                          {upload.status}
+                        </span>
+                      </td>
+                      <td style={{ padding: '10px 10px', color: colors.textMuted, fontSize: '0.78rem' }}>
+                        {new Date(upload.created_at).toLocaleDateString()}{' '}
+                        {new Date(upload.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </section>

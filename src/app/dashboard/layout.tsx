@@ -11,6 +11,8 @@ import {
   Menu,
   X,
   LogOut,
+  Gavel,
+  HandCoins,
 } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
 
@@ -29,6 +31,11 @@ const NAV_ITEMS: readonly NavItem[] = [
   { label: 'Orders', href: '/dashboard/orders', icon: ShoppingCart },
   { label: 'Browse Brands', href: '/brands', icon: Package },
   { label: 'Account Settings', href: '/dashboard/settings', icon: Settings },
+] as const;
+
+const MARKETPLACE_NAV_ITEMS: readonly NavItem[] = [
+  { label: 'My Lots', href: '/marketplace/my-lots', icon: Gavel },
+  { label: 'My Bids', href: '/marketplace/my-bids', icon: HandCoins },
 ] as const;
 
 const SIDEBAR_WIDTH = 260;
@@ -228,6 +235,48 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         {/* Nav links */}
         <nav style={{ flex: 1, padding: '12px 10px' }}>
           {NAV_ITEMS.map((item) => {
+            const Icon = item.icon;
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  padding: '11px 14px',
+                  borderRadius: 10,
+                  marginBottom: 4,
+                  textDecoration: 'none',
+                  fontSize: '0.88rem',
+                  fontWeight: active ? 600 : 400,
+                  color: active ? COLORS.gold : COLORS.textSecondary,
+                  backgroundColor: active ? COLORS.goldSubtle : 'transparent',
+                  transition: 'background-color 150ms ease, color 150ms ease',
+                }}
+              >
+                <Icon size={18} strokeWidth={active ? 2.2 : 1.8} />
+                {item.label}
+              </Link>
+            );
+          })}
+
+          {/* Marketplace section */}
+          <p
+            style={{
+              fontSize: '0.6rem',
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: COLORS.textMuted,
+              margin: '20px 14px 8px',
+              fontFamily: "'Barlow', Arial, sans-serif",
+            }}
+          >
+            Marketplace
+          </p>
+          {MARKETPLACE_NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
             return (

@@ -1,0 +1,231 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getAuthenticatedDispensary } from '@/lib/dispensary-auth';
+import { getSupabaseServer } from '@/lib/supabase-server';
+import { rateLimit } from '@/lib/rate-limit';
+
+export const dynamic = 'force-dynamic';
+
+// ---------------------------------------------------------------------------
+// POST /api/marketplace/lots/[id]/bid -- Place a bid on a lot
+// ---------------------------------------------------------------------------
+
+export async function POST(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id: lotId } = await params;
+
+  // ---- Auth ---------------------------------------------------------------
+  const dispensary = await getAuthenticatedDispensary();
+  if (!dispensary) {
+    return NextResponse.json(
+      { ok: false, error: 'Unauthorized' },
+      { status: 401 },
+    );
+  }
+
+  // Rate limit: 30 bids per minute per user (prevents bid-sniping scripts)
+  if (!rateLimit(`bid:${dispensary.id}`, 30, 60_000)) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many bid requests. Please try again later.' },
+      { status: 429 },
+    );
+  }
+
+  const supabase = getSupabaseServer();
+  if (!supabase) {
+    return NextResponse.json(
+      { ok: false, error: 'Database unavailable' },
+      { status: 503 },
+    );
+  }
+
+  // ---- Parse body ---------------------------------------------------------
+  let body: Record<string, unknown>;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: 'Invalid JSON body' },
+      { status: 400 },
+    );
+  }
+
+  const amountCents =
+    typeof body.amount_cents === 'number' ? Math.floor(body.amount_cents) : NaN;
+  if (isNaN(amountCents) || amountCents <= 0) {
+    return NextResponse.json(
+      { ok: false, error: 'amount_cents must be a positive integer' },
+      { status: 400 },
+    );
+  }
+
+  const maxAutoBidCents =
+    body.max_auto_bid_cents != null
+      ? typeof body.max_auto_bid_cents === 'number'
+        ? Math.floor(body.max_auto_bid_cents)
+        : NaN
+      : null;
+  if (maxAutoBidCents !== null && (isNaN(maxAutoBidCents) || maxAutoBidCents <= 0)) {
+    return NextResponse.json(
+      { ok: false, error: 'max_auto_bid_cents must be a positive integer when provided' },
+      { status: 400 },
+    );
+  }
+  if (maxAutoBidCents !== null && maxAutoBidCents < amountCents) {
+    return NextResponse.json(
+      { ok: false, error: 'max_auto_bid_cents must be >= amount_cents' },
+      { status: 400 },
+    );
+  }
+
+  // ---- Fetch the lot and validate state -----------------------------------
+  const { data: lot, error: lotError } = await supabase
+    .from('weedbay_lots')
+    .select(
+      'id, seller_id, status, current_bid_cents, bid_count, buy_now_price_cents, ends_at, reserve_price_cents',
+    )
+    .eq('id', lotId)
+    .maybeSingle();
+
+  if (lotError) {
+    console.error('[marketplace/bid] Lot query error:', lotError.message);
+    return NextResponse.json(
+      { ok: false, error: 'An internal error occurred.' },
+      { status: 500 },
+    );
+  }
+
+  if (!lot) {
+    return NextResponse.json(
+      { ok: false, error: 'Lot not found' },
+      { status: 404 },
+    );
+  }
+
+  // Lot must be active
+  if (lot.status !== 'active') {
+    return NextResponse.json(
+      { ok: false, error: 'This lot is no longer accepting bids.' },
+      { status: 409 },
+    );
+  }
+
+  // Lot must not have ended
+  if (new Date(lot.ends_at).getTime() <= Date.now()) {
+    return NextResponse.json(
+      { ok: false, error: 'This auction has ended.' },
+      { status: 409 },
+    );
+  }
+
+  // Bidder cannot be the seller
+  if (lot.seller_id === dispensary.id) {
+    return NextResponse.json(
+      { ok: false, error: 'You cannot bid on your own lot.' },
+      { status: 403 },
+    );
+  }
+
+  // Bid must exceed current bid (or starting price if no bids yet)
+  const minimumBid = lot.current_bid_cents ?? 0;
+  if (amountCents <= minimumBid) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: `Bid must exceed the current bid of ${minimumBid} cents.`,
+        current_bid_cents: minimumBid,
+      },
+      { status: 400 },
+    );
+  }
+
+  // ---- Check for Buy Now -------------------------------------------------
+  const isBuyNow =
+    lot.buy_now_price_cents != null && amountCents >= lot.buy_now_price_cents;
+
+  // ---- Insert the bid -----------------------------------------------------
+  const isAutoBid = maxAutoBidCents !== null;
+
+  const { data: bid, error: bidError } = await supabase
+    .from('weedbay_bids')
+    .insert({
+      lot_id: lotId,
+      bidder_id: dispensary.id,
+      amount_cents: amountCents,
+      is_auto_bid: isAutoBid,
+      max_auto_bid_cents: maxAutoBidCents,
+    })
+    .select('id, amount_cents, created_at')
+    .single();
+
+  if (bidError) {
+    console.error('[marketplace/bid] Insert error:', bidError.message);
+    return NextResponse.json(
+      { ok: false, error: 'Failed to place bid.' },
+      { status: 500 },
+    );
+  }
+
+  // ---- Update lot counters ------------------------------------------------
+  const newBidCount = (lot.bid_count ?? 0) + 1;
+
+  if (isBuyNow) {
+    // Instant win via Buy Now
+    const { error: updateError } = await supabase
+      .from('weedbay_lots')
+      .update({
+        status: 'sold',
+        current_bid_cents: amountCents,
+        bid_count: newBidCount,
+        winner_id: dispensary.id,
+        winner_bid_cents: amountCents,
+      })
+      .eq('id', lotId);
+
+    if (updateError) {
+      console.error('[marketplace/bid] Buy-now update error:', updateError.message);
+      // Bid was already inserted -- log but respond with partial success
+    }
+
+    return NextResponse.json({
+      ok: true,
+      data: {
+        bid_id: bid.id,
+        amount_cents: bid.amount_cents,
+        status: 'won',
+        buy_now: true,
+        lot_status: 'sold',
+      },
+    });
+  }
+
+  // Standard bid -- just update current_bid_cents and bid_count
+  const { error: updateError } = await supabase
+    .from('weedbay_lots')
+    .update({
+      current_bid_cents: amountCents,
+      bid_count: newBidCount,
+    })
+    .eq('id', lotId);
+
+  if (updateError) {
+    console.error('[marketplace/bid] Lot update error:', updateError.message);
+  }
+
+  // ---- Check if this bid outbid someone -----------------------------------
+  // (The previous highest bidder is implicitly outbid. We report that fact so
+  //  the frontend can show "You are the highest bidder" or similar.)
+
+  return NextResponse.json({
+    ok: true,
+    data: {
+      bid_id: bid.id,
+      amount_cents: bid.amount_cents,
+      status: 'leading',
+      buy_now: false,
+      current_bid_cents: amountCents,
+      bid_count: newBidCount,
+    },
+  });
+}

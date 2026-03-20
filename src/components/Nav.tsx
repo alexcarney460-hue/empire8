@@ -10,6 +10,7 @@ import { useDispensaryCart } from '@/context/DispensaryCartContext';
 const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Brands', href: '/brands' },
+  { label: 'Marketplace', href: '/marketplace' },
   { label: 'Dispensary Sign Up', href: '/dispensary-signup' },
   { label: 'White Label', href: '/whitelabel' },
   { label: 'Compliance', href: '/compliance' },

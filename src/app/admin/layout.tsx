@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { label: 'CRM', href: '/admin/crm' },
   { label: 'Dispensaries', href: '/admin/dispensaries' },
   { label: 'Orders', href: '/admin/orders' },
+  { label: 'Marketplace', href: '/admin/marketplace' },
   { label: 'Accounting', href: '/admin/accounting' },
   { label: 'Analytics', href: '/admin/analytics' },
   { label: 'Marketing', href: '/admin/marketing' },
