@@ -36,7 +36,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
       .from('list_companies')
       .select('company_id, companies!inner(id, name, domain, phone, city, state)', { count: 'exact' })
       .eq('list_id', id)
-      .order('created_at', { ascending: false })
+      .order('added_at', { ascending: false })
       .range(offset, offset + limit - 1);
 
     if (search) {
