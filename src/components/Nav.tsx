@@ -190,36 +190,54 @@ export default function Nav() {
               </button>
             )}
 
-            {/* Get in Touch CTA */}
-            <Link
-              href="/contact"
-              className="desktop-nav"
-              style={{
-                marginLeft: 8,
-                backgroundColor: 'var(--color-royal)',
-                color: '#fff',
-                padding: '8px 18px',
-                borderRadius: 8,
-                fontFamily: "'Barlow', Arial, sans-serif",
-                fontWeight: 700,
-                fontSize: '0.68rem',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                textDecoration: 'none',
-                transition: 'background-color 150ms ease, transform 200ms ease',
-                whiteSpace: 'nowrap',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-royal-light)';
-                (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-royal)';
-                (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
-              }}
-            >
-              Get in Touch
-            </Link>
+            {/* Auth CTAs — show Create Account / Sign In when logged out, Get in Touch always */}
+            {!isLoggedIn && (
+              <>
+                <Link
+                  href="/signup"
+                  className="desktop-nav"
+                  style={{
+                    marginLeft: 8,
+                    backgroundColor: 'var(--color-gold)',
+                    color: '#1A0633',
+                    padding: '8px 18px',
+                    borderRadius: 8,
+                    fontFamily: "'Barlow', Arial, sans-serif",
+                    fontWeight: 700,
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    transition: 'background-color 150ms ease, transform 200ms ease',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  Create Account
+                </Link>
+                <Link
+                  href="/login"
+                  className="desktop-nav"
+                  style={{
+                    marginLeft: 4,
+                    backgroundColor: 'transparent',
+                    color: 'var(--color-charcoal)',
+                    padding: '8px 18px',
+                    borderRadius: 8,
+                    fontFamily: "'Barlow', Arial, sans-serif",
+                    fontWeight: 600,
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    border: '1px solid var(--color-border)',
+                    transition: 'border-color 150ms ease',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  Sign In
+                </Link>
+              </>
+            )}
 
             {/* Mobile hamburger */}
             <button
