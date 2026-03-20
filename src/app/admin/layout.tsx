@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: 'Dashboard', href: '/admin' },
   { label: 'CRM', href: '/admin/crm' },
   { label: 'Dispensaries', href: '/admin/dispensaries' },
+  { label: 'Brand Accounts', href: '/admin/brand-accounts' },
   { label: 'Orders', href: '/admin/orders' },
   { label: 'Marketplace', href: '/admin/marketplace' },
   { label: 'Accounting', href: '/admin/accounting' },

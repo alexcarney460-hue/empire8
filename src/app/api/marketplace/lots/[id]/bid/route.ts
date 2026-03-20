@@ -61,11 +61,19 @@ export async function POST(
     );
   }
 
+  const MAX_BID_CENTS = 1_000_000_000; // $10,000,000
+
   const amountCents =
     typeof body.amount_cents === 'number' ? Math.floor(body.amount_cents) : NaN;
   if (isNaN(amountCents) || amountCents <= 0) {
     return NextResponse.json(
       { ok: false, error: 'amount_cents must be a positive integer' },
+      { status: 400 },
+    );
+  }
+  if (!Number.isSafeInteger(amountCents) || amountCents > MAX_BID_CENTS) {
+    return NextResponse.json(
+      { ok: false, error: `amount_cents must not exceed ${MAX_BID_CENTS} ($10,000,000)` },
       { status: 400 },
     );
   }
@@ -82,9 +90,15 @@ export async function POST(
       { status: 400 },
     );
   }
-  if (maxAutoBidCents !== null && maxAutoBidCents < amountCents) {
+  if (maxAutoBidCents !== null && (!Number.isSafeInteger(maxAutoBidCents) || maxAutoBidCents > MAX_BID_CENTS)) {
     return NextResponse.json(
-      { ok: false, error: 'max_auto_bid_cents must be >= amount_cents' },
+      { ok: false, error: `max_auto_bid_cents must not exceed ${MAX_BID_CENTS} ($10,000,000)` },
+      { status: 400 },
+    );
+  }
+  if (maxAutoBidCents !== null && maxAutoBidCents <= amountCents) {
+    return NextResponse.json(
+      { ok: false, error: 'max_auto_bid_cents must be greater than amount_cents' },
       { status: 400 },
     );
   }
@@ -245,14 +259,15 @@ export async function POST(
     });
   }
 
-  // Standard bid -- optimistic concurrency check on current_bid_cents
+  // Standard bid -- optimistic concurrency check on current_bid_cents + status
   let updateQuery = supabase
     .from('weedbay_lots')
     .update({
       current_bid_cents: amountCents,
       bid_count: newBidCount,
     })
-    .eq('id', lotId);
+    .eq('id', lotId)
+    .eq('status', 'active');
 
   // Supabase .eq() does not match null -- use .is() for first-bid scenario
   if (lot.current_bid_cents == null) {

@@ -8,6 +8,10 @@
     {
       "path": "/api/cron/renew-subscriptions",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/close-auctions",
+      "schedule": "*/5 * * * *"
     }
   ]
 }
