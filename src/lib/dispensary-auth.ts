@@ -82,5 +82,10 @@ export async function getAuthenticatedDispensary(): Promise<DispensaryAccount | 
 
   if (dispError || !dispensary) return null;
 
-  return dispensary as unknown as DispensaryAccount;
+  const account = dispensary as unknown as DispensaryAccount;
+
+  // Reject unapproved dispensary accounts
+  if (!account.is_approved) return null;
+
+  return account;
 }

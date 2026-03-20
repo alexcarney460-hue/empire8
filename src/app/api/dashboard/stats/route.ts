@@ -28,8 +28,9 @@ export async function GET() {
     .eq('dispensary_id', dispensary.id);
 
   if (error) {
+    console.error('[dashboard/stats] Database error:', error.message);
     return NextResponse.json(
-      { ok: false, error: error.message },
+      { ok: false, error: 'An internal error occurred.' },
       { status: 500 },
     );
   }

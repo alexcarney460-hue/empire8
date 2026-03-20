@@ -29,11 +29,28 @@ import {
  */
 
 const ADMIN_PATHS = ['/admin', '/api/admin'];
+const DASHBOARD_PATHS = ['/dashboard'];
 
 function isAdminPath(pathname: string): boolean {
   return ADMIN_PATHS.some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   );
+}
+
+function isDashboardPath(pathname: string): boolean {
+  return DASHBOARD_PATHS.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+}
+
+/**
+ * Check if the request has a Supabase session cookie present.
+ * This is a lightweight check -- the actual token verification
+ * happens server-side in getAuthenticatedDispensary().
+ */
+function hasSupabaseSessionCookie(request: NextRequest): boolean {
+  const allCookies = request.cookies.getAll();
+  return allCookies.some((c) => c.name.match(/^sb-.*-auth-token$/));
 }
 
 function timingSafeCompare(a: string, b: string): boolean {
@@ -129,6 +146,18 @@ function setVisitorTracking(request: NextRequest, response: NextResponse): NextR
 export function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
+  // Protect dashboard routes: redirect to /login if no session cookie
+  if (isDashboardPath(pathname)) {
+    if (!hasSupabaseSessionCookie(request)) {
+      const loginUrl = request.nextUrl.clone();
+      loginUrl.pathname = '/login';
+      loginUrl.search = '';
+      return NextResponse.redirect(loginUrl);
+    }
+    const response = NextResponse.next();
+    return setVisitorTracking(request, response);
+  }
+
   // For non-admin paths, set visitor tracking cookie and pass through
   if (!isAdminPath(pathname)) {
     const response = NextResponse.next();
@@ -213,6 +242,8 @@ export const config = {
     // Admin auth
     '/admin/:path*',
     '/api/admin/:path*',
+    // Dashboard auth
+    '/dashboard/:path*',
     // Visitor tracking — match all pages except static assets and Next internals
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
   ],

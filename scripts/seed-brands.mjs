@@ -73,8 +73,8 @@ const BRANDS = [
     logo_url: null,
     description: 'Premium concentrates and vape cartridges crafted in small batches across New York State. Known for high-potency live resin and solventless extractions.',
     contact_email: 'wholesale@empireextracts.com',
-    website_url: 'https://empireextracts.com',
-    active: true,
+    website: 'https://empireextracts.com',
+    is_active: true,
   },
   {
     id: 'brand_hudson_valley_flower',
@@ -83,8 +83,8 @@ const BRANDS = [
     logo_url: null,
     description: 'Craft flower and infused pre-rolls grown in the Hudson Valley. Sun-assisted greenhouse cultivation with a focus on terpene-rich, small-batch genetics.',
     contact_email: 'orders@hudsonvalleyflower.com',
-    website_url: 'https://hudsonvalleyflower.com',
-    active: true,
+    website: 'https://hudsonvalleyflower.com',
+    is_active: true,
   },
   {
     id: 'brand_brooklyn_botanics',
@@ -93,8 +93,8 @@ const BRANDS = [
     logo_url: null,
     description: 'Artisanal edibles and cannabis-infused beverages inspired by Brooklyn\u2019s food scene. Precise dosing, chef-driven recipes, and locally sourced ingredients.',
     contact_email: 'hello@brooklynbotanics.com',
-    website_url: 'https://brooklynbotanics.com',
-    active: true,
+    website: 'https://brooklynbotanics.com',
+    is_active: true,
   },
   {
     id: 'brand_upstate_roots',
@@ -103,8 +103,8 @@ const BRANDS = [
     logo_url: null,
     description: 'Full-spectrum tinctures and capsules formulated for consistency and bioavailability. Lab-tested, physician-informed product line from upstate New York.',
     contact_email: 'wholesale@upstateroots.com',
-    website_url: 'https://upstateroots.com',
-    active: true,
+    website: 'https://upstateroots.com',
+    is_active: true,
   },
   {
     id: 'brand_capital_cure',
@@ -113,8 +113,8 @@ const BRANDS = [
     logo_url: null,
     description: 'Medical-grade flower and concentrates from the Capital Region. Rigorous testing standards and cultivar-specific processing for therapeutic outcomes.',
     contact_email: 'sales@capitalcure.com',
-    website_url: null,
-    active: true,
+    website: null,
+    is_active: true,
   },
   {
     id: 'brand_five_boroughs',
@@ -123,8 +123,8 @@ const BRANDS = [
     logo_url: null,
     description: 'A multi-category brand built for the New York dispensary. Flower, vapes, pre-rolls, and edibles \u2014 everything a retail shelf needs from a single partner.',
     contact_email: 'partners@fiveboroughscannabis.com',
-    website_url: 'https://fiveboroughscannabis.com',
-    active: true,
+    website: 'https://fiveboroughscannabis.com',
+    is_active: true,
   },
 ];
 
@@ -183,29 +183,54 @@ const PRODUCTS = [
 async function seed() {
   console.log(`Seeding ${BRANDS.length} brands and ${PRODUCTS.length} products...\n`);
 
-  // Upsert brands
-  const { error: brandsError } = await supabase
+  // Insert brands (strip string IDs, let Postgres generate UUIDs)
+  // Use upsert on slug (unique) so it's safe to rerun
+  const brandRows = BRANDS.map(({ id, ...rest }) => rest);
+  const { data: insertedBrands, error: brandsError } = await supabase
     .from('brands')
-    .upsert(BRANDS, { onConflict: 'id' });
+    .upsert(brandRows, { onConflict: 'slug' })
+    .select('id, slug');
 
   if (brandsError) {
     console.error('Failed to upsert brands:', brandsError.message);
     process.exit(1);
   }
 
-  console.log(`  Brands upserted: ${BRANDS.length}`);
+  console.log(`  Brands upserted: ${brandRows.length}`);
 
-  // Upsert products
+  // Build slug -> UUID mapping
+  const { data: allBrands } = await supabase.from('brands').select('id, slug');
+  const slugToUuid = {};
+  for (const b of allBrands || []) {
+    slugToUuid[b.slug] = b.id;
+  }
+
+  // Map old string brand_id to real UUIDs via slug lookup
+  const brandIdToSlug = {};
+  for (const b of BRANDS) {
+    brandIdToSlug[b.id] = b.slug;
+  }
+
+  // Insert products (strip string IDs, map brand_id to UUID)
+  const productRows = PRODUCTS.map(({ id, brand_id, active, ...rest }) => ({
+    ...rest,
+    brand_id: slugToUuid[brandIdToSlug[brand_id]],
+    is_available: active !== undefined ? active : true,
+  }));
+
+  // Filter out products where brand_id couldn't be resolved
+  const validProducts = productRows.filter(p => p.brand_id);
+
   const { error: productsError } = await supabase
     .from('brand_products')
-    .upsert(PRODUCTS, { onConflict: 'id' });
+    .upsert(validProducts, { onConflict: 'brand_id,slug' });
 
   if (productsError) {
     console.error('Failed to upsert products:', productsError.message);
     process.exit(1);
   }
 
-  console.log(`  Products upserted: ${PRODUCTS.length}`);
+  console.log(`  Products upserted: ${validProducts.length}`);
 
   // Verify
   const { count: brandCount } = await supabase

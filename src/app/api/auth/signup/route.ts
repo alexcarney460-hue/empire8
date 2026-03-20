@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseServer } from '@/lib/supabase-server';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
 
 type SignupPayload = {
   email: string;
@@ -24,6 +25,15 @@ const LICENSE_TYPES = [
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting: 3 requests per minute per IP
+    const ip = getClientIp(req);
+    if (!rateLimit(`signup:${ip}`, 3, 60_000)) {
+      return NextResponse.json(
+        { error: 'Too many signup attempts. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
     const body = (await req.json()) as Partial<SignupPayload>;
 
     // Validate required fields

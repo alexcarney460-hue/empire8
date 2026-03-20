@@ -68,16 +68,10 @@ export default function LoginPage() {
         return;
       }
 
-      if (data.dispensary && !data.dispensary.is_approved) {
+      if (!data.approved) {
         setError('Your dispensary account is pending approval. You will receive an email once approved.');
         setLoading(false);
         return;
-      }
-
-      // Store tokens in localStorage for client-side Supabase
-      if (data.session?.access_token) {
-        localStorage.setItem('e8_access_token', data.session.access_token);
-        localStorage.setItem('e8_refresh_token', data.session.refresh_token ?? '');
       }
 
       router.push('/dashboard');

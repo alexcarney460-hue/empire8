@@ -171,21 +171,23 @@ export default function SettingsPage() {
         return;
       }
 
-      const supabase = getSupabase();
-      const { error: updateError } = await (supabase
-        .from('dispensary_accounts') as any)
-        .update({
+      const res = await fetch('/api/dashboard/settings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           contact_name: form.contact_name.trim(),
           phone: form.phone.trim() || null,
           address_street: form.address_street.trim() || null,
           address_city: form.address_city.trim() || null,
           address_state: form.address_state.trim() || 'NY',
           address_zip: form.address_zip.trim() || null,
-        })
-        .eq('id', dispensary.id);
+        }),
+      });
 
-      if (updateError) {
-        setError('Failed to update settings. Please try again.');
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        setError(data.error || 'Failed to update settings. Please try again.');
       } else {
         setSuccess('Settings updated successfully.');
         // Update local state immutably

@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseServer } from '@/lib/supabase-server';
+import { rateLimit, getClientIp } from '@/lib/rate-limit';
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting: 5 requests per minute per IP
+    const ip = getClientIp(req);
+    if (!rateLimit(`login:${ip}`, 5, 60_000)) {
+      return NextResponse.json(
+        { error: 'Too many login attempts. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
     const { email, password } = body;
 
@@ -50,16 +60,8 @@ export async function POST(req: NextRequest) {
     const account = dispensary as { id: string; is_approved: boolean; company_name: string };
 
     return NextResponse.json({
-      success: true,
-      session: {
-        access_token: data.session?.access_token ?? null,
-        refresh_token: data.session?.refresh_token ?? null,
-      },
-      dispensary: {
-        id: account.id,
-        company_name: account.company_name,
-        is_approved: account.is_approved,
-      },
+      ok: true,
+      approved: account.is_approved,
     });
   } catch {
     return NextResponse.json(

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseServer } from '@/lib/supabase-server';
+import { getAuthenticatedDispensary } from '@/lib/dispensary-auth';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { sendBrandOrderEmails } from '@/lib/order-emails';
 
-/* ── Types ─────────────────────────────────────────────────────────── */
+/* -- Types ----------------------------------------------------------------- */
 
 interface SubmitCartItem {
   productId: string;
@@ -16,7 +17,7 @@ interface SubmitCartItem {
   unitType: string;
 }
 
-/* ── Helpers ───────────────────────────────────────────────────────── */
+/* -- Helpers --------------------------------------------------------------- */
 
 /**
  * Generate a unique order number in the format E8-YYYYMMDD-XXXX.
@@ -57,7 +58,7 @@ function isValidCartItem(item: unknown): item is SubmitCartItem {
   );
 }
 
-/* ── Route Handler ─────────────────────────────────────────────────── */
+/* -- Route Handler --------------------------------------------------------- */
 
 export async function POST(req: NextRequest) {
   try {
@@ -78,37 +79,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Authenticate the dispensary user via Authorization header or cookie
-    const authHeader = req.headers.get('authorization');
-    const accessToken = authHeader?.startsWith('Bearer ')
-      ? authHeader.slice(7)
-      : null;
-
-    let userId: string | null = null;
-    let userEmail: string | null = null;
-
-    if (accessToken) {
-      const { data, error } = await supabase.auth.getUser(accessToken);
-      if (!error && data.user) {
-        userId = data.user.id;
-        userEmail = data.user.email ?? null;
-      }
-    }
-
-    // If no auth header, try to extract from cookie (Supabase client-side auth)
-    if (!userId) {
-      const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-      const projectRef = supabaseUrl.match(/\/\/([\w-]+)\.supabase/)?.[1] ?? 'app';
-      const cookieName = `sb-${projectRef}-auth-token`;
-      const cookieToken = req.cookies.get(cookieName)?.value;
-
-      if (cookieToken) {
-        const { data, error } = await supabase.auth.getUser(cookieToken);
-        if (!error && data.user) {
-          userId = data.user.id;
-          userEmail = data.user.email ?? null;
-        }
-      }
+    // Authenticate -- session required
+    const dispensary = await getAuthenticatedDispensary();
+    if (!dispensary) {
+      return NextResponse.json(
+        { error: 'Authentication required. Please sign in.' },
+        { status: 401 },
+      );
     }
 
     // Parse body
@@ -141,25 +118,65 @@ export async function POST(req: NextRequest) {
       items.push(raw);
     }
 
-    // Calculate order total in cents
-    const totalCents = items.reduce(
-      (sum, item) => sum + item.unitPriceCents * item.quantity,
-      0,
-    );
+    // Server-side price verification: query brand_products for real prices
+    const productIds = items.map((item) => item.productId);
+    const { data: dbProducts, error: productsError } = await supabase
+      .from('brand_products')
+      .select('id, unit_price_cents, active')
+      .in('id', productIds);
+
+    if (productsError) {
+      console.error('[orders/submit] Failed to fetch product prices:', productsError.message);
+      return NextResponse.json(
+        { error: 'Failed to verify product prices. Please try again.' },
+        { status: 500 },
+      );
+    }
+
+    // Build a price lookup map from the database
+    const priceMap = new Map<string, number>();
+    for (const p of dbProducts ?? []) {
+      if (p.active) {
+        priceMap.set(p.id, p.unit_price_cents);
+      }
+    }
+
+    // Filter items to only those with valid, active products and use server prices
+    const warnings: string[] = [];
+    const verifiedItems = items.filter((item) => {
+      const serverPrice = priceMap.get(item.productId);
+      if (serverPrice === undefined) {
+        warnings.push(`Product "${item.productName}" is unavailable and was skipped.`);
+        return false;
+      }
+      return true;
+    });
+
+    if (verifiedItems.length === 0) {
+      return NextResponse.json(
+        { error: 'None of the products in your cart are currently available.' },
+        { status: 400 },
+      );
+    }
+
+    // Calculate order total using server-side prices
+    const totalCents = verifiedItems.reduce((sum, item) => {
+      const serverPrice = priceMap.get(item.productId)!;
+      return sum + serverPrice * item.quantity;
+    }, 0);
 
     // Generate order number
     const orderNumber = generateOrderNumber();
 
-    // Insert sales_orders row
+    // Insert sales_orders row using dispensary_id
     const { data: orderRow, error: orderError } = await supabase
       .from('sales_orders')
       .insert({
         order_number: orderNumber,
-        user_id: userId,
-        user_email: userEmail,
+        dispensary_id: dispensary.id,
         status: 'pending',
         total_cents: totalCents,
-        item_count: items.reduce((s, i) => s + i.quantity, 0),
+        item_count: verifiedItems.reduce((s, i) => s + i.quantity, 0),
         notes: null,
       })
       .select('id, order_number')
@@ -173,19 +190,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Insert sales_order_items rows
-    const orderItems = items.map((item) => ({
-      order_id: orderRow.id,
-      product_id: item.productId,
-      brand_id: item.brandId,
-      brand_name: item.brandName,
-      product_name: item.productName,
-      unit_price_cents: item.unitPriceCents,
-      quantity: item.quantity,
-      line_total_cents: item.unitPriceCents * item.quantity,
-      image_url: item.imageUrl,
-      unit_type: item.unitType,
-    }));
+    // Insert sales_order_items rows using server-side prices
+    const orderItems = verifiedItems.map((item) => {
+      const serverPrice = priceMap.get(item.productId)!;
+      return {
+        order_id: orderRow.id,
+        product_id: item.productId,
+        brand_id: item.brandId,
+        brand_name: item.brandName,
+        product_name: item.productName,
+        unit_price_cents: serverPrice,
+        quantity: item.quantity,
+        line_total_cents: serverPrice * item.quantity,
+        image_url: item.imageUrl,
+        unit_type: item.unitType,
+      };
+    });
 
     const { error: itemsError } = await supabase
       .from('sales_order_items')
@@ -193,36 +213,45 @@ export async function POST(req: NextRequest) {
 
     if (itemsError) {
       console.error('[orders/submit] Failed to create order items:', itemsError.message);
-      // Still return the order since the header was created
-      // Items can be reconciled manually if needed
+      // Rollback: delete the sales_orders row since items failed
+      const { error: deleteError } = await supabase
+        .from('sales_orders')
+        .delete()
+        .eq('id', orderRow.id);
+      if (deleteError) {
+        console.error('[orders/submit] Failed to rollback order row:', deleteError.message);
+      }
+      return NextResponse.json(
+        { error: 'Failed to save order items. Please try again.' },
+        { status: 500 },
+      );
     }
 
     // Send brand-split order emails (fire-and-forget to avoid blocking response)
-    if (!itemsError) {
-      sendBrandOrderEmails(orderRow.id).then((emailResult) => {
-        const failedBrands = emailResult.brandResults.filter((r) => !r.success);
-        if (failedBrands.length > 0) {
-          console.error(
-            '[orders/submit] Brand emails failed:',
-            failedBrands.map((f) => `${f.brandName}: ${f.error}`).join(', '),
-          );
-        }
-        if (!emailResult.dispensaryResult.success) {
-          console.error('[orders/submit] Dispensary confirmation failed:', emailResult.dispensaryResult.error);
-        }
-        if (!emailResult.adminResult.success) {
-          console.error('[orders/submit] Admin notification failed:', emailResult.adminResult.error);
-        }
-        console.log(`[orders/submit] Order emails processed for ${orderRow.order_number}`);
-      }).catch((err) => {
-        console.error('[orders/submit] Email sending threw:', err instanceof Error ? err.message : err);
-      });
-    }
+    sendBrandOrderEmails(orderRow.id).then((emailResult) => {
+      const failedBrands = emailResult.brandResults.filter((r) => !r.success);
+      if (failedBrands.length > 0) {
+        console.error(
+          '[orders/submit] Brand emails failed:',
+          failedBrands.map((f) => `${f.brandName}: ${f.error}`).join(', '),
+        );
+      }
+      if (!emailResult.dispensaryResult.success) {
+        console.error('[orders/submit] Dispensary confirmation failed:', emailResult.dispensaryResult.error);
+      }
+      if (!emailResult.adminResult.success) {
+        console.error('[orders/submit] Admin notification failed:', emailResult.adminResult.error);
+      }
+      console.log(`[orders/submit] Order emails processed for ${orderRow.order_number}`);
+    }).catch((err) => {
+      console.error('[orders/submit] Email sending threw:', err instanceof Error ? err.message : err);
+    });
 
     return NextResponse.json({
       ok: true,
       orderId: orderRow.id,
       orderNumber: orderRow.order_number,
+      ...(warnings.length > 0 ? { warnings } : {}),
     });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : 'unknown error';

@@ -33,8 +33,9 @@ export async function GET(req: NextRequest) {
     .limit(limit);
 
   if (error) {
+    console.error('[dashboard/orders] Database error:', error.message);
     return NextResponse.json(
-      { ok: false, error: error.message },
+      { ok: false, error: 'An internal error occurred.' },
       { status: 500 },
     );
   }
