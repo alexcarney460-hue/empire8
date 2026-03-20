@@ -70,11 +70,25 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     }
   }, [pathname, isMobile]);
 
-  // Fetch company name from stats endpoint
+  // Fetch company name from stats endpoint; redirect admins to /admin
   useEffect(() => {
     async function loadCompanyName() {
       try {
         const res = await fetch('/api/dashboard/stats');
+        if (res.status === 401) {
+          // Check if user is an admin — redirect to admin panel
+          const supabase = getSupabase();
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user?.email) {
+            const { ADMIN_EMAILS } = await import('@/lib/admin/constants');
+            if (ADMIN_EMAILS.includes(user.email.toLowerCase())) {
+              window.location.href = '/admin';
+              return;
+            }
+          }
+          window.location.href = '/login';
+          return;
+        }
         if (res.ok) {
           const json = await res.json();
           if (json.ok && json.data?.companyName) {
