@@ -405,7 +405,7 @@ export default function TrackOrderPage() {
 
               {/* Shipping details */}
               <div style={{ padding: '28px 32px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px 32px' }}>
+                <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px 32px' }}>
                   {order.shipping_name && (
                     <InfoField label="Ship To" value={order.shipping_name} />
                   )}

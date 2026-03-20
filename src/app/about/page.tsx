@@ -146,7 +146,7 @@ export default function AboutPage() {
           </AnimateIn>
 
           {/* Stats */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 16 }}>
             {STATS.map(({ stat, label }, i) => (
               <AnimateIn key={label} delay={i * 80}>
                 <div

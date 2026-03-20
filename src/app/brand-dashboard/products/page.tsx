@@ -501,12 +501,14 @@ export default function BrandProductsPage() {
           </p>
         </div>
       ) : (
+        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
         <div
           style={{
             backgroundColor: COLORS.card,
             border: `1px solid ${COLORS.cardBorder}`,
             borderRadius: 16,
             overflow: 'hidden',
+            minWidth: 640,
           }}
         >
           {/* Table header */}
@@ -650,6 +652,7 @@ export default function BrandProductsPage() {
               </span>
             </div>
           ))}
+        </div>
         </div>
       )}
     </div>

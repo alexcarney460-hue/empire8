@@ -147,8 +147,8 @@ export default function Nav() {
                 aria-label={`Open cart${cartCount > 0 ? `, ${cartCount} items` : ''}`}
                 style={{
                   position: 'relative',
-                  width: 36,
-                  height: 36,
+                  width: 44,
+                  height: 44,
                   borderRadius: 8,
                   border: 'none',
                   backgroundColor: 'transparent',

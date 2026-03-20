@@ -200,7 +200,7 @@ export default function ContactPage() {
 
           {/* Right -- contact form */}
           <AnimateIn delay={100}>
-            <div style={{ backgroundColor: 'rgba(255,255,255,0.04)', borderRadius: 24, padding: '44px 40px', border: '1px solid rgba(200,162,60,0.12)', boxShadow: 'var(--shadow-sm)' }}>
+            <div className="e8-form-card" style={{ backgroundColor: 'rgba(255,255,255,0.04)', borderRadius: 24, padding: '44px 40px', border: '1px solid rgba(200,162,60,0.12)', boxShadow: 'var(--shadow-sm)' }}>
               <h2 className="font-heading" style={{ fontSize: '1.25rem', marginBottom: 8, color: '#fff' }}>Send a Message</h2>
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem', marginBottom: 28 }}>
                 We&apos;ll get back to you within 1 business day.

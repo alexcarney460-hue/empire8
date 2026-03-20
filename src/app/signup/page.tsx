@@ -347,6 +347,7 @@ export default function SignupPage() {
               borderRadius: 24,
               padding: '40px 36px',
             }}
+            className="e8-form-card"
           >
             <form onSubmit={handleSubmit}>
               {error && (
@@ -368,13 +369,13 @@ export default function SignupPage() {
               )}
 
               {/* Section: Business Info */}
-              <p className="label-caps" style={{ color: COLORS.gold, marginBottom: 20, fontSize: '0.6rem' }}>
+              <p className="label-caps" style={{ color: COLORS.gold, marginBottom: 20, fontSize: '0.68rem' }}>
                 Business Information
               </p>
 
               {/* Company Name */}
               <div style={{ marginBottom: 18 }}>
-                <label className="label-caps" htmlFor="company_name" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                <label className="label-caps" htmlFor="company_name" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                   Company Name *
                 </label>
                 <div style={{ position: 'relative' }}>
@@ -386,7 +387,7 @@ export default function SignupPage() {
               {/* License Number + Type (side by side) */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 18 }} className="e8-name-row">
                 <div>
-                  <label className="label-caps" htmlFor="license_number" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="license_number" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     License Number *
                   </label>
                   <div style={{ position: 'relative' }}>
@@ -395,7 +396,7 @@ export default function SignupPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="label-caps" htmlFor="license_type" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="license_type" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     License Type *
                   </label>
                   <select
@@ -427,13 +428,13 @@ export default function SignupPage() {
               <div style={{ height: 1, backgroundColor: 'rgba(200,162,60,0.1)', margin: '28px 0' }} />
 
               {/* Section: Contact */}
-              <p className="label-caps" style={{ color: COLORS.gold, marginBottom: 20, fontSize: '0.6rem' }}>
+              <p className="label-caps" style={{ color: COLORS.gold, marginBottom: 20, fontSize: '0.68rem' }}>
                 Contact Information
               </p>
 
               {/* Contact Name */}
               <div style={{ marginBottom: 18 }}>
-                <label className="label-caps" htmlFor="contact_name" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                <label className="label-caps" htmlFor="contact_name" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                   Contact Name *
                 </label>
                 <div style={{ position: 'relative' }}>
@@ -445,7 +446,7 @@ export default function SignupPage() {
               {/* Email + Phone */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 18 }} className="e8-name-row">
                 <div>
-                  <label className="label-caps" htmlFor="email" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="email" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     Email *
                   </label>
                   <div style={{ position: 'relative' }}>
@@ -454,7 +455,7 @@ export default function SignupPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="label-caps" htmlFor="phone" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="phone" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     Phone
                   </label>
                   <div style={{ position: 'relative' }}>
@@ -468,13 +469,13 @@ export default function SignupPage() {
               <div style={{ height: 1, backgroundColor: 'rgba(200,162,60,0.1)', margin: '28px 0' }} />
 
               {/* Section: Address */}
-              <p className="label-caps" style={{ color: COLORS.gold, marginBottom: 20, fontSize: '0.6rem' }}>
+              <p className="label-caps" style={{ color: COLORS.gold, marginBottom: 20, fontSize: '0.68rem' }}>
                 Business Address
               </p>
 
               {/* Street */}
               <div style={{ marginBottom: 18 }}>
-                <label className="label-caps" htmlFor="address_street" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                <label className="label-caps" htmlFor="address_street" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                   Street Address
                 </label>
                 <div style={{ position: 'relative' }}>
@@ -486,19 +487,19 @@ export default function SignupPage() {
               {/* City, State, Zip */}
               <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 14, marginBottom: 18 }} className="e8-name-row">
                 <div>
-                  <label className="label-caps" htmlFor="address_city" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="address_city" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     City
                   </label>
                   <input id="address_city" type="text" autoComplete="address-level2" placeholder="New York" value={form.address_city} onChange={(e) => updateField('address_city', e.target.value)} style={makeInputStyle(false)} onFocus={focusHandler} onBlur={blurHandler} />
                 </div>
                 <div>
-                  <label className="label-caps" htmlFor="address_state" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="address_state" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     State
                   </label>
                   <input id="address_state" type="text" autoComplete="address-level1" placeholder="NY" value={form.address_state} onChange={(e) => updateField('address_state', e.target.value)} style={makeInputStyle(false)} onFocus={focusHandler} onBlur={blurHandler} />
                 </div>
                 <div>
-                  <label className="label-caps" htmlFor="address_zip" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="address_zip" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     Zip Code
                   </label>
                   <input id="address_zip" type="text" autoComplete="postal-code" placeholder="10001" value={form.address_zip} onChange={(e) => updateField('address_zip', e.target.value)} style={makeInputStyle(false)} onFocus={focusHandler} onBlur={blurHandler} />
@@ -509,13 +510,13 @@ export default function SignupPage() {
               <div style={{ height: 1, backgroundColor: 'rgba(200,162,60,0.1)', margin: '28px 0' }} />
 
               {/* Section: Password */}
-              <p className="label-caps" style={{ color: COLORS.gold, marginBottom: 20, fontSize: '0.6rem' }}>
+              <p className="label-caps" style={{ color: COLORS.gold, marginBottom: 20, fontSize: '0.68rem' }}>
                 Account Password
               </p>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 32 }} className="e8-name-row">
                 <div>
-                  <label className="label-caps" htmlFor="password" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="password" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     Password *
                   </label>
                   <div style={{ position: 'relative' }}>
@@ -524,7 +525,7 @@ export default function SignupPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="label-caps" htmlFor="confirm_password" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.6rem' }}>
+                  <label className="label-caps" htmlFor="confirm_password" style={{ color: COLORS.textMuted, display: 'block', marginBottom: 8, fontSize: '0.68rem' }}>
                     Confirm Password *
                   </label>
                   <div style={{ position: 'relative' }}>

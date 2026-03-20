@@ -232,12 +232,14 @@ export default function MyLotsPage() {
       ) : (
         <>
           {/* Table header */}
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
           <div
             style={{
               backgroundColor: COLORS.card,
               border: `1px solid ${COLORS.cardBorder}`,
               borderRadius: 16,
               overflow: 'hidden',
+              minWidth: 640,
             }}
           >
             <div
@@ -346,6 +348,7 @@ export default function MyLotsPage() {
                 </Link>
               );
             })}
+          </div>
           </div>
         </>
       )}

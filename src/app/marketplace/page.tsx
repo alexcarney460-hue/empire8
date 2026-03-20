@@ -210,7 +210,7 @@ export default function MarketplacePage() {
           </div>
 
           {/* Category pills */}
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <div className="e8-category-pills" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}

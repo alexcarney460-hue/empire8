@@ -170,7 +170,7 @@ export default function WhiteLabelPage() {
             </p>
           </AnimateIn>
           <AnimateIn>
-            <div style={{ backgroundColor: 'rgba(255,255,255,0.06)', border: '1px solid rgba(200,162,60,0.15)', borderRadius: 24, padding: '44px 40px' }}>
+            <div className="e8-form-card" style={{ backgroundColor: 'rgba(255,255,255,0.06)', border: '1px solid rgba(200,162,60,0.15)', borderRadius: 24, padding: '44px 40px' }}>
               <WhiteLabelForm />
             </div>
           </AnimateIn>

@@ -145,7 +145,7 @@ export default function CompliancePage() {
               padding: '28px 28px',
             }}
           >
-            <div style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: '12px 16px', fontSize: '0.95rem' }}>
+            <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: '12px 16px', fontSize: '0.95rem' }}>
               <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>Company</span>
               <span style={{ color: '#fff', fontWeight: 600 }}>Empire 8 Sales Direct</span>
 

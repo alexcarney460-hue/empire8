@@ -414,6 +414,7 @@ a { transition: color 150ms ease, opacity 150ms ease; }
 
 @media (max-width: 480px) {
   .e8-container { padding-left: 16px !important; padding-right: 16px !important; }
+  .e8-form-card { padding: 24px 20px !important; }
 }
 
 /* Touch-friendly tap targets */
@@ -434,6 +435,17 @@ a { transition: color 150ms ease, opacity 150ms ease; }
 select option {
   background: #1A0E2E;
   color: #fff;
+}
+
+/* ── Marketplace category pills horizontal scroll on mobile ── */
+@media (max-width: 640px) {
+  .e8-category-pills {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .e8-category-pills::-webkit-scrollbar { display: none; }
 }
 
 /* ── Shared utility keyframes ── */

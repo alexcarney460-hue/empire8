@@ -207,6 +207,7 @@ export default function LoginPage() {
           )}
 
           <div
+            className="e8-form-card"
             style={{
               backgroundColor: COLORS.cardBg,
               border: `1px solid ${COLORS.cardBorder}`,

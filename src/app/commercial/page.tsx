@@ -254,7 +254,7 @@ export default function CommercialPage() {
               className="e8-fade-up-4"
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, auto)',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
                 gap: '0 28px',
                 marginTop: 48,
                 paddingTop: 36,
@@ -699,7 +699,7 @@ export default function CommercialPage() {
             </Link>
           </AnimateIn>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14 }}>
             {[
               { label: 'Licensed Distributor', sub: 'Fully licensed NY cannabis wholesale operation' },
               { label: 'Fast Processing', sub: '1-2 business day turnaround on all orders' },

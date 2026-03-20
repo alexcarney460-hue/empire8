@@ -58,7 +58,7 @@ export default function CheckoutSuccessPage() {
         </p>
 
         {/* Info cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 40 }}>
+        <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 40 }}>
           <div
             style={{
               backgroundColor: 'rgba(255,255,255,0.04)',

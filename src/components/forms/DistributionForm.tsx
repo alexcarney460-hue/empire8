@@ -104,7 +104,7 @@ export default function DistributionForm() {
             <input type="text" required placeholder="123 Main St" value={values.street_address} onChange={(e) => onChange('street_address', e.target.value)} style={inputStyle} />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 100px', gap: 12 }}>
+          <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 80px 100px', gap: 12 }}>
             <div>
               <label className="label-caps" style={labelStyle}>City *</label>
               <input type="text" required placeholder="City" value={values.city} onChange={(e) => onChange('city', e.target.value)} style={inputStyle} />

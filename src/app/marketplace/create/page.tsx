@@ -459,7 +459,7 @@ export default function CreateLotPage() {
               </div>
 
               {/* Quantity + Unit */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 140px', gap: 12, ...fieldGap }}>
+              <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 140px', gap: 12, ...fieldGap }}>
                 <div>
                   <label className="label-caps" htmlFor="quantity" style={labelStyle}>
                     Quantity *
@@ -549,7 +549,7 @@ export default function CreateLotPage() {
               </div>
 
               {/* THC % + CBD % */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, ...fieldGap }}>
+              <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, ...fieldGap }}>
                 <div>
                   <label className="label-caps" htmlFor="thc_percentage" style={labelStyle}>
                     THC %
@@ -656,7 +656,7 @@ export default function CreateLotPage() {
               </div>
 
               {/* Reserve Price + Buy Now Price */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, ...fieldGap }}>
+              <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, ...fieldGap }}>
                 <div>
                   <label className="label-caps" htmlFor="reserve_price" style={labelStyle}>
                     Reserve Price ($)

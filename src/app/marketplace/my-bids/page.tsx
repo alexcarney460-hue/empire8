@@ -205,12 +205,14 @@ export default function MyBidsPage() {
           </Link>
         </div>
       ) : (
+        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
         <div
           style={{
             backgroundColor: COLORS.card,
             border: `1px solid ${COLORS.cardBorder}`,
             borderRadius: 16,
             overflow: 'hidden',
+            minWidth: 560,
           }}
         >
           {/* Table header */}
@@ -322,6 +324,7 @@ export default function MyBidsPage() {
               </Link>
             );
           })}
+        </div>
         </div>
       )}
       </div>

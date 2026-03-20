@@ -39,7 +39,7 @@ export default function WhiteLabelForm() {
     >
       {({ values, onChange, status }) => (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
               <label className="label-caps" style={labelStyle}>Brand Name *</label>
               <input type="text" required placeholder="Your brand name" value={values.brand_name} onChange={(e) => onChange('brand_name', e.target.value)} style={inputStyle} />
@@ -50,7 +50,7 @@ export default function WhiteLabelForm() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
               <label className="label-caps" style={labelStyle}>Email *</label>
               <input type="email" required placeholder="you@company.com" value={values.email} onChange={(e) => onChange('email', e.target.value)} style={inputStyle} />
@@ -61,7 +61,7 @@ export default function WhiteLabelForm() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
               <label className="label-caps" style={labelStyle}>Company Name</label>
               <input type="text" placeholder="If applicable" value={values.company_name} onChange={(e) => onChange('company_name', e.target.value)} style={inputStyle} />
@@ -106,7 +106,7 @@ export default function WhiteLabelForm() {
             </select>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="e8-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
               <label className="label-caps" style={labelStyle}>Estimated Monthly Volume</label>
               <select value={values.estimated_volume} onChange={(e) => onChange('estimated_volume', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }}>

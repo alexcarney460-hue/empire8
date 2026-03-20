@@ -344,7 +344,8 @@ export default function OrderDetailPage() {
             </div>
 
             {/* Items */}
-            <div style={{ padding: '4px 0' }}>
+            <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <div style={{ padding: '4px 0', minWidth: 420 }}>
               {/* Column headers */}
               <div
                 style={{
@@ -399,6 +400,7 @@ export default function OrderDetailPage() {
                   </span>
                 </div>
               ))}
+            </div>
             </div>
           </div>
         ))}
