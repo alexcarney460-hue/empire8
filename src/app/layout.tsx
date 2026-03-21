@@ -2,14 +2,15 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Barlow, Barlow_Condensed, Inter, JetBrains_Mono } from 'next/font/google';
 import '@/app/globals.css';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
+import Nav from '@/components/NavRedesign';
+import Footer from '@/components/FooterRedesign';
 import ChatWidget from '@/components/ChatWidget';
 import PageTracker from '@/components/PageTracker';
 import AgeGate from '@/components/AgeGate';
 import { DispensaryCartProvider } from '@/context/DispensaryCartContext';
 import DispensaryCartDrawer from '@/components/DispensaryCartDrawer';
 import InstallPrompt from '@/components/InstallPrompt';
+import SmoothScroll from '@/components/SmoothScroll';
 
 /*
  * ── Analytics IDs ──────────────────────────────────────────────────────
@@ -407,7 +408,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <DispensaryCartProvider>
           <AgeGate>
             <Nav />
-            <div>{children}</div>
+            <SmoothScroll>
+              <div>{children}</div>
+            </SmoothScroll>
             <Footer />
             <ChatWidget />
             <PageTracker />
