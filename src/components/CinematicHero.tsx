@@ -18,7 +18,7 @@ export default function CinematicHero() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 140,
+        paddingTop: 260,
       }}
     >
       {/* Background image with parallax */}
