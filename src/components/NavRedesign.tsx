@@ -61,7 +61,7 @@ export default function NavRedesign() {
           left: 0,
           right: 0,
           zIndex: 9999,
-          height: scrolled ? 64 : 80,
+          height: scrolled ? 130 : 160,
           padding: '0 24px',
           backgroundColor: scrolled ? 'rgba(15,5,32,0.85)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
@@ -92,7 +92,7 @@ export default function NavRedesign() {
               className="e8-nav-logo"
               style={{
                 objectFit: 'contain',
-                height: scrolled ? 40 : 50,
+                height: scrolled ? 120 : 150,
                 width: 'auto',
                 transition: 'height 300ms ease',
               }}
@@ -456,8 +456,8 @@ export default function NavRedesign() {
         @media (max-width: 768px) {
           .e8-desktop-nav { display: none !important; }
           .e8-mobile-menu-btn { display: flex !important; }
-          .e8-nav-redesign { height: 64px !important; }
-          .e8-nav-logo { height: 36px !important; }
+          .e8-nav-redesign { height: 110px !important; }
+          .e8-nav-logo { height: 100px !important; }
         }
 
         /* Nav link hover underline — grows from center */
