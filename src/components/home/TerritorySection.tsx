@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Target, Handshake, TrendingUp } from 'lucide-react';
 import AnimateIn from '../AnimateIn';
 import Link from 'next/link';
@@ -115,6 +116,24 @@ export default function TerritorySection() {
           >
             Lean Coverage. Maximum Influence.
           </p>
+        </AnimateIn>
+
+        {/* Mobile-only inline zone map */}
+        <AnimateIn delay={200}>
+          <div className="e8-territory-map-inline">
+            <Image
+              src="/zone-map.jpg"
+              alt="Empire 8 — 7 Zone Regional Sales & Distribution Map covering all 62 NY counties"
+              width={3000}
+              height={2092}
+              style={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: 12,
+                border: '1px solid rgba(200,162,60,0.2)',
+              }}
+            />
+          </div>
         </AnimateIn>
 
         {/* Strategy cards */}
@@ -267,11 +286,24 @@ export default function TerritorySection() {
       </div>
 
       <style>{`
+        /* Desktop: hide inline map (background image handles it) */
+        .e8-territory-map-inline {
+          display: none;
+        }
+
         @media (max-width: 768px) {
+          /* Mobile: remove pixelated background, use solid gradient */
           .e8-territory-section {
+            background-image: linear-gradient(180deg, #0F0520 0%, #150A28 100%) !important;
             background-attachment: scroll !important;
             min-height: auto !important;
             padding: 80px 16px !important;
+          }
+
+          /* Show the inline map as a crisp Next.js Image */
+          .e8-territory-map-inline {
+            display: block;
+            margin-bottom: 40px;
           }
         }
       `}</style>
