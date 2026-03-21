@@ -61,7 +61,7 @@ export default function NavRedesign() {
           left: 0,
           right: 0,
           zIndex: 9999,
-          height: scrolled ? 64 : 80,
+          height: scrolled ? 100 : 140,
           padding: '0 24px',
           backgroundColor: scrolled ? 'rgba(15,5,32,0.85)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
@@ -92,7 +92,7 @@ export default function NavRedesign() {
               className="e8-nav-logo"
               style={{
                 objectFit: 'contain',
-                height: scrolled ? 40 : 50,
+                height: scrolled ? 80 : 120,
                 width: 'auto',
                 transition: 'height 300ms ease',
               }}
