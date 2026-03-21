@@ -82,6 +82,7 @@ function SectionLabel({ text }: { readonly text: string }) {
 function ProblemSection() {
   return (
     <div
+      className="e8-problem-section"
       style={{
         backgroundColor: '#0F0520',
         padding: '96px 24px',
@@ -142,6 +143,7 @@ function ProblemSection() {
 function ShiftSection() {
   return (
     <div
+      className="e8-shift-section"
       style={{
         backgroundColor: '#150A28',
         padding: '96px 24px',
@@ -294,6 +296,14 @@ export default function ProblemSolution() {
         .e8-reveal.is-visible {
           opacity: 1 !important;
           transform: translateY(0) !important;
+        }
+        @media (max-width: 768px) {
+          .e8-problem-section {
+            padding: 64px 16px !important;
+          }
+          .e8-shift-section {
+            padding: 64px 16px !important;
+          }
         }
       `}</style>
       <section ref={containerRef}>

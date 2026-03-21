@@ -28,6 +28,7 @@ export default function ContactCTA() {
   return (
     <section
       ref={sectionRef}
+      className="e8-contact-cta"
       style={{
         position: 'relative',
         width: '100%',
@@ -141,6 +142,7 @@ export default function ContactCTA() {
 
         {/* Buttons */}
         <div
+          className="e8-cta-buttons"
           style={{
             display: 'flex',
             gap: 16,
@@ -202,6 +204,24 @@ export default function ContactCTA() {
           </Link>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .e8-contact-cta {
+            padding: 80px 16px !important;
+            min-height: auto !important;
+          }
+          .e8-contact-cta .e8-cta-buttons {
+            flex-direction: column !important;
+            align-items: stretch !important;
+          }
+          .e8-contact-cta .e8-cta-buttons a {
+            text-align: center;
+            justify-content: center;
+            width: 100%;
+          }
+        }
+      `}</style>
     </section>
   );
 }

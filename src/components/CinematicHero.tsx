@@ -8,6 +8,7 @@ const LINE_2_WORDS = ['PRODUCTS', 'SELL.'];
 export default function CinematicHero() {
   return (
     <section
+      className="ch-hero-section"
       style={{
         position: 'relative',
         width: '100%',
@@ -47,6 +48,7 @@ export default function CinematicHero() {
 
       {/* Content */}
       <div
+        className="ch-hero-content"
         style={{
           position: 'relative',
           zIndex: 1,
@@ -123,6 +125,7 @@ export default function CinematicHero() {
 
         {/* CTA Buttons */}
         <div
+          className="ch-cta-row"
           style={{
             display: 'flex',
             gap: 16,
@@ -292,6 +295,28 @@ export default function CinematicHero() {
         @media (max-width: 768px) {
           .ch-bg {
             background-attachment: scroll !important;
+          }
+          .ch-hero-section {
+            min-height: 100svh !important;
+            min-height: 100vh !important;
+            padding-top: 100px !important;
+          }
+          .ch-hero-content {
+            padding: 0 16px !important;
+          }
+          .ch-subtitle {
+            letter-spacing: 0.06em !important;
+            font-size: 0.78rem !important;
+          }
+          .ch-cta-row {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+          .ch-cta-row a {
+            text-align: center;
+            justify-content: center;
+            width: 100%;
           }
         }
       `}</style>

@@ -322,6 +322,7 @@ export default function PricingSection() {
   return (
     <section
       ref={sectionRef}
+      className="e8-pricing-section"
       style={{
         background: '#0F0520',
         padding: '120px 24px',
@@ -388,6 +389,7 @@ export default function PricingSection() {
 
         {/* Cards grid */}
         <div
+          className="e8-pricing-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
@@ -404,11 +406,14 @@ export default function PricingSection() {
       {/* Responsive override */}
       <style>{`
         @media (max-width: 900px) {
-          section > div > div:last-child {
+          .e8-pricing-grid {
             grid-template-columns: 1fr !important;
             max-width: 420px;
             margin-left: auto;
             margin-right: auto;
+          }
+          .e8-pricing-section {
+            padding: 80px 16px !important;
           }
         }
       `}</style>

@@ -387,7 +387,7 @@ a { transition: color 150ms ease, opacity 150ms ease; }
 
 /* ── Mobile overrides ── */
 @media (max-width: 640px) {
-  :root { --nav-height: 90px; }
+  :root { --nav-height: 100px; }
 
   .e8-logo { height: 160px !important; margin-top: -40px !important; margin-bottom: -40px !important; }
 

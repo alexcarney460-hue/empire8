@@ -456,8 +456,8 @@ export default function NavRedesign() {
         @media (max-width: 768px) {
           .e8-desktop-nav { display: none !important; }
           .e8-mobile-menu-btn { display: flex !important; }
-          .e8-nav-redesign { height: 210px !important; }
-          .e8-nav-logo { height: 200px !important; }
+          .e8-nav-redesign { height: 100px !important; }
+          .e8-nav-logo { height: 80px !important; }
         }
 
         /* Nav link hover underline — grows from center */

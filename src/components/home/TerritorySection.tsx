@@ -34,6 +34,7 @@ const coverageStats = [
 export default function TerritorySection() {
   return (
     <section
+      className="e8-territory-section"
       style={{
         minHeight: '80vh',
         backgroundImage: `
@@ -264,6 +265,16 @@ export default function TerritorySection() {
           </Link>
         </AnimateIn>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .e8-territory-section {
+            background-attachment: scroll !important;
+            min-height: auto !important;
+            padding: 80px 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

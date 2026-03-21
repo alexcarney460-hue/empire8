@@ -107,7 +107,7 @@ export default function ThreePillarSystem() {
   }, []);
 
   return (
-    <section ref={sectionRef} style={styles.section}>
+    <section ref={sectionRef} className="tps-section" style={styles.section}>
       {/* Decorative glow */}
       <div style={styles.glowTopRight} />
       <div style={styles.glowBottomLeft} />
@@ -303,6 +303,12 @@ const animationCSS = `
   [data-animate][data-direction="left"],
   [data-animate][data-direction="right"] {
     transform: translateY(40px);
+  }
+  .tps-section {
+    padding: 64px 16px !important;
+  }
+  .tps-card {
+    padding: 32px 20px !important;
   }
 }
 `;
